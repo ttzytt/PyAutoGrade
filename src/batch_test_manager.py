@@ -12,17 +12,29 @@ class BatchTestManger:
         correct_output  : int 
         pass_percent    : float 
         total_test      : int
+        correct_average_time : float
+        correct_average_memory : float
         wrong_case_details : list[TestCase.TestResult] = None
         def __init__(self, tests : list[TestCase.TestResult]):
+            self.correct_average_time = 0
+            self.correct_average_memory = 0
             self.total_test = len(tests)
             self.correct_output = 0
             self.wrong_case_details = []
             for t in tests:
                 if t.result_type == TestCase.TestResultType.pass_:
                     self.correct_output += 1
+                    self.correct_average_time += t.time_used
+                    self.correct_average_memory += t.memory_used
                 else:
                     self.wrong_case_details.append(t)
             self.pass_percent = self.correct_output / self.total_test * 100
+            if self.correct_output > 0:
+                self.correct_average_memory /= self.correct_output
+                self.correct_average_time /= self.correct_output
+            else:
+                self.correct_average_memory = -1
+                self.correct_average_time = -1
     
     def __init__(self, cfg : str = './config.yml'):
         self.cfg = yaml.load(open(cfg, "r"), Loader=yaml.FullLoader)
@@ -82,6 +94,7 @@ class BatchTestManger:
                 assert isinstance(t, TestCase), "test case constructor should return a list of TestCase, instead, it is {}".format(type(t))
                 if isinstance(t, PrewrittenFileCase):
                     t.testcase_path = os.path.join(self.test_case_abs_path, t.testcase_path)
+                    t._load_test_case()
                 cases_resuls.append(t.run_test(abs_prob_solution_path))
             if prob not in ret: 
                 ret[prob] = [0] * len(unique_stu)

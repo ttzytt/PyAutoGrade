@@ -13,6 +13,8 @@ import psutil
 from memory_profiler import memory_usage
 from typing import Generic, TypeAlias, TypeVar, Callable
 import sys
+import traceback
+
 class TestCase(ABC): 
     # abstract class for all kinds of testers 
     # e.g. pre-written test cases, solution code + data generator, etc.
@@ -34,6 +36,7 @@ class TestCase(ABC):
         expected    : any   = None     # only useful when result_type is wrong_answer
         actual      : any   = None     # only useful when result_type is wrong_answer
         err_message : str   = None     # error message
+        stack_trace : str   = None     # stack trace
     
     @dataclasses.dataclass
     class TestLimits:
@@ -81,24 +84,21 @@ class PrewrittenScriptCase(TestCase):
         module_specs = importlib.util.spec_from_file_location('module', evaluated_module_path)
         module = importlib.util.module_from_spec(module_specs)
         module_specs.loader.exec_module(module)
-        evaluator_ret : self.EvaluatorResult = None
         @timeout(self.test_limits.time_limit / 1000)
         def get_test_ret(): 
-            nonlocal evaluator_ret
             evaluated_func = getattr(module, self.tested_func_name)
-            evaluator_ret = self.test_case(evaluated_func)
+            return self.test_case(evaluated_func)
         
         def proc_task(children_pipe : Pipe, get_test_ret : type(get_test_ret)): 
             # this is to prevent the tested code from writing anythings to the disk
             try : 
-                os.chroot('/tmp/autograde') # limit read after loading
+                os.chroot('/tmp/autograde') # limit read and write after loading
                 free_nonroot_uid = 65534                    
                 os.setuid(free_nonroot_uid)
                 st_time = time.time()
-                memory_curve = memory_usage(get_test_ret, interval=0.1)
+                evaluator_ret = get_test_ret()
                 ed_time = time.time()
-                max_mem = max(memory_curve)
-                ret = TestCase.TestResult(self.TestResultType.pass_, (ed_time - st_time) * 1000, max_mem)
+                ret = TestCase.TestResult(self.TestResultType.pass_, (ed_time - st_time) * 1000)
                 if not evaluator_ret.is_correct: 
                     ret.result_type = TestCase.TestResultType.wrong_answer
                     ret.expected = evaluator_ret.expected
@@ -108,11 +108,12 @@ class PrewrittenScriptCase(TestCase):
                 children_pipe.close()
                 exit()
             except Exception as e:
+                stack_trace_str = traceback.format_exc()
                 if isinstance(e, TimeoutError):
-                    children_pipe.send(TestCase.TestResult(TestCase.TestResultType.time_limit_exceeded, err_message=str(e)))
+                    children_pipe.send(TestCase.TestResult(TestCase.TestResultType.time_limit_exceeded, err_message=str(e), stack_trace=stack_trace_str))
                 if isinstance(e, SyntaxError):
-                    children_pipe.send(TestCase.TestResult(TestCase.TestResultType.syntax_error, err_message=str(e)))
-                children_pipe.send(TestCase.TestResult(TestCase.TestResultType.runtime_error, err_message=str(e)))
+                    children_pipe.send(TestCase.TestResult(TestCase.TestResultType.syntax_error, err_message=str(e), stack_trace=stack_trace_str))
+                children_pipe.send(TestCase.TestResult(TestCase.TestResultType.runtime_error, err_message=str(e), stack_trace=stack_trace_str))
                 children_pipe.close()
                 exit()
         
@@ -123,8 +124,6 @@ class PrewrittenScriptCase(TestCase):
         max_mem_usage = 0
         while True: 
             # checking the memory usage
-            # check for every 50ms
-            time.sleep(0.05)
             try:
                 prog_info = psutil.Process(prog.pid)
                 mem_usage = prog_info.memory_info().rss / 1024 / 1024
@@ -141,6 +140,8 @@ class PrewrittenScriptCase(TestCase):
             
         prog.join()
         ret = parent_pip.recv()
+        assert isinstance(ret, TestCase.TestResult)
+        ret.memory_used = max_mem_usage
         parent_pip.close()
         return ret
 class PrewrittenFileCase(PrewrittenScriptCase):
@@ -148,29 +149,32 @@ class PrewrittenFileCase(PrewrittenScriptCase):
     # the test case could be either two files (input and output) 
     # or a function that accept the tested function and return if the output is correct
     
+    def _load_test_case(self): 
+        assert self.testcase_path.endswith('.yml')
+        with open(self.testcase_path, 'r') as f:
+            file_case = yaml.load(f, Loader=yaml.FullLoader)
+            for arg_str in file_case['args']:
+                if isinstance(arg_str, str):
+                    self.test_args.append(eval(arg_str))
+                else:
+                    self.test_args.append(arg_str)
+            self.test_expected = file_case['expected']
+            if isinstance(self.test_expected, str):
+                self.test_expected = eval(self.test_expected)
+    
     def __init__(self, testcase_path : str, tested_func_name, case_name: str = "", test_limits: TestCase.TestLimits = TestCase.TestLimits()):
         # test_case is the path to the yml file
         self.testcase_path = testcase_path
+        self.test_args = []
+        self.test_expected = None
         def file_syle_case_handler(func : callable) -> PrewrittenScriptCase.EvaluatorT: 
             # make sure that this str is indicating the path to a yml file
-            assert self.testcase_path.endswith('.yml')
-            with open(self.testcase_path, 'r') as f:
-                test_case = yaml.load(f, Loader=yaml.FullLoader)
-                args = []
-                for arg_str in test_case['args']:
-                    if isinstance(arg_str, str):
-                        args.append(eval(arg_str))
-                    else:
-                        args.append(arg_str)
-                output = func(*args)
-                expected = test_case['expected']
-                if isinstance(expected, str):
-                    expected = eval(expected)
-                is_correct =( output == expected)
+                output = func(*self.test_args)
+                is_correct =(output == self.test_expected)
                 if is_correct:
                     return PrewrittenScriptCase.EvaluatorResult(is_correct)
                 else:
-                    return PrewrittenFileCase.EvaluatorResult(is_correct, expected, output) 
+                    return PrewrittenFileCase.EvaluatorResult(is_correct, self.test_expected, output) 
 
         super().__init__(file_syle_case_handler, tested_func_name, case_name, test_limits)
                 
