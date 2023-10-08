@@ -10,7 +10,6 @@ from timeout_decorator import timeout
 import importlib.util
 import time
 import psutil
-from memory_profiler import memory_usage
 from typing import Generic, TypeAlias, TypeVar, Callable
 import sys
 import traceback
