@@ -1,0 +1,8 @@
+tested_code_path : ./test_input
+output_path : ./test_output
+test_case_path : ./testcase
+students_list:
+- PCS 9 - Tony Zhao
+- PCS 9 - Dr.Math
+problems_list: 
+- addition
