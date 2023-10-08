@@ -4,5 +4,7 @@ test_case_path : ./testcase
 students_list:
 - PCS 9 - Tony Zhao
 - PCS 9 - Dr.Math
+- PCS 9 - Mr.Timeout
+- PCS 9 - Ms.Memout
 problems_list: 
 - addition
