@@ -2,9 +2,11 @@ tested_code_path : ./test_input
 output_path : ./test_output
 test_case_path : ./testcase
 students_list:
-- PCS 9 - Tony Zhao
-- PCS 9 - Dr.Math
+- PCS 9 - Wrong Answer
+- PCS 9 - Right Answer
 - PCS 9 - Mr.Timeout
 - PCS 9 - Ms.Memout
+- PCS 9 - Dangerous Behavior
+- PCS 9 - No Homework
 problems_list: 
 - addition

@@ -6,7 +6,7 @@ import yaml
 import prctl
 from multiprocessing import Process, Pipe
 import os
-from timeout_decorator import timeout
+from timeout_decorator import timeout, timeout_decorator
 import importlib.util
 import time
 import psutil
@@ -26,6 +26,7 @@ class TestCase(ABC):
         syntax_error = 4
         runtime_error = 5
         system_error = 6
+        solution_not_found = 7
 
     @dataclasses.dataclass
     class TestResult:
@@ -36,7 +37,8 @@ class TestCase(ABC):
         actual      : any   = None     # only useful when result_type is wrong_answer
         err_message : str   = None     # error message
         stack_trace : str   = None     # stack trace
-    
+        test_case_id: int   = -1
+        
     @dataclasses.dataclass
     class TestLimits:
         time_limit : float    = 3000
@@ -108,7 +110,7 @@ class PrewrittenScriptCase(TestCase):
                 exit()
             except Exception as e:
                 stack_trace_str = traceback.format_exc()
-                if isinstance(e, TimeoutError):
+                if isinstance(e, timeout_decorator.TimeoutError):
                     children_pipe.send(TestCase.TestResult(TestCase.TestResultType.time_limit_exceeded, err_message=str(e), stack_trace=stack_trace_str))
                 if isinstance(e, SyntaxError):
                     children_pipe.send(TestCase.TestResult(TestCase.TestResultType.syntax_error, err_message=str(e), stack_trace=stack_trace_str))
