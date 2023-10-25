@@ -178,4 +178,4 @@ class PrewrittenFileCase(PrewrittenScriptCase):
                     return PrewrittenFileCase.EvaluatorResult(is_correct, self.test_expected, output) 
 
         super().__init__(file_syle_case_handler, tested_func_name, case_name, test_limits)
-                
+        

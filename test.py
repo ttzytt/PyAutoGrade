@@ -6,5 +6,5 @@ from batch_test_manager import *
 
 bm = BatchTestManger()
 test_ret = bm.test_all()
-# pprint(test_ret)
-print(bm.export_file())
+pprint(test_ret)
+print(bm.export_csv())

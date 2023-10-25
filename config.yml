@@ -1,6 +1,7 @@
 tested_code_path : ./test_input
 output_path : ./test_output
 test_case_path : ./testcase
+temp_files_path : ./temp_files
 students_list:
 - PCS 9 - Wrong Answer
 - PCS 9 - Right Answer

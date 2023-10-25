@@ -1,5 +1,6 @@
 import os 
 from pathlib import Path
+import yaml
 def replace_last_path_occurance(path : str, old : str, new : str):
     path = Path(path)
     parts = list(path.parts)
@@ -19,3 +20,27 @@ def replace_first_path_occurance(path : str, old : str, new : str):
             parts[i] = new
             break
     return os.path.join(*parts)
+
+class CfgFileRelated: 
+    def __get_abs_path_in_cfg(self, path: str) -> str:
+        # get the absolute path of `path` in the cfg file
+        # if `path` is not a relative path, return `path`
+        if not os.path.isabs(path):
+            return os.path.join(self.cfg_folder_abs_path, path)
+        else:
+            return path
+    def __init__(self, cfg_path: str = './config.yml') -> None:
+        self.cfg = yaml.load(open(cfg_path, 'r'), Loader=yaml.FullLoader)
+        self.cfg_abspath = os.path.abspath(cfg_path)
+        self.cfg_folder_abs_path = os.path.join(
+            *Path(self.cfg_abspath).parts[:-1])
+        self.tested_code_abs_path = self.__get_abs_path_in_cfg(
+            self.cfg['tested_code_path'])
+        self.test_case_abs_path = self.__get_abs_path_in_cfg(
+            self.cfg['test_case_path'])
+        self.temp_files_abs_path = self.__get_abs_path_in_cfg(
+            self.cfg['temp_files_path']
+        )
+        self.output_abs_path = self.__get_abs_path_in_cfg(
+            self.cfg['output_path']
+        )

@@ -8,8 +8,9 @@ import itertools
 import pandas as pd
 from numbers import Number
 from datetime import datetime
+from helpers import * 
 
-class BatchTestManger:
+class BatchTestManger(CfgFileRelated):
     @dataclasses.dataclass
     class TestSummary: 
         correct_output  : int 
@@ -39,20 +40,8 @@ class BatchTestManger:
                 self.correct_average_memory = -1
                 self.correct_average_time = -1
                 
-    def __get_abs_path_in_cfg(self, path : str) -> str:
-        # get the absolute path of `path` in the cfg file
-        # if `path` is not a relative path, return `path`
-        if not os.path.isabs(path):
-            return os.path.join(self.cfg_folder, path)
-        else:
-            return path
-    
-    def __init__(self, cfg : str = './config.yml'):
-        self.cfg = yaml.load(open(cfg, "r"), Loader=yaml.FullLoader)
-        self.cfg_abspath = os.path.abspath(cfg)
-        self.cfg_folder  = os.path.join(*Path(self.cfg_abspath).parts[:-1])
-        self.tested_code_abs_path = self.__get_abs_path_in_cfg(self.cfg['tested_code_path'])
-        self.test_case_abs_path = self.__get_abs_path_in_cfg(self.cfg['test_case_path'])
+    def __init__(self, cfg_path : str = './config.yml'):
+        super().__init__(cfg_path)
         self.last_test_result = dict[str, list]
     def test_all(self) -> dict[str, list]:
         # test all presented problems with test strategies cofigured
@@ -115,7 +104,7 @@ class BatchTestManger:
         self.last_test_result = ret 
         return ret
 
-    def export_file(self, export_test_result : dict[str, list] = None, export_path : str = None) -> pd.DataFrame:
+    def export_csv(self, export_test_result : dict[str, list] = None, export_path : str = None) -> pd.DataFrame:
         # export testing results in the format of file 
         # if export_test_result is None, export the last test result
         # if export_path is None, export to the output path provided in the cfg config file

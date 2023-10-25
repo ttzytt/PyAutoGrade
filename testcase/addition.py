@@ -13,7 +13,6 @@ def test_rand_add(func):
     
 def test_case_constructor() -> list[TestCase]:
     # return only test case or with the path to the tested code 
-    # if not providing the path, will use the default path
     ret = []
     ret.append(PrewrittenFileCase("./addition.yml", "add", "addition file test"))
     ret.append(PrewrittenScriptCase(test_rand_add, "add", "addition random test"))
