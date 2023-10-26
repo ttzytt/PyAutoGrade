@@ -29,7 +29,7 @@ class FileManager(CfgFileRelated):
         """
         pbar_problems = tqdm(p_or_folder_names)
         for pfname in pbar_problems:
-            pbar_problems.set_description(f"Copy problem: {pfname}")
+            pbar_problems.set_description(f"Copying file/folder: {pfname}")
             timestr =  str(datetime.datetime.now())
             # replace : with #, because : is not allowed to use in file name
             timestr = timestr.replace(':', '#')
@@ -67,5 +67,5 @@ if __name__ == "__main__":
     fm = FileManager(args.cfg)
     if args.clear_cache:
         fm.clear_cache()
-    if args.file_folder:
-        fm.get_all_by_problem(*args.file_folder)
+    if args.move_file_folder:
+        fm.get_all_by_problem(*args.move_file_folder)
