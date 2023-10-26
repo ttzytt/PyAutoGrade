@@ -3,7 +3,6 @@ import enum
 import dataclasses
 from rich.progress import Progress
 import yaml
-import prctl
 from multiprocessing import Process, Pipe
 import os
 from timeout_decorator import timeout, timeout_decorator
