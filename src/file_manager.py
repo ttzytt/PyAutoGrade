@@ -48,13 +48,24 @@ class FileManager(CfgFileRelated):
                     dest_solution_file_path = os.path.join(self.temp_files_abs_path, pfname + '_' + timestr, stu + ' [no solution found].py')
                     dest_solution_file = open(dest_solution_file_path, 'w')
                     dest_solution_file.close()
+                    
+    def clear_cache(self):
+        """ 
+            Clear all files in `temp_files_path`
+        """
+        shutil.rmtree(self.temp_files_abs_path)
+        os.mkdir(self.temp_files_abs_path)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Copy all students\' file or folder into a folder in `temp_files_path`')
     # use --cfg / -c to specify the path to the config file
     # use --file_folder / -ff to specify the file ors folder to copy
     parser.add_argument('--cfg', '-c', type=str, default='./config.yml', help='path to the config file')
-    parser.add_argument('--file_folder', '-ff', type=str, nargs='+', help='file or folder to copy')
+    parser.add_argument('--move_file_folder', '-mf', type=str, nargs='+', help='file or folder to copy')
+    parser.add_argument('--clear_cache', '-cc', action='store_true', help='clear all files in `temp_files_path`')
     args = parser.parse_args()
     fm = FileManager(args.cfg)
-    fm.get_all_by_problem(*args.file_folder)
+    if args.clear_cache:
+        fm.clear_cache()
+    if args.file_folder:
+        fm.get_all_by_problem(*args.file_folder)
