@@ -75,8 +75,8 @@ class BatchTestManger(CfgFileRelated):
         for i, (stu, prob) in enumerate(pbar):
             assert not os.path.isabs(prob), "prob path should be the relative path from the `test_case_path` or `tested_code_path` provided in the cfg file"
             pbar.set_description(f"Testing {stu}'s {prob}")
-            abs_prob_testcase_path = os.path.join(self.test_case_abs_path, prob + '.py')
-            abs_prob_solution_path = os.path.join(self.tested_code_abs_path, stu, prob + '.py')
+            abs_prob_testcase_path = os.path.join(self.test_case_abs_path, prob)
+            abs_prob_solution_path = os.path.join(self.tested_code_abs_path, stu, prob)
             multiple_cases_results = []
             if not os.path.exists(abs_prob_testcase_path): 
                 raise FileNotFoundError(f"Test case at {abs_prob_testcase_path} not found")
@@ -109,7 +109,7 @@ class BatchTestManger(CfgFileRelated):
         # if export_test_result is None, export the last test result
         # if export_path is None, export to the output path provided in the cfg config file
         if export_test_result is None: export_test_result = self.last_test_result
-        if export_path is None: export_path = self.__get_abs_path_in_cfg(self.cfg['output_path'])
+        if export_path is None: export_path = self._get_abs_path_in_cfg(self.cfg['output_path'])
 
         tmp_dict = {"students" : export_test_result['students'][:]} 
         tmp_test_result = self.TestSummary([TestCase.TestResult(TestCase.TestResultType.pass_)])

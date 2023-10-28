@@ -1,7 +1,7 @@
-tested_code_path : ./test_input
-output_path : ./test_output
-test_case_path : ./testcase
-temp_files_path : ./temp_files
+tested_code_path : ./tests/test_input
+output_path : ./tests/test_output
+test_case_path : ./tests/testcase
+temp_files_path : ./tests/temp_files
 students_list:
 - PCS 9 - Wrong Answer
 - PCS 9 - Right Answer
@@ -10,4 +10,5 @@ students_list:
 - PCS 9 - Dangerous Behavior
 - PCS 9 - No Homework
 problems_list: 
-- addition
+- addition.py
+- ./folder/subtraction.py

@@ -22,7 +22,7 @@ def replace_first_path_occurance(path : str, old : str, new : str):
     return os.path.join(*parts)
 
 class CfgFileRelated: 
-    def __get_abs_path_in_cfg(self, path: str) -> str:
+    def _get_abs_path_in_cfg(self, path: str) -> str:
         # get the absolute path of `path` in the cfg file
         # if `path` is not a relative path, return `path`
         if not os.path.isabs(path):
@@ -34,13 +34,13 @@ class CfgFileRelated:
         self.cfg_abspath = os.path.abspath(cfg_path)
         self.cfg_folder_abs_path = os.path.join(
             *Path(self.cfg_abspath).parts[:-1])
-        self.tested_code_abs_path = self.__get_abs_path_in_cfg(
+        self.tested_code_abs_path = self._get_abs_path_in_cfg(
             self.cfg['tested_code_path'])
-        self.test_case_abs_path = self.__get_abs_path_in_cfg(
+        self.test_case_abs_path = self._get_abs_path_in_cfg(
             self.cfg['test_case_path'])
-        self.temp_files_abs_path = self.__get_abs_path_in_cfg(
+        self.temp_files_abs_path = self._get_abs_path_in_cfg(
             self.cfg['temp_files_path']
         )
-        self.output_abs_path = self.__get_abs_path_in_cfg(
+        self.output_abs_path = self._get_abs_path_in_cfg(
             self.cfg['output_path']
         )

@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "pyautograde"
+version = "0.0.1"
+description = "Simple library that used to grade programming assignments automatically. Support adding mem/time limits, multiple ways of configure tests, and partially limiting tested code to perform dangerous operations."
+authors = ["ttzytt <Zyt2006613@outlook.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+
+psutil = "^5.9.3"
+PyYAML = "^6.0.1"
+rich = "^13.6.0"
+timeout_decorator = "^0.5.0"
+tqdm = "^4.66.1"
+python = "^3.8"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.script]
