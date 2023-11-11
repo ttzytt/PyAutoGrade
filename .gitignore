@@ -1,2 +1,2 @@
-./tests/temp_files/**
-./tests/test_output/**
+tests/temp_files/**
+tests/test_output/**
