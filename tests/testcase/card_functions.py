@@ -44,8 +44,7 @@ def bonus_question_test(func):
     random.seed(0)
     EACH_ROUND_INPUT_LEN = 500 
     ROUNDS = 500
-    NUM_PLAYER_RG = (2, 1000) # not sure if maximum number of player should be less than length of cards_played
-                             # because I got some bugs when setting it greater than EACH_ROUND_INPUT_LEN
+    NUM_PLAYER_RG = (2, 1000) 
     for r in range(ROUNDS): 
         num_player = random.randint(*NUM_PLAYER_RG)
         player_index = random.randint(0, num_player - 1)
