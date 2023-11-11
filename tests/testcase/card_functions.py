@@ -24,11 +24,18 @@ def correct_solution(cards_played, num_players = 4, player_index = 0):
 def random_input_test(func):
     random.seed(0)
     INPUT_LEN = 10000
+    sig = signature(func)
+    param_len = len(sig.parameters)
     possible_cards = [str(i) for i in range(1, 10)] + ['skip', 'reverse']
     cards_played = []
     for i in range(INPUT_LEN):
         cards_played.append(random.choice(possible_cards))
-    expected = correct_solution(cards_played)
+    if param_len == 1:
+        expected = correct_solution(cards_played)
+    elif param_len == 3:
+        expected = correct_solution(cards_played, 4, 0)
+    else: 
+        raise Exception("the function should have 1 or 3 parameters, but it has {} parameters".format(param_len))
     actual = func(cards_played)
     return ps.EvaluatorResult(
         expected == actual, 
@@ -40,7 +47,7 @@ def bonus_question_test(func):
     sig = signature(func)
     param_len = len(sig.parameters)
     if param_len != 3: 
-        return ps.EvaluatorResult(False, None, "to implemented the bonus question, you should provide parameters for customizing the number of players and the starting player")
+        return ps.EvaluatorResult(False, msg="to implemented the bonus question, you should provide parameters for customizing the number of players and the starting player")
     random.seed(0)
     EACH_ROUND_INPUT_LEN = 500 
     ROUNDS = 500
