@@ -63,6 +63,77 @@ class PrewrittenScriptCase(TestCase):
         actual     : any = None 
         msg        : str = None
 
+    class EvaluatorBuilder:
+        @staticmethod
+        def assert_cond_true(cond : callable, *input_args, **input_kwds):
+            def evaluator(func : callable) -> PrewrittenScriptCase.EvaluatorResult:
+                ret = func(*input_args, **input_kwds)
+                cond_ret = cond(ret)
+                if cond_ret:
+                    return PrewrittenScriptCase.EvaluatorResult(True)
+                else:
+                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert cond true evaluator, the return value of the tested function is " + str(ret) + " which does not satisfy the condition")
+            return evaluator
+        @staticmethod   
+        def assert_eq(value : any, *input_args, **input_kwds):
+            def evaluator(func : callable) -> PrewrittenScriptCase.EvaluatorResult:
+                ret = func(*input_args, **input_kwds)
+                if ret == value:
+                    return PrewrittenScriptCase.EvaluatorResult(True)
+                else:
+                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert eq evaluator, the return value of the tested function is " + str(ret) + " which does not equal to " + str(value))
+            return evaluator
+        @staticmethod
+        def assert_lt(value : any, *input_args, **input_kwds):
+            def evaluator(func : callable) -> PrewrittenScriptCase.EvaluatorResult:
+                ret = func(*input_args, **input_kwds)
+                if ret < value:
+                    return PrewrittenScriptCase.EvaluatorResult(True)
+                else:
+                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert lt evaluator, the return value of the tested function is " + str(ret) + " which is not less than " + str(value))
+            return evaluator
+     
+        @staticmethod
+        def assert_gt(value : any, *input_args, **input_kwds):
+            def evaluator(func : callable) -> PrewrittenScriptCase.EvaluatorResult:
+                ret = func(*input_args, **input_kwds)
+                if ret > value:
+                    return PrewrittenScriptCase.EvaluatorResult(True)
+                else:
+                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert gt evaluator, the return value of the tested function is " + str(ret) + " which is not greater than " + str(value))
+            return evaluator
+        
+        @staticmethod
+        def assert_le(value : any, *input_args, **input_kwds):
+            def evaluator(func : callable) -> PrewrittenScriptCase.EvaluatorResult:
+                ret = func(*input_args, **input_kwds)
+                if ret <= value:
+                    return PrewrittenScriptCase.EvaluatorResult(True)
+                else:
+                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert le evaluator, the return value of the tested function is " + str(ret) + " which is not less than or equal to " + str(value))
+            return evaluator
+        
+        @staticmethod
+        def assert_ge(value : any, *input_args, **input_kwds):
+            def evaluator(func : callable) -> PrewrittenScriptCase.EvaluatorResult:
+                ret = func(*input_args, **input_kwds)
+                if ret >= value:
+                    return PrewrittenScriptCase.EvaluatorResult(True)
+                else:
+                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert ge evaluator, the return value of the tested function is " + str(ret) + " which is not greater than or equal to " + str(value))
+            return evaluator
+
+        @staticmethod
+        def assert_content_in_set(value : set, *input_args, **input_kwds):
+            def evaluator(func : callable) -> PrewrittenScriptCase.EvaluatorResult:
+                ret = func(*input_args, **input_kwds)
+                ret = set(ret)
+                if ret.issubset(value):
+                    return PrewrittenScriptCase.EvaluatorResult(True)
+                else:
+                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert content in set evaluator, the return value of the tested function is " + str(ret) + " which is not a subset of " + str(value))
+            return evaluator
+                
     EvaluatorT  = Callable[[Callable], EvaluatorResult]
     def __init__(self, evaluator : EvaluatorT, tested_func_name : str, case_name: str = "", test_limits: TestCase.TestLimits = TestCase.TestLimits()):
         assert callable(evaluator)

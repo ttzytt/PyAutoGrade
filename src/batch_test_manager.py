@@ -75,8 +75,8 @@ class BatchTestManger(CfgFileRelated):
         for i, (stu, prob) in enumerate(pbar):
             assert not os.path.isabs(prob), "prob path should be the relative path from the `test_case_path` or `tested_code_path` provided in the cfg file"
             pbar.set_description(f"Testing {stu}'s {prob}")
-            abs_prob_testcase_path = os.path.join(self.test_case_abs_path, prob)
-            abs_prob_solution_path = os.path.join(self.tested_code_abs_path, stu, prob)
+            abs_prob_testcase_path = os.path.join(self.test_case_abs_path, prob + '.py')
+            abs_prob_solution_path = os.path.join(self.tested_code_abs_path, stu, prob + '.py')
             multiple_cases_results = []
             if not os.path.exists(abs_prob_testcase_path): 
                 raise FileNotFoundError(f"Test case at {abs_prob_testcase_path} not found")

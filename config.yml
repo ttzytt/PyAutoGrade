@@ -12,3 +12,4 @@ students_list:
 problems_list: 
 - addition.py
 - ./folder/subtraction.py
+- card_functions.py

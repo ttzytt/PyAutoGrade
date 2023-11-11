@@ -1,0 +1,7 @@
+students,card_functions_correct_average_time,card_functions_correct_average_memory,card_functions_total_test,card_functions_correct_output,card_functions_wrong_case_details,card_functions_pass_percent
+PCS 9 - Wrong Answer,-1.0,-1.0,1,0,"[TestCase.TestResult(result_type=<TestResultType.solution_not_found: 7>, time_used=-1, memory_used=-1, expected=None, actual=None, err_message=None, stack_trace=None, test_case_id=-1)]",0.0
+PCS 9 - Right Answer,24.028499921162922,51.193359375,6,6,[],100.0
+PCS 9 - Ms.Memout,-1.0,-1.0,1,0,"[TestCase.TestResult(result_type=<TestResultType.solution_not_found: 7>, time_used=-1, memory_used=-1, expected=None, actual=None, err_message=None, stack_trace=None, test_case_id=-1)]",0.0
+PCS 9 - Mr.Timeout,-1.0,-1.0,1,0,"[TestCase.TestResult(result_type=<TestResultType.solution_not_found: 7>, time_used=-1, memory_used=-1, expected=None, actual=None, err_message=None, stack_trace=None, test_case_id=-1)]",0.0
+PCS 9 - No Homework,-1.0,-1.0,1,0,"[TestCase.TestResult(result_type=<TestResultType.solution_not_found: 7>, time_used=-1, memory_used=-1, expected=None, actual=None, err_message=None, stack_trace=None, test_case_id=-1)]",0.0
+PCS 9 - Dangerous Behavior,-1.0,-1.0,1,0,"[TestCase.TestResult(result_type=<TestResultType.solution_not_found: 7>, time_used=-1, memory_used=-1, expected=None, actual=None, err_message=None, stack_trace=None, test_case_id=-1)]",0.0
