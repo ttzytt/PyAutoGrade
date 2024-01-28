@@ -98,7 +98,12 @@ class FileManager(CfgFileRelated):
         for stu in stus: 
             stu_path = pathlib.Path(os.path.join(self.tested_code_abs_path, stu))
             stu_num = stus_to_num[stu]
-            for pyfile_path in stu_path.rglob("*.py"):
+            all_pyfiles = list(stu_path.rglob("*.py"))
+            if len(all_pyfiles) == 0:
+                # no file found for this student
+                # but still open a folder for this student
+                os.makedirs(os.path.join(self.cfg_folder_abs_path, self.temp_files_rel_path, copy_folder_name, str(stu_num)))
+            for pyfile_path in all_pyfiles:
                 with open(pyfile_path, 'r') as f:
                     program = f.read()
                 program = remove_comments(program)
