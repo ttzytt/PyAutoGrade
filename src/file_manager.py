@@ -86,11 +86,10 @@ class FileManager(CfgFileRelated):
         
         def remove_comments(program : str) -> str:
             # Remove single-line comments
-            program = re.sub(r'#.*?\n', '\n', program)
-            
+            program = re.sub(r'(\'[^\']*\'|\"[^\"]*\")|(#.*?\n)', lambda m: m.group(1) if m.group(1) else '\n', program)
             # Remove multi-line comments
             program = re.sub(r'""".*?"""', '', program, flags=re.DOTALL)
-            
+            program = re.sub(r"'''.*?'''", '', program, flags=re.DOTALL)
             return program
         
         copy_folder_name = "obfuscated_tested_codes [copied at {}]".format(self.get_timestr())

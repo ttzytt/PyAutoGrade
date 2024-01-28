@@ -4,10 +4,12 @@ multi-line comment
 """
 
 def add(a, b):
-    # single line comment
+
     """
     multi-line comment
     """
     print(' """ """ ')
+    print("# test single line comment")
+    "test test"
     while True:
         pass
