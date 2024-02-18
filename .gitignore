@@ -1,2 +1,4 @@
 tests/temp_files/**
 tests/test_output/**
+.vscode/**
+*.csv

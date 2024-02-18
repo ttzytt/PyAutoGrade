@@ -1,6 +1,7 @@
 import os 
 from pathlib import Path
 import yaml
+import re
 def replace_last_path_occurance(path : str, old : str, new : str):
     path = Path(path)
     parts = list(path.parts)
@@ -52,3 +53,23 @@ class CfgFileRelated:
             self.cfg['output_path']
         )
         self.output_rel_path = self.cfg['output_path']
+
+
+        student_re_list = self.cfg['students_list'] # all regular expressions
+        student_list = []
+
+        # Iterate over each regular expression
+        for re_str in student_re_list:
+            # Compile the regular expression
+            pattern = re.compile(re_str)
+            
+            # Iterate over all files in the directory
+            for file_or_folder in Path(self.tested_code_abs_path).glob('*'):
+                # Check if the file name matches the regular expression
+                print(f"Matching {file_or_folder.name} with {re_str}")
+                if pattern.match(file_or_folder.name):
+                    student_list.append(file_or_folder.name)
+
+        self.student_list = student_list
+        print(f"Student list: {self.student_list}")
+        self.problem_list = self.cfg['problems_list']

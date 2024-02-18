@@ -45,15 +45,15 @@ class BatchTestManger(CfgFileRelated):
         self.last_test_result = dict[str, list]
     def test_all(self) -> dict[str, list]:
         # test all presented problems with test strategies cofigured
-        stus = self.cfg['students_list']
-        probs = self.cfg['problems_list']
+        stus = self.student_list
+        probs = self.problem_list
         return self.test_specific(*itertools.product(stus, probs))
         
     def test_students(self, *students : str) -> dict[str, list]:
         # test all the code of `students`
         return self.test_specific(*itertools.product(students, self.cfg['problems_list']))
     def test_problems(self, *problems : str) -> dict[str, list] :
-        return self.test_specific(*itertools.product(self.cfg['students_list'], problems))
+        return self.test_specific(*itertools.product(self.student_list, problems))
     def test_students_with_problem(self, students : list[str], problems : list[str]) -> dict[str, list]:
         # test all `problems` that implemented by students listed in `students`
         return self.test_specific(*itertools.product(students, problems))

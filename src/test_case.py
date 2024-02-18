@@ -151,12 +151,18 @@ class PrewrittenScriptCase(TestCase):
             os.mkdir('/tmp/autograde')
             os.chmod('/tmp/autograde', 0o000) # no permission to read, write or execute
         
-        
-        module_specs = importlib.util.spec_from_file_location('module', evaluated_module_path)
-        module = importlib.util.module_from_spec(module_specs)
-        module_specs.loader.exec_module(module)
+
+        loading_module_exception = None
+        try: 
+            module_specs = importlib.util.spec_from_file_location('module', evaluated_module_path)
+            module = importlib.util.module_from_spec(module_specs)
+            module_specs.loader.exec_module(module)
+        except Exception as e:
+            loading_module_exception = e
         @timeout(self.test_limits.time_limit / 1000)
         def get_test_ret(): 
+            if loading_module_exception is not None:
+                raise loading_module_exception
             evaluated_func = getattr(module, self.tested_func_name)
             return self.test_case(evaluated_func)
         
@@ -238,7 +244,7 @@ class PrewrittenFileCase(PrewrittenScriptCase):
         self.testcase_path = testcase_path
         self.test_args = []
         self.test_expected = None
-        def file_syle_case_handler(func : callable) -> PrewrittenScriptCase.EvaluatorT: 
+        def file_syle_case_handler(func : Callable) -> PrewrittenScriptCase.EvaluatorResult: 
             # make sure that this str is indicating the path to a yml file
                 output = func(*self.test_args)
                 is_correct =(output == self.test_expected)

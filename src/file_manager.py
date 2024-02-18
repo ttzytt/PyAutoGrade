@@ -49,7 +49,7 @@ class FileManager(CfgFileRelated):
                 suffix = ''
             destination_pfname = pfname.replace('/', '$') + '_' + timestr + '.' + suffix # destination problem/folder name
             os.mkdir(os.path.join(self.temp_files_abs_path, destination_pfname))
-            for stu in tqdm(self.cfg['students_list']):
+            for stu in tqdm(self.student_list):
                 student_pf_path = os.path.join(self.tested_code_abs_path, stu, pfname)
                 if os.path.exists(student_pf_path):
                     dest_solution_file_path = os.path.join(self.temp_files_abs_path, destination_pfname, stu + '.' + suffix)
@@ -78,7 +78,7 @@ class FileManager(CfgFileRelated):
             as in some cases, students indicate their name in comments.
         
         """
-        stus : list[str] = self.cfg['students_list']
+        stus : list[str] = self.student_list
         stus_to_num : dict[str, int] = {}
         random.shuffle(stus)
         for num, stu in enumerate(stus):
