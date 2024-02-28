@@ -1,0 +1,15 @@
+tested_code_path : ./tested_code
+output_path : ./output
+test_case_path : ./test_case
+temp_files_path : ./tests/temp_files
+students_list:
+- PCS 9 - Wrong Answer
+- PCS 9 - Right Answer
+- PCS 9 - Mr.Timeout
+- PCS 9 - Ms.Memout
+- PCS 9 - Dangerous Behavior
+- PCS 9 - No Homework
+problems_list: 
+- addition
+- ./folder/subtraction
+- card_functions
