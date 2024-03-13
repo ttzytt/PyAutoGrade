@@ -2,3 +2,5 @@ tests/temp_files/**
 tests/test_output/**
 .vscode/**
 *.csv
+/test_specs
+*.pdf

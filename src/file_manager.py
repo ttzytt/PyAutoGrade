@@ -44,22 +44,22 @@ class FileManager(CfgFileRelated):
             # so replace / with other stuff
             # also put time into pfname 
             if isfile and pfname.find('.') != -1:
-                suffix = pfname.split('.')[-1]
+                extension_name = "." + pfname.split('.')[-1]
             else: 
-                suffix = ''
-            destination_pfname = pfname.replace('/', '$') + '_' + timestr + '.' + suffix # destination problem/folder name
+                extension_name = ''
+            destination_pfname = pfname.replace('/', '$').replace('.', '') + '_' + timestr + extension_name # destination problem/folder name
             os.mkdir(os.path.join(self.temp_files_abs_path, destination_pfname))
             for stu in tqdm(self.student_list):
                 student_pf_path = os.path.join(self.tested_code_abs_path, stu, pfname)
                 if os.path.exists(student_pf_path):
-                    dest_solution_file_path = os.path.join(self.temp_files_abs_path, destination_pfname, stu + '.' + suffix)
+                    dest_solution_file_path = os.path.join(self.temp_files_abs_path, destination_pfname, stu + extension_name)
                     if isfile:
                         shutil.copyfile(student_pf_path, dest_solution_file_path)   
                     else: 
                         shutil.copytree(student_pf_path, dest_solution_file_path)
                 else: 
                     # create a file named: stu-no-solution.py
-                    dest_solution_file_path = os.path.join(self.temp_files_abs_path, destination_pfname, stu + ' [no solution found]'+ '.' + suffix)
+                    dest_solution_file_path = os.path.join(self.temp_files_abs_path, destination_pfname, stu + ' [no solution found]' + extension_name)
                     dest_solution_file = open(dest_solution_file_path, 'w')
                     dest_solution_file.close()
                     

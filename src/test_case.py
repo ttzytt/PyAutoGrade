@@ -12,6 +12,7 @@ import psutil
 from typing import Generic, TypeAlias, TypeVar, Callable
 import sys
 import traceback
+from typing import Any
 
 class TestCase(ABC): 
     # abstract class for all kinds of testers 
@@ -32,8 +33,8 @@ class TestCase(ABC):
         result_type : 'TestCase.TestResultType'
         time_used   : float = -1          # in miliseconds
         memory_used : float = -1          # in MB
-        expected    : any   = None     # only useful when result_type is wrong_answer
-        actual      : any   = None     # only useful when result_type is wrong_answer
+        expected    : Any   = None     # only useful when result_type is wrong_answer
+        actual      : Any   = None     # only useful when result_type is wrong_answer
         err_message : str   = None     # error message
         stack_trace : str   = None     # stack trace
         test_case_id: int   = -1
@@ -59,14 +60,21 @@ class PrewrittenScriptCase(TestCase):
     @dataclasses.dataclass
     class EvaluatorResult: 
         is_correct : bool
-        expected   : any = None
-        actual     : any = None 
-        msg        : str = None
+        expected   : Any = None
+        actual     : Any  = None 
+        msg        : str | None = None
 
     class EvaluatorBuilder:
-        @staticmethod
-        def assert_cond_true(cond : callable, *input_args, **input_kwds):
-            def evaluator(func : callable) -> PrewrittenScriptCase.EvaluatorResult:
+        def __init__(self, float_precision : float = 1e-5):
+            self.float_precision = float_precision
+            self.float_eq = lambda a, b: abs(a - b) < self.float_precision
+            self.float_lt = lambda a, b: a < b - self.float_precision
+            self.float_gt = lambda a, b: a > b + self.float_precision
+            self.float_le = lambda a, b: a < b + self.float_precision
+            self.float_ge = lambda a, b: a > b - self.float_precision
+
+        def assert_cond_true(self, cond : Callable, *input_args, **input_kwds):
+            def evaluator(func : Callable) -> PrewrittenScriptCase.EvaluatorResult:
                 ret = func(*input_args, **input_kwds)
                 cond_ret = cond(ret)
                 if cond_ret:
@@ -74,50 +82,66 @@ class PrewrittenScriptCase(TestCase):
                 else:
                     return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert cond true evaluator, the return value of the tested function is " + str(ret) + " which does not satisfy the condition")
             return evaluator
-        @staticmethod   
-        def assert_eq(value : any, *input_args, **input_kwds):
-            def evaluator(func : callable) -> PrewrittenScriptCase.EvaluatorResult:
+
+        def assert_eq(self, value : Any, *input_args, **input_kwds):
+            def evaluator(func : Callable) -> PrewrittenScriptCase.EvaluatorResult:
                 ret = func(*input_args, **input_kwds)
-                if ret == value:
+                cond = ret == value
+                if isinstance(ret, float) and isinstance(value, float):
+                    cond = self.float_eq(ret, value)
+                if cond:
                     return PrewrittenScriptCase.EvaluatorResult(True)
                 else:
                     return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert eq evaluator, the return value of the tested function is " + str(ret) + " which does not equal to " + str(value))
             return evaluator
-        @staticmethod
-        def assert_lt(value : any, *input_args, **input_kwds):
-            def evaluator(func : callable) -> PrewrittenScriptCase.EvaluatorResult:
+        
+        def assert_eq_correct_sol(self, correct_sol : Callable, *input_args, **input_kwds):
+            correct_val = correct_sol(*input_args, **input_kwds)
+            return self.assert_eq(correct_val, *input_args, **input_kwds)
+
+        def assert_lt(self, value : Any, *input_args, **input_kwds):
+            def evaluator(func : Callable) -> PrewrittenScriptCase.EvaluatorResult:
                 ret = func(*input_args, **input_kwds)
-                if ret < value:
+                cond = ret < value
+                if isinstance(ret, float) and isinstance(value, float):
+                    cond = self.float_lt(ret, value)
+                if cond:
                     return PrewrittenScriptCase.EvaluatorResult(True)
                 else:
                     return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert lt evaluator, the return value of the tested function is " + str(ret) + " which is not less than " + str(value))
             return evaluator
      
-        @staticmethod
-        def assert_gt(value : any, *input_args, **input_kwds):
-            def evaluator(func : callable) -> PrewrittenScriptCase.EvaluatorResult:
+        def assert_gt(self, value : Any, *input_args, **input_kwds):
+            def evaluator(func : Callable) -> PrewrittenScriptCase.EvaluatorResult:
                 ret = func(*input_args, **input_kwds)
-                if ret > value:
+                cond = ret > value
+                if isinstance(ret, float) and isinstance(value, float):
+                    cond = self.float_gt(ret, value)
+                if cond:
                     return PrewrittenScriptCase.EvaluatorResult(True)
                 else:
                     return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert gt evaluator, the return value of the tested function is " + str(ret) + " which is not greater than " + str(value))
             return evaluator
         
-        @staticmethod
-        def assert_le(value : any, *input_args, **input_kwds):
-            def evaluator(func : callable) -> PrewrittenScriptCase.EvaluatorResult:
+        def assert_le(self, value : Any, *input_args, **input_kwds):
+            def evaluator(func : Callable) -> PrewrittenScriptCase.EvaluatorResult:
                 ret = func(*input_args, **input_kwds)
-                if ret <= value:
+                cond = ret <= value
+                if isinstance(ret, float) and isinstance(value, float):
+                    cond = self.float_le(ret, value)
+                if cond:
                     return PrewrittenScriptCase.EvaluatorResult(True)
                 else:
                     return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert le evaluator, the return value of the tested function is " + str(ret) + " which is not less than or equal to " + str(value))
             return evaluator
         
-        @staticmethod
-        def assert_ge(value : any, *input_args, **input_kwds):
-            def evaluator(func : callable) -> PrewrittenScriptCase.EvaluatorResult:
+        def assert_ge(self, value : Any, *input_args, **input_kwds):
+            def evaluator(func : Callable) -> PrewrittenScriptCase.EvaluatorResult:
                 ret = func(*input_args, **input_kwds)
-                if ret >= value:
+                cond = ret >= value
+                if isinstance(ret, float) and isinstance(value, float):
+                    cond = self.float_ge(ret, value)
+                if cond:
                     return PrewrittenScriptCase.EvaluatorResult(True)
                 else:
                     return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert ge evaluator, the return value of the tested function is " + str(ret) + " which is not greater than or equal to " + str(value))
@@ -125,7 +149,7 @@ class PrewrittenScriptCase(TestCase):
 
         @staticmethod
         def assert_content_in_set(value : set, *input_args, **input_kwds):
-            def evaluator(func : callable) -> PrewrittenScriptCase.EvaluatorResult:
+            def evaluator(func : Callable) -> PrewrittenScriptCase.EvaluatorResult:
                 ret = func(*input_args, **input_kwds)
                 ret = set(ret)
                 if ret.issubset(value):

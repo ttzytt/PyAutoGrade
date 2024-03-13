@@ -67,7 +67,8 @@ class CfgFileRelated:
             for file_or_folder in Path(self.tested_code_abs_path).glob('*'):
                 # Check if the file name matches the regular expression
                 print(f"Matching {file_or_folder.name} with {re_str}")
-                if pattern.match(file_or_folder.name):
+                if pattern.fullmatch(file_or_folder.name):
+                    print("Matched!")
                     student_list.append(file_or_folder.name)
 
         self.student_list = student_list
