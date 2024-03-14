@@ -25,6 +25,11 @@ def get_abs_norm_path_str(path : str) -> str:
     return str(Path(path).resolve())
 def get_norm_path_str(path : str) -> str:
     return str(Path(path))
+def remove_first_dot_if_preceding_spaces(s):
+    parts = s.split('.', 1)  # Split the string into two parts at the first dot
+    if len(parts) == 2 and (not parts[0] or parts[0].isspace()):  # Check if the first part contains only spaces or nothing
+        return parts[0].rstrip() + parts[1]  # If so, remove trailing spaces and concatenate with the second part
+    return s
 
 class CfgFileRelated: 
     def _get_abs_path_in_cfg(self, path: str) -> str:

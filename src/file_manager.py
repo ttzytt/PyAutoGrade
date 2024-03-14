@@ -47,7 +47,8 @@ class FileManager(CfgFileRelated):
                 extension_name = "." + pfname.split('.')[-1]
             else: 
                 extension_name = ''
-            destination_pfname = pfname.replace('/', '$').replace('.', '') + '_' + timestr + extension_name # destination problem/folder name
+            destination_pfname = pfname.replace('/', '$') + '_' + timestr + extension_name # destination problem/folder name
+            destination_pfname = remove_first_dot_if_preceding_spaces(destination_pfname)
             os.mkdir(os.path.join(self.temp_files_abs_path, destination_pfname))
             for stu in tqdm(self.student_list):
                 student_pf_path = os.path.join(self.tested_code_abs_path, stu, pfname)
