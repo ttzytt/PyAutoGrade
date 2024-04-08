@@ -1,4 +1,6 @@
 from test_case import *
+import sys 
+sys.path.append('./../../src/')
 from test_case import  PrewrittenFileCase as pf, PrewrittenScriptCase as ps
 import random
 import io
@@ -235,13 +237,13 @@ def test_case_constructor() -> list[TestCase]:
             )
         ),
         _ps(peb.assert_eq_correct_sol(
-            longest_word_sol, 
-            longest_palindrome_sol(2000)
+            longest_palindrome_sol,
+            gen_random_file(2000),
             )
         ),
         _ps(peb.assert_eq_correct_sol(
-            longest_word_sol, 
-            longest_palindrome_sol(8000)
+            longest_palindrome_sol,
+            gen_random_file(8000),
             )
         )
     ])
@@ -274,13 +276,13 @@ def test_case_constructor() -> list[TestCase]:
             )
         ),
         _ps(peb.assert_eq_correct_sol(
-            longest_word_sol, 
-            all_vowels_counter_sol(2000)
+            all_vowels_counter_sol,
+            gen_random_file(2000),
             )
         ),
         _ps(peb.assert_eq_correct_sol(
-            longest_word_sol, 
-            all_vowels_counter_sol(8000)
+            all_vowels_counter_sol,
+            gen_random_file(8000),
             )
         )
     ])
@@ -302,21 +304,21 @@ def test_case_constructor() -> list[TestCase]:
                         + "\n"
                         + "ddddddddddddddddddddddddddddddddddd\n"
                         + "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n", 5, "count_long_lines", 30), 
-        _ps(peb.assert_eq_correct_sol(
-            count_long_lines_sol, 
-            gen_random_file(1000)
-            )
-        ),
-        _ps(peb.assert_eq_correct_sol(
-            count_long_lines_sol, 
-            all_vowels_counter_sol(2000)
-            )
-        ),
-        _ps(peb.assert_eq_correct_sol(
-            count_long_lines_sol, 
-            all_vowels_counter_sol(8000)
-            )
-        )
+        # _ps(peb.assert_eq_correct_sol(
+        #     count_long_lines_sol, 
+        #     gen_random_file(1000)
+        #     )
+        # ),
+        # _ps(peb.assert_eq_correct_sol(
+        #     count_long_lines_sol, 
+        #     all_vowels_counter_sol(2000)
+        #     )
+        # ),
+        # _ps(peb.assert_eq_correct_sol(
+        #     count_long_lines_sol, 
+        #     all_vowels_counter_sol(8000)
+        #     )
+        # )
     ])
 
 

@@ -125,7 +125,7 @@ class BatchTestManger(CfgFileRelated):
                 for stu_idx, stu in enumerate(export_test_result['students']):
                     entry_val = getattr(export_test_result[prob][stu_idx], t_summary_entries)
                     entry_val = entry_val if isinstance(entry_val, Number) else str(entry_val)
-                    tmp_dict[col_name].append(entry_val)
+                    tmp_dict[col_name].append(str(entry_val)[:1000])
         
         file_name = "test result@" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".csv"
         df = pd.DataFrame(tmp_dict)
