@@ -1,15 +1,26 @@
-temperature = int(input("What's the temperature today in °F? : "))
-raining = input ("Is it raining? : ")
 
-if temperature > 95 or temperature < 50 :
-    if 32 < temperature < 50 :
-        if raining == "yes"or raining == "Yes":
-            jacket = input ("Do you have a jacket? : ")
-            if jacket == "yes"or jacket == "Yes":
-                print ("You should play outside today.")
-        elif raining == "no" or raining == "No":
-            print ("You should play outside today.")
-    else:
-        print("You shouldn't play outside today.")
-else :
-    print ("You should play outside today.")
+
+
+
+Fahrenheit = int(input("what the temperature today in F°? ")) 
+
+
+if Fahrenheit >= 90 or Fahrenheit < 50: 
+    print("You shouldn't play outside today:(")
+
+
+elif Fahrenheit < 90 or Fahrenheit >=50:
+    rain = input("Is it raining?") 
+    if rain =="no":
+        print("You should play outside today:p!")
+    elif rain == "yes": 
+        jacket = input("Do you wear a jacket?")
+        if jacket == "yes": 
+            print("You should play outside today!")
+        elif jacket == "no": 
+            print("You shouldn't play outside today:(")
+   
+
+
+
+

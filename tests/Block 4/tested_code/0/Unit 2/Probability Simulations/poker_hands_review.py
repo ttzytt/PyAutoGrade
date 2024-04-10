@@ -4,186 +4,198 @@
 
 
 
-
 from operator import itemgetter
+
 import random
+
 random.seed()
 
 
+def full_house_check(deck):
+    random.shuffle(deck)
 
-def is_full_house():
+    hand = deck[0:5]
+
+    
+    
+    
+    ranks_of_hand = []
+    
+    for i in range(5):
+        ranks_of_hand.append(hand[i][0])
+        
+    ranks_of_hand.sort()
+    
+    if ranks_of_hand[0] == ranks_of_hand[1]:
+        if ranks_of_hand[2] == ranks_of_hand[3] == ranks_of_hand[4]:
+            return True
+
+    if ranks_of_hand[0] == ranks_of_hand[1] == ranks_of_hand[2]:
+        if ranks_of_hand[3] == ranks_of_hand[4]:
+            return True
+        
+    return False
+
+
+
+
+def probability_full_house(num_trials):
+    total = 0
+    
+    for _ in range(num_trials):
+        
+        full_house = False 
+        number_of_tries = 0
+        
+        while full_house == False:
+
+            if full_house_check(deck) == True:
+                full_house = True
+            
+            number_of_tries += 1
+        total += number_of_tries
+    
+    return round(total/num_trials)
+
+
+
+
+
+
+def straight_flush_check(deck):
+    
+    random.shuffle(deck)
+    hand = deck[0:5]
+    
+    
+    hand.sort(key = itemgetter(1, 0))
+
+    
+    if hand[0][1] != hand[4][1]:
+        return False
+    
+    
+    
+    
+    if hand[0][0] == 1 and hand[1][0] == 10 and hand[2][0] == 11 and hand[3][0] == 12 and hand[4][0] == 13:
+        return True
+    if hand[4][0] - hand[0][0] != 4:
+        return False
+        
+    return True
+
+
+
+
+
+def probability_straight_flush(num_trials):
+    total = 0
+    
+    for _ in range(num_trials):
+        
+        straight_flush = False
+        number_of_tries = 0
+        
+        while straight_flush == False:
+            if straight_flush_check(deck) == True:
+                straight_flush = True
+
+            number_of_tries += 1
+        total += number_of_tries
+
+    return round(total/num_trials)
+
     
 
-    rank_count = 0
-    full_house = False
+
+def flush_check(deck):
     
-    while full_house == False:
-        hands = make_deck()
-        hands.sort()
-        
-        
-        if((hands[0][0] == hands[1][0] == hands[2][0]
-               and hands[3][0] == hands[4][0]) or (hands[0][0]==hands[1][0]
-               and hands[2][0] == hands[3][0] == hands[4][0])):
-            full_house = True
-        rank_count += 1
-    return rank_count
-   
-def full_house_odds_test(num_trials):
-    simulation_count = 0
-    for i in range(1, num_trials):
-        simulation_count += is_full_house()
-    return simulation_count/num_trials
+    random.shuffle(deck)
+    hand = deck[0:5]
 
-def make_deck():
     
-    ranks = [1,2,3,4,5,6,7,8,9,10,11,12,13]
-    suits = ['♠','♥','♦','♣']
-    deck = []
-
-
-    for rank in ranks: 
-        for suit in suits:
-            deck.append([rank,suit]) 
-
-    random.shuffle(deck) 
-    return deck[:5:] 
-
-
-
-
-
-
-
-
-
-def is_straight_flush():
-    count = 0
-    straight_flush = False
+    hand.sort(key = itemgetter(1, 0))
     
-    while straight_flush == False:
-        hands = make_deck()
-        hands.sort()
-        
-        
-        
-        
-        if hands[0][0] == 1:
-            if(int(hands[0][0]) + 1 != int(hands[1][0])):
-                   hands[0][0] = 1
-        hands.sort()
-        
-        
-        if(hands[0][1] == hands[1][1]
-            and hands[0][1] == hands[2][1] 
-            and hands[0][1] == hands[3][1]
-            and hands[0][1] == hands[4][1]):
-            straight_flush = True
-        else:
-            straight_flush = False
-        count += 1
-    return count
-
-def straight_flush_odds_test(num_trials):
-    simulation_count = 0
-    for i in range(1, num_trials):
-        simulation_count += is_straight_flush()
-    return simulation_count/num_trials
-
-
-
-
-
-
-
-def is_flush():
-    count = 0
-    flush = False
     
-    while flush == False:
-        hands = make_deck()
-        hands.sort()
-        
-        if hands[0][0] == 1:
-            if(int(hands[0][0]) + 1 != int(hands[1][0])):
-                   hands[0][0] = 1
-        hands.sort()
-        
-        if(int(hands[0][0]) + 1 == int(hands[1][0])
-            and int(hands[2][0]) + 1 == int(hands[3][0])
-            and int(hands[3][0]) + 1 == int(hands[4][0])): 
-            if(hands[0][1] == hands[1][1]
-                and hands[0][1] == hands[2][1]
-                and hands[0][1] == hands[3][1]
-                and hands[0][1] == hands[4][1]):
+    if hand[0][1] != hand[4][1]:
+        return False
+    
+    if hand[0][0] == 1 and hand[1][0] == 10 and hand[2][0] == 11 and hand[3][0] == 12 and hand[4][0] == 13:
+        return False
+    if hand[4][0] - hand[0][0] == 4:
+        return False
+
+    return True
+
+
+
+
+
+def probability_flush(num_trials):
+    total = 0
+    
+    for _ in range(num_trials):
+        flush = False
+        number_of_tries = 0
+        while flush == False:
+            
+            if flush_check(deck) == True:
                 flush = True
-        else:
-             flush = False
-        count += 1
-    return count
 
-def straight_flush_odds_test(num_trials):
-    simulation_count = 0
-    for i in range(1, num_trials):
-        simulation_count += is_flush()
-    return simulation_count/num_trials
+            number_of_tries += 1
+        total += number_of_tries
+    return round(total/num_trials)
 
-num_trials = int(input('Enter how many trials you want to go the simulation: '))
-flush_odds = straight_flush_odds_test(num_trials)
-print(f'The odds of being dealt a straight flush is 1 in {flush_odds}')
 
-def generate_roll():
-    dice_suits = ['♠','♥','♦','♣']
-    dice_values = random.randint(1,4)
-    dice_rolls = []
+
+
+
+
+def flush_comparison_check():
+    rolls = []
+
+    for _ in range(5):
+        rolls.append(random.choice([1, 2, 3, 4]))
     
-    for values in dice_values: 
-        for suit in dice_suits:
-            deck.append([value,suit]) 
-
-    random.shuffle(deck) 
-    print(dice_rolls)
-    return dice_rolls[:5:] 
-
-
     
-def is_four_side_dice():
+    rolls.sort()
+
+    if rolls[0] != rolls[4]:
+        return False
+
+    return True
+
+
+
+def probability_flush_comparison(num_trials):
+    total = 0
+    for _ in range(num_trials):
+        flush = False
+        number_of_tries = 0
+        while flush == False:
+            
+            if flush_comparison_check() == True:
+                flush = True
+
+            number_of_tries += 1
+        total += number_of_tries
+    return round(total/num_trials)
+
+
+deck = []
+different_suits = ['♠', '♥', '♦', '♣']
+for suit in different_suits:
+    for i in range(13):
+        deck.append([i+1, suit])
+                    
+num_trials = int(input('How many trials do you want?'))
+
+print('Probability of full house is 1 in ' + str(probability_full_house(num_trials)) + '.')
+print('Probability of straight flush is 1 in ' + str(probability_straight_flush(num_trials)) + '.')
+print('Probability of flush is 1 in ' + str(probability_flush(num_trials)) + '.')
+print('Probability of flush is 1 in ' + str(probability_flush_comparison(num_trials)) + '.')
 
 
 
 
 
-    same_count = 0
-    same_roll = False
-    
-    while same_roll == False:
-        hands = generate_roll()
-        hands.sort()
-        
-        
-        if((hands[0][0] == hands[1][0] == hands[2][0]
-               and hands[3][0] == hands[4][0]) or (hands[0][0]==hands[1][0]
-               and hands[2][0] == hands[3][0] == hands[4][0])):
-            same_roll = True
-        same_count += 1
-    return same_count
-        
-    
-def straight_4_side_dice_test(num_trials):
-    simulation_count = 0
-    for i in range(1, num_trials):
-        simulation_count += is_four_side_dice()
-    return simulation_count/num_trials
-
-
-
-
-
-
-
-
-
-
-
-
-    

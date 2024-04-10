@@ -1,16 +1,35 @@
-file_name = 'Text files/greeneggs.txt'
-with open(file_name, 'r') as my_file:
+def count_characters(read_file):
+    count = 0  
+    for line in read_file:  
+        count += len(line)
+    return count
+
+yes_or_no = input("Do you want to read the story? (y/n) ").lower()
+if yes_or_no != 'no':
     
-    
-    character_count = 0
-    list_of_line = my_file.readline()
-    for line in my_file:  
-        character_count += len(line)
-    full_content = my_file.read()
-        
-print(list_of_line) 
- 
-print('Rest characters: ' + str(character_count))
- 
-print(full_content[:50])
-print()
+    print("Okay, you can read below!")
+    print()
+    file_name = 'Text files/greeneggs.txt'
+    with open(file_name, 'r') as my_file:
+            
+            
+        full_content = my_file.read()
+    print(full_content[:])  
+    print()
+
+else:
+    other = input("Okay, well do you want a list of addition problems? ").lower()
+    if other != 'no':
+        print("You can read below!")
+        print()
+        file_name = 'Text files/addition.txt'
+        with open(file_name, 'r') as my_file:
+            
+            
+            full_content = my_file.read()
+        print(full_content[:])  
+
+    else:
+        print("Okay! Goodbye")
+
+              

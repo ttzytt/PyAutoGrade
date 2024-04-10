@@ -7,62 +7,74 @@
 from infection_functions import *
 
 
-def infection_simulation(grid, cycles, heal_probability, infect_probability):
 
-    for i in range(cycles):
+infection_probability = 0.4
+heal_probability = 0.5
 
-        
-        
-        
-        
-        next_grid = []
-        for row in range(len(grid)):
-            next_grid.append(grid[row][:])
+grid_rows = 10
+grid_columns = 10
 
-        
-        
-        for person_y in range(len(grid) - 2):
-            for person_x in range(len(grid[0]) - 2):
-                if grid[person_y+1][person_x+1] == 'x': 
-                    heal_infected(heal_probability, person_x, person_y, grid,
-                                  next_grid)
+max_turns = 10000
+print_turn_interval = 10
 
-                else: 
-                    infect_healthy(infect_probability, person_x, person_y,
-                                   grid, next_grid)
-        grid = next_grid
-        print('Cycle ' + str(i+1))
-        print_grid(grid)
-        
-        print()
+squares_to_be_inserted = [[0,0],[9,0],[0,9],[9,9]]
 
-    return grid
+
+is_infected_grid = []
+for _ in range(grid_rows):
+    row = []
+    for _ in range(grid_columns):
+        row.append(False)
+    is_infected_grid.append(row)
 
 
 
+for square in squares_to_be_inserted:
+    grid_column = square[0]
+    grid_row = square[1]
+    is_infected_grid[grid_row][grid_column] = True
 
+print_grid(is_infected_grid)
+print("This is the starting map. Press ENTER to continue")
+input()
 
+turn = 1
+was_prompted_to_quit = False
+while turn < max_turns and (not is_everyone_healed(is_infected_grid)):
+    if (turn % print_turn_interval == 0):
+        print("Turn",turn,":")
+        print_grid(is_infected_grid)
+    new_grid = []
+    for row in range(grid_rows):
+        new_row = []
+        for column in range(grid_columns):
+            if is_infected_grid[row][column]: 
+                
+                new_row.append(determine_if_still_infected(heal_probability))
+            else: 
+                new_row.append(determine_if_infected(infection_probability,
+                                                      check_neighbors(is_infected_grid, column, row)))
+        new_grid.append(new_row)
+    is_infected_grid = new_grid
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    if is_everyone_infected(is_infected_grid):
+        if not was_prompted_to_quit:
+            was_prompted_to_quit = True
+            if turn % print_turn_interval != 0:
+                print(f"Turn {turn}:")
+                print_grid(is_infected_grid)
+            print(f"Everyone is infected (Turn {turn}). Would you like to continue?")
+            user_input = input("Press ENTER to continue. Type anything to quit. ")
+            if user_input != '':
+                turn = max_turns
+    else:
+        was_prompted_to_quit = False
+    
+    turn += 1
+if turn == max_turns + 1: 
+    turn = '^^^'
+print(f"Final State ({turn} turns): ")
+print_grid(is_infected_grid)
 
 

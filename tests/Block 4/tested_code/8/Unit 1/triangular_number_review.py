@@ -1,13 +1,14 @@
 
 
 
-number = int(input("Enter a number: ")) 
-triangular = number
+number = int(input("Please enter a number."))
+trinumber = number 
+triangle = trinumber
 
+while number > 1:
+    triangle = (number * (number + 1)) / 2
+    number = 0  
 
-while number>1:
-    triangular = triangular + (number - 1)
-    number = number - 1
+print('The triangular number of ' + str(trinumber) + ' is ' + str(round(triangle)))
 
-print("The nth triangular number of your number(n) is: " + str(triangular))
 

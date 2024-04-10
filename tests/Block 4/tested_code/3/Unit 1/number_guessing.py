@@ -1,23 +1,23 @@
 
 
 
-
-
 import random
-
 random.seed()
 
-computer_choice = int(random.choice(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']))
+
+program_choose = random.randint(1,10)
+user_guess = int(input('Guess the number between 1 to 10: '))
 
 
-guess = int(input('Guess what I choose: '))
+while user_guess != program_choose:
 
+    if user_guess > program_choose:
+        print('Too high!')
+    elif user_guess < program_choose:
+        print('Too low!')
 
-while guess != computer_choice: 
-    if guess < computer_choice:
-        print('too low, try again!')
-    elif guess > computer_choice:
-        print('too high, try again!')
-    guess = int(input('Guess what I choose: '))
+    
+    user_guess = int(input('Guess again: '))
 
-print('congratuations!')
+print() 
+print('You guessed it right! The number is ' + str(program_choose) + '.') 

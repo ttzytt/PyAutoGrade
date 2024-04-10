@@ -1,21 +1,39 @@
 
 
 
-import random
 
+import random 
 random.seed()
 
 
-choice = str(input("Enter 'rock' or 'paper': "))
+user_choice = input("Enter 'rock' or 'paper': ") 
 
 
-choice2 = random.choice(['rock', 'paper'])
-print("I choose " + choice2)
+comp_choice = random.choice(['rock', 'paper']) 
+print('I choose ' + comp_choice + '.')
 
 
-if choice == 'rock' and choice2 == 'paper':
-    print('I win.')
-elif choice == 'paper' and choice2 == 'rock':
-    print('You win.')
+if user_choice == 'rock':   
+    if comp_choice == 'rock':
+        print('We tie.')
+    else:
+        
+        print('I win.')
+
+elif user_choice == 'paper':
+    if comp_choice == 'rock':
+        print('You win.')
+    else:
+        
+        print('We tie.')
+
 else:
-    print('We tie.')
+    
+    print('I already chose, you need to choose from rock and paper too!')
+
+
+
+
+        
+        
+

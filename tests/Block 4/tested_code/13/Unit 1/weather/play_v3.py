@@ -2,36 +2,34 @@
 
 
 
-weather = input("What's the weather like today? (Sunny/Cloudy/Rainy) ")
+temperature = float(input('What is the temperature today (in °F)? '))
 
-if weather == "sunny":
-    
-    sunscreen = input("Do you have sunscreen? (Yes/No) ")
-    hat = input("Do you have a hat? (Yes/No) ")
-    
-    
-    if sunscreen == "yes" and hat == "yes":
-        print("It's a great day for a hike! Enjoy the sunshine.")
+
+if temperature > 95 or temperature < 32: 
+    print("You shouldn't play outside today.")
+
+elif temperature >= 50: 
+    is_raining = input('Is it raining? ')
+    if is_raining.lower() == 'yes': 
+                                    
+        is_waterproof = input('Are you waterproof? ')
+        if is_waterproof.lower() == 'no':
+            print("You shouldn't play outside today.")
+        elif is_waterproof.lower() == 'yes':
+            print('You should play outside today.')
+        else: 
+            print('Invalid answer.')
+    elif is_raining.lower() == 'no': 
+        print('You should play outside today.')
     else:
-        print("You should go for a hike, but don't forget sunscreen and a hat!")
-elif weather == "cloudy":
-    
-    water = input("Do you have a water bottle? (Yes/No) ")
-    
-    
-    if water == "yes":
-        print("It's a good day for a hike, even though it's cloudy. Stay hydrated!")
+        print('Invalid answer.')
+        
+else: 
+      
+    from_arctic = input('Are you from the arctic? ')
+    if from_arctic.lower() == 'no': 
+        print("You shouldn't play outside today.")
+    elif from_arctic.lower() == 'yes':
+        print("You should play outside today.")
     else:
-        print("You should go for a hike, but remember to bring a water bottle.")
-elif weather == "rainy":
-    
-    umbrella = input("Do you have an umbrella? (Yes/No) ")
-    
-    
-    if umbrella == "yes":
-        print("You can still go for a hike, but be prepared for rain with an umbrella.")
-    else:
-        print("It's not a good day for a hike without an umbrella.")
-else:
-    
-    print("I'm not sure about the weather conditions. Check a weather forecast and decide.")
+        print('Invalid answer.')

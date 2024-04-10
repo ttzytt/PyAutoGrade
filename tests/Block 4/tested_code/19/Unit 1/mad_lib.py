@@ -3,33 +3,37 @@
 
 
 
+noun_1 = input('give me a noun:')  
+animal_1 = input('give me an animal:')
+noun_2 = input('give me a second noun:')
+noun_3 = input('give me a third noun:')
+place_1 = input ('give me a place:')
+noun_4 = input ('give me a fourth noun:')
 
 
+madlib = ('Once upon a time, there was a '+ noun_1 +
+          ' class. It’s mainly about teaching ' + animal_1 + ' to use '
+          + noun_2 + ' and '+noun_3+ '. Student’s would have the class on '+
+          place_1+ ', it’s a room with bunch of ' + noun_4)
 
-print('spaces are included, do not type spaces, all lowercase')
-
-
-name_1 = input('name 1: ')
-name_2 = input('name 2: ')
-name_3 = input('name 3: ')
-
-food_1 = input('food 1(plural): ')
-place_1 = input('place 1: ')
-
-verb_ing = input('verb with -ing: ')
-
-noun_1 = input('noun 1 (plural): ')
-noun_2 = input('noun 2 (plural): ')
-noun_3 = input('noun 3 (plural): ')
+print(madlib)
 
 
-print( name_1 + ' loves eating ' + food_1 + '. One day, ' + name_1 + ' decided to make his own '
+ask = input ('do you want to have a another one? Choose Yes or No :')
+if (ask == 'Yes'):
+    name_1 = input('give me a name:')
+    noun_5 = input('give me a noun:')
+    verb_1 = input('give me a verb:')
+    noun_6 = input('give me a noun:')
+    adj_1 = input('give me a adj:')
+    animal_2 = input('give me an animal:')
 
-+ food_1 + '. \n' + name_1 +' realized they needed ' + noun_2 + ' to make ' + food_1 + '. In the end, '
+    madlibtwo = ('The was a guy named '+ name_1 +', he has got his '
+                 +noun_5+' stolen because he forget to '+verb_1+
+                 ' when he put it in the shared '+noun_6+'. He is so '
+                 +adj_1+' about it that he told '+animal_2+ ' about it.')
+    print(madlibtwo)
 
+input('rate this from 1-5: ')
 
-
-
-+ name_1 + ' tried calling ' + name_2 + ', but they were ' + verb_ing + ' ' + noun_3 + '. \n' + name_1
-+ ' gave up trying to make ' + food_1 + ', and went to the ' + place_1 + ' that sells ' + food_1 + ', called ' + name_3 + "'s " + place_1 + '.')
-
+    

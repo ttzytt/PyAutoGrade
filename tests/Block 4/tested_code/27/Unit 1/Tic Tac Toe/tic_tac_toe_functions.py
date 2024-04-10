@@ -1,8 +1,6 @@
 
 
 
-i = 0
-
 
 
 
@@ -26,38 +24,36 @@ def draw_board(board):
 
 
 
-
 def find_winner(board):
-    if (board [0][0] == board[1][0]== board[2][0]== 'x' or board [0][1] == board[1][1]== board[2][1]== 'x'
-            or board [0][2] == board[1][2]== board[2][2]== 'x' or board [0][0] == board[0][1]== board[0][2]== 'x'
-            or board [1][0] == board[1][1]== board[1][2]== 'x' or board [2][0] == board[2][1]== board[2][2]== 'x'
-            or board [0][0] == board[1][1]== board[2][2]== 'x' or board [0][2] == board[1][1]== board[2][0]== 'x'):
-        return 'x'
-    if (board [0][0] == board[1][0]== board[2][0]== 'o' or board [0][1] == board[1][1]== board[2][1]== 'o'
-            or board [0][2] == board[1][2]== board[2][2]== 'o' or board [0][0] == board[0][1]== board[0][2]== 'o'
-            or board [1][0] == board[1][1]== board[1][2]== 'o' or board [2][0] == board[2][1]== board[2][2]== 'o'
-            or board [0][0] == board[1][1]== board[2][2]== 'o' or board [0][2] == board[1][1]== board[2][0]== 'o'):
-        return 'o'
-    else:
-        return None
+    
+    for row in range(3):
+        if (board[row][0] == board[row][1] and board[row][1] == board[row][2]) and board[row][0] != ' ':
+            return board[row][0]
+    
+    for column in range(3):
+        if (board[0][column] == board[1][column] and board[1][column] == board[2][column]) and board[0][column] != ' ':
+            return board[0][column]
+    
+    if (board[0][0] == board[1][1] and board[1][1] == board[2][2]) and board[0][0] != ' ':
+        return board[0][0]
+    if (board[0][2] == board[1][1] and board[1][1] == board[2][0]) and board[1][1] != ' ':
+        return board[0][2]
+    return None
+
 
 
 
 def get_move(player):
-    return input(player + ' player, chose your move: ')
+    return input(player + ' player, choose your move: ')
 
 
 
 def make_move(player, move, board):
     if len(move) != 2:
-        ret = 1
         return False
-    if move[0] != '1' and move[0] != '2' and move[0] != '3':
-        ret = 1
-        return False
-
-    if move[1] != 'A' and move[1] != 'B' and move[1] != 'C':
-        ret = 1
+    
+    
+    if (not (1 <= int(move[0]) <= 3) or not (ord('A') <= ord(move[1]) <= ord('C'))):
         return False
 
     
@@ -66,20 +62,12 @@ def make_move(player, move, board):
     
     
     column = ord(move[1]) - ord('A')
-    
-    if board[row][column] != ' ':
-        ret = 1
-        return False
-
-
 
     
-    board[row][column] = player
-
-    return True
-
-
-
+    if board[row][column] == ' ':
+        board[row][column] = player
+        return True
+    return False
 
 
 

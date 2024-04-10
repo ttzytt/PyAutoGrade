@@ -1,37 +1,24 @@
 
 
 
+
+
 import random
-import time
 
 random.seed()
 
-print("Hello, lets play a game of rock and paper.")
 
 
-time.sleep(2)
-
-print("Choose one: Rock or Paper?")
-
-time.sleep(2)
+choice = str(input("Enter 'rock' or 'paper': "))
 
 
-computer = random.choice(['rock', 'paper'])
+choice2 = random.choice(['rock', 'paper'])
+print("I choose " + choice2)
 
 
-player = input("What do you choose? (all lowercase)")
-
-print("I choose " + computer + ".")
-
-
-
-if str(computer) == str(player):
-    print("Looks like we tied, want to play again?")
-
-elif str(computer) == ('rock') or str(player) == ('paper'):
-    print("Looks like I lost, Good Game!")
-
-elif str(computer) == ('paper') or str(player) == ('rock'):
-    print("I win gg ez.")
-
-
+if choice == 'rock' and choice2 == 'paper':
+    print('I win.')
+elif choice == 'paper' and choice2 == 'rock':
+    print('You win.')
+else:
+    print('We tie.')

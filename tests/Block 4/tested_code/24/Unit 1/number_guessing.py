@@ -1,29 +1,40 @@
 
 
 
-
 import random
 
 random.seed()
 
-user_guess = int(input('Input a number: '))
-computer_number = random.randint(1,10) 
-count = 1
+print("Let's play a number game.")
 
 
-while(user_guess != computer_number): 
-    if (user_guess > computer_number): 
-        print('That\'s too high!')
-    else: #If not too high, too low
-        print('That\'s too low :( ')
-        
-    if (12 > count > 10):
-        print()
+response = str('yes')
 
-        
-    print()
-    user_guess = int(input('Input a number: ')) 
+while response == 'yes':
+    
+    random_number = str(random.randint(1, 10))
+    player = str(input("I have chosen a number between 1 and 10 (exclusive). Try to guess it!" ))
 
-    count += 1
+    while player != random_number:
+        if player > random_number:
+            print("That number is too high!")
+        elif player < random_number:
+            print("That number is too low.")
+        player = input("Guess again!")
+    else:
+        print("Nice guess! Thats right!")
+    
+    response = input("Do you want to play again? ('yes' or 'no') ")
+else:
+    print("I'm sad to see you leave, come play another time!")
 
-print()
+
+
+
+
+
+
+
+
+
+

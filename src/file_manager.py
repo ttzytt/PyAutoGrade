@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from typing import Callable
 import yaml
 import os
 from pathlib import Path
@@ -71,7 +72,7 @@ class FileManager(CfgFileRelated):
         shutil.rmtree(self.temp_files_abs_path)
         os.mkdir(self.temp_files_abs_path)
     
-    def obfuscate_tested_codes(self):
+    def obfuscate_tested_codes(self, hash_func : Callable[[str], int] | None = adding_hash_func):
         """
             This function is designed to meet the compliance rule of the school. 
             Specifically, it will replace the name of the student in the input folder 
@@ -82,8 +83,12 @@ class FileManager(CfgFileRelated):
         stus : list[str] = self.student_list
         stus_to_num : dict[str, int] = {}
         random.shuffle(stus)
-        for num, stu in enumerate(stus):
-            stus_to_num[stu] = num
+        if hash_func is None:
+            for num, stu in enumerate(stus):
+                stus_to_num[stu] = num
+        else: 
+            for stu in stus:
+                stus_to_num[stu] = hash_func(stu)
         
         def remove_comments(program : str) -> str:
             # Remove single-line comments

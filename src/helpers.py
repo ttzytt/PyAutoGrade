@@ -79,3 +79,10 @@ class CfgFileRelated:
         self.student_list = student_list
         print(f"Student list: {self.student_list}")
         self.problem_list = self.cfg['problems_list']
+
+
+def adding_hash_func(stu : str) -> int:
+    ret = 0
+    for c in stu: 
+        ret += ord(c)
+    return ret

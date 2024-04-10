@@ -1,10 +1,21 @@
 
 
 
-user_number = int(input("Please enter a number."))
-triangle_number = user_number
-while user_number > 1:
-    triangle_number = (triangle_number * (user_number + 1)) / 2
-    user_number = 0  
 
-print('The triangular number of your number is ' + str(round(triangle_number)))
+
+
+input_number = int(input('Type any number greater than zero: '))
+
+
+final_text = input_number
+
+if input_number <= 0:
+    print("Please enter a positive integer.")
+else:
+    
+    triangle_number = 0 
+    while input_number > 0:   
+        triangle_number = input_number + triangle_number 
+        input_number = input_number - 1  
+    
+    print(f'The number {final_text} triangle number is {triangle_number}.')

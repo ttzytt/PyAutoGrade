@@ -2,57 +2,78 @@
 
 
 
-
+from infection_functions import *
 import random
-from infection_functions import*
+random.seed()
 
 
-rows = 10
-columns = 10
-rounds_of_simulation = 10
+healing_rate = 12
+infection_rate = 40
 
-board = make_board(rows, columns)
-
-for _ in range(rows * columns // 10): 
-    i = random.randint(0, rows - 1) 
-    j = random.randint(0, columns - 1)
-    board[i][j] = 'x'
-    
-print('Initial board: ')
-
-for row in board:
-    for cell in row:
-        print(cell, end = ' ')
-    print()
+patients = []
+cured = []
+board = [ [' ', ' ', ' ', ' ',' ',' ',' ',' ',' ',' '],
+          [' ', ' ', ' ', ' ',' ',' ',' ',' ',' ',' '],
+          [' ', ' ', ' ', ' ',' ',' ',' ',' ',' ',' '],
+          [' ', ' ', ' ', ' ',' ',' ',' ',' ',' ',' '],
+          [' ', ' ', ' ', ' ',' ',' ',' ',' ',' ',' '],
+          [' ', ' ', ' ', ' ',' ',' ',' ',' ',' ',' '],
+          [' ', ' ', ' ', ' ',' ',' ',' ',' ',' ',' '],
+          [' ', ' ', ' ', ' ',' ',' ',' ',' ',' ',' '],
+          [' ', ' ', ' ', ' ',' ',' ',' ',' ',' ',' '],
+          [' ', ' ', ' ', ' ',' ',' ',' ',' ',' ',' ']]
+while len(patients) < 20:
+    row = random.randint(0,9)
+    column = random.randint(0,9)
+    patient = [row,column]
+    if patient not in patients:
+        board[row][column] = '+'
+        patients.append(patient)
+print('initial! ')
+draw_board(board)
 print()
 
-for number_of_rounds in range(rounds_of_simulation):
-    
-    
-    heal_probabilities = heal_probability(board) 
-    infect_probabilities = infection_probability(board) 
-    
-    new_board = make_board(rows, columns)
-    for row in range(rows):
-        for column in range(columns):
-            if board[row][column] == 'x':
-                
-                if random.random() < heal_probabilities[row][column]:
-                    new_board[row][column] = '·'
-                else:
-                    new_board[row][column] = 'x'
-            else:
-                
-                if random.random() < infect_probabilities[row][column]:
-                    new_board[row][column] = 'x'
-                else:
-                    new_board[row][column] = '·'
-                    
-    board = new_board
-    
-    print(f'Round {number_of_rounds + 1}: ')
-    for row in board:
-        for cell in row:
-            print(cell, end = ' ')
-        print()
+
+
+
+
+
+
+while count_patients(board) > 0 and count_patients(board) < 100:
     print()
+    patients = []
+    cured = []
+    for row in range(10):
+        for column in range(10):
+            if board[row][column] == ' ': 
+                neighbors = check_neighbors(board,row,column)
+                actual_infection_rate = neighbors*infection_rate
+                get_infected = random.randint(1,100)
+                if get_infected <= actual_infection_rate: 
+                    new_patient = [row,column]
+                    patients.append(new_patient)
+                    
+            elif board[row][column] == '+': 
+                get_cured = random.randint(1,100)
+                if get_cured <= healing_rate: 
+                    new_cured = [row,column]
+                    cured.append(new_cured)
+
+    board = draw_patients_cured(board,patients,cured)
+    draw_board(board)
+    print()
+    print('Current patients: '+str(count_patients(board)))
+    print()
+    attitude = input(('do you want to continue?'))
+    if attitude == 'no':
+        break
+    print(board)
+    
+    
+    
+    
+print('simulation ended')
+
+
+
+

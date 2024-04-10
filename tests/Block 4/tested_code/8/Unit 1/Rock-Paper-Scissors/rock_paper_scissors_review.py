@@ -1,38 +1,29 @@
 
 
 
-import random
+import random 
 
 random.seed()
 
-
-
-player = input("Enter rock, paper, scissors:")
-bot = random.choice(['rock' , 'paper' , 'scissors'])
-
-if player == 'rock' and bot == 'paper':
-    print('I chose paper.')
-    print('You lose!')
-elif player == 'rock' and bot == 'scissors':
-    print('I chose scissors.')
-    print('You win!')
-elif player == 'paper' and bot == 'rock':
-    print('You win!')
-    print('I chose rock.')
-elif player == 'paper' and bot == 'scissors':
-    print('I chose scissors.')
-    print('You lose!')
-elif player == 'scissors' and bot == 'paper':
-    print('I chose paper.')
-    print('You win!')
-elif player == 'scissors' and bot == 'rock':
-    print('I chose rock.')
-    print('You lose!')
-elif player == bot:
-    print('I chose ' + player + '.')
-    print('You tie!')
+player = input("Enter 'rock', 'paper', or 'scissors':") 
+computer = random.choice(['rock', 'paper', 'scissors']) 
+print('I choose ' + computer)
+if computer == player: 
+    print ('We tie.')
+elif player == 'rock' and computer == 'paper':
+    print ('I win.')
+elif player == 'paper' and computer == 'rock':
+    print ('You win.')
+elif computer == 'scissors' and player == 'paper':
+    print ('I win')
+elif player == 'scissors' and computer == 'paper':
+    print ('You win')
+elif computer == 'rock' and player == 'scissors':
+    print ('I win')
+elif player == 'rock' and computer == 'scissors':
+    print ('You win')
 else:
-    print('Please enter rock, paper, or scissors')
+    print ('What do you mean?')
 
 
 

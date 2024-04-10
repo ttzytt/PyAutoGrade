@@ -1,82 +1,63 @@
 
 
 
-import random
-
-random.seed()
 
 
-user_choice = input("Enter 'rock' or 'paper' or 'scissors': ").lower()
+from random import choice, randint
 
 
-cheating_choice = random.randint(1, 10)
+user_choice = input("Rock, Paper, or Scissors: ").lower()
 
 
-if cheating_choice == 1:
-    cheating = True
-else:
-    cheating = False
+if randint(1,10) == 1: 
+    
+    
+    winning_battles = {
+        "rock": "paper",
+        "paper": "scissors",
+        "scissors": "rock"
+    }
 
+    
+    computer_choice = winning_battles.get(user_choice, "nothing since you're cheating.")
 
-if cheating == True:
-    if user_choice == 'rock':
-        print('I choose paper.')
-        print('I win.')
-
-    elif user_choice == 'paper':
-        print('I choose scissors.')
-        print('I win.')
-
-    elif user_choice == 'scissors':
-        print('I choose rock.')
-        print('I win.')
-
-    else: 
-        print('Invalid answer.')
+    print("I choose: \n %s." % computer_choice)
+    print("I win.")
 
 else: 
     
-    random_choice = random.randint(0, 2)
-
     
-    choices = ['rock', 'paper', 'scissors']
+    computer_choice = choice(["rock","paper","scissors"])
 
-    
-    computer_choice = choices[random_choice]
+    print("I choose %s." % computer_choice)
 
+    if user_choice == "rock":
+        
+        
+        rock_battles = {
+            "rock": "We tie.",
+            "paper": "I win.",
+            "scissors": "You win."
+        }
 
-    
+        print(rock_battles.get(computer_choice))
+        
+    if user_choice == "paper":
+        
+        paper_battles = {
+            "rock": "You win.",
+            "paper": "We tie.",
+            "scissors": "I win."
+        }
 
-    
-    if user_choice == 'paper':
-        print('I choose ' + str(computer_choice) + '.')
-        if computer_choice == 'rock':
-            print('You win.')
-        elif computer_choice == 'scissors':
-            print('I win.')
-        else:
-            print('We tie.')
-            
-    
-    elif user_choice == 'rock':
-        print('I choose ' + str(computer_choice) + '.')
-        if computer_choice == 'scissors':
-            print('You win.')
-        elif computer_choice == 'paper':
-            print('I win.')
-        else:
-            print('We tie.')
+        print(paper_battles.get(computer_choice))
+        
+    if user_choice == "scissors":
+        
+        scissors_battles = {
+            "rock": "I win.",
+            "paper": "You win.",
+            "scissors": "We tie."
+        }
 
-    
-    elif user_choice == 'scissors':
-        print('I choose ' + str(computer_choice) + '.')
-        if computer_choice == 'paper':
-            print('You win.')
-        elif computer_choice == 'rock':
-            print('I win.')
-        else:
-            print('We tie.')
-
-    
-    else:
-        print('Invalid answer.')
+        print(scissors_battles.get(computer_choice))

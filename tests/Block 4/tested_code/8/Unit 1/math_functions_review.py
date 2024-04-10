@@ -2,45 +2,39 @@
 
 
 
-def factorial(player_number):
-    factorial = player_number
-    
-    while player_number > 1:
-        factorial = factorial * (player_number - 1)
-        player_number = player_number-1
+def factorial(user_number):
+    factorial = user_number
+    factcounter = user_number
+    while factcounter > 1:
+        factorial = factorial * (factcounter - 1) 
+        factcounter = factcounter - 1
+        
     return(factorial)
 
+def triangle_number(user_number):
+    triangle_number = user_number
+    triangle_number = (triangle_number * (user_number + 1)) / 2
+    return(triangle_number)
 
-def triangular(player_number):
-    triangular = player_number
-    
-    while player_number > 1:
-        triangular = triangular + (player_number - 1)
-        player_number = player_number - 1
-    return(triangular)
+def new_triangle_number(user_number):
+    new_triangle_number = 0
+    if user_number %2 == 0:
+        counter = 0
+        while new_triangle_number <= user_number:
+            new_triangle_number = new_triangle_number + counter
+            counter = counter + 2
 
-
-def new_triangular(player_number):
-    new_triangular = player_number
-    
-    if player_number % 2 == 0:
-        
-        while player_number > 2:
-            new_triangular = new_triangular + (player_number - 2)
-            player_number = player_number - 2
     else:
+        counter = 1
         
-        while player_number > 1:
-            new_triangular = new_triangular + (player_number - 2)
-            player_number = player_number - 2
-    return(new_triangular)
-    
+        while new_triangle_number <= user_number:
+            new_triangle_number = new_triangle_number + counter
+            counter = counter + 2
+            
+    return(new_triangle_number)
 
-
-player_number = int(input("Enter a number: "))
-
-print(str(player_number) + '! is ' + str(factorial(player_number)))
-print("Triangular number: " + str(triangular(player_number)))
-print('"New" triangular number: ' + str(new_triangular(player_number)))
-
+user_number = int(input('Enter an integer: '))
+print('n! = ' + str(factorial(user_number)))
+print('Triangular number: ' + str(round(triangle_number(user_number))))
+print('"New" triangular number:' + str(new_triangle_number(user_number)))
 

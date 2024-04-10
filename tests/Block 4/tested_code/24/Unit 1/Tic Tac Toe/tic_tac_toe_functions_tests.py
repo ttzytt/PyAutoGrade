@@ -13,12 +13,11 @@ from tic_tac_toe_functions import *
 def TEST(description, expected_result, actual_result):
     print(description, end = ': ')
     if actual_result == expected_result:
-        print('pass :)')
+        print('pass')
     else:
         print('FAIL')
         print('   Expected result:', expected_result)
         print('   Actual result:', actual_result)
-        print()
 
 
 

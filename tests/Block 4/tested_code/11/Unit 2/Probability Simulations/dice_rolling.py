@@ -1,27 +1,32 @@
 
 
 
+
 import random
-random.seed()
+def rolls_until_all_values():
+    
+    
+    rolled_values = []
+    
+    rolls_count = 0
+    while len(rolled_values) < 6:
+        
+        roll = random.randint(1, 6)
+        
+        if roll not in rolled_values:
+            rolled_values.append(roll)
+        
+        rolls_count += 1
+    return rolls_count
 
-def all_dice_achived():
-    rolled = 0
-    values = []
-    while True:
-        outcome = random.randint(1,6)
-        rolled += 1
-        if outcome not in values:
-            values.append(outcome)
-        if len(values) is 6:
-            break
-    return rolled
+def average_rolls_until_all_values(num_trials):
+    
+    total_rolls = 0
+    for _ in range(num_trials):
+        total_rolls += rolls_until_all_values()
+    return total_rolls / num_trials
 
-def average_of_all_of_trials(trials):
-    total_sum = 0
-    for i in range(trials):
-        total_sum += all_dice_achived()
-
-    return total_sum/trials
-
-trials = int(input('how many trials are there? '))
-print('the average is ' + str(average_of_all_of_trials(trials)))
+if __name__ == "__main__":
+    num_trials = int(input("Enter the number of trials: "))
+    result = average_rolls_until_all_values(num_trials)
+    print("Average number of rolls needed to get all six different values:", result)

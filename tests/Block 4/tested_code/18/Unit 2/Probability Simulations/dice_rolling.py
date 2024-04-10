@@ -1,38 +1,46 @@
 
 
 
-
-
-a simulation to see how many times you would need to roll a standard 6 sided die
-until all the sides have been rolled at least once.
-"""
 import random
 
 random.seed()
 
-def rolls_until_all_values():
-    values_seen = []  
-    rolls = 0  
 
-    while len(values_seen) < 6:
-        roll = random.randint(1, 6)  
-        
-        if roll not in values_seen:
-            values_seen.append(roll)  
-        rolls += 1  
-        
-        
-    return rolls
+def tries_until_duplicate_dice():
+    
+    dice_rolls = [] 
+    i = 0
+    dice_roll = random.randint(1, 6)
+    n = 0
 
-def average_until_all_values(num_trials):
-    total_rolls = 0  
+    while i < 6:
+        if dice_roll not in dice_rolls:
+            dice_rolls.append(dice_roll) 
+            i += 1
+        dice_roll = random.randint(1, 6)
+        n += 1
 
-    for _ in range(num_trials):
-        total_rolls += rolls_until_all_values()
+    return n 
 
-    return total_rolls / num_trials 
 
-num_trials = int(input('How many trials do you want to go through? '))
-print(f'Average number of rolls to get all six values in {num_trials} trials is')
-print(f'{average_until_all_values(num_trials)}')
+def average_until_duplicate_dice(num_trials):
 
+    trials = [] 
+
+    sum = 0
+
+    for j in range(len(num_trials)): 
+        sum += tries_until_duplicate_dice()
+
+    average = sum / len(num_trials)
+
+    return average
+
+
+
+num_trials = input('How many times of simulation would you like to do? ')
+
+average_until_duplicate_dice(num_trials)
+
+print('You did ' + str(num_trials) + ' times of simulation.')
+print('The trials threw on average ' + str(average_until_duplicate_dice(num_trials)) + ' times of dice.')

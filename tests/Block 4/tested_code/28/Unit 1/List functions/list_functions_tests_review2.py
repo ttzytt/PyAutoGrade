@@ -39,7 +39,7 @@ def average_TEST():
     TEST(approx_equal(average([1.0, 3.0, 5.0]), 3))
     TEST(approx_equal(average([1, 2, 4]), 2.333333))
     TEST(approx_equal(average([-2]), -2))
-    TEST(average([]) == "Empty list")
+    TEST(average([]) == None)
     print('End average_TEST')
     print()
 
@@ -53,90 +53,76 @@ def largest_element_TEST():
     
     
     TEST(largest_element([-10, -3, -5, -9]) == -3)
-    TEST(largest_element([-10]) == -10) 
-    TEST(largest_element([]) == "Empty list")
-    print('End largest_element_TEST') 
+    TEST(largest_element([-10]) == -10)
+    TEST(largest_element([]) == None)
+    print('End largest_element_TEST')
     print()
 
 
 def all_equal_TEST():
     print('Start all_equal_TEST')
-    TEST(all_equal([2, 2, 2, 2, 2]) == True)
-    TEST(all_equal([-1, -1, -1, -1]) == True)
+    TEST(all_equal([1,1]) == True)
+    TEST(all_equal([1,0]) == False)
+    TEST(all_equal([-1,1]) == False)
+    TEST(all_equal([197432198743213423943493249298747943987432879874,
+                    197432198743213423943493249298747943987432879874]) == True)
+    TEST(all_equal([197432198743213423943493249298747943987432879874,
+                    197432198743213423943493249298747943987432879873]) == False)
+    TEST(all_equal([3.1415,3.1415]) == True)
+    TEST(all_equal([3.1415,3.1414]) == False)
+    TEST(all_equal([1,1,1,1,1]) == True)
+    TEST(all_equal([1,1,1,1,0]) == False)
+    TEST(all_equal(['apple', 'apple', 'apple']) == True)
+    TEST(all_equal(['apple', 'banana', 'carrot']) == False)
+    TEST(all_equal(['1',1,1,1,1]) == False)
     
-    TEST(all_equal([1, 2, 2, 2, 2]) == False)
     
-    TEST(all_equal([2, 2, 2, 2, 1]) == False)
     
-    TEST(all_equal([2, 1, 3, 6, 16, 9, 39]) == False)
-    
-    TEST(all_equal([1]) == True)
     
     TEST(all_equal([1, True]) == False)
-    
-    TEST(all_equal(['hi', 'hi', 'hi', 'hi']) == True)
-    TEST(all_equal(['hi', 'bye', 'hi', 'hi']) == False)
-    TEST(all_equal([]) == "Empty list")
+    TEST(all_equal([0]) == True)
+    TEST(all_equal([]) == None)
     print('End all_equal_TEST')
     print()
 
 def alternate_sum_TEST():
     print('Start alternate_sum_TEST')
-    TEST(alternate_sum([3, 2, 5, 6, 1, 4]) == -3)
-    
-    
-    TEST(alternate_sum([2, 2, 2, 2]) == 0)
-    
-    TEST(alternate_sum([2, 2, 2, 2, 2]) == 2)
-    TEST(alternate_sum([3, 2, 5, 6, 1,]) == 1)
-    
+    TEST(alternate_sum([1,2,3,4,5]) == 3)
+    TEST(alternate_sum([1,1,1,1,1]) == 1)
+    TEST(alternate_sum([1.12]) == 1.12)
+    TEST(alternate_sum([1,2]) == -1)
     TEST(alternate_sum([]) == 0)
-    TEST(alternate_sum([2]) == 2)
-    TEST(alternate_sum([0, 2]) == -2)
     print('End alternate_sum_TEST')
     print()
 
 def is_ordered_TEST():
-    
-    
     print('Start is_ordered_TEST')
+    TEST(is_ordered([1,2,3,4,5], True) == True)
+    TEST(is_ordered([1,2,3,4,-1], False) == False)
+    TEST(is_ordered([1,2,3,4,0], True) == False)
+    TEST(is_ordered([1,1,1,1,1], False) == True)
+    TEST(is_ordered([1,1,1,1,1], True) == False)
     
-    TEST(is_ordered([1, 2, 3, 4, 5, 6], True) == True)
-    TEST(is_ordered([1, 2, 3, 4, 5, 6], False) == True)
     
-    TEST(is_ordered([1, 4, 3, 4, 5, 6], True) == False)
-    TEST(is_ordered([1, 4, 3, 4, 5, 6], False) == False)
-    
-    TEST(is_ordered([6, 5, 4, 3, 2, 1], True) == False)
-    TEST(is_ordered([6, 5, 4, 3, 2, 1], False) == False)
-    
-    TEST(is_ordered([1, 2, 2, 3, 4, 5], True) == False)
-    TEST(is_ordered([1, 2, 2, 3, 4, 5], False) == True)
-    
-    TEST(is_ordered([], True) == True)
+    TEST(is_ordered([1,1.0000000000001], True) == True)
+    TEST(is_ordered([1], True) == True)
+    TEST(is_ordered([1], False) == True)
     TEST(is_ordered([], False) == True)
     print('End is_ordered_TEST')
     print()
 
 def rotate_right_TEST():
-    
     print('Start rotate_right_TEST')
-    
-    TEST(rotate_right([1, 2, 3, 4, 5, 6]) == [6, 1, 2, 3, 4, 5])
-    TEST(rotate_right([3, 2, 5, 7, 2, 7]) == [7, 3, 2, 5, 7, 2])
-    
-    TEST(rotate_right(['hi', 'bye', 'stop', 'go', 'daniel']) ==
-         ['daniel', 'hi', 'bye', 'stop', 'go'])
-    
-    TEST(rotate_right([4.2, 6.7, 1.5, 2.7, 5.6]) == [5.6, 4.2, 6.7, 1.5, 2.7])
-    
-    TEST(rotate_right([1, 2]) == [2, 1])
+    TEST(rotate_right([1,2,3,4,5]) == [5,1,2,3,4])
+    TEST(rotate_right([1,1,1,1,1]) == [1,1,1,1,1])
     TEST(rotate_right([1]) == [1])
+    TEST(rotate_right([1,1,1,1,2]) == [2,1,1,1,1])
+    TEST(rotate_right([1,234.123,'amongus','😱','0b11101']) == ['0b11101',1,234.123,'amongus','😱'])
     TEST(rotate_right([]) == [])
     print('End rotate_right_TEST')
     print()
 
-    
+
 
 
 count_number_larger_than_TEST()
@@ -146,3 +132,4 @@ all_equal_TEST()
 alternate_sum_TEST()
 is_ordered_TEST()
 rotate_right_TEST()
+

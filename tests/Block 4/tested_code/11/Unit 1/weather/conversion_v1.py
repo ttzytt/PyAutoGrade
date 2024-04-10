@@ -2,17 +2,15 @@
 
 
 
-
-tempurature = input('What is the temperature today (in °F)? ')
-
-
-tempurature = int(tempurature)
+a = int(input('What is the temperature today (in °F)? '))
 
 
-if tempurature >= 90:
-    print('Wow thats hot.')
+b = str((a - 32) / 1.8)
 
 
-print('Thats ' + str((tempurature - 32) * 5/9) + '°C.')
-
-
+if a >= 90:
+    
+    print("Wow, that's hot. That's " + b + " °C")
+else:
+    
+    print("That's " + b + "°C")

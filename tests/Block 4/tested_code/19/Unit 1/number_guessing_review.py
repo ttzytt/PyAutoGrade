@@ -1,29 +1,32 @@
 
 
 
+
+
+
 import random
 random.seed()
 
-
-c_choice = random.randint(1,10)
-
+generated_number = random.randint(1, 10)
 
 
-p_choice = 0
+guess_number = int(input("Try to guess the number between 1-10: "))
 
 
 
-while p_choice != c_choice:
-    
-    p_choice = int(input('choose and integer between 1 and 10 (inclusive): '))
 
-    if p_choice > c_choice:
-        print('too high')
-    elif p_choice < c_choice:
-        print('too low')
-    else:
-        p_choice = c_choice
+while generated_number != guess_number:
+    if guess_number > generated_number:
+        print("too high")
+        guess_number = int(input("Try to guess the number between 1-10: "))
+    if guess_number < generated_number:
+        print("too low")
+        guess_number = int(input("Try to guess the number between 1-10: "))
 
 
-print('Congrats u got it')
-        
+
+print("You Are Correct")
+
+
+
+

@@ -1,22 +1,22 @@
 
 
 
-n = int(input('write a positive integer: '))
 
 
-if n < 0:
-    print('factorial is not defined for negative numbers.')
-else:
-    result = 1
-    input_n = n
+n = int(input("Enter a number, n: "))
 
 
-while n > 0:
-    result *= n
-    n -= 1
+fact = 1  
+count = 1  
+factorial_expression = "1"  
 
 
-result = str(result)
+while count <= n:
+    fact *= count  
+    if count > 1:
+        factorial_expression += f" * {count}"  
+    count += 1  
 
 
-print('the factorial of n is ' + result)
+print(+ n! = {factorial_expression} = {fact}")
+

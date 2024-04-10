@@ -3,53 +3,84 @@
 
 
 
+def deal_3_hands(deck):
+    hands = [[], [], []] 
 
-def deal_3_hands(_deck):
-    hands = [[], [], []]
-    deck_index = 0
-    hand_index = 0
-    
-    while deck_index < len(_deck):
-        hands[hand_index].append(_deck[deck_index])
-        deck_index += 1
-        hand_index = (hand_index + 1) % 3
+    for card_index in range(len(deck)): 
+        current_hand = hands[card_index % 3] 
+        current_hand.append(deck[card_index])
 
     return hands
+
 
 
 def uno_who_played_what(cards_played):
-    if len(cards_played) == 0:
-        return 0
-    index = 0
     hands = [[], [], [], []]
-    deck_index = 0
-    hand_index = 0
-    reverse_flag = False
-
-    while deck_index < len(cards_played):
-        if cards_played[deck_index] == 'skip':
-            
-            hands[hand_index].append(cards_played[deck_index])
-            deck_index += 1
-            hand_index += (hand_index + 1) % 4
-            
-        if cards_played[deck_index] == 'reverse':
-            
-            hands[hand_index].append(cards_played[deck_index])
-            reverse_flag = True
-            deck_index += 1
-            hand_index = (hand_index - 1) % 4
-
-        hands[hand_index].append(cards_played[deck_index])
-        deck_index += 1
+    
+    current_player = 0
+    card_index = 0
+    is_reversed = False
+    
+    while card_index < len(cards_played):
+        card = cards_played[card_index]
+        hands[current_player].append(card) 
         
-        if reverse_flag == False:
-            hand_index = (hand_index + 1) % 4
-        else:
-            hand_index = (hand_index - 1) % 4
+         
+        if card == 'skip':
+            current_player += 1
             
+        elif card == 'reverse':
+            if is_reversed == False:
+                is_reversed = True
+                
+        elif card != 'reverse': 
+            if is_reversed == True:
+                is_reversed = False
+            
+            
+        if is_reversed == True:
+            
+            current_player = (current_player - 1) % 4 
+        else:
+            current_player = (current_player + 1) % 4
+
+        card_index += 1
+
+    return hands
+
+def uno_who_played_what(cards_played, num_players, starting_player):
+    hands = [[] for _ in range(num_players)]  
+    
+    current_player = starting_player
+    card_index = 0
+    is_reversed = False
+
+    if num_players == 0:
+        return None
+
+    while card_index < len(cards_played):
+        card = cards_played[card_index]
+        hands[current_player].append(card)  
+
+        if card == 'skip':
+            current_player = (current_player + 1) % num_players  
+
+        elif card == 'reverse':
+            if is_reversed:
+                is_reversed = False
+            else:
+                is_reversed = True
+
+        if is_reversed:
+            current_player = (current_player - 1) % num_players  
+        else:
+            current_player = (current_player + 1) % num_players  
+
+        card_index += 1
+
     return hands
 
 
 
 
+    

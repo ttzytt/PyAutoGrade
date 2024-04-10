@@ -108,7 +108,7 @@ def make_move_TEST():
     expected_board = board
     TEST('reject move, wrong case', False, make_move('x', '2a', board))
     TEST('dont change after rejected move', expected_board, board)
-    TEST('reject move, no location', False, make_move('x', ' ', board))
+    TEST('reject move, no location', False, make_move('x', '', board))
     TEST('dont change after rejected move', expected_board, board)
     TEST('reject move, wrong order', False, make_move('x', 'A3', board))
     TEST('dont change after rejected move', expected_board, board)

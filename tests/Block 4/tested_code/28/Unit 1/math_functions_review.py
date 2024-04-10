@@ -4,83 +4,39 @@
 
 
 
+
 def factorial(n):
-    
-    
-    result =  1
-
-    
-    
+    product = 1
     count = 1
-
-    while count < n:
+    while count <= n:
+        product = product * count
         count = count + 1
-        
-        
-        
-        result = result * count
 
-    return result
 
+    return product
 
 def triangular_number(n):
-    
-    result = 0
-
-    count = 0
-
-    while count < n:
+    sum_var = 0
+    count = 1
+    while count <= n:
+        sum_var = sum_var + count
         count = count + 1
-        
-        
-        
-        result = result + count
-
-    return result
 
 
+    return sum_var
 
 def new_triangular_number(n):
-    
-    result = n
-
-    
-    count = n
-
-    while count - 2 > 0: 
-                         
-    
-        count = count - 2
+    if n % 2: 
         
         
-        
-        result = result + count
-
-    return result   
-
-def new_triangular_number_bonus(n):
-    if n % 2 == 0: 
+        return int((n+1)/2)**2
         
         
-        
-        return 2 * triangular_number(n/2)
-
     else: 
-        
-        
-        
-        
-        
+        return 2 * triangular_number(int(n/2))
 
-        return int(((n + 1) / 2)  ** 2)
-    
-        
-        
+user_number = int(input('Enter an integer: '))
+print(f'{user_number}! is {factorial(user_number)}')
+print(f'Triangular number: {triangular_number(user_number)}')
+print(f'"New" Triangular Number is {new_triangular_number(user_number)}')
 
-    
-
-input_integer = int(input('Enter an integer: '))
-
-print(str(input_integer) + '! is ' + str(factorial(input_integer)))
-print('Triangular number: ' + str(triangular_number(input_integer)))
-print('"New" triangular number: ' + str(new_triangular_number(input_integer)))

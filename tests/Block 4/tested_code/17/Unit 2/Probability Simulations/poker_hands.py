@@ -3,157 +3,152 @@
 
 
 
-
 import random
+
 random.seed()
 
 
-def build_deck(deck):
-    for i in range(1,14):
-        for j in range(1,5):
-            deck.append([i,j])
 
-def full_house(trials):
-    num_full_houses=0
-    deck=[]
-    build_deck(deck)
-    
-    for _ in range(trials):
-        
-        random.shuffle(deck) 
-        random_cards=[0,0,0,0,0]
-        for i in range(5):
-            random_cards[i] = deck[i][0] 
-        
-        random_cards.sort()
-        if random_cards[0] == random_cards[1] == random_cards[2] and random_cards[3] == random_cards[4]:
-            num_full_houses += 1
-        if random_cards[2] == random_cards[3] == random_cards[4] and random_cards[0] == random_cards[1]:
-            num_full_houses += 1
-            
-    return trials / num_full_houses * 1.0000 
+def deal_five_card_hand(deck):
+    random.shuffle(deck)
+    return deck[:5]
 
-def straight_flush(trials):
-    num_straight_flushes = 0
-    deck=[]
-    build_deck(deck)
-
-    for _ in range(trials):
-        num_straight_flushes += check_straight_flush(deck)
+def check_full_house(hand):
+    rank_of_hand = [card[0] for card in hand]
+    rank_of_hand.sort()
 
     
+    if rank_of_hand[0] == rank_of_hand[1] and rank_of_hand[2] == rank_of_hand[3] == rank_of_hand[4]:
+        return True
+    if rank_of_hand[0] == rank_of_hand[1] == rank_of_hand[2] and rank_of_hand[3] == rank_of_hand[4]:
+        return True
+
+    return False
+
+def simulate_full_house():
+    deck = [[rank, suit] for rank in range(1, 14) for suit in ['♠', '♥', '♦', '♣']]
+
+    tries = 0
+    while True:
+        hand = deal_five_card_hand(deck)
+        tries += 1
+        if check_full_house(hand):
+            break
+
+    return tries
+
+def main():
+    print("Welcome to the Poker Simulation!")
+    while True:
+        tries = simulate_full_house()
+        print(f"The odds of being dealt a full house is 1 in {tries}.")
+
+        play_again = input("Do you want to try again? (yes/no): ").lower()
+        if play_again != 'yes':
+            break
+
+
+
+def check_flush(hand):
+    suit_of_hand = [card[1] for card in hand]
+    suit_of_hand.sort()
+
     
-    if num_straight_flushes == 0:
-        while num_straight_flushes == 0:
-            num_straight_flushes += check_straight_flush(deck)
-            trials += 1
+    if suit_of_hand[0] == suit_of_hand[1] == suit_of_hand[2] == suit_of_hand[3] == suit_of_hand[4]:
+        return True
 
-    return trials / num_straight_flushes * 1.0000 
+    return False
+
+def simulate_flush():
+    deck = [[rank, suit] for rank in range(1, 14) for suit in ['♠', '♥', '♦', '♣']]
+
+    tries = 0
+    while True:
+        hand = deal_five_card_hand(deck)
+        tries += 1
+        if check_flush(hand):
+            break
+
+    return tries
+
+def main_2():
+    print("Welcome to the Poker Simulation!")
+    while True:
+        tries = simulate_flush()
+        print(f"The odds of being dealt a flush is 1 in {tries}.")
+
+        play_again = input("Do you want to try again? (yes/no): ").lower()
+        if play_again != 'yes':
+            break
+
+
+
+def check_straight_flush(hand):
+    suit_of_hand = [card[1] for card in hand]
+    suit_of_hand.sort()
+
+    ranks = [card[0] for card in hand]
+    ranks.sort()
+
+    
+    if suit_of_hand[0] == suit_of_hand[1] == suit_of_hand[2] == suit_of_hand[3] == suit_of_hand[4]:
+        if ranks[0] == ranks[1] - 1 and ranks[1] == ranks[2] - 1 and ranks[2] == ranks[3] - 1 and ranks[3] == ranks[4] - 1:
+            return True
+
+    return False
+
+def simulate_straight_flush():
+    deck = [[rank, suit] for rank in range(1, 14) for suit in ['♠', '♥', '♦', '♣']]
+
+    tries = 0
+    while True:
+        hand = deal_five_card_hand(deck)
+        tries += 1
+        if check_straight_flush(hand):
+            break
+
+    return tries
+
+def main_3():
+    print("Welcome to the Poker Simulation!")
+    while True:
+        tries = simulate_straight_flush()
+        print(f"The odds of being dealt a straight flush is 1 in {tries}.")
+
+        play_again = input("Do you want to try again? (yes/no): ").lower()
+        if play_again != 'yes':
+            break
 
 
 
 
-def check_straight_flush(deck):
-    random.shuffle(deck) 
-    random_cards=[0,0,0,0,0]
-    if not(deck[0][1]==deck[1][1]==deck[2][1]==deck[3][1]==deck[4][1]):
-            return 0
-    else:
-        for i in range(5):
-            random_cards[i] = deck[i][0]
-                
-        random_cards.sort()
-            
-        if random_cards[0] !=1:
-            for i in range(4):
-                if random_cards[i+1]-random_cards[i] != 1:
-                    return 0
-            return 1
+def rolls_until_all_values():    
+    rolled_values = []
+    rolls = 0
+
+    while True:
+        roll = random.choice(['♠', '♥', '♦', '♣'])
+        rolls += 1
+        if not rolled_values or roll == rolled_values[0]:
+            rolled_values.append(roll)
         else:
-            if random_cards[1]!=2:
-                random_cards[0]=14
-                random_cards.sort()
-            for i in range(4):
-                if random_cards[i+1]-random_cards[i] != 1:
-                    return 0
-            return 1
-    return 0
+            rolled_values = [roll]
 
-def check_flush(deck):
-    random.shuffle(deck) 
-    random_cards=[0,0,0,0,0]
-    if deck[0][1]==deck[1][1]==deck[2][1]==deck[3][1]==deck[4][1]:
-        if check_straight_flush(deck)==0:
-            return 1
+        if len(rolled_values) == 5:
+            break
+        
+    return rolls    
+
+def average_rolls_until_all_values(num_trials):
+    total_rolls = 0
+    for _ in range(num_trials):
+        total_rolls += rolls_until_all_values()
+
+    average_rolls = total_rolls / num_trials
+    return average_rolls
+
+def total_average_in_all_flush(num_trials):
+    total_rolls = average_rolls_until_all_values/(simulate_flush + simulate_straight_flush )
     
-    return 0
-
-def flush(trials):
-    num_flushes = 0
-    deck = []
-    build_deck(deck)
-
-    for _ in range(trials):
-        num_flushes += check_flush(deck)
-
-    if num_flushes == 0:
-        while num_flushes == 0:
-            num_flushes += check_flush(deck)
-            trials += 1
-
-    return trials / num_flushes * 1.0000 
 
 
-
-def flush_comparison(trials):
-    num_diceflush = 0
-    temp = trials
-    for _ in range(trials):
-        deck = [0, 0, 0, 0, 0]
-        for i in range(5):
-            deck[i] = random.randint(1,4)
-        if deck[0] == deck[1] == deck[2] == deck[3] == deck[4]:
-            num_diceflush += 1
-
-    if num_diceflush == 0:
-        while num_diceflush == 0:
-            deck = []
-            for _ in range(5):
-                deck.append(random.randint(1,4))
-            if deck[0] == deck[1] == deck[2] == deck[3] == deck[4]:
-                num_diceflush += 1
-            trials += 1
-    
-    return num_diceflush
-
-
-type_poker = input("What type of simulation do you want to have? (Enter 'full house', 'straight flush','flush', or 'flush comparison') ")
-
-if type_poker == "full house" or type_poker == "straight flush" or type_poker == "flush" :
-    num_trials = int(input("How many trials do you want to have?"))
-    if type_poker == "full house":
-        odds = full_house(num_trials)
-    if type_poker == "straight flush":
-        odds = straight_flush(num_trials)
-    if type_poker == "flush":
-        odds = flush(num_trials)
-    print("The odds of  being dealt a " + type_poker + " is 1 in " + str(odds))
-
-elif type_poker == "flush comparison":
-    num_trials = int(input("How many trials do you want to have? "))
-    
-    dice = flush_comparison(num_trials)
-    pokers = num_trials/flush(num_trials) + num_trials/straight_flush(num_trials)
-    
-    print("The odds of all five dice to have the same suit is 1 in " + str(num_trials*1.0/dice))
-    print("The odds of  being dealt all kinds of flushes is 1 in " + str(num_trials*1.0/pokers))
-    if dice>pokers:
-        print("As the result, the odds of all five dice to have the same suit is higher than the odds of  being dealt all kinds of flushes.")
-    else:
-        print("As the result, the odds of all five dice to have the same suit is lower than the odds of  being dealt all kinds of flushes.")
-
-else:
-    
-    print("Please enter 'full house', 'straight flush','flush', or 'flush comparison'!")
-
- 

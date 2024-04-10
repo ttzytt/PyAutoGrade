@@ -3,22 +3,22 @@
 
 
 
+temperature = int(input('What is the temperature today (in °F)? '))
+temp_converted=round((temperature-32)*5/9,2)
 
-
-temperature = int(input('What is the temperature today(in °F): '))
-
-
-celsius = round(float(( int(temperature) - 32 ) * 5 / 9), 2)
-
-
-if temperature >= 90:
-    print('Wow that is hot. ')
-    print('That is ' + str(celsius) + '℃. ')
+if temperature > 90:
+    print("Wow that's hot.")
+    print("That's "+str(temp_converted)+" °C")
 
 elif temperature < 32:
-    print('That is freezing.')
+    print("That's freezing.")
+    print("That's "+str(temp_converted)+" °C")
 
-elif temperature >= 32 and temperature < 50:
-    print('That is so cold.')
+elif temperature < 50 and temperature >= 32:
+    print("That's so cold.")
+    print("That's "+str(temp_converted)+" °C")
 
-print('That is ' + str(celsius) + '℃. ')
+else:
+    print("That's "+str(temp_converted)+" °C")
+    
+    

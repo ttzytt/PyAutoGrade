@@ -1,22 +1,18 @@
 
 
 
-Fahrenheit = int(input('What is the temperature today (in °F)? ')) 
 
+temperature = int(input('What is the temperature today in °F? '))
 
-if Fahrenheit > 90: 
-    print("Wow that's hot.")
-    
-elif Fahrenheit < 32: 
-    print("Oh! That's freezing.")
+if temperature >= 90:
+    print('Wow, that is hot.')
 
-    
-    
-elif Fahrenheit < 50: 
-    print("That's so cold.")
-    
-Celsuis = float (Fahrenheit - 32)/ 1.8 
+elif temperature <= 32:
+    print('That is freezing!')
 
-print ("That's " + str(round(Celsuis,2)) + '°C.') 
+elif temperature >= 32 and temperature << 50:
+    print('That is so cold!')
 
+celsius = (temperature - 32) * 5/9
 
+print('That is ' + str(celsius) + '°C.')

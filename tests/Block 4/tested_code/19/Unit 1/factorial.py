@@ -2,18 +2,19 @@
 
 
 
-n_inputed = int(input('Enter your number(no spaces): '))
+number_n = int(input("Please type in the number you want to be factorialized: "))
 
 
 
-num_left = n_changed - 1
+
+number_1 = number_n - 1
 
 
-original_n = n_changed
 
 
-while num_left > 0:
-    n_inputed = n_inputed * num_left
-    num_left -= 1
-    
-print('!' + str(original_n) + ' is equal to ' + str(n_changed))
+while number_1 > 1:
+
+    number_n = number_n * number_1
+    number_1 = number_1 - 1
+print("The factoral of your number is " + str(number_n))
+

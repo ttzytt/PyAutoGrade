@@ -1,18 +1,22 @@
 
 
 
-
-number = int(input('Enter an integer n: '))
-
-count = 0
-
-factorial = 1
+n = int(input('write a positive integer: '))
 
 
-while count < number:
-    count = count + 1
-    factorial = factorial * count
-    
+if n < 0:
+    print('factorial is not defined for negative numbers.')
+else:
+    result = 1
+    input_n = n
 
-print('n factorial is equal to ' + str(factorial))
 
+while n > 0:
+    result *= n
+    n -= 1
+
+
+result = str(result)
+
+
+print('the factorial of n is ' + result)

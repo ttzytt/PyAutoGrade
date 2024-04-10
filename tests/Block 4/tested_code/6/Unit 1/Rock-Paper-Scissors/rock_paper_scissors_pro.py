@@ -1,51 +1,52 @@
 
 
 
+
 import random
 random.seed()
 
 
+
 def rps_score_round(choice_1, choice_2):
     if choice_1 == choice_2:
+        
         return 0
-    if (choice_1 == 'rock' and choice_2 == 'scissors') or \
-       (choice_1 == 'scissors' and choice_2 == 'paper') or \
-       (choice_1 == 'paper' and choice_2 == 'rock'):
+    elif (choice_1== 'paper' and choice_2 == 'scissors') or (choice_1== 'scissors' and choice_2 == 'rock') or (choice_1== 'rock' and choice_2 == 'paper'):
+        
         return 1
-    return -1
+    elif (choice_2== 'paper' and choice_1 == 'scissors') or (choice_2 == 'scissors' and choice_1 == 'rock') or (choice_2 == 'rock' and choice_1 == 'paper'):
+        
+        return -1
+    else:
+        return None
 
+respond = 'a'
 score = 0
 
+computer = random.choice(['paper','scissors','rock'])
+respond = input("Enter 'rock', 'paper', or 'scissors', or 'q' to quit: ")
 
-while True:
-    user_choice = input("\nEnter 'rock', 'paper', or 'scissors', or 'q' to quit: ").lower()
+while respond != 'q': 
     
-    
-    if user_choice not in ['rock', 'paper', 'scissors', 'q']:
-        print("Invalid input. Try again.")
-        continue
-    
-    
-    if user_choice == 'q':
-        break
-    
-    computer_choice = random.choice(['rock', 'paper', 'scissors'])
-    print(f"Computer chose: {computer_choice}\n")
-    
-    
-    round_score = rps_score_round(user_choice, computer_choice)
-    score += round_score
+    if rps_score_round(computer,respond) is None:
+        respond = input('Try again: ')
 
-    if round_score == 1:
-        print("🎉Congrats! You win!")
-    elif round_score == 0:
-        print("🤝We tie.")
-    else:
-        print("😢Sorry, you lose.")
-        
     
-    print("\n--------------------------------------------------\n")
-    print(f"Total Score: {score}")
-    
+    if rps_score_round(computer,respond) == 1:
+         print("You win")
+         score = score + rps_score_round(computer,respond)
+         
+    elif rps_score_round(computer,respond) == 0:
+         print('We tie')
+         score = score + rps_score_round(computer,respond)
+
+    elif rps_score_round(computer,respond) == -1:
+         print('I win')
+         score = score + rps_score_round(computer,respond)
+    print('score: '+ str(score)) 
     
 
+    respond = input("Enter 'rock', 'paper', or 'scissors', or 'q' to quit: ")
+
+if respond == 'q':
+    print('The game ends') 

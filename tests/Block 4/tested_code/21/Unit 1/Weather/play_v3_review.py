@@ -2,19 +2,32 @@
 
 
 
-have_jacket = ''
 
-temperature = int(input('What is the temperature today in °F? '))
-
-rain = input('Is it raining? ').lower()
-if (rain == 'yes') or (temperature > 32 and temperature < 50):
-    have_jacket = input('Do you have a jacket? ').lower()
-
-homework_done = input('Have you finished your homework yet? (yes/no) ').lower()
-alive = input('Are you alive right now? (yes/no) ').lower()
-
-if (rain == 'yes' and have_jacket == 'no') or temperature < 50 and have_jacket == 'no' or (temperature > 95 or temperature < 35)  or (alive == 'no' or homework_done == 'no'):
-    print('You should not play outside today. ')
-
+want = str(input('Do you want to play outside? '))
+if(want=='yes'):
+ temperature = float(input('What is the temperature today(in °F)? '))
+ if temperature < 32 or temperature > 95:
+        print('You shouldn’t play outside today.')
+ elif(temperature > 50):
+  rain = str( input('Is it raining?(answer yes or no) ') )
+  if rain == 'no':
+        print('You should play outside today.')
+  else:
+   jacket = str( input ('Do you have a jacket?(answer yes or no) '))
+   if(jacket == 'no'):
+    print('You shouldn’t play outside today.') 
+   else:
+    print('You should play outside today.')
+ else:
+  jacket = str( input ('Do you have a jacket?(answer yes or no) '))
+  if(jacket == 'no'):
+    print('You shouldn’t play outside today.') 
+  else:
+    print('You should play outside today.')
 else:
-    print('You should play outside today. ')
+ print('You shouldn’t play outside today.')
+
+
+
+
+

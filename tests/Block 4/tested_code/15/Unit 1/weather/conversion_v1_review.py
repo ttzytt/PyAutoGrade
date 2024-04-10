@@ -1,23 +1,13 @@
 
 
 
+temperature = int(input('What is the temperature today (in °F)? '))
+if temperature > 90:
+     
+     print("Wow that's hot.")
+celsius = str(round((temperature-32) / (9/5),2))
+print("That's " + celsius + ' °C')
 
 
 
 
-
-
-
-farenheit = int(input(' What is the temperature today (in °F)? '))
-
-
-celsius = (farenheit - 32) * 5/9
-
-
-if farenheit >= 90:
-    print (' Wow that is hot. ')
-
-
-
-
-print (f'That is {celsius:.2f} °C. ')

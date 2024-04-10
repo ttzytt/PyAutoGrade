@@ -4,56 +4,79 @@
 
 
 
+def write_diamond_pattern(out_file_name, width):
 
-def write_diamond_pattern(out_file, width):
-    if width % 2 == 0:
-        raise(ValueError, "width cannot be an even integer.")
-    list_of_lines = []
-    for i in range(1, width + 1, 2):
-        space_buffer = int((width - i)/2) * ' '
-        line = space_buffer + (i * '*') + space_buffer + '\n'
-        list_of_lines.append(line)
-    for i in range(width - 2, 0, -2):
-        space_buffer = int((width - i)/2) * ' '
-        line = space_buffer + (i * '*') + space_buffer + '\n'
-        list_of_lines.append(line)
-    out_file.writelines(list_of_lines)
+    with open(out_file_name, 'w') as out_file:
+        width += 1
 
+        list_of_lines = []
 
+        for i in range(1, width, 2):
+            list_of_lines.append(' ' * ((width - (i+1))//2))
+            list_of_lines.append('x' * i + '\n')
 
+        for i in range(width - 3, 0, -2):
+            list_of_lines.append(' ' * ((width - (i+1))//2))
+            list_of_lines.append('x' * i + '\n')
 
-
-
-def last_name_first(in_file, out_file):
-    names = in_file.read().splitlines()
-    list_of_lines = []
-    for name in names:
-        name_parts = name.split(' ')
-        list_of_lines.append(name_parts[-1] + ', ' + name_parts[0] + '\n')
-    out_file.writelines(list_of_lines)
+        out_file.writelines(list_of_lines)
 
 
 
 
 
+def last_name_first(in_file_name, out_file_name):
 
-def add_and_write(in_file, out_file):
-    equations = in_file.read().splitlines()
-    list_of_lines = []
-    for equation in equations:
+    with (open(in_file_name, 'r') as in_file,
+              open(out_file_name, 'w') as out_file):
         
-        equation_parts = equation.split("+")
-        equation_sum = 0
-        for part in equation_parts:
-            equation_sum += int(part)
+        for line in in_file:
+            
+            word_list = line.split()
+            print(word_list)
 
-        
-        list_of_lines.append(equation + " = " + str(equation_sum) + "\n")
-    out_file.writelines(list_of_lines)
+            out_file.write(word_list[1] + ', ' + word_list[0] + '\n')
+
+            
+
+
+
+
+
 
 def blah_blah_blah(in_file_name, out_file_name):
-    in_file_name
 
-with (open('Text files/addition.txt', 'r') as in_file, open("Text files/TESTING.py", 'w') as out_file):
-    add_and_write(in_file, out_file)
-    
+    with (open(in_file_name, 'r') as in_file,
+              open(out_file_name, 'w') as out_file):
+
+        for line in in_file:
+
+            if len(line) > 20:
+                out_file.write(line[:15] + ', blah blah blah\n')
+            else:
+                out_file.write(line + '\n')
+
+
+def main():
+
+    out_file_name = 'Text files/diamond_pattern.txt'
+
+    write_diamond_pattern(out_file_name, 9)
+
+
+    in_file_name = 'Text files/names.txt'
+
+    out_file_name = 'Text files/names_reversed.txt'
+
+    last_name_first(in_file_name, out_file_name)
+
+
+    in_file_name = 'Text files/infection_function.txt'
+
+    out_file_name = 'Text files/infection_function_short.txt'
+
+    blah_blah_blah(in_file_name, out_file_name)
+
+if __name__ == "__main__":
+    main()
+

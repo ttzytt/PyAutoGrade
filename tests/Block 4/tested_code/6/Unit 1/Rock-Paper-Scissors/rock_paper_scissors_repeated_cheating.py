@@ -1,40 +1,77 @@
 
 
 
+
+
 import random
+
 random.seed()
 
-while True:   
+answer = input("Enter 'rock' or 'paper' or 'scissors' or 'quit' (The game stops only if you enter 'quit') ")
+
+
+
+while answer != 'quit':
     
-    user_choice = input("Enter 'rock', 'paper', 'scissors' or 'quit' to stop: ").lower()
-    if user_choice == 'quit':
-        break   
+    
+    computer_cheating_choice = random.randint(0, 9)
 
     
-    if user_choice not in ['rock', 'paper', 'scissors']:
-        print("Invalid input. Try again.")
-        continue
-
-    computer_choice = random.choice(['rock', 'paper', 'scissors'])
-
     
-    if random.random() < 0.1:
-        cheat_map = {'rock': 'paper', 'paper': 'scissors', 'scissors': 'rock'}
-        computer_choice = cheat_map[user_choice]
+    if computer_cheating_choice == 0:
+       
+       if answer == 'rock':
+          print('I choose paper.')
+          print('I win.')
+       elif answer == 'paper':
+          print('I choose scissors.')
+          print('I win.')
+       elif answer == 'scissors':
+          print('I choose rock.')
+          print('I win.')
+
+    else: 
+          
+        computer_answer = random.randint(1,3)
         
-    
-    print("I choose " + computer_choice + ".")
+        
+        
+        
+        if computer_answer == 1:
+            print('I choose rock.')
+            if answer == 'rock':
+               print('We tie.')
+            elif answer == 'paper':
+               print('You win.')
+            elif answer == 'scissors':
+               print('I win.')
 
+        
+        
+        
+        elif computer_answer == 2:
+            print('I choose paper.')
+            if answer == 'rock':
+               print('I win.')
+            elif answer == 'paper':
+               print('We tie.')
+            elif answer == 'scissors':
+               print('You win.')
 
+        else:
+            
+            
+            print('I choose scissors.')
+            if answer == 'rock':
+                print('You win.')
+            elif answer == 'paper':
+                print('I win.')
+            elif answer == 'scissors':
+                print('We tie.')
+
+    answer = input("Enter 'rock' or 'paper' or 'scissors' or 'quit' (The game stops only if you enter 'quit') ")
     
-    if user_choice == computer_choice:
-        print("We Tie.")
-    
-    elif (user_choice == 'rock' and computer_choice == 'scissors') or \
-         (user_choice == 'scissors' and computer_choice == 'paper') or \
-         (user_choice == 'paper' and computer_choice == 'rock'):
-        print("You Win.")
-    
-    else:
-        print("I win!")
+
+if answer == 'quit':
+    print('The game ends')
 

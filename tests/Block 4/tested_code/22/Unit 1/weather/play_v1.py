@@ -1,23 +1,16 @@
 
 
-celcius = 0.0
 
 
 
-temp = int(input('What is the temperature today (in °F)? '))
+temperature_fahrenheit = int(input('What is the temperature today (in °F)? '))
 
 
 
-if temp > 95 or temp < 50:
-    print("You shouldn't play outside today.")
+if temperature_fahrenheit > 95 or temperature_fahrenheit < 50:
+    
+    print('You should not play outside today.')
 
 else:
-    print("You should play outside today.")
-
-
- 
-        
-
-
-
+    print('You can play outside today.')
 

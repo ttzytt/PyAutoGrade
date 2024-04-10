@@ -3,44 +3,31 @@
 
 
 
-
 import random
-
 random.seed()
 
+def tries_until_six_values():
+    numbers_rolled = []
+    count = 0
 
+    while len(numbers_rolled) < 6:
+        
+        random_number = random.randint(1, 6)
+        
+        if random_number not in numbers_rolled:
+            numbers_rolled.append(random_number)
+        
+        count += 1
+    return count
 
-
-
-
-
-
-
-
-def tries_until_all_six_numbers():
-    dice_roll = [random.randint(1, 6)] 
-    num_rolled = 1 
-    while (len(dice_roll) < 6):
-        new_dice_roll = random.randint(1, 6) 
-        if(new_dice_roll not in dice_roll):
-            dice_roll.append(new_dice_roll) 
-        num_rolled += 1
-
-    return num_rolled 
-
-
-
-
-
-def average_until_duplicate_birthday(num_trials):
-    sum = 0
-    for _ in range(num_trials):
-        sum += tries_until_all_six_numbers()
-
-    average = sum / num_trials
-
-    return average
-
-
-num_trials = int(input('How many trials would you like to do? '))
-print('Your average is: ' + str(average_until_duplicate_birthday(num_trials)))
+def average_for_six_unique_values(num_trials):
+    total = 0
+    
+    for _ in range(1, num_trials):
+        total += tries_until_six_values()
+    
+    return total/num_trials
+        
+num_trials = int(input('Enter how many trials you want to go through: '))
+average_result = average_for_six_unique_values(num_trials)
+print('The average amount of tries is ' + str(average_result))

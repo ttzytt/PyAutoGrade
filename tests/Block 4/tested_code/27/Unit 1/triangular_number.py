@@ -2,22 +2,13 @@
 
 
 
+user_input = int(input('Type in a number: '))
+user_input_triangular = 0
+countdown = 1
 
-
-number_n = int(input("Input the number you want to triangularize: "))
-
-
-
-
-countdown = number_n - 1
-
-
-while countdown > 0:
-    number_n = number_n + countdown
-    countdown = countdown - 1
-
-
-
-print("The triangular number of your number is " + str(number_n))
-
+while countdown <= user_input:
+    user_input_triangular = user_input_triangular + countdown
+    countdown = countdown + 1
+    
+print('The value of the ' + str(user_input) + 'th triangular number is ' + str(user_input_triangular) + '.')
 

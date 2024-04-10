@@ -10,9 +10,6 @@ from tic_tac_toe_functions import *
 
 
 
-
-
-
 def TEST(description, expected_result, actual_result):
     print(description, end = ': ')
     if actual_result == expected_result:

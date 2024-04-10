@@ -1,50 +1,32 @@
 
 
 
+
+
 import random
-
 random.seed()
+choice = input("Enter 'rock', 'paper', 'scissors' or 'quit': ")
 
 
-print("Hello, lets play a game of rock paper scissors.")
+while choice != "quit":
 
 
-response = 'yes'
-
-while response == 'yes':
-    
-    
-    random.seed()
-
-    player = input("Choose one: rock, paper, or scissors? (all lowercase, no spaces) ")
 
     computer_choice = random.choice(['rock', 'paper', 'scissors'])
+    print("I choose " + computer_choice)
 
-    print("I choose " + computer_choice + ".")
 
+    if ((choice == 'rock' and computer_choice == 'paper')
+            or (choice == 'paper' and computer_choice == 'scissors')
+            or (choice == 'scissors' and computer_choice == 'rock')):
+        print('I win.')
     
-    if computer_choice == player:
-        print("Looks like we tied.")
-
-    elif computer_choice == ('rock'):
-        if player == ('paper'):
-            print("Looks like I lost, Good Game!")
-        elif player == ('scissors'):
-            print("I win gg ez.")
-
-    elif computer_choice == ('paper'):
-        if player == ('rock'):
-            print("I win gg ez.")
-        elif player == ('scissors'):
-            print("Looks like I lost, Good Game!")
-
-    elif computer_choice == ('scissors'):
-        if player == ('rock'):
-           print("Looks like I lost, Good Game!")
-        elif player == ('paper'):
-            print("I win gg ez.")
-    response = input("Do you want to play again? ( Type 'yes' or 'no') ")
+    elif ((choice == 'paper' and computer_choice == 'rock')
+            or (choice == 'scissors'and computer_choice == 'paper')
+            or (choice == 'rock' and computer_choice == 'scissors')):
+        print('You win.')
     
-
-print("I'm sad to see you go :(")
- 
+    else:
+        print('We tie.')
+    choice = input("Enter 'rock', 'paper', 'scissors' or 'quit': ")
+print('Bye.')

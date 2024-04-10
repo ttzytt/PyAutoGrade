@@ -2,28 +2,19 @@
 
 
 
+n_final_ans = int(input('Enter your number(no spaces): '))
 
 
-num = int(input("Enter a positive integer: "))
+n_left = n_final_ans - 1
 
 
-count = 1
+n_original = n_final_ans
 
 
-
-final_sum = 0
-
-
-
-while count <= num:
-    final_sum = final_sum + count
-    count = count + 1
+while n_left > 0:
+    n_final_ans += n_left
+    n_left -= 1
 
 
+print('The triangle number of ' + str(n_original) + ' is ' + str(n_final_ans))
 
-
-
-
-
-    
-print("The " + str(num) + "th triangular number is " + str(final_sum))

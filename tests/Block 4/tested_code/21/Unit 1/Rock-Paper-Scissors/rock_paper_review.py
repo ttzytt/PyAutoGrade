@@ -3,20 +3,28 @@
 
 
 import random
-
 random.seed()
 
-user = input("Enter 'rock' or 'paper': ")
-comp = random.choice(['rock', 'paper'])
 
-print("I choose", comp)
+human = str(input('Enter rock or paper: '))
 
-if (user == comp):
-    print('We tie.')
 
-elif (user == 'paper' and comp == 'rock'):
-    print('You won.')
+computer = random.choice(['paper', 'rock'])
 
+
+print()
+
+
+print('I choose ' + computer + '.')
+
+
+if human == computer:
+    print ('We tie.')
+elif human == 'paper':
+    print ('You win.')
 else:
     print('I win.')
+
+
+
 

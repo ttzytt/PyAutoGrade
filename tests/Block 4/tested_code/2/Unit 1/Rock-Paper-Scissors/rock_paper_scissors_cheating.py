@@ -2,22 +2,20 @@
 
 
 
-player_input = input('Enter rock, paper, or scissors: ')
+
+user = input('choose rock, paper, or scissors: ')
 
 
-if player_input == 'rock':
-    print('I chose paper')
-    print('I won!')
 
-elif player_input == 'paper':
-    print('I chose scissors')
-    print('I won!')
+if user == 'paper':
+    print('i choose scissors')
 
-elif player_input == 'scissors':
-    print('I chose rock')
-    print('I won!')
+if user == 'rock':
+    print('i choose paper')
 
+if user == 'scissors':
+    print('i choose rock')
 
-else:
-    print('Invalid choice: type rock, paper, or scissors!')
+print('i win')
+
 

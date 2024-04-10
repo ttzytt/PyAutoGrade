@@ -2,17 +2,18 @@
 
 
 
-
-n = int(input("Give me a positive ingeter! "))
-factorial = 1
-i = n
+n = input("Input a number: ")
 
 
 
-while i > 0:
-    factorial *= i
-    i -= 1
+i = 1
+product = 1
 
 
 
-print(f"The factorial of {n} is {factorial}.")
+while i <= int(n):
+    product = product * i
+    i = i + 1
+
+
+print(product)

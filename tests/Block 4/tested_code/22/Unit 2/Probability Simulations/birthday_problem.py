@@ -1,67 +1,45 @@
 
 
 
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
- 
-
-
-
-
 import random
+random.seed()
 
 
 
-def repeats_until_duplicate_birthday():
 
-    counter = 0
-    roll = random
-    birthday_rolls = [] 
 
+def tries_until_duplicate_birthday():
     
-    roll = random.randint(1, 365) 
+    birthday_list = []
     
-
-    
-    birthday_rolls.append(roll)
-
-
-    while : 
-
+    while True:
         
-        roll = random.randint(1, 365) 
-
+        random_day = random.randint(1, 365)
         
-        birthday_rolls.append(roll)
-
-    
-
-    
+        if random_day not in birthday_list:
+            birthday_list.append(random_day)
             
+        else:
+            break
+
+    return len(birthday_list)
+
+
+def average_until_duplicate_birthday(num_trials):
+    
+    total = 0
+    
+    for i in range(num_trials):
+        total += tries_until_duplicate_birthday()
+
+    return total / num_trials
 
 
 
 
 
-
-
-
-
-
+num_trials = int(input("Enter the number of trials: "))
+print(average_until_duplicate_birthday(num_trials))
 
 
 

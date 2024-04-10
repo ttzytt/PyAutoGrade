@@ -4,8 +4,6 @@
 
 
 
-
-
 def draw_row(row, row_number):
     print(str(row_number) + ' │ '
           + row[0] + ' │ '
@@ -29,42 +27,92 @@ def draw_board(board):
 
 def find_winner(board):
     
-    for i in range(3):
-        if board[i][0] == board[i][1] and board[i][1] == board[i][2]:
-            if board[i][0] == 'x':
-                return 'x'
-            elif board[i][0] == 'o':
-                return 'o'
-            
-            
-            if board[i][0] != ' ':
-                return board[i][0]
 
     
-    for i in range(3):
-        if board[0][i] == board[1][i] and board[1][i] == board[2][i]:
-            if board[0][i] == 'x':
+    if board[0][0] == 'x':
+        if board[0][1] == 'x':
+            if board[0][2] == 'x':
                 return 'x'
-            elif board[0][i] == 'o':
+    
+    if board[1][0] == 'x':
+        if board[1][1] == 'x':
+            if board[1][2] == 'x':
+                return 'x'
+
+    if board[2][0] == 'x':
+        if board[2][1] == 'x':
+            if board[2][2] == 'x':
+                return 'x'
+    
+    
+    if board[0][0] == 'x':
+        if board[1][0] == 'x':
+            if board[2][0] == 'x':
+                return 'x'
+    if board[0][1] == 'x':
+        if board[1][1] == 'x':
+            if board[2][1] == 'x':
+                return 'x'
+    if board[0][2] == 'x':
+        if board[1][2] == 'x':
+            if board[2][2] == 'x':
+                return 'x'
+
+    
+    if board[0][0] == 'x':
+        if board[1][1] == 'x':
+            if board[2][2] == 'x':
+                return 'x'
+    if board[0][2] == 'x':
+        if board[1][1] == 'x':
+            if board[2][0] == 'x':
+                return 'x'
+
+    
+    if board[0][0] == 'o':
+        if board[0][1] == 'o':
+            if board[0][2] == 'o':
                 return 'o'
-            
-            
-            if board[0][i] != ' ':
-                return board[i][0]
+    
+    if board[1][0] == 'o':
+        if board[1][1] == 'o':
+            if board[1][2] == 'o':
+                return 'o'
+
+    if board[2][0] == 'o':
+        if board[2][1] == 'o':
+            if board[2][2] == 'o':
+                return 'o'
     
     
-    if board[0][0] == board[1][1] and board[1][1] == board[2][2]:
-        if board[0][0] == 'x':
-            return 'x'
-        elif board[0][0] == 'o':
-            return 'o'
-    if board[2][0] == board[1][1] and board[1][1] == board[0][2]:
-        if board[2][0] == 'x':
-            return 'x'
-        elif board[2][0] == 'o':
-            return 'o'
+    if board[0][0] == 'o':
+        if board[1][0] == 'o':
+            if board[2][0] == 'o':
+                return 'o'
+    if board[0][1] == 'o':
+        if board[1][1] == 'o':
+            if board[2][1] == 'o':
+                return 'o'
+    if board[0][2] == 'o':
+        if board[1][2] == 'o':
+            if board[2][2] == 'o':
+                return 'o'
+
+    
+    if board[0][0] == 'o':
+        if board[1][1] == 'o':
+            if board[2][2] == 'o':
+                return 'o'
+    if board[0][2] == 'o':
+        if board[1][1] == 'o':
+            if board[2][0] == 'o':
+                return 'o'
+
+    
     return None
 
+    
+    
 
 
 def get_move(player):
@@ -75,25 +123,37 @@ def get_move(player):
 def make_move(player, move, board):
     
     if len(move) != 2:
+        print("Not Valid: Move must be 2 characters long")
         return False
-    elif not ('1' <= move[0] <= '3'):
+        
+    if move[0] < '1' or move[0] > '3':
+        print("Not Valid: 1st character of the move must be 1, 2, or 3")
         return False
-    elif move[1] != 'A' and move[1] != 'B' and move[1] != 'C':
+
+    
+    if move[1] < 'A' or move[1] > 'C':
+        print("Not Valid: 2nd charcter of the move must be A, B, or C")
         return False
     
+    
+
+
+
+
     
     row = int(move[0]) - 1
     
     
     
+    column = int
     column = ord(move[1]) - ord('A')
 
     
-    if board[row][column] != ' ':
+    if board[row][column] != 'x' and board[row][column] != 'o':
+        board[row][column] = player
+        return True
+    else:
         return False
-    
-    board[row][column] = player
-    return True
 
 
 
@@ -105,13 +165,3 @@ def next_player(player):
     else:  
         return 'x'
 
-
-
-def all_filled(board):
-    total_board = board[0] + board[1] + board[2]
-
-    for i in range(len(total_board)):
-        if total_board[i] == ' ':
-            return False
-    return True
-        

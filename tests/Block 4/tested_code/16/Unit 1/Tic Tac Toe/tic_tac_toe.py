@@ -8,10 +8,9 @@ board = [ [' ', ' ', ' '],
           [' ', ' ', ' '],
           [' ', ' ', ' '] ]
 player = 'x'
-count = 0
+winner = None
 
-while find_winner(board) == None and count < 9:
-    count += 1
+while winner is None:
     draw_board(board)
     next_move = get_move(player)
     success = make_move(player, next_move, board)
@@ -20,19 +19,16 @@ while find_winner(board) == None and count < 9:
         next_move = get_move(player)
         success = make_move(player, next_move, board)
     player = next_player(player)
-
-if count == 9 and find_winner(board) == None:
-    print()
-    print("It's a tie!")
+    winner = find_winner(board)
 
 
-if find_winner(board) != None:
-    draw_board(board)
-    print()
-    print('The ' + find_winner(board) + ' player wins!')
 
+
+draw_board(board)
+print()
+if(winner != 'tie'):
+    print('The ' + str(winner) + ' player wins!')
+
+else:
+    print('I\'m sorry, no one wins.')
     
-    
-
-    
-

@@ -3,11 +3,10 @@
 
 
 
-Integer = int(input('What is temperature today in °F? '))
+fahrenheit = float(input("What is the temperature today(in °F)? "))
 
 
-if Integer > 95 or Integer < 50:
+if fahrenheit > 95 or fahrenheit < 50:
     print("You shouldn't play outside today.")
-
 else:
-    print('You should play outside today.')
+    print("You should play outside today.")

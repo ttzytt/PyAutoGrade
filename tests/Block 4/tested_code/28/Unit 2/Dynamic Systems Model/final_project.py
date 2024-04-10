@@ -3,71 +3,114 @@
 
 
 
-def rabbit_sheep_simulation(model, rabbits, sheep, cycles=50,):
-    populations = []
-    
-    populations.append((rabbits, sheep))
-    
-    for i in range(cycles):
-        if model == 1:
-            new_rabbits = (rabbits + 0.1 * (3 - rabbits) * rabbits
-                           - 0.2 * rabbits * sheep)
-            new_sheep = (sheep + 0.1 * (2 - sheep) * sheep - 0.1
-                         * rabbits * sheep)
-        else:
-            new_rabbits = (rabbits + 0.1 * (3 - rabbits) * rabbits - 0.2
-                           * rabbits * sheep)
-            new_sheep = (sheep + 0.1 * (1 - sheep) * sheep - 0.02
-                         * rabbits * sheep)
+import pyperclip
 
-        if new_rabbits < 0 :
+
+
+
+
+
+def format_data_to_desmos(data):
+    copying = []
+    for point in data:
+       copying.append("	".join(convert_points_to_strings(point)))
+    pyperclip.copy("\n".join(copying))
+
+
+
+
+
+
+
+
+
+
+def run_model(rabbits = 5, sheep = 1, max_days = 50):
+    day = 1
+    while day <= max_days:
+        new_rabbits = rabbits + 0.1 * (3 - rabbits) * rabbits - 0.2 * rabbits * sheep
+        new_sheep = sheep + 0.1 * (2 - sheep) * sheep - 0.1 * rabbits * sheep
+        if new_rabbits < 0:
             new_rabbits = 0
         if new_sheep < 0:
             new_sheep = 0
-
         rabbits = new_rabbits
         sheep = new_sheep
+        day += 1
+    return rabbits, sheep
 
-        populations.append((rabbits, sheep))
 
+
+
+
+
+
+
+
+
+def run_model_2(rabbits = 5, sheep = 1, max_days = 50):
+    day = 1
+    while day <= max_days:
+        new_rabbits = rabbits + 0.1 * (3 - rabbits) * rabbits - 0.2 * rabbits * sheep
+        new_sheep = sheep + 0.1 * (1 - sheep) * sheep - 0.02 * rabbits * sheep
+        if new_rabbits < 0:
+            new_rabbits = 0
+        if new_sheep < 0:
+            new_sheep = 0
+        rabbits = new_rabbits
+        sheep = new_sheep
+        day += 1
+    return rabbits, sheep
+
+
+
+def check_for_negative(point):
+    return point[0] < 0 or point[1] < 0
+
+
+
+
+
+def convert_points_to_strings(point):
+    return map(str,map(lambda x: round(x,4), point))
+
+data = []
+max_days = 1000
+for days in range(max_days):
+    data.append(tuple(run_model_2(3,1.25,days)))
+
+format_data_to_desmos(data)
+
+assert False
+
+data = []
+max_days = 50
+for rabbits in range(1,15):
+    print(rabbits, end = ': ')
+    for sheep in range(1,15):
+        point = run_model(rabbits,sheep,max_days)
+        if check_for_negative(point):
+            print("negative")
         
-    return populations
+        if (round(point[0],5),round(point[1],5)) == (0,0):
+           data.append((rabbits, sheep))
 
-def coordinates_close(coords1, coords2):
-    return (coords2[0] >= coords1[0] - 0.05 and coords2[1] >= coords1[1] - 0.05
-            and coords2[0] <= coords1[0] + 0.05 and coords2[1] <= coords1[1] + 0.05)
+format_data_to_desmos(data)
 
-def find_sign(number):
-    if number > 0:
-        return 1
-    elif number < 0:
-        return -1
-    else:
-        return 0
+input()
 
-def find_turning_point(populations):
-    pre_slope = None
-    for i in range(0, len(populations) - 1):
-        delta_y = populations[i+1][1] - populations[i][1]
-        delta_x = populations[i+1][0] - populations[i][0]
+data = []
+for rabbits in range(1,100):
+    print(rabbits)
+    for sheep in range(1,100):
+        point = run_model_2(rabbits,sheep,max_days)
+        if check_for_negative(point):
+            print("negative")
+        if (round(point[0],5),round(point[1],5)) == (0,0):
+           data.append((rabbits, sheep))
 
-        if delta_x == 0:
-            slope = 0
-        else:
-            slope = delta_y / delta_x
+format_data_to_desmos(data)
 
 
+   
 
-        if pre_slope != None:
-            if find_sign(pre_slope) != find_sign(slope):
-
-                return populations[i]
-
-        pre_slope = slope
-
-
-
-
-
-
-print(rabbit_sheep_simulation(2, 2.5, 1, 100))

@@ -3,25 +3,17 @@
 
 
 
-
-
- 
-
-integer = int(input('Enter a number: '))
-
-
-n = 1
+user_input = int(input('Input an integer n: ')) 
 count = 1
-value = 1
-while n <= integer:
-    factor = count
-    count = 1
-    while count <= n:
-        count = count +1
-        a = factor
-        value = value + 1
-    n = n + 1
-    factor = count
+result = 0
 
-value = value - 1
-print(value)
+while count <= user_input: 
+    result = result + count
+    count = count + 1
+
+if user_input == 1: 
+    print('1 = 1')
+else:
+    print('1+...+' + str(user_input) + ' = '  + str(result))
+    
+    

@@ -1,71 +1,60 @@
 
 
-
-
 import random
+
 random.seed()
 
 
+def find_winner(num_wereolves, num_villager):
+
+
+    while num_werewolves > 0 and num_villager != num_werewolves and num_villager > 0:
 
 
 
-def find_winner(num_werewolves, num_villagers):
-    day_or_night = 'day'
+        num_total = num_werewolves + num_villager
 
-    
-    
-    while num_werewolves != 0 and num_villagers != num_werewolves:
-        total_players = num_villagers + num_werewolves
+        if random.randint(0, num_total) < 4:
+            pass
+
+        
+        return num_werewolves = num_villager
+
+        if num_werewolves
+
+
+        
+        num_villager = num_villager - 1
+
+
+
+
+
 
         
         
-        if day_or_night == 'day':
-            person_killed = random.randint(1, total_players)
-            if person_killed <= num_werewolves:
-                num_werewolves -= 1
-            else:
-                num_villagers -= 1
-            day_or_night = 'night'
-
-        elif day_or_night == 'night':
-            num_villagers -= 1
-            day_or_night = 'day'
-
-    
-    if num_werewolves == 0:
-        return 'villagers'
-    else:
-        return 'werewolves'
 
 
-
-def odds_of_werewolves_winning(num_werewolves, num_villagers):
-    werewolf_wins = 0
-    
-    for _ in range(10000):
-        current_simulation = find_winner(num_werewolves, num_villagers)
         
-        if current_simulation == 'werewolves':
-            werewolf_wins += 1
-            
-
-    return werewolf_wins/10000
 
 
 
+        
 
-num_werewolves = int(input('How many werewolves would you like? '))
-print()
-num_villagers = int(input('How many villagers would you like? '))
-print()
-odds_werewolf = odds_of_werewolves_winning(num_werewolves, num_villagers)
-print(odds_werewolf)
+
+        
+        
+
+
+
+
+        
 
 
 
 
 
 
-
-
-
+        
+        
+       

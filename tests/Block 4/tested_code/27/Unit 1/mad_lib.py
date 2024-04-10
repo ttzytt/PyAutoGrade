@@ -1,39 +1,27 @@
 
 
 
+print('Mad Lib! Created by Frank Wang.')
+noun_1 = input('noun 1(start with Capital letter):')
+noun_2 = input('noun 2:')
+noun_3 = input('noun 3(plural):')
+noun_4 = input('noun 4:')
+noun_5 = input('noun 5(start with Capital letter):') 
+verb = input('verb:')
+print(' ')
+print('    There used to be a huge building called ' + noun_1 + '(noun 1), with a large ' + noun_2
+      + '(noun 2) on its top. Every day, ' + noun_3
+      + '(noun 3) go on to the top of the building and watch the scenery of '
+      + noun_4 + '(noun 4) city. The building is used as the headquarters for ' + noun_5
+      + '(noun 5) Corportation, which ' + verb + '(verb) ' + noun_2 + '(noun 2) '
+      + 'and makes the greatest profit in the world ever. The ' + noun_3
+      + '(noun 3) feel that this building is always the best building ever in the ' + noun_4 + '(noun 4) city!' )
 
 
-noun_1 = input('give me a noun:')  
-animal_1 = input('give me an animal:')
-noun_2 = input('give me a second noun:')
-noun_3 = input('give me a third noun:')
-place_1 = input ('give me a place:')
-noun_4 = input ('give me a fourth noun:')
 
 
-madlib = ('Once upon a time, there was a '+ noun_1 +
-          ' class. It’s mainly about teaching ' + animal_1 + ' to use '
-          + noun_2 + ' and '+noun_3+ '. Student’s would have the class on '+
-          place_1+ ', it’s a room with bunch of ' + noun_4)
 
-print(madlib)
+ 
 
 
-ask = input ('do you want to have a another one? Choose Yes or No :')
-if (ask == 'Yes'):
-    name_1 = input('give me a name:')
-    noun_5 = input('give me a noun:')
-    verb_1 = input('give me a verb:')
-    noun_6 = input('give me a noun:')
-    adj_1 = input('give me a adj:')
-    animal_2 = input('give me an animal:')
 
-    madlibtwo = ('The was a guy named '+ name_1 +', he has got his '
-                 +noun_5+' stolen because he forget to '+verb_1+
-                 ' when he put it in the shared '+noun_6+'. He is so '
-                 +adj_1+' about it that he told '+animal_2+ ' about it.')
-    print(madlibtwo)
-
-input('rate this from 1-5: ')
-
-    

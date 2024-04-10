@@ -4,38 +4,34 @@
 
 
 
-tempature_fahrenheit = int(input("What is the tempature today (in °F)? "))
+temp = int(input('What is the temperature today (in °F)? '))
+def ask_rain():
+    global b_rain
+    b_rain = input('Is it raining(yes/no)(no spaces, all lowercase)? ')
+def ask_jacket():
+    global b_jacket
+    b_jacket = input('Do you have a jacket(yes/no)(no spaces, all lowercase)? ')
 
 
-
-
-if tempature_fahrenheit > 95 or tempature_fahrenheit <= 32:
-    print("You shouldn't play outside today.")
+if temp > 95 or temp < 32:
+    print("You shouldn't play outside today")
     
+elif temp < 50:
+    ask_jacket()
+
+    if b_jacket == 'no':
+        print('You should not play outside today')
+    else:
+        print('You should play outside today')
 else:
-    
-    
-    
-    
-    if tempature_fahrenheit > 50:
-        jacket_needed = input("Is it raining? ")
-    else:
-        jacket_needed = "yes"
+    ask_rain()
 
-    
-    if jacket_needed.lower() == "yes":
-        
-        jacket_response = input("Do you have a jacket? ")
-
-        
-        
-        if jacket_response.lower() == "yes":
-            print("You should play outside today.")
+    if b_rain == 'yes':
+        ask_jacket()
+        if b_jacket == 'no':
+            print('You should not play outside today')
         else:
-            print("You shouldn't play outside today.")
-
-    
+            print('You should play outside today')
     else:
-        print("You should play outside today.")
-
-
+        print('You should play outside today')
+    

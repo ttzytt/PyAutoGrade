@@ -1,33 +1,38 @@
 
 
 
+
+
+a simulation to see how many times you would need to roll a standard 6 sided die
+until all the sides have been rolled at least once.
+"""
 import random
+
 random.seed()
 
-def dice_rolling():
-    rolls = []
-    times_ran = 0
-    roll_model = [1,2,3,4,5,6]
-    
-    
-    while rolls != roll_model:
-        random_dice_roll = random.randint(1,6)
-        if random_dice_roll not in rolls:
-            rolls.append(random_dice_roll)
-            rolls.sort()
-        times_ran += 1
-    return times_ran - 1
+def rolls_until_all_values():
+    values_seen = []  
+    rolls = 0  
 
+    while len(values_seen) < 6:
+        roll = random.randint(1, 6)  
+        
+        if roll not in values_seen:
+            values_seen.append(roll)  
+        rolls += 1  
+        
+        
+    return rolls
 
-def dice_rolling_average():
-    number = 0
-    
-    for i in range(num_trials):
-        number += dice_rolling()
-    number = number / num_trials
-    print('The average is ' + str(number))
+def average_until_all_values(num_trials):
+    total_rolls = 0  
 
-    
-    
-num_trials = int(input('How many times would you like to find the average?'))
-dice_rolling_average()
+    for _ in range(num_trials):
+        total_rolls += rolls_until_all_values()
+
+    return total_rolls / num_trials 
+
+num_trials = int(input('How many trials do you want to go through? '))
+print(f'Average number of rolls to get all six values in {num_trials} trials is')
+print(f'{average_until_all_values(num_trials)}')
+

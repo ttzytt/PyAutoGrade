@@ -2,21 +2,23 @@
 
 
 
+playerinput = input('Enter rock, paper, or scissors: ')
 
-import random 
 
-random.seed()
+if playerinput == 'rock':
+    print('I chose paper')
+    print('I won!')
 
-user = input("Enter 'rock' or 'paper' or 'scissors': ") 
+elif playerinput == 'paper':
+    print('I chose scissors')
+    print('I won!')
 
-if user == 'rock': 
-    comp = 'paper'
+elif playerinput == 'scissors':
+    print('I chose rock')
+    print('I won!')
 
-elif user == 'paper':
-    comp = 'scissors'
-        
+
 else:
-    comp = 'rock'
+    print('Invalid choice: type rock, paper, or scissors!')
 
-print('I choose '+comp+'.')
-print('I win.')
+

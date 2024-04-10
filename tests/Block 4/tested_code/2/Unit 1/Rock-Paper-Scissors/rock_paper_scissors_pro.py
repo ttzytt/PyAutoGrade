@@ -1,9 +1,10 @@
 
 
 
-
 import random
 random.seed()
+
+
 
 
 def score_round(choice_1, choice_2):
@@ -19,39 +20,44 @@ def score_round(choice_1, choice_2):
         return -1
 
 
+
 def user():
     while True:
-        player_input = input("Enter 'rock', 'paper', or 'scissors', or 'quit': ")
-        if player_input in ['rock', 'paper', 'scissors', 'quit']:
-            return player_input
+        user_input = input('enter rock, paper, scissors, or quit to quit: ')
+        if user_input in ['rock', 'paper', 'scissors', 'quit']:
+            return user_input
         else:
-            print("Invalid input; enter 'rock', 'paper', 'scissors', or 'quit'.")
+            print("invalid input try again")
 
 score = int(0)
 
 while True:
     choice = user()
-    
+
     
     if choice == 'quit':
         break
 
-    bot_choice = random.choice(['rock', 'paper', 'scissors'])  
+    computer_choice = random.choice(['rock','paper','scissors']) 
 
-    result = score_round(choice, bot_choice)
+    result = score_round(choice, computer_choice)
 
-    print('You chose ' + choice + ', and I chose ' + bot_choice)
+    print('you choose ' + choice + ' ' + 'computer choose ' + computer_choice)
 
     
+    
     if result == 1:
-        print('You won!')
+        print('you win this round')
         score += 1
     elif result == -1:
-        print('You lost.')
+        print('you lose this round')
         score -= 1
     else:
-        print('We tied!')
+        print('its a tie')
 
-    print('Your current score is ' + str(score))
+    
+    print('your current score is ' + str(score))
 
-print('Thanks for playing!')
+print('thanks for playing')
+
+

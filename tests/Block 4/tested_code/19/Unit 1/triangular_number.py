@@ -2,19 +2,22 @@
 
 
 
-n_final_ans = int(input('Enter your number(no spaces): '))
 
 
-n_left = n_final_ans - 1
+number_n = int(input("Input the number you want to triangularize: "))
 
 
-n_original = n_final_ans
 
 
-while n_left > 0:
-    n_final_ans += n_left
-    n_left -= 1
+countdown = number_n - 1
 
 
-print('The triangle number of ' + str(n_original) + ' is ' + str(n_final_ans))
+while countdown > 0:
+    number_n = number_n + countdown
+    countdown = countdown - 1
+
+
+
+print("The triangular number of your number is " + str(number_n))
+
 

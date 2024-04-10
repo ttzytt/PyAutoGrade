@@ -2,25 +2,20 @@
 
 
 
+n = int(input("Enter a number, n: "))
 
 
-n = int(input('Enter a positive integer n: '))
-
-
-result = 0
-i = 1
-
-
-if n <= 0:
-    print('Please enter a positive integer.')
+if n < 0:
+    print("Please enter a non-negative integer.")
 else:
+    
+    triangle_sum = 0
+    i = 1
+    
+    
     while i <= n:
-        result += i
+        triangle_sum += i
         i += 1
-
-
-result = str(result)
-
-
-print('The nth triangle number is ' + result)
-
+    
+    
+    print("The" + n + "th triangle number is " + triangle_sum + ".")

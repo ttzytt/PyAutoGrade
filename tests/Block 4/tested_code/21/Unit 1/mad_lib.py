@@ -3,25 +3,30 @@
 
 
 
-adjective1 = input('Enter an adjective: ')
-color1 = input('Enter a color: ')
-color2 = input('Enter a color: ')
-color3 = input('Enter a color: ')
-type_of_furniture = input('Enter a type of furniture: ')
-plural_animal = input('Enter a plural animal: ')
-type_of_food = input('Enter a type of food: ')
-adjective2 = input('Enter an adjective: ')
-noun = input('Enter a noun: ')
-verb = input('Enter an action verb: ')
 
 
-story = ('There was once a school that most people would find to be ' + adjective1 + '. Lockers were both ' + color1
-         + ' and ' + color2 + '. ' + 'The walls were painted to be a neon ' + color3 + '. Instead of desks, there were '
-         + type_of_furniture + '! ' + 'Throughout the different classrooms, ' + plural_animal +
-         ' were kept in glass tanks. These ' + plural_animal + ' would scare all the students. During lunch, ' +
-         type_of_food + ' was served, and it always tasted ' + adjective2 + '. At the end of a day, a ' + noun +
-         ' is rung, and all the students ' + verb + ' out of the school.')
 
-print(story)
 
+noun_1 = input('Noun1: ')  
+noun_2 = input('Noun2: ')
+noun_3 = input('Noun3: ')
+noun_4 = input('Noun4: ')
+adverb = input('Adverb: ')  
+adjective = input('Adjective: ')
+verb_1 = input('Verb1: ')
+verb_2 = input('Verb2: ')
+verb_3 = input('Verb-ing: ')
+
+
+
+
+
+
+
+
+print('Eric is a ' + noun_1 + ' in prisms and he is a great video game player.He can win many ' + noun_2 + 
+       '. One day, he scored a lot in a game' + ' and he wanted a cup of ' + noun_3 + ' to drink to celebrate.'+
+       'Unfortunenately, when he open the ' + noun_4 + ', he ' + adverb + ' found that it was run out. He felt ' + adjective + ' and he ' + verb_1
+       + ' at the play ground to adjust his emotion. He got tired soon and ' + verb_2 +' in the bathroom. At last he went back to the dorm'
+       ' for '+ verb_3 +'.')
 

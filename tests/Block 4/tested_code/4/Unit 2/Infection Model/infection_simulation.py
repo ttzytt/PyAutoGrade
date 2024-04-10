@@ -3,49 +3,65 @@
 
 
 
+
+
+from infection_functions import *
 import random
 random.seed()
 
-from infection_functions import *
 
-board = [] 
-board_length = (int(input("Input the board size: ")))+2
+board = original()
+draw_board(board)
+stop = '' 
 
-heal = 0 
-infect = 0 
-board_copy =[] 
-infected_row = 0 
-infected_column = 0
-board_infected_count = []
-
-run = 1
-make_board(board,board_length,board_copy, board_infected_count)
+print()
+print('Current patients: 10')
+print()
 
 
-while (run == 1):
-    if ((type(infected_row) == int) and (type (infected_column) == int)):
-        infected_row = int(input("Input the row: "))
-        infected_column = int(input("Input the column: "))
-        setup_board(board,board_length,infected_row,infected_column)
-      
-        print_board(board,board_length)
-        print("Enter 1 to continue, enter anything else to quit setup")
-        run = int(input("Do you want to continue: "))
-    else:
-        print("Enter Valid value")
-
-infect = float(input("Input the infection probability: "))
-heal = float(input("Input the heal probability: "))
+healing_rate = int(input('Input the healing rate(%): '))
+infection_rate = int(input('Input the infection rate(%): '))
 
 
 
+while 0 < count_patients(board) < 100 and stop != 'stop':
+    
+    patients = []
+    cured = []
+    
+    for row in range(10):
+        
+        for column in range(10):
+            
+            if board[row][column] == ' ': 
+                neighbors = check_neighbors(board,row,column)
+                actual_infection_rate = neighbors * infection_rate
+                get_infected = random.randint(1,100)
+                if get_infected <= actual_infection_rate: 
+                    new_patient = [row,column]
+                    patients.append(new_patient) 
+                    
+            elif board[row][column] == '+': 
+                get_cured = random.randint(1,100)
+                if get_cured <= healing_rate: 
+                    new_cured = [row,column]
+                    cured.append(new_cured) 
+                else:
+                    new_patient = [row,column]
+                    patients.append(new_patient) 
 
-for runtime in range(10000):
-	infecting_neighbor(board, board_length, infect, heal, board_copy)
-	count_infected_time(board_length, board, board_infected_count)
-	heal_process(board_length, board, board_copy,heal)
-	runtime += 1
+    board = draw_patients(board,patients,cured)
+    draw_board(board)
+    
+    print()
+    print('Current patients: ' + str(count_patients(board)))
+    print()
+    
+    if 0 < count_patients(board) < 100:
+        print('Press return/enter to continue, input \'stop\' to stop')
+        stop = input()
+    
+print('Simulation ended')
 
 
-print_board(board, board_length)
-print_infected_board(board_infected_count,board_length)
+                

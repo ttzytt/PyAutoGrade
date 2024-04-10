@@ -1,16 +1,22 @@
 
 
 
-person_1 = input("Enter the name of a person: ")
+Noun1 = "Dolphin"
+Noun2 = "Leslie"
+Place1 = "the fishtank"
+Place2 = "the toilet"
+Animal = "mosquitos"
+Verb1 = "hijacking "
+Verb2 = "rotating"
+Name = "bobby"
+Adj = " beautiful "
+Food = "fried calamari"
+Noun3 = "milky way"
 
-
-noun_2 = input("write a sport: ")
-place = input("write a place :  ")
-animal = input("write an animal: ")
-verb = input("write a verb: ")
-
-
-
-sentence = "Once upon a time, there was a guy called " + noun_1 + ". "+ noun_1 + " outgoing and loves playing " + noun_2 +". " + "Usually "+ noun_1+ " takes the pet, " + animal +" to go to the "
-+ place +" for " + verb + "."
-print(sentence)
+print("Studens at PRISMS school are" + Adj + "students who like " + Verb1 + Noun1 + ".")
+print("kids came from all over the world from " + Place1 + " to " + Place2 + ".")
+print("At leisure time, they play " + Noun2 + " together.")
+print("Sometimes they will see " + Animal + " in the backyeard eating grass.")
+print("Bob is a " + Noun3 + ".")
+print("He likes " + Verb2 +".")
+print("His favorite food throughout the 4 years spent in PRISMS is cafeteria's " + Food + ".")

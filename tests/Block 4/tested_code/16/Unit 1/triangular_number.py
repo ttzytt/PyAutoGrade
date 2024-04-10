@@ -1,19 +1,12 @@
 
 
 
+num = int(input('Enter in an integer: ')) 
+triangle_number = 0 
+count = num
 
+while(count > 0):
+    triangle_number = triangle_number + count
+    count -= 1
 
-n = int(input('Please enter a number: '))
-
-count = 0
-
-triangular_number = 0
-
-while count < n:
-    
-    count = count + 1
-    triangular_number = triangular_number + count 
-
-print()   
-print("The triangular number would be: " + str(triangular_number))
-
+print('The triangle of ' + str(num) + ' is ' + str(triangle_number))

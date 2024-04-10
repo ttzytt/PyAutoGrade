@@ -4,21 +4,11 @@
 
 
 
-
-number_n = int(input("Please type in your n: "))
-
-
-number_minus_1 = number_n - 1
-
-
-
-
-
-
-while number_minus_1 > 1:
-
-    number_n = number_n * number_minus_1
-    number_minus_1 = number_minus_1 - 1
-print("Your factorial number is " + str(number_n))
-
-
+n = int(input('Type in a number: '))
+n_factorial = 1
+countdown = 1
+while countdown <= n:
+    n_factorial = n_factorial * countdown
+    countdown = countdown +1
+print('The value of n! equals ' + str(n_factorial) +'.')
+ 

@@ -3,19 +3,48 @@
 
 
 import random
-
 random.seed()
 
-user = input("Enter 'rock', 'paper', or 'scissors': ")
-comp = random.choice(['rock', 'paper', 'scissors'])
+human = str(input('Enter paper, scissors or rock: '))
 
-print("I choose", comp)
+computer= random.choice(['paper', 'rock', 'scissors'])
 
-if (user == comp):
-    print('We tie.')
 
-elif (user == 'paper' and comp == 'rock')or (user == 'scissors' and comp == 'paper') or (user == 'rock' and comp == 'scissors'):
-    print('You won.') 
+
+print()
+
+
+print('I choose ' + computer + '.')
+
+
+if human == computer:
+    print ('We tie.')
+    
+
+
+elif human == 'paper':
+    if computer=='rock':
+       
+        print('You win.')
+    else:
+        print('I win.')
+
+        
+
+elif human == 'scissors':
+    if computer=='rock':
+        print('I win.')
+    else:
+        print('You win.')
+
 
 else:
-    print('I win.')
+    if computer=='paper':
+       
+        print('I win.')
+    else:
+        print('You win.')
+
+
+
+

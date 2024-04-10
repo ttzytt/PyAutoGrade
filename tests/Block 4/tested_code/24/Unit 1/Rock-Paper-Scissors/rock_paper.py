@@ -5,30 +5,23 @@ import random
 
 random.seed()
 
-user_rp_choice = input('Enter \'rock\' or \'paper\': ')
+print("Hello, lets play a game of rock and paper.")
 
-num = random.randint(1,2) 
-if (num == 1):
-    computer_rp_choice = 'rock' 
-elif (num == 2):
-    computer_rp_choice = 'paper' 
+player = input("What do you choose? (all lowercase) ")
 
 
-if(user_rp_choice == 'rock') or (user_rp_choice == 'paper'):
-    print('I choose ' + computer_rp_choice + '.') 
-
-    if(computer_rp_choice == user_rp_choice): 
-        print('We tie.')
-    elif(computer_rp_choice == 'paper') and (user_rp_choice == 'rock'): 
-        print('I win.')
-    elif(computer_rp_choice == 'rock') and (user_rp_choice == 'paper'): 
-        print('You win.')
+computer = random.choice(['rock', 'paper'])
 
 
-elif(user_rp_choice == 'scissors') or (user_rp_choice == 'Scissors'):
-    print('Yay, you win!!!!! Oh wait no. . .  You lost because of your stupidity. You didn\'t even read directions well enough to tell that it said to enter \'rock\' or \'paper\'. A baby would have done better.')
+print("I choose " + computer + ".")
+
+if str(computer) == str(player):
+    print("Looks like we tied, want to play again?")
+
+elif str(computer) == ('rock') or str(player) == ('paper'):
+    print("Looks like I lost, Good Game!")
 
 else:
-    print('Come on dude. You need to wisen up and read directions.')
-          
-    
+    print("I win gg ez.")
+
+

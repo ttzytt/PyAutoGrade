@@ -2,34 +2,21 @@
 
 
 
-def count_characters(read_file):
-    count = 0
-    for line in read_file:
-        count = count + len(line)
-    return count
-
-file_name = 'Text files/names.txt'
-with open(file_name, 'r') as my_file:
-    num_characters = count_characters(my_file)
-
-print('The file ' + file_name + ' contains ' + str(num_characters)
-      + ' characters.')
-print()
 
 
+with open('Text files/greeneggs.txt', 'r') as my_file:
+    egg_count = 0
+    for line in my_file: 
+        words = line.split() 
+        for word in words: 
+            
+            if word == "eggs":
+                egg_count += 1
 
-def count_lines(read_file):
-    lines = read_file.read().splitlines()
-    return len(lines)
+print('The story mentions the word eggs ' + str(egg_count) + ' times. ')
 
-file_name = 'Text files/names.txt'
-with open(file_name,'r') as my_file:
-    
-    lines_counted = count_lines(my_file)
 
-print('The file ' + file_name + ' contains ' + str(lines_counted)
-      + ' lines.')
-print()
+
 
 
 

@@ -1,107 +1,163 @@
 
 
-from poker_hand_functions import *
 
 
 
 
-def odds_of_full_house():
-    time = 1
-    hand = get_cards()
-    while find_full_house(hand) == False:
-        time += 1
-        hand = get_cards()
-    print('The probability should be 1 in ' +  str(time))
-    return time
+
+
+from operator import itemgetter  
+import random  
+random.seed()
+
+
+
+number = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+color = ['♠', '♥', '♦', '♣']
+deck = []
+for rank in range(13):
+    for suit in range(4):
+        deck.append([number[rank], color[suit]])
+
+
+
+def random_five_hand():
+    random.shuffle(deck)
+    hands = deck[:5]
+    return hands
+
+
+
+
+def full_house():
+    count = 0
+    tries = 200000
+    
+    for _ in range(tries):
+        hand = random_five_hand()
+        
+        hand.sort(key = itemgetter(0))
+
+        
+        if hand[0][0] == hand[1][0] and hand[3][0] == hand[4][0] and hand[0][0] != hand[4][0]:
+            if hand[1][0] == hand[2][0] or hand[2][0] == hand[3][0]:
+                count = count + 1
+    
+    result = round(tries / count)
+    return result
+
+
+
+
+
+def is_straight_flush(hand):
+
+    
+        hand.sort(key = itemgetter(1, 0))
+        if hand[0][1] == hand[4][1]:
+
             
+            if hand[4][0] - hand[0][0] == 4:
+                return True
+            
+            elif hand[0][0] == 1 and hand[1][0] == 10 and hand[4][0] == 13:
+                return True
+            else:
+                return False
+        return False
+    
+def straight_flush():
+    count = 0
+    tries = 500000
+    
+    for _ in range(tries):
+        hand = random_five_hand()
         
-def average_odds_of_full_house(times):
-    total = 0
-    for i in range(times):
-        time = 1
-        hand = get_cards()
-        while find_full_house(hand) == False:
-            time += 1
-            hand = get_cards()
-        total += time
-    print('The average probability is 1 in ' + str(total / times))
-    return total/times 
+        if is_straight_flush(hand) == True:
+                count = count + 1
+
+    result = round(tries / count)
+    return result
 
 
 
-def odds_of_straight_flush():
-    time = 1
-    hand = get_cards()
-    while find_straight_flush(hand) == False:
-        time += 1
-        hand = get_cards()
-        find_straight_flush(hand)
-    print('The probability should be 1 in ' +  str(time))
-    return time
 
-def average_odds_of_straight_flush(times):
-    total = 0
-    for i in range(times):
-        time = 1
-        hand = get_cards()
-        while find_straight_flush(hand) == False:
-            time += 1
-            hand = get_cards()
-            find_straight_flush(hand)
-        total += time
-    print('The average probability is 1 in ' + str(total / times))
-    return times/total 
+def flush():
+    count = 0
+    tries = 200000
+    
+    for _ in range(tries):
+        hand = random_five_hand()
 
-
-
-def odds_of_flush():
-    time = 1
-    hand = get_cards()
-    while find_flush(hand) == False:
-        time += 1
-        hand = get_cards()
-        find_flush(hand)
-    print('The probability should be 1 in ' +  str(time))
-    return time
-
-def average_odds_of_flush(times):
-    total = 0
-    for i in range(times):
-        time = 1
-        hand = get_cards()
-        while find_flush(hand) == False:
-            time += 1
-            hand = get_cards()
-            find_flush(hand)
-        total += time
-    print('The average probability is 1 in ' + str(total / times))
-    return times/total
-
-
-
-def odds_of_dice_flush():
-    time = 1
-    cases = get_dice()
-    while find_flush_dice(cases) == False:
-        time += 1
-        cases = get_dice()
         
-    print('The probability should be 1 in ' +  str(time))
-    return time
+        hand.sort(key = itemgetter(1, 0))
 
-def average_odds_of_dice_flush(times):
-    total = 0
-    for i in range(times):
-        time = 1
-        cases = get_dice()
-        while find_flush_dice(cases) == False:
-            time += 1
-            cases = get_dice()
-            find_flush_dice(cases)
-        total += time
-    print('The average probability is 1 in ' + str(total / times))
-    return times/total
+        
+        if hand[0][1] == hand[4][1]:
+    
+            
+            if hand[4][0] - hand[0][0] != 4:
+                
+                if [hand[0][0], hand[1][0], hand[2][0]] != [1, 10, 13]:
 
-def comparison(times):
-    slope = average_odds_of_dice_flush(times)/ (average_odds_of_flush(times) + average_odds_of_straight_flush(times))
-    print('their relationship is ' + str(slope) + ' times.')    
+                    count = count + 1
+    
+    result = round(tries / count)
+    return result
+
+
+
+
+ 
+def same_suit_dice():
+    count = 0
+    tries = 100000
+
+    for _ in range(tries):
+        
+        dice = ['♠', '♥', '♦', '♣']
+        dice_hand = []
+    
+        for _ in range(5):
+            random.shuffle(dice)
+            dice_hand.append(dice[0])
+
+        
+        dice_hand.sort()
+        if dice_hand[0] == dice_hand[4]:
+            count = count + 1
+
+    result = round(tries / count)
+    return result
+
+
+
+
+check = input('You can check the odds of Full House, Straight Flush, Flush, and Five Dice'
+              ' return the one you want to check (capitalize first letter of each word): ')
+if check == 'Full House':
+    odds = full_house()
+elif check == 'Straight Flush':
+    odds = straight_flush()
+elif check == 'Flush':
+    odds = flush()
+else:
+    odds = same_suit_dice()
+
+print('The odds of being dealt a ' + str(check) + ' is 1 in ' + str(odds) + '.')
+
+
+    
+
+
+
+
+
+
+
+
+        
+        
+
+
+    

@@ -1,42 +1,50 @@
 
 
 
-import random
+
+import random 
+
 random.seed()
-loop = "continue"
 
+whether_quit = 'No' 
 
+while whether_quit == 'No': 
+    
+    
+    human_choice = input("Enter 'rock' or 'paper'or 'scissors'(Type 'quit' to end the program): ") 
+    computer_choice = random.choice(['rock', 'paper', 'scissors']) 
 
-while loop != "quit":
-	
+    
+    if human_choice != 'quit': 
+        print('I choose ' + computer_choice + '.')
+        
+    else:
+        whether_quit = 'Yes'
 
-    user = input("Enter 'rock' 'paper' or 'scissors' : ")
-    computer_select_list = ['rock', 'paper', 'scissors']
-    computer_select = random.choice(computer_select_list)
-    print("I choose " + computer_select)
+    
+    if human_choice == computer_choice:
+        print('We tie.') 
+    
+    elif human_choice == 'rock' and computer_choice == 'scissors':
+        print('You win.')
+    
+    elif human_choice == 'paper' and computer_choice == 'rock':
+        print('You win.')
+    
+    elif human_choice == 'scissors' and computer_choice == 'paper':
+        print('You win.')
 
+    
+    elif human_choice == 'rock' or human_choice == 'paper' or human_choice == 'scissors':
+        print('I win.')
 
-    if user == "rock":
-        if computer_select == "rock":
-            print("We tie.")
-        elif computer_select == "paper":
-            print("I win.")
-        elif computer_select == "scissors":
-            print("You win.")
+    elif whether_quit == 'No':
+        
+        print('You cannot choose anything else than rock, paper or scissors!')
 
-    elif user == "paper":
-        if computer_select == "rock":
-            print("You win.")
-        elif computer_select == "paper":
-            print("We tie.")
-        elif computer_select == "scissors":
-            print("I win.")
+    print() 
 
-    elif user == "scissors":
-        if computer_select == "rock":
-            print("You win.")
-        elif computer_select == "paper":
-            print("I win.")
-        elif computer_select == "scissors":
-            print("We tie.")
-    loop = input("Do you want to continue? Enter quit or anything else: " )
+print('End of the program.') 
+
+    
+    

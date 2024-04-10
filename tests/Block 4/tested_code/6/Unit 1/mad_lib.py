@@ -8,44 +8,22 @@
 
 
 
-print('Enter your words!')
-
-food = input ('Food: ')
-sound = input ('Sound: ')
-verb_1 = input ('Verb 1: ')
-verb_2 = input ('Verb 2: ')
-verb_3 = input ('Verb 3: ')
-verb_4 = input ('Verb 4: ')
-noun = input ('Noun: ')
-animal = input ('Animal: ')
-phrase = input ('Phrase: ')
-adjective_1 = input ('Adjective 1: ')
-adjective_2 = input ('Adjective 2: ')
-famous_person = input ('Famous Person: ')
-building_type = input ('Building Type: ')
-household_item = input ('Household Item: ')
-transportation = input ('Transportation: ')
-mythical_creature = input ('Mythical Creature: ')
-
-
-
-print()
-print('Once upon a time, a ' + adjective_1 + ' '
-      + animal + ' tried to ' + verb_1 + ' a '
-      + noun + '. ' + 'Just when it succeeded, '
-      + famous_person + ' flew on a ' + transportation
-      + ', shouting: "' + phrase + '!" '
-      + 'Then, they began to ' + verb_2 + ' using a '
-      + household_item + '. ' + 'Out of nowhere, a '
-      + adjective_2 + ' ' + mythical_creature
-      + ' appeared and started to ' + verb_3
-      + ' all the ' + food + ' in the village. '
-      + 'Shockingly, the ' + building_type
-      + ' began to ' + verb_4 + ' while emitting '
-      + sound + '. ' + 'Finally, the ' + adjective_1 + ' '
-      + animal + ' began to ' + verb_4 + '.')
 
 
 
 
 
+
+ball_game = input('write a ball game ')
+noun_1 = input('write a noun ')
+number = input('write a number ')
+noun_2 = input('write a noun ')
+adjective = input('write an adjective ')
+
+
+
+
+print('There is a ' + ball_game + ' game every Saturday in the town. There is a team called the ' + noun_1 + '. ' + 
+      'This team is very strong. They can win ' + number + ' more points than the other teams per game. ' + 
+      'They are eating ' + noun_2 +' before the game. Although it is wierd, it can make them feel ' + adjective + '. ' + 
+      'This feeling can help them win the game. So they always win the games.')

@@ -2,221 +2,53 @@
 
 
 
-
 def deal_3_hands(deck):
-    hands = [[], [], []]
+	deck_position = 0
+	hands = [[], [], []]
+	
+	while deck_position < len(deck):
+		hands[0].append(deck[deck_position])
+		if deck_position + 1 < len(deck):
+			hands[1].append(deck[deck_position+1])
+		if deck_position + 2 < len(deck):
+			hands[2].append(deck[deck_position+2])
+		deck_position += 3
+	
+	return hands
 
-    i_deck = 0
 
-    while i_deck < len(deck):
-        hands[i_deck % 3].append(deck[i_deck])
-        i_deck += 1
+def uno_who_played_what(cards_played):
+    card_played_position = 0
+    player_position = 100000
+    hands = [[], [], [], []]
+    skip_1 = 0
+    reverse_count = 0
+
+    while card_played_position < len(cards_played):
+        if skip_1 == 1:
+            player_position += 1
+            skip_1 = 0
+            if reverse_count % 2 == 1:
+                player_position -= 4
+        elif cards_played[card_played_position] == "skip":
+            skip_1 = 1
+            hands[(player_position % 4)].append("skip")
+            card_played_position += 1
+            player_position += 1
+        elif cards_played[card_played_position] == 'reverse':
+            reverse_count += 1
+            hands[(player_position % 4)].append("reverse")
+            card_played_position += 1
+            if reverse_count % 2 == 1:
+                player_position -= 1
+            else:
+                player_position += 1
+        else:
+            hands[(player_position % 4)].append(cards_played[card_played_position])
+            card_played_position += 1
+            player_position += 1
+            if reverse_count % 2 == 1:
+                player_position -= 2
+    
     return hands
 
-
-
-
-def uno_who_played_what(uno_deck):
-    i_deck = 0
-    i_player = 0
-    is_reverse = False
-
-    players = [[], [], [], []]
-
-    while i_deck < len(uno_deck):
-        if uno_deck[i_deck] == 'reverse':
-            is_reverse = True
-
-        while is_reverse == True and i_deck < len(uno_deck):
-
-            players[i_player % 4].append(uno_deck[i_deck])
-
-            if uno_deck[i_deck] == 'skip':
-                i_player -= 2
-            else:
-                i_player -= 1
-
-            i_deck += 1
-
-            if i_deck != (len(uno_deck)):
-                if uno_deck[i_deck] == 'reverse':
-                    is_reverse = False
-
-        if i_deck < len(uno_deck):
-
-            players[i_player % 4].append(uno_deck[i_deck])
-
-            if uno_deck[i_deck] == 'skip':
-                i_player += 2
-            else:
-                i_player += 1
-
-            i_deck += 1
-
-    return players
-
-
-
-def uno_who_played_what_bonus_1(uno_deck, num_players, starting_player):
-    i_deck = 0
-    i_player = 0
-    is_reverse = False
-    players = []
-
-    for i in range(num_players - 1):
-        players.append([])
-
-    i_player = starting_player - 1
-
-    print(i_player)
-
-    while i_deck < len(uno_deck):
-        if uno_deck[i_deck] == 'reverse':
-            is_reverse = True
-
-        while is_reverse == True and i_deck < len(uno_deck):
-
-            players[i_player % num_players].append(uno_deck[i_deck])
-
-            if uno_deck[i_deck] == 'skip':
-                i_player -= 2
-            else:
-                i_player -= 1
-
-            i_deck += 1
-
-            if i_deck != (len(uno_deck)):
-                if uno_deck[i_deck] == 'reverse':
-                    is_reverse = False
-
-        if i_deck < len(uno_deck):
-
-            players[i_player % 4].append(uno_deck[i_deck])
-
-            if uno_deck[i_deck] == 'skip':
-                i_player += 2
-            else:
-                i_player += 1
-
-            i_deck += 1
-
-    return players
-
-
-
-
-
-
-
-
-
-def uno_who_played_what_v2(uno_deck, num_players=4, starting_player=1):
-    
-    if not uno_deck:
-        return None
-
-    
-    i_deck = 0
-    i_players = starting_player - 1
-
-    
-    players = []
-
-    
-    negative = 1
-
-    
-    is_reverse = False
-
-    
-    for i in range(num_players):
-        players.append([])
-
-    while i_deck < len(uno_deck):
-
-        players[i_players % num_players].append(uno_deck[i_deck])
-
-        
-        
-        if uno_deck[i_deck] == 'reverse':
-            
-            
-            if is_reverse:
-                is_reverse = False
-                negative = 1
-            
-            else:
-                is_reverse = True
-                negative = -1
-
-        
-        
-        if uno_deck[i_deck] == 'skip':
-            i_players += (2 * negative)
-        else:
-            i_players += (1 * negative)
-
-        
-        i_deck += 1
-
-    return players
-
-
-
-
-
-
-
-
-def catch_cheater(uno_deck, initial_card, num_players=4, starting_player=1):
-    
-    if not uno_deck:
-        return None
-
-    
-    i_player = starting_player - 1
-    i_deck = 0
-
-    
-    prev_card = initial_card
-
-    cheater_list = []
-
-    
-    negative = 1
-    is_reverse = False
-
-    while i_deck < len(uno_deck):
-
-        
-        if uno_deck[i_deck][1] != prev_card[1] and uno_deck[i_deck][0] != prev_card[0]:
-            cheater_list.append((i_player % num_players))
-
-        
-        prev_card = uno_deck[i_deck]
-
-        
-        if uno_deck[i_deck][1] == 'reverse':
-            if is_reverse:
-                is_reverse = False
-                negative = 1
-            else:
-                is_reverse = True
-                negative = -1
-
-        
-        if uno_deck[i_deck][1] == 'skip':
-            i_player += (2 * negative)
-        else:
-            i_player += (1 * negative)
-
-        i_deck += 1
-
-    
-    if not cheater_list:
-        return None
-    else:
-        return cheater_list
-
-
-def 

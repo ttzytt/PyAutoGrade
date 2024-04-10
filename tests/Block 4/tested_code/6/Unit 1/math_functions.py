@@ -1,37 +1,46 @@
 
 
 
-def factorial(n):
-    result = 1   
-    for i in range(1, n+1):   
-        result *= i   
-    return result   
 
+n = int(input('Write a number '))
+
+def factorial(n):
+    count = 1
+    result = 1
+    
+    while count <= n:
+        result = result * count
+        count = count + 1
+    return result
 
 def triangular_number(n):
-
-    sum = 0
+    count = 1
+    result = 0
     
-    while i <= n:
-        i = 0
-        sum += i
-        i += 1
-
-    return sum
-    
-    
+    while count <= n:
+        result = result + count
+        count = count + 1
+    return result
 
 def new_triangular_number(n):
-    if n % 2 == 0:   
-        return sum(range(2, n+1, 2))   
+    if n % 2 == 0:
+        count = 2
+        result = 0
+        
+        while count <= n:
+            result = result + count
+            count = count + 2
+        return result
     else:
-        return sum(range(1, n+1, 2))   
+        count = 1
+        result = 0
+        
+        while count <= n:
+            result = result + count
+            count = count + 2
+        return result
 
 
-user_input = int(input("Enter an integer: "))
-
-
-print(str(user_input) + "! is " + str(factorial(user_input)))
-print("Triangular number: " + str(triangular_number(user_input)))
-print('"New" triangular number: ' + str(new_triangular_number(user_input)))
-
+print('The result of factorial is ' + str(factorial(n)))
+print('The result of triangular_number is ' + str(triangular_number(n)))
+print('The result of new_triangular_number is ' + str(new_triangular_number(n)))

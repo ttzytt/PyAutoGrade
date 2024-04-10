@@ -1,37 +1,53 @@
 
 
 
+input_number = int(input('Please input a positive integer: ')) 
+def factorial(input_number):
+    factorial = 1
+    while input_number > 0:
+        factorial = factorial * input_number
+        input_number = input_number - 1
+    return factorial
 
-def factorial(n):
-    x = n-1
-    while x > 0:
-     n = n*x
-     x -= 1 
-    return n
+def triangular_number(input_number):
+    triangular_number = 1
+    number = input_number
+    while number > 1:
+        triangular_number = triangular_number + number
+        number =  number - 1
+    return triangular_number
 
-def triangular_number(n):
-    x = n-1
-    while x > 0:
-     n = n+x
-     x -= 1 
-    return n
 
-def new_triangular_number(n):
- if n % 2 == 0: 
-  x = n-2
-  while x > 0:
-   n = n+x
-   x -= 2
-  return n 
- else: 
-  x = n-2
-  while x > 0:
-   n = n+x
-   x -= 2
-  return n 
+def new_triangular_number(input_number):
+    new_triangular_number = 0
+    number = input_number
+    while number > 0: 
+           new_triangular_number = new_triangular_number + number
+           number =  number - 2
+    return new_triangular_number
 
-n = int(input('Enter an integral: '))
-print(str(n) + '! is ' + str(factorial(n)))
-print('The triangular number of ' + str(n) + ' is ' + str(triangular_number(n)))
-print('The "New" triangular number of ' + str(n) + ' is ' + str(new_triangular_number(n)))
+def bonus_triangular_number(input_number):
+    if input_number % 2 == 0:
+        return int((input_number/2)*(input_number/2 + 1))
+    else:
+        return int((input_number/2 + 1)*(input_number/2 + 1))
+    
+    
+
+print(f' {input_number}! is {factorial(input_number)}')
+print(f' Triangular number: {triangular_number(input_number)}')
+print(f' "New" triangular number: {new_triangular_number(input_number)}')
+print(bonus_triangular_number(input_number))
+
+
+    
+
+
+
+
+
+
+
+
+    
 

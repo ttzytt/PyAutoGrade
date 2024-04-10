@@ -39,7 +39,7 @@ def average_TEST():
     TEST(approx_equal(average([1.0, 3.0, 5.0]), 3))
     TEST(approx_equal(average([1, 2, 4]), 2.333333))
     TEST(approx_equal(average([-2]), -2))
-    TEST(average([]) == "Empty list")
+    TEST(average([]) == None)
     print('End average_TEST')
     print()
 
@@ -53,33 +53,39 @@ def largest_element_TEST():
     
     
     TEST(largest_element([-10, -3, -5, -9]) == -3)
-    TEST(largest_element([-10]) == -10) 
-    TEST(largest_element([]) == "Empty list")
-    print('End largest_element_TEST') 
+    TEST(largest_element([-10]) == -10)
+    TEST(largest_element([]) == None)
+    print('End largest_element_TEST')
     print()
 
 
 def all_equal_TEST():
     print('Start all_equal_TEST')
-    TEST(all_equal([2, 2, 2, 2, 2]) == True)
-    TEST(all_equal([-1, -1, -1, -1]) == True)
+    TEST(all_equal([1,1]) == True)
+    TEST(all_equal([1,0]) == False)
+    TEST(all_equal([-1,1]) == False)
+    TEST(all_equal([197432198743213423943493249298747943987432879874,
+                    197432198743213423943493249298747943987432879874]) == True)
+    TEST(all_equal([197432198743213423943493249298747943987432879874,
+                    197432198743213423943493249298747943987432879873]) == False)
+    TEST(all_equal([3.1415,3.1415]) == True)
+    TEST(all_equal([3.1415,3.1414]) == False)
+    TEST(all_equal([1,1,1,1,1]) == True)
+    TEST(all_equal([1,1,1,1,0]) == False)
+    TEST(all_equal(['apple', 'apple', 'apple']) == True)
+    TEST(all_equal(['apple', 'banana', 'carrot']) == False)
+    TEST(all_equal(['1',1,1,1,1]) == False)
     
-    TEST(all_equal([1, 2, 2, 2, 2]) == False)
     
-    TEST(all_equal([2, 2, 2, 2, 1]) == False)
     
-    TEST(all_equal([2, 1, 3, 6, 16, 9, 39]) == False)
-    
-    TEST(all_equal([1]) == True)
     
     TEST(all_equal([1, True]) == False)
-    
-    TEST(all_equal(['hi', 'hi', 'hi', 'hi']) == True)
-    TEST(all_equal(['hi', 'bye', 'hi', 'hi']) == False)
-    TEST(all_equal([]) == "Empty list")
+    TEST(all_equal([0]) == True)
+    TEST(all_equal([]) == None)
     print('End all_equal_TEST')
     print()
 
+    
 
 
 

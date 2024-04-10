@@ -1,15 +1,18 @@
 
 
 
-user_input = int(input('Choose a number '))
-counter = 1
-factorial = 1
-flag = False
-while flag == False:
-    factorial = factorial * counter
-    
-    if counter == user_input:
-        flag = True
-    counter = counter + 1   
 
-print('Your n! number is ' + str(factorial))
+
+n = int(input("Give me a positive ingeter! "))
+factorial = 1
+i = n
+
+
+
+while i > 0:
+    factorial *= i
+    i -= 1
+
+
+
+print(f"The factorial of {n} is {factorial}.")

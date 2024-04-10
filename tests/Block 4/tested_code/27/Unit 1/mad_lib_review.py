@@ -1,31 +1,16 @@
 
 
+print('Mad Lib! Created by Frank Wang.')
+noun_1 = input('noun 1(Capital letter):')
+noun_2 = input('noun 2:')
+noun_3 = input('noun 3(plural):')
+noun_4 = input('noun 4:')
+noun_5 = input('noun 5(Capital letter):') 
+verb = input('verb:')
+print(' ')
+print('    There used to be a huge building called ' + noun_1 + '(noun 1), with a large ' + noun_2 + '(noun 2) on its top. Every day, ' + noun_3 + '(noun 3) go on to the top of the building and watch the scenery of ' + noun_4 + '(noun 4) city. The building is used as the headquarters for ' + noun_5 + '(noun 5) Corportation, which ' + verb + '(verb) ' + noun_2 + '(noun 2) ' + 'and makes the greatest profit in the world ever. The ' + noun_3 + '(noun 3) feel that this building is always the best building ever in the ' + noun_4 + '(noun 4) city!' )
 
-none = input('give me a noun:')
-aone = input('give me an animal:')
-ntwo = input('give me a second noun:')
-nthree = input('give me a third noun:')
-pone = input ('give me a place:')
-nfour = input ('give me a fourth noun:')
-
-madlib = ('Once upon a time, there was a '+ none + ' class. It’s mainly about teaching ' + aone + ' to use ' + ntwo + ' and '+nthree+ '. Student’s would have the class on '+pone+ ', it’s a room with bunch of ' + nfour)
+ 
 
 
-print(madlib)
 
-ask = input ('do you want to have a another one? Choose Yes or No :')
-if (ask == 'Yes'):
-
-    onen = input('give me a name:')
-    fiven = input('give me a noun:')
-    onev = input('give me a verb:')
-    sixn = input('give me a noun:')
-    onea = input('give me a adj:')
-    twoa = input('give me an animal:')
-
-    madlibtwo = ('The was a guy named '+ onen +', he has got his '+fiven+' stolen because he forget to '+onev+ ' when he put it in the shared '+sixn+'. He is so '+onea+' about it that he told '+twoa+ ' about it.')
-    print(madlibtwo)
-
-input('rate this from 1-5: ')
-
-    

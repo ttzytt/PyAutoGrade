@@ -1,31 +1,42 @@
 
 
 
-
-
-
 import random
 
-answer = input('Enter a integer between 1 to 10 ')
-
-computer_choice = random.randint(1,10)
+random.seed()
 
 
+auto = random.randint(1,10)
 
-while int(answer) != int(computer_choice):
-     
-     
-     if int(answer) < int(computer_choice):
-         print('Input a bigger integer')
-         
-     
-     
-     elif int(answer) > int(computer_choice):
-         print('Input a smaller integer')
+user = int(input('Randomly input an integral between 1 and 10: '))
 
-     answer = input('Enter a integer between 1 to 10 ')
+if user <= 10 and user >= 1:
+ while user < auto or user > auto:
+ 
+  if user < auto:
+   print('Your answer is too low, try again!')
+  elif user > auto:
+   print('Your answer is too high, try again!')
+  print()
+  user = int(input('Randomly input an integral between 1 and 10: '))
+ if user == auto:
+  print('You are right, congrats!')
+  
+else:
+ print('You should input numbers between 1 and 10 ONLY')
+ 
+ print()
+ print('Try again, guess a number!')
+ user = int(input('Randomly input an integral between 1 and 10: '))
 
 
 
-print('Your guess is right, nice job!')
-     
+
+
+
+
+
+
+
+
+ 

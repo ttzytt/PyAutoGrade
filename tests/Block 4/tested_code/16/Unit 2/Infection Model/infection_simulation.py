@@ -1,37 +1,31 @@
 
 
-
-
-from infection_functions import *
-
+from infection_functions import*
 
 
 
 
 
-board = [ [' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' '],
-          [' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          ['x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' '],
-          [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          [' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x']]
-
-heal_probability = 0.9
-infection_probability = 0.5
 
 
 
-rounds = int(input('How many rounds would you like to run? '))
-for i in range(rounds):
-    mark_numbers(board)
-    heal_infected(board, heal_probability)
-    infect(board, infection_probability)
-
-draw_board(board)
 
 
+
+
+infection_probability = 15
+healing_probability = 20
+board = create_starting_board(20)
+print('---Initial Start---')
+print_board(board)
+times = 50
+
+
+for i in range(times):
+    print()
+    print('-------Day ' + str(i + 1) + '-------')
+    infection_board = create_board_of_infections(board)
+    infect_the_healthy(infection_probability, board, infection_board)
+    heal_the_infected(healing_probability, board, infection_board)
+    print_board(board)
 

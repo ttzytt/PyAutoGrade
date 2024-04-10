@@ -4,32 +4,24 @@
 import random
 random.seed()
 
-
-def tries_until_all_dice_values_are_achieved():
-    times_rolled = 0
-    dice_values = []
-    
+def all_dice_achived():
+    rolled = 0
+    values = []
     while True:
-        random_outcome = random.randint(1,6)
-        times_rolled += 1
-        
-        if random_outcome not in dice_values:
-            dice_values.append(random_outcome)
-        
-        if len(dice_values) is 6:   
+        outcome = random.randint(1,6)
+        rolled += 1
+        if outcome not in values:
+            values.append(outcome)
+        if len(values) is 6:
             break
-    return times_rolled
+    return rolled
 
-
-def average_rolls_until_all_values(num_trials):
+def average_of_all_of_trials(trials):
     total_sum = 0
-    for i in range(num_trials):
-        total_sum += tries_until_all_dice_values_are_achieved()
+    for i in range(trials):
+        total_sum += all_dice_achived()
 
-    return total_sum/num_trials
+    return total_sum/trials
 
-
-num_trials = int(input('How many trials would you like to run?'))
-
-print('The average amount of rolls until all dice values are achieved is '
-      + str(average_rolls_until_all_values(num_trials)))
+trials = int(input('how many trials are there? '))
+print('the average is ' + str(average_of_all_of_trials(trials)))

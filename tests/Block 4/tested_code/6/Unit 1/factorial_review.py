@@ -4,21 +4,21 @@
 
 
 
-n = int(input("Give me a positive ingeter! "))
 
-result = 1
-
-i = n
+user_number = int(input('Write a number '))
 
 
 
+factorial = user_number - 1
+count = user_number - 1
 
-while i > 0:
+
+while count > 0:
     
-    result *= i
     
-    i -= 1
+    count = count - 1
 
-
-print(f"The factorial of {n} is {result}.")
-
+    
+    user_number = user_number * factorial
+    factorial = factorial - 1
+print(user_number)

@@ -1,32 +1,40 @@
 
-def factorial_number(n):
-    result = 1
-    i = 1
+
+
+
+n = int(input("Choose an positive integer: ")) 
+i = 1 
+factorial = 1
+while i <= n:
+    factorial = factorial * i
+    i = i + 1
+print(f"The factorial of {n} is {factorial}")
+
+
+i = 1
+triangular = 0
+while i <= n:
+    triangular = triangular + i
+    i = i + 1
+
+print(f"The traingular number of {n} is {triangular}.") 
+
+
+if (n % 2) == 0:
+    i = 0
+    new_triangular = 0
     while i <= n:
-        result *= i
-        i += 1
-    return result
+        new_triangular = new_triangular + i
+        i = i + 2
+else:
+    i = 1
+    new_triangular = 0
+    while i <= n:
+        new_triangular = new_triangular + i
+        i = i + 2
 
 
-def triangular_number(n):
-    return n * (n + 1) // 2
+print(f"The new traingular number of {n} is {new_triangular}.") 
 
 
-def new_triangular_number(n):
-    if n % 2 == 0:
-        return n * (n // 2)
-    else:
-        return ((n + 1) // 2) ** 2
 
-
-user_input = int(input("Enter an integer: "))
-
-
-factorial_result = factorial_number(user_input)
-triangular_result = triangular_number(user_input)
-new_triangular_result = new_triangular_number(user_input)
-
-
-print(f"{user_input}! is {factorial_result}")
-print(f"Triangular number: {triangular_result}")
-print(f'"New" triangular number: {new_triangular_result}')

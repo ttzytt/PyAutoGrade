@@ -2,14 +2,19 @@
 
 
 
-user_input = int(input('Type in a number: '))
-user_input_factorial = 1
-countdown = 1
+
+user_input = int(input('Type in a Number: '))
+factor = 1
+result = 1
 
 
-while countdown <= user_input:
-    user_input_factorial = user_input_factorial * countdown
-    countdown = countdown +1
+while factor <= user_input:
+    result = result * factor
+    factor = factor + 1
+    
+
+print('The factorial of ' + str(user_input) + ' is ' + str(result) + '.')
 
 
-print('The value of n! equals to ' + str(user_input_factorial) +'.')
+
+

@@ -5,23 +5,17 @@ import random
 
 random.seed()
 
-print("Hello, lets play a game of rock and paper.")
 
-player = input("What do you choose? (all lowercase) ")
-
-
-computer = random.choice(['rock', 'paper'])
+choice = str(input("Enter 'rock' or 'paper': "))
 
 
-print("I choose " + computer + ".")
+choice2 = random.choice(['rock', 'paper'])
+print("I choose " + choice2)
 
-if str(computer) == str(player):
-    print("Looks like we tied, want to play again?")
 
-elif str(computer) == ('rock') or str(player) == ('paper'):
-    print("Looks like I lost, Good Game!")
-
+if choice == 'rock' and choice2 == 'paper':
+    print('I win.')
+elif choice == 'paper' and choice2 == 'rock':
+    print('You win.')
 else:
-    print("I win gg ez.")
-
-
+    print('We tie.')

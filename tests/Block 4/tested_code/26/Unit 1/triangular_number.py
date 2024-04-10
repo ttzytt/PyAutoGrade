@@ -3,16 +3,19 @@
 
 
 
-number = int(input('Type a number: '))
 
-count = 1 
-triangular_number = 0 
+integer = input(' Tell me a random integer ')
+integer = int(integer)
+number = 1
+triangle_number = 0
 
 
-while count <= number:
- triangular_number = triangular_number + count
- count = count + 1
- 
+while number <= integer:
+    triangle_number = triangle_number + number
+    number = number + 1
 
-print()
-print('The triangular number of '+ str(number) +' is '+ str(triangular_number) + '.')
+
+
+
+
+print(' The triangular number is ' + str(triangle_number))

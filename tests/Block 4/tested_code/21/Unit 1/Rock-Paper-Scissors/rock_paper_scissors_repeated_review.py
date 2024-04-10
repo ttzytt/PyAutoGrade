@@ -2,38 +2,45 @@
 
 
 
-import random
 
+import random
 random.seed()
 
 
-print("This is rock paper scissors, type 'quit' to stop playing.")
+response = 'a'
 
 
-user = input("Choose 'rock', 'paper', 'scissors' or 'quit': ")
-while user != 'quit':
-    computer = random.choice(['rock', 'paper', 'scissors'])
-    print("I choose", computer)
+while response != 'quit':
+    print()
+    human = input('Enter paper, scissors or rock: ')
+    computer = random.choice(['paper', 'rock', 'scissors'])
 
-    if user == computer:
+    
+    print()
+
+    
+    print('I choose ' + computer + '.')
+    
+    
+    if human == computer:  
         print('We tie.')
-
-    elif (user == 'paper' and computer == 'rock') or (user == 'scissors' and computer == 'paper') or (user == 'rock' and computer == 'scissors'):
-        print('You won.')
-
-    else:
-        print('I win.')
-
-    user = input("Choose 'rock', 'paper', 'scissors' or 'quit': ")
-
-
-print('Unfortunate you must go...')
-print('Hope you come back later!')
-
-      
+    elif human == 'paper': 
+        if computer == 'rock':
+            print('You win.')
+        else:
+            print('I win.')
+    elif human == 'scissors': 
+        if computer == 'rock':
+            print('I win.')
+        else:
+            print('You win.')
+    else: 
+        if computer == 'paper':
+            print('I win.')
+        else:
+            print('You win.')
 
 
     
-
-        
-    
+    print()
+    response = input('Type quit to stop the game: ')

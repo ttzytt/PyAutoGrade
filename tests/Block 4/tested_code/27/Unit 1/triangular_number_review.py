@@ -3,28 +3,14 @@
 
 
 
+n = int(input('Type in a number: '))
+n_triangular = 0
+countdown = 1
 
-
-
-
-
-
-number_n = int(input("Input your number n: "))
-
-
-
-
-
-
-number_n_minus_1 = number_n - 1
-
-
-while number_n_minus_1 > 0:
-    number_n = number_n + number_n_minus_1
-    number_n_minus_1 = number_n_minus_1 - 1
-
-
-
-print("Your triangular number is " + str(number_n))
+while countdown <= n:
+    n_triangular = n_triangular + countdown
+    countdown = countdown + 1
+    
+print('The value of the ' + str(n) + 'th triangular number is ' + str(n_triangular) + '.')
 
 

@@ -2,24 +2,19 @@
 
 
 
+have_jacket = ''
 
-temperature = int(input("You are a fish. What's the temperature today (in °F)? "))
+temperature = int(input('What is the temperature today in °F? '))
 
+rain = input('Is it raining? ').lower()
+if (rain == 'yes') or (temperature > 32 and temperature < 50):
+    have_jacket = input('Do you have a jacket? ').lower()
 
+homework_done = input('Have you finished your homework yet? (yes/no) ').lower()
+alive = input('Are you alive right now? (yes/no) ').lower()
 
-if  temperature < 32: 
-    print("You will be freezed!")
-elif temperature >= 212:
-    print("You are steamed!")
+if (rain == 'yes' and have_jacket == 'no') or temperature < 50 and have_jacket == 'no' or (temperature > 95 or temperature < 35)  or (alive == 'no' or homework_done == 'no'):
+    print('You should not play outside today. ')
+
 else:
-    rain = input('Is it raining? ')
-    if rain == 'Yes' and temperature >= 50: 
-        print('You should play outside today.')
-    elif rain == 'No':
-        print("You have no water to breath! you will be dead if you play!")
-        tank = input("Do you have a water tank? ")
-        if tank == 'Yes': 
-            print('You should play outside today.')
-        elif tank == 'No':
-            print("You are dead now！ ")
-
+    print('You should play outside today. ')

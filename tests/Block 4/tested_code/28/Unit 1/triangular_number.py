@@ -3,20 +3,27 @@
 
 
 
-input_number = int(input('Give me a number: '))
+
+num = int(input("Enter a positive integer: "))
 
 
-triangular_number = 0
+count = 1
 
-count = 0
 
-while count < input_number:
+
+final_sum = 0
+
+
+
+while count <= num:
+    final_sum = final_sum + count
     count = count + 1
-    
-    
-    
-    triangular_number = triangular_number + count
 
 
-print('Triangular number #' + str(input_number) + ' is ' +
-      str(triangular_number) + '.')
+
+
+
+
+
+    
+print("The " + str(num) + "th triangular number is " + str(final_sum))

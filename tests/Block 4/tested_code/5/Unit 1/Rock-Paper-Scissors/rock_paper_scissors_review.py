@@ -1,41 +1,24 @@
 
 
+
+
+
 import random
-import time
+
 random.seed()
 
 
-print("Hello, lets play a game of rock paper scissors.")
-
-time.sleep(1)
-
-player = input("Choose one: Rock or Paper? (all lowercase)")
-
-computer = random.choice(['rock', 'paper', 'scissors'])
-      
-print("I choose " + computer + ".")
+choice = str(input("Enter 'rock', 'paper' or 'scissor': "))
 
 
-if str(computer) == str(player):
-    print("Looks like we tied, want to play again?")
-
-if str(computer) == ('rock'):
-    if str(player) == ('paper'):
-        print("Looks like I lost, Good Game!")
-
-    elif str(player) == ('scissors'):
-        print("I win gg ez.")
-
-if str(computer) == ('paper'):
-    if str(player) == ('rock'):
-        print("Looks like I lost, Good Game!")
-    elif str(player) == ('scissors'):
-        print("I win gg ez.")
-
-if str(computer) == ('scissors'):
-    if str(player) == ('rock'):
-       print("Looks like I lost, Good Game!")
-    elif str(player) == ('paper'):
-        print("I win gg ez.")
+choice2 = random.choice(['rock', 'paper', 'scissor'])
+print("I choose " + choice2)
 
 
+if (choice == 'rock' and choice2 == 'paper') or (choice == 'paper' and choice2 == 'scissor') or (choice == 'scissor' and choice2 == 'rock'):
+    print('I win.')
+elif (choice == 'paper' and choice2 == 'rock') or (choice == 'scissor' and choice2 == 'papper') or (choice == 'rock' and choice2 == 'scissor'):
+    print('You win.')
+    
+else:
+    print('We tie.')

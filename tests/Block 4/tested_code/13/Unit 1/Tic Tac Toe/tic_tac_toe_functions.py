@@ -5,15 +5,28 @@
 
 
 
-def draw_row(row, row_number):
-    print(str(row_number) + ' │ '
-          + row[0] + ' │ '
-          + row[1] + ' │ '
-          + row[2] + ' │ ')
 
+def all_equal(my_list):
+    if len(my_list) == 0:
+        return "Empty list"
+
+
+    comparison_value = my_list[0] 
+                                  
+    for i in range(len(my_list)):
+        if my_list[i] is not comparison_value: 
+                                               
+            return False
+    return True 
 
 
 def draw_board(board):
+    def draw_row(row, row_number):
+        print(str(row_number) + ' │ '
+              + row[0] + ' │ '
+              + row[1] + ' │ '
+              + row[2] + ' │ ')
+    
     print('  ┌───┬───┬───┐ ')
     draw_row(board[0], 1)
     print('  ├───┼───┼───┤ ')
@@ -27,22 +40,31 @@ def draw_board(board):
 
 
 def find_winner(board):
-    for row in board:
-        if row[0] == row[1] == row[2] and row[0] != ' ':
-            return row[0]
+    diagonal_1 = []
+    diagonal_2 = []
+    for i in range(len(board)):
+        
+        testing_sequence = [] 
+        testing_sequence = board[i] 
+        if all_equal(testing_sequence) and board[i][0] != ' ':
+            return testing_sequence[0]
 
-    for col in range(3):
-        if board[0][col] == board[1][col] == board[2][col] and board[0][col] != ' ':
-            return board[0][col]
+        
+        testing_sequence = [] 
+        for j in range(len(board[i])):
+            testing_sequence.append(board[j][i]) 
+        if all_equal(testing_sequence) and board[j][0] != ' ':
+            return testing_sequence[0]
 
-    if board[0][0] == board[1][1] == board[2][2] and board[0][0] != ' ':
-        return board[0][0]
-
-    if board[0][2] == board[1][1] == board[2][0] and board[0][2] != ' ':
-        return board[0][2]
-
+        
+        diagonal_1.append(board[i][i])
+        diagonal_2.append(board[2-i][i])
+    if all_equal(diagonal_1) and diagonal_1[0] != ' ':
+        return diagonal_1[0]
+    if all_equal(diagonal_2) and diagonal_2[0] != ' ':
+        return diagonal_2[0]
+    
     return None
-
 
 
 
@@ -53,21 +75,24 @@ def get_move(player):
 
 
 def make_move(player, move, board):
-    if len(move) != 2:
-        return False
+    
+    if len(move) != 2 or not (('1' <= move[0] <= '3') and \
+                              ('A' <= move[1] <= 'C')):
 
-    if move[0] not in '123' or move[1] not in 'ABC':
         return False
-
     
     row = int(move[0]) - 1
+    
+    
+    
     column = ord(move[1]) - ord('A')
 
-    if board[row][column] == ' ':
-        board[row][column] = player
-        return True
-    else:
+    
+    if board[row][column] != ' ': 
         return False
+    board[row][column] = player
+    return True
+
 
 
 
@@ -75,13 +100,6 @@ def make_move(player, move, board):
 def next_player(player):
     if player == 'x':
         return 'o'
-    else:
+    else:  
         return 'x'
 
-
-def is_board_full(board):
-    for row in range(len(board)):
-        for col in range(len(board[row])):
-            if board[row][col] == ' ':
-                return False  
-    return True

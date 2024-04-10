@@ -1,18 +1,31 @@
 
 
 
+
+
+
 import random
-random.seed()
+
+answer = input('Enter a integer between 1 to 10 ')
+
+computer_choice = random.randint(1,10)
 
 
-target = random.randint(1, 10)
-guess = int(input("Guess a number from 1 - 10: "))
+
+while int(answer) != int(computer_choice):
+     
+     
+     if int(answer) < int(computer_choice):
+         print('Input a bigger integer')
+         
+     
+     
+     elif int(answer) > int(computer_choice):
+         print('Input a smaller integer')
+
+     answer = input('Enter a integer between 1 to 10 ')
 
 
-while guess != target: 
-    if guess < target:
-        guess = int(input("Too low. Guess Again: "))
-    elif guess > target:
-        guess = int(input("Too high. Guess Again: "))
 
-print("Correct!")
+print('Your guess is right, nice job!')
+     

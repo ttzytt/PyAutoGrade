@@ -1,63 +1,52 @@
 
 
 
+
+
 import random
+
+
+player_input = input('Enter rock, paper, scissors, or quit: ')
 random.seed()
 
 
-user_quit = "continue"
-
-while user_quit == "continue":
+while player_input != 'quit':
+    
+    
+    bot_choice = random.choice(['rock', 'paper', 'scissors'])
+    print('I chose ' + bot_choice)
 
     
-    user_choice = input("Enter 'rock' or 'paper' or 'scissors': ") 
-
     
-    comp_choice = random.choice(['rock', 'paper', 'scissors']) 
-    print('I choose ' + comp_choice + '.') 
+    if player_input == 'rock':
+        if bot_choice == 'rock':
+            print('We tied.')
+        elif bot_choice == 'paper':
+            print('I won!')
+        elif bot_choice == 'scissors':
+            print('You won!')
 
+    elif player_input == 'paper':
+        if bot_choice == 'paper':
+            print('We tied.')
+        elif bot_choice == 'scissors':
+            print('I won!')
+        elif bot_choice == 'rock':
+            print('You won!')
+
+    elif player_input == 'scissors':
+        if bot_choice == 'scissors':
+            print('We tied.')
+        elif bot_choice == 'rock':
+            print('I won!')
+        elif bot_choice == 'paper':
+            print('You won!')
+            
     
-    if user_choice == 'rock':
-        if comp_choice == 'rock':
-            print('We tie.')
-        elif comp_choice == 'paper':
-            print('I win.')
-        else:
-            
-            print('You win.') 
-
-    elif user_choice == 'paper':
-        if comp_choice == 'rock':
-             print('You win.')
-        elif comp_choice == 'paper':
-            print('We tie.')
-        else:
-            
-            print('I win.')
-        
-
-    elif user_choice == 'scissors':
-        if comp_choice == 'rock':
-            print('I win.')
-        elif comp_choice == 'paper':
-            print('You win.')
-        else:
-            
-            print('We tie.')
-            
     else:
-        
-        print('I already chose, you need to choose from rock, paper, and scissors too!')
+        print('Invalid choice: type rock, paper, or scissors!')
 
     
-    user_quit = input("Do you want to keep playing? Enter 'continue' or 'quit': ")
-    if user_quit == 'quit':
-        print('Bye!')
-    elif user_quit != 'continue':
-        print('You typed something other than "continue" or "quit"!'
-              'I assume that you want to quit!')
-              
-    print() 
+    player_input = input('Enter rock, paper, scissors, or quit ')
 
 
-        

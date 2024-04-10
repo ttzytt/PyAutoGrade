@@ -1,24 +1,18 @@
 
 
 
+n = int(input('Please enter a number: '))
 
-integer = input(' Tell me a random integer ')
+count = 0
 
+factorial = 1
 
-
-
-
-
-integer = int(float(integer))
-number = 1
-result = 1
-
-
-
-while number <= integer:
-    result = result * number
-    number = number + 1
-
-
-print(result)
+while count < n:
     
+    count = count + 1
+    factorial = factorial * count
+    
+print("n! would be: " + str(factorial))
+
+
+

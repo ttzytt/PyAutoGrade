@@ -1,46 +1,46 @@
-
-
-
 import random
-
-random.seed()
-
-userChoice = input('Enter \'rock\' \'paper\' or \'scissors\': ')
-
-cheatOrNotCheat = random.randint(1,10)
+import time
 
 
 
-if(cheatOrNotCheat == 1):
-    if (userChoice == 'rock'):                                 
-        rps_choice = 'paper'
-        print('I choose ' + rps_choice + ' I win!')
-    elif (userChoice == 'paper'):                              
-        rps_choice = 'scissors'
-        print('I choose ' + rps_choice + ' I win!')
-    elif (userChoice == 'scissors'):                           
-        rps_choice = 'rock'
-        print('I choose ' + rps_choice + ' I win!')
-    else:
-        print()
+print("Hello, lets play a game of rock paper scissors.")
 
-else:
-    num = random.randint(1,3)                                       
-    if (num == 1):                                                  
-        computer_rps_choice = 'rock'
-    elif (num == 2):                                                
-        computer_rps_choice = 'paper'
-    elif (num == 3):
-        computer_rps_choice = 'scissors'
+time.sleep(1)
 
-    if (userChoice == 'rock' or userChoice == 'paper' or userChoice == 'scissors'):  
-        if(userChoice == computer_rps_choice):              
-            print('I played ' + computer_rps_choice + '! Draw!')
-        elif((computer_rps_choice =='rock' and userChoice == 'scissors') or (computer_rps_choice =='scissors' and userChoice == 'paper') or (computer_rps_choice =='paper' and userChoice == 'rock')): 
-            print('I played ' + computer_rps_choice + '! I win!') 
-        else:                                               
-            print('I played ' + computer_rps_choice + '! You win! Good game!')
+player = input("Choose one: Rock or Paper? (all lowercase)")
 
-    else:
-        print()
+rock_random = random.choices(['rock', 'paper', 'scissors'], [3,4,3])[0]
+paper_random = random.choices(['rock', 'paper', 'scissors'], [3,3,4])[0]
+scissors_random = random.choices(['rock', 'paper', 'scissors'], [4,3,3])[0]
+
+print("I choose " + rock_random + ".")
+if player == str("rock"):
+    print("I choose " + rock_random + ".")
+    if str(rock_random) == ('rock'):
+        print('Loooks like we tied. Good Game.')
+    elif str(rock_random) == ('scissors'):
+        print("Looks like I lost, Good Game!")
+    else str(rock_random) == ('paper'):
+        print("I win gg ez.")
+
+elif player == str("paper"):
+    print("I choose " + rock_random + ".")
+    if str(paper_random) == ('paper'):
+        print('Loooks like we tied. Good Game.')
+    elif str(paper_random) == ('rock'):
+        print("Looks like I lost, Good Game!")
+    else str(paper_random) == ('scissors'):
+        print("I win gg ez.")
+
+elif player == str("scissors"):
+    print("I choose " + rock_random + ".")
+    if str(scissors_random) == ('scissors'):
+        print('Loooks like we tied. Good Game.')
+    elif str(scissors_random) == ('paper'):
+        print("Looks like I lost, Good Game!")
+    else str(scissors_random) == ('rock'):
+        print("I win gg ez.")
+
+
+
 

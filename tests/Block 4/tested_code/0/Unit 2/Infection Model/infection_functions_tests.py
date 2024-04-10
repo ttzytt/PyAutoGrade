@@ -3,7 +3,14 @@
 
 
 
-from infection_functions import*
+from infection_functions import *
+
+
+
+
+
+
+
 
 def TEST(description, expected_result, actual_result):
     print(description, end = ': ')
@@ -14,110 +21,75 @@ def TEST(description, expected_result, actual_result):
         print('   Expected result:', expected_result)
         print('   Actual result:', actual_result)
 
-        
-
-def make_board_TEST():
-    rows = 3
-    columns = 3
-    expected_result = [ ['·', '·', '·'],
-                        ['·', '·', '·'],
-                        ['·', '·', '·'] ]
-    TEST('make_board',expected_result, make_board(rows, columns))
-
-def make_players_TEST():
-    board = [ ['·', '·', '·'],
-              ['·', '·', '·'],
-              ['·', '·', '·'] ]
-    expected_result = [ ['·', '·', '·'],
-                        ['·', '·', '·'],
-                        ['·', '·', '·'] ]
-    TEST('Make player', expected_result, make_players(board))
 
 
-def num_infected_neighbors_TEST():
-
-    board = [ ['x', '·', '·'],
-              ['·', '·', '·'],
-              ['·', '·', '·'] ] 
-    TEST('num_infected_neighbors',1, num_infected_neighbors(board, 1, 0))
-
-    board = [ ['x', '·', '·'],
-              ['·', 'x', 'x'],
-              ['·', '·', '·'] ] 
-    TEST('num_infected_neighbors',2, num_infected_neighbors(board, 0, 1))
-
-    board = [ ['x', '·', '·'],
-              ['·', 'x', 'x'],
-              ['·', '·', '·'] ] 
-    TEST('num_infected_neighbors',1, num_infected_neighbors(board, 0, 2))
-
-    board = [ ['x', '·', '·','·','·'],
-              ['·', 'x', 'x','·','·'],
-              ['·', 'x', '·','x','·'],
-              ['·', 'x', 'x','·','·'],
-              ['·', '·', '·','·','·']] 
-    TEST('num_infected_neighbors',4, num_infected_neighbors(board, 2, 2))
-
-
-
-def heal_probability_TEST():
-    board = [ ['x', '·', '·'],
-              ['·', 'x', 'x'],
-              ['·', '·', '·'] ] 
-    expected_result = [ [0.2, 0, 0],
-                         [0, 0.2, 0.2],
-                         [0, 0, 0] ]
-    board = [ ['·', '·', '·'],
-              ['·', '·', '·'],
-              ['·', '·', '·'] ] 
-    expected_result = [ [0, 0, 0],
-                         [0, 0, 0],
-                         [0, 0, 0] ]
-
-
-    TEST('heal_probability',expected_result, heal_probability(board))
-
-    board = [ ['x', '·', '·','·','·'],
-              ['·', 'x', 'x','·','·'],
-              ['·', 'x', '·','x','·'],
-              ['·', 'x', 'x','·','·'],
-              ['·', '·', '·','·','·']] 
-    expected_result = [ [0.2, 0, 0,0,0],
-                        [0,0.2 , 0.2,0,0],
-                        [0, 0.2, 0,0.2,0],
-                        [0, 0.2, 0.2,0,0],
-                        [0,0, 0,0,0]] 
-
-    TEST('heal_probability',expected_result, heal_probability(board))
+def num_neighbors_different_TEST():
+    print('Start num_neighbors_different_TEST')
+    board = [[' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', ' ', ' '],
+            [' ', ' ', 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', 'x', 'x', ' ', ' ', ' ', ' ', ' '],
+            ['x', ' ', 'x', ' ', ' ', ' ', ' ', ' ', 'x', 'x'],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            ['x', 'x', 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', 'x', ' ', 'x', ' ', ' ', ' ', ' ', ' ', 'x'],
+            [' ', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ']]
     
-def infection_probability_TEST():
-    board = [ ['x', '·', '·'],
-              ['·', 'x', 'x'],
-              ['·', '·', '·'] ] 
-    expected_result =[ [0, 0.3, 0.15],
-                       [0.3, 0, 0],
-                       [0, 0.15, 0.15] ] 
+    TEST('In the Middle Infect', 3, num_neighbors_different(board, 3, 2))
+    TEST('In the Middle Heal', 2, num_neighbors_different(board, 3, 3))
+    TEST('In the Middle None', 0, num_neighbors_different(board, 7, 1))
+    TEST('On the Top Edge', 2, num_neighbors_different(board, 0, 6))
+    TEST('On the Bottom Edge', 2, num_neighbors_different(board, 9, 3))
+    TEST('On the Left Edge', 3, num_neighbors_different(board, 4, 0))
+    TEST('On the Right Edge', 2, num_neighbors_different(board, 4, 9))
+    TEST('Diagonal Not Count', 0, num_neighbors_different(board, 4, 5))
+    print('End num_neighbors_different_TEST')
+    print()
+
+
+def change_state_TEST():
+    print('Start change_state_TEST')
+    board = [[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' '],
+             [' ', ' ', ' ', 'x', 'x', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
     
-    TEST('infected_probability', expected_result, infection_probability(board))
-    board = [ ['x', '·', '·','·','·'],
-              ['·', 'x', 'x','·','·'],
-              ['·', 'x', '·','x','·'],
-              ['·', 'x', 'x','·','·'],
-              ['·', '·', '·','·','·']] 
-    expected_result = [ [0, 0.3,0.15,0,0],
-                        [0.3,0 , 0,0.3,0],
-                        [0.15, 0, 0.6,0,0.15],
-                        [0.15, 0, 0,0.3,0],
-                        [0,0.15, 0.15,0,0]]
-    TEST('infected_probability', expected_result, infection_probability(board))
-
-
-
-
-
+    changing_board = [[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
     
-make_players_TEST()
-make_board_TEST()
-num_infected_neighbors_TEST()
-infection_probability_TEST()    
-heal_probability_TEST()
+    expected_board = [[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' '],
+                      [' ', ' ', ' ', 'x', 'x', ' ', ' ', 'x', ' ', 'x'],
+                      [' ', ' ', 'x', ' ', ' ', 'x', ' ', ' ', 'x', ' '],
+                      [' ', ' ', ' ', 'x', 'x', ' ', ' ', ' ', ' ', ' '],
+                      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
+
+    TEST('Propagating Properly', None, change_state(board, changing_board, 1, 1))
+    
+    TEST('Board is Correct', expected_board, changing_board)
+
+
+
+
+
+num_neighbors_different_TEST()
+change_state_TEST()

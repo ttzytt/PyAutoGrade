@@ -1,57 +1,61 @@
 
 
 
+
+
 import random
+random.seed
 
 
-
-def find_winner(num_werewolves, num_villagers):
-
-    while num_werewolves > 0 and num_werewolves < num_villagers:
-        
-        num_villagers -= 1
-
-        if random.randint(1, num_werewolves + num_villagers) <= num_werewolves:
-            
-            num_werewolves -= 1
-            
-        else:
-            
-            num_villagers -= 1
-
-    if num_werewolves >= num_villagers:
-
-        winner = 'werewolves'
-
-    else:
-        
-        winner = 'villages'
-
-    return winner
-
-
-def odds_of_werewolves_winning(num_werewolves, num_villagers, num_of_trials):
-
-    werewolves_win = 0
-
-    for i in range(num_of_trials):
-        
-        if find_winner(num_werewolves, num_villagers) == 'werewolves':
-            
-            werewolves_win += 1
-
-    return werewolves_win / num_of_trials
+def find_winner(num_werewolves , num_villagers):
+	if num_werewolves > num_villagers:
+		return "werewolves"
+	day_night = -1
+	
+	
+	while ((num_werewolves != 0) and (num_werewolves != num_villagers)):
+		total = num_werewolves + num_villagers
+		day_night += 1
+		if day_night%2 == 0:
+                        
+			kill = random.randint(1, total)
+			if kill <= num_villagers:
+				num_villagers -= 1
+			else:
+				num_werewolves -= 1
+		elif day_night%2 == 1:
+			
+			num_villagers -= 1
+	
+	if num_werewolves == 0:
+		return "villagers"
+	
+	elif num_werewolves == num_villagers:
+		return "werewolves"
 
 
+def odds_of_werewolves_winning(num_werewolves , num_villagers):
+	village_win = 0
+	werewolves_win = 0
+	repeat = 0
+	while repeat < 10000: 
+		win = (find_winner(num_werewolves,num_villagers))
+		if win == "villagers":
+			village_win += 1
+		if win == "werewolves":
+			werewolves_win += 1
+			
+		repeat += 1
+		
+		total_win = werewolves_win + village_win
 
-num_werewolves = int(input('How many werewoles do you want to start with? '))
-num_villagers = int(input('How many villagers do you want to start with? '))
-num_of_trials = int(input('How many games do you want to simulate? '))
-odds = odds_of_werewolves_winning(num_werewolves, num_villagers, num_of_trials)
-print('The odds of werewolves winning is ' + str(odds) + '.')
+	return werewolves_win/total_win
+
+num_werewolves = int(input("How many werewolves: "))
+num_villagers = int(input("How many villagers: ")) 
 
 
-
+print(odds_of_werewolves_winning(num_werewolves, num_villagers))
 
 
 

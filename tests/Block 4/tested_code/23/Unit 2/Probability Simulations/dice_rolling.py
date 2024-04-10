@@ -1,50 +1,35 @@
 
 
 
-
-
-
-
-
 import random
 random.seed()
 
 
-
-def tries_until_all_six():
+def tries_until_all_dice_values_are_achieved():
+    times_rolled = 0
+    dice_values = []
     
-    tries_value = []
-    value = random.randint(1,6)
-    count = 0
-
-    
-    while len(tries_value) != 6:
-        if value not in tries_value:
-            tries_value.append(value)
-        value = random.randint(1,6)
-
+    while True:
+        random_outcome = random.randint(1,6)
+        times_rolled += 1
         
+        if random_outcome not in dice_values:
+            dice_values.append(random_outcome)
         
-        
-        count = count + 1
-
-    return count
-
+        if len(dice_values) is 6:   
+            break
+    return times_rolled
 
 
+def average_rolls_until_all_values(num_trials):
+    total_sum = 0
+    for i in range(num_trials):
+        total_sum += tries_until_all_dice_values_are_achieved()
 
-def average_until_all_six(num_trails):
-    sum_tries = 0
-
-    for _ in range(num_trials):
-        sum_tries = sum_tries + tries_until_all_six()
-
-    return (sum_tries / num_trails)
+    return total_sum/num_trials
 
 
-num_trials = int(input('How many trails do you want to have? '))
-print(average_until_all_six(num_trials))
+num_trials = int(input('How many trials would you like to run?'))
 
-
-    
-        
+print('The average amount of rolls until all dice values are achieved is '
+      + str(average_rolls_until_all_values(num_trials)))

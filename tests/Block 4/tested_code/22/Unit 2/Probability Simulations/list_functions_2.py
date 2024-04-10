@@ -2,23 +2,25 @@
 
 
 
-
-
-def largest_element(1st):
-    if not 1st:
+def largest_element(numbers):
+    
+    if numbers == []:
         return None
-    
 
-    sorted_list = sorted(1st)
-    
-
-    
+    numbers.sort()
+    return numbers[-1]
 
 
+def alternate_sum(numbers):
 
-def alternate_sum(1st):
-    if not 1st:
-        return None
-    
+    return sum(numbers[ : :2]) - sum(numbers[1: :2])
 
-    result = sum =(1st[
+
+def rotate_right(my_list):
+
+    return [my_list[-1]] + my_list[ :(len(my_list) - 1): ]
+
+
+def deal_3_hands(deck):
+
+    return [deck[ : :3], deck[1: :3], deck[2: :3]]

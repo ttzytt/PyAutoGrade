@@ -1,35 +1,33 @@
 
 
+temperature = int(input('What is the temperature today (in °F)?'))
 
-
-
-want = input("Do you want to play outside? ")
-
-
-if want == No:
-    
-    print("You shouldn't play outside.")
+robot = input('Are you a robot?')
+if robot == 'Yes':
+    print('Why do you need to know the weather?? Anyways...')
+elif robot == 'No':
+    print('Ok, cool. Solve this captcha.')
+    answer = input('Are you a robot? ANSWER TRUTHFULLY.')
+    if answer == 'No':
+        print('LIES!')
+    elif answer == 'Yes':
+        print('Thanks for owning up to it.')
+if temperature > 90 or temperature < 32:
+    print("You shouldn't play outside today.")
 else:
+    raining = input("Is it raining?")
+    if raining == 'Yes':
+        jacket = input('Do you have a jacket?')
+        if jacket == 'No':
+            print("You shouldn't play outside today.")
+            
+        elif jacket == 'Yes' and temperature > 50 and temperature < 32:
+            print("You shouldn't play outside today.")
+            
+        elif jacket == 'Yes' and temperature < 50 or temperature > 32:
+            print("You should play outside today.")
+
+    elif raining == 'No' and temperature < 95 and temperature > 50:
+        print('You should play outside today.')
+        
     
-    fahrenheit = float(input("What is the temperature today(in °F) ?"))
-
-    if fahrenheit > 95 or fahrenheit <32:
-        print("You shouldn't play outside today.")
-
-    elif fahrenheit>=32 and fahrenheit<=50:
-            jacket = input("Do you have a jacket? ")
-            if jacket == "Yes":
-                print("You should play outside today.")
-            if jacket == "No":
-                print("You shouldn't play outside today.")
-
-    elif fahrenheit>50 and fahrenheit <=95 :
-        rain= input("Is it raining? ")
-        if rain == "Yes":
-            jacket = input("Do you have a jacket? ")
-            if jacket == "No":
-                print("You shouldn't play outside today.")
-            if jacket == "Yes":
-                print("You should play outside today.")
-    else:
-        print("You should play outside today.")

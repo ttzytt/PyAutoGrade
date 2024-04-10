@@ -1,24 +1,31 @@
 
 
 
+none = input('give me a noun:')
+aone = input('give me an animal:')
+ntwo = input('give me a second noun:')
+nthree = input('give me a third noun:')
+pone = input ('give me a place:')
+nfour = input ('give me a fourth noun:')
+
+madlib = ('Once upon a time, there was a '+ none + ' class. It’s mainly about teaching ' + aone + ' to use ' + ntwo + ' and '+nthree+ '. Student’s would have the class on '+pone+ ', it’s a room with bunch of ' + nfour)
 
 
+print(madlib)
 
+ask = input ('do you want to have a another one? Choose Yes or No :')
+if (ask == 'Yes'):
 
-name_1 = input('name 1: ')
-name_2 = input('name 2: ')
-name_3 = input('name 3: ')
-food_1 = input('food 1 (plural): ')
-place_1 = input('place 1: ')
-verb_ing = input('verb with -ing: ')
+    onen = input('give me a name:')
+    fiven = input('give me a noun:')
+    onev = input('give me a verb:')
+    sixn = input('give me a noun:')
+    onea = input('give me a adj:')
+    twoa = input('give me an animal:')
 
-noun_3 = input('noun 3 (plural): ')
-noun_1 = input('noun 1 (plural): ')
-noun_2 = input('noun 2 (plural): ')
+    madlibtwo = ('The was a guy named '+ onen +', he has got his '+fiven+' stolen because he forget to '+onev+ ' when he put it in the shared '+sixn+'. He is so '+onea+' about it that he told '+twoa+ ' about it.')
+    print(madlibtwo)
 
+input('rate this from 1-5: ')
 
-
-print( name_1 + ' loves eating ' + food_1 + '. One day, ' + name_1 + ' decided to make his own '
-+ food_1 + '. ' + name_1 +' realized they needed ' + noun_2 + ' to make ' + food_1 + '. In the end, '
-+ name_1 + ' tried calling ' + name_2 + ', but they were ' + verb_ing + ' ' + noun_3 + '. ' + name_1
-+ ' gave up trying to make ' + food_1 + ', and went to the ' + place_1 + ' that sells ' + food_1 + ', called ' + name_3 + "'s " + place_1 + '.')
+    

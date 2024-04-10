@@ -3,17 +3,30 @@
 
 
 
-noun_1 = input("write a person: ")
-
-noun_2 = input("write a sport: ")
-place = input("write a place :  ")
-animal = input("write an animal: ")
-verb = input("write a verb: ")
-
-sentence = "Once upon a time, there was a guy called " + noun_1 + ". "+ noun_1 + " outgoing and loves playing " + noun_2 \
-           +". " + "Usually "+ noun_1+ " takes the pet, " + animal +" to go to the "\
-           + place +" and " + verb + "."
 
 
-print(sentence)
+
+
+Noun1 = input("Choose a noun!")  
+Noun2 = input("Pick a name, any name!")  
+Place1 = input("think of somewhere you'd like to go:D")
+Place2 =input("what about another place?")
+Animal = input("favorite animal?")
+Verb1 = input("think of a verb that end in 'ing'")
+Verb2 = input("and a similar one ends in 'ing'")
+Name = input("favorite character's name?")
+Adj = input("think of an adj?")
+Food = input("first food appears in ur mind?")
+Noun3 =input("choose another noun!")
+
+
+print("Studens at PRISMS school are " +  Adj  + " students who like " +  Verb1  +   Noun1  + ".")
+print("kids came from all over the world from " +  Place1  + " to " +  Place2  + ".")
+print("At leisure time, they play " +  Noun2  + " together.")
+print("Sometimes they will see " +  Animal  + " in the backyeard eating grass.")
+print("Bob is a " +  Noun3  + ".")
+print("He likes " +  Verb2  +".")
+print("His favorite food throughout the 4 years spent in PRISMS is cafeteria's " +  Food  + ".")
+
+
 

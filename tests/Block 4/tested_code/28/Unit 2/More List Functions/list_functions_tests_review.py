@@ -1,6 +1,11 @@
 
 
-from list_functions import *
+
+
+
+
+
+from list_functions import * 
 
 
 
@@ -9,107 +14,86 @@ from list_functions import *
 
 
 
-def TEST(has_passed):
-    if has_passed:
+def TEST(description, expected_result, actual_result):
+    print(description, end = ': ')
+    if actual_result == expected_result:
         print('pass')
     else:
         print('FAIL')
-
+        print('   Expected result:', expected_result)
+        print('   Actual result:', actual_result)
 
 
 
 
 def item_moved_to_end_TEST():
-    print("Start item_moved_to_end_TEST")
+    
+    
+    L = [1,2,3,4,5]
+    TEST('moving first element to end',[2,3,4,5,1], item_moved_to_end(L,0))
+    TEST('does list stay the same', [1,2,3,4,5], L)
+
+    
+    L = [1,2,3,4,5]
+    TEST('moving middle element to end',[1,2,4,5,3], item_moved_to_end(L,2))
+    TEST('does list stay the same', [1,2,3,4,5], L)
+
+    
+    L = [1,2,3,4,5]
+    TEST('moving last element to end',[1,2,3,4,5], item_moved_to_end(L,4))
+    TEST('does list stay the same', [1,2,3,4,5], L)
+
+    
+    L = ['a','b','c','d','e','f','g']
+    TEST('moving middle element to end with strings',['a','b','d','e','f','g','c'], item_moved_to_end(L,2))
+    TEST('does list stay the same', ['a','b','c','d','e','f','g'], L)
 
     
     
-    
-    
-    print("Move first item")
-    my_list = [1, 2, 3, 4, 5, 6, 7]
-    TEST(item_moved_to_end(my_list, 0) == [2, 3, 4, 5, 6, 7, 1])
-    TEST(my_list == [1, 2, 3, 4, 5, 6, 7])
-    print()
+    L = [1]
+    TEST('one-element lists',[1], item_moved_to_end(L,0))
+    TEST('does list stay the same', [1], L)
 
     
-    print("Move last item")
-    my_list = [1, 2, 3, 4, 5, 6, 7]
-    TEST(item_moved_to_end(my_list, 6) == [1, 2, 3, 4, 5, 6, 7])
-    TEST(my_list == [1, 2, 3, 4, 5, 6, 7])
-    print()
-
+    L = [1,'a',True]
+    TEST('mixed arrays',['a',True, 1], item_moved_to_end(L,0))
+    TEST('does list stay the same', [1,'a',True], L)
     
-    print("Move middle item")
-    my_list = [1, 2, 3, 4, 5, 6, 7]
-    TEST(item_moved_to_end(my_list, 3) == [1, 2, 3, 5, 6, 7, 4])
-    TEST(my_list == [1, 2, 3, 4, 5, 6, 7])
-    print()
-
-    
-    print("1 element list")
-    my_list = [1]
-    TEST(item_moved_to_end(my_list, 0) == [1])
-    TEST(my_list == [1])
-    print()
-
-    
-    print("2 element list")
-    my_list = [1, 2]
-    TEST(item_moved_to_end(my_list, 0) == [2, 1])
-    TEST(my_list == [1, 2])
-
-
-    print("End item_moved_to_end_TEST")
-    print()
-
-
     
 def move_item_to_end_TEST():
-    print("Start move_item_to_end_TEST")
+    
+    
+    L = [1,2,3,4,5]
+    TEST('function returns None:', None, move_item_to_end(L,0))
+    TEST('list changed correctly:', [2,3,4,5,1], L)
+
+    
+    L = [1,2,3,4,5]
+    TEST('function returns None:', None, move_item_to_end(L,2))
+    TEST('list changed correctly:', [1,2,4,5,3], L)
+
+    
+    L = [1,2,3,4,5]
+    TEST('function returns None:', None, move_item_to_end(L,4))
+    TEST('list changed correctly:', [1,2,3,4,5], L)
+
+    
+    L = ['a','b','c','d','e','f','g']
+    TEST('function returns None:', None, move_item_to_end(L,2))
+    TEST('list changed correctly:', ['a','b','d','e','f','g','c'], L)
 
     
     
-    
-    
-    print("Move first item")
-    my_list = [1, 2, 3, 4, 5, 6, 7]
-    TEST(move_item_to_end(my_list, 0) == None)
-    TEST(my_list == [2, 3, 4, 5, 6, 7, 1])
-    print()
+    L = [1]
+    TEST('function returns None:', None, move_item_to_end(L,0))
+    TEST('list changed correctly:', [1], L)
 
     
-    print("Move last item")
-    my_list = [1, 2, 3, 4, 5, 6, 7]
-    TEST(move_item_to_end(my_list, 6) == None)
-    TEST(my_list == [1, 2, 3, 4, 5, 6, 7])
-    print()
-
-    
-    print("Move middle item")
-    my_list = [1, 2, 3, 4, 5, 6, 7]
-    TEST(move_item_to_end(my_list, 3) == None)
-    TEST(my_list == [1, 2, 3, 5, 6, 7, 4])
-    print()
-
-    
-    print("1 element list")
-    my_list = [1]
-    TEST(move_item_to_end(my_list, 0) == None)
-    TEST(my_list == [1])
-    print()
-
-    
-    print("2 element list")
-    my_list = [1, 2]
-    TEST(move_item_to_end(my_list, 0) == None)
-    TEST(my_list == [2, 1])
-
-    print("End move_item_to_end_TEST")
-    print()
-
+    L = [1,'a',True]
+    TEST('function returns None:', None, move_item_to_end(L,0))
+    TEST('list changed correctly:', ['a',True, 1], L)
 
 item_moved_to_end_TEST()
-print()
-print()
 move_item_to_end_TEST()
+        
+    

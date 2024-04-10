@@ -1,32 +1,29 @@
 
-tempurature = int ('What is the tempurature today (in °F)? ')
 
 
-tempurature = int(tempurature)
+
+temperature = int(input("What is the temperature today (in °F)? "))
 
 
-if tempurature > 95 or tempurature < 50:
-    print('You shouldnt play outside today. ')
-elif tempurature <95 or tempurature >50:
-    print('You should play outside today. ')
+is_raining = input("Is it raining? ")
 
 
-if tempurature > 32 and tempurature < 50:
-    print('Do you have a jacket?')
+jacket_needed = False
 
 
-jacket = input('Do you have a jacket?')
-
-jacket = int(jacket)
-
-rain = input('Is it raining?')
-
-rain = int(rain)
+if (is_raining == "yes" and temperature < 50) or (temperature >= 32 and temperature <= 50):
+    
+    jacket_needed = True
 
 
-if rain == 'Yes' and jacket == 'Yes':
-    print('You shouldn play outside today. ')
-elif rain == 'Yes' and jacket == 'No':
-    print('You shouldnt play outside today. ')
+have_jacket = None
+
+
+if jacket_needed:
+    have_jacket = input("Do you have a jacket? ")
+
+
+if (temperature >= 60 and not jacket_needed) or (temperature >= 60 and jacket_needed and have_jacket == "yes"):
+    print("You should play outside today")
 else:
-    print('You should play outside today')
+    print("You shouldn't play outside today")

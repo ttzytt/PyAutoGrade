@@ -4,54 +4,50 @@
 
 
 
-import random
+
 from infection_functions import *
 
-rows = 10
-columns = 10
-rounds_of_simulation = 10 
 
-board = make_board(rows, columns)
-for _ in range((rows * columns) // rows): 
-    row = random.randint(0, rows - 1) 
-    column = random.randint(0, columns - 1)
-    board[row][column] = 'x'
+board = [[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
+changing_board = [[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
 
-for number_of_rounds in range(rounds_of_simulation):
-    number_of_round = number_of_rounds + 1
-    print('Round ' + str(number_of_round))
-    print('Initial board: ')
-    
-    for row in board:
-        for cell in row:
-            
-            
-            print(cell, end= ' ')
-        print()
-    print()
-    
-    heal_probabilities = heal_probability(board)
-    infect_probabilities = infection_probability(board)
-    new_board = make_board(rows, columns)
-    
-    for row in range(rows):
-        for column in range(columns):
-            if board[row][column] == 'x':
-                if random.random() < heal_probabilities[row][column]:
-                    new_board[row][column] = '·'
-                else:
-                    new_board[row][column] = 'x'
-            else:
-                if random.random() < infect_probabilities[row][column]:
-                    new_board[row][column] = 'x'
-                else:
-                    new_board[row][column] = '·'
-    board = new_board
 
+num_trials = int(input('How many rounds do you want to run?'))
+num_starting_infected = int(input('How many starting infected?'))
+set_infected(num_starting_infected, board)
+
+draw_board(board)
+
+
+for _ in range(num_trials):
     
-    print('New board')
-    for row in board:
-        for cell in row:
-            print(cell, end= ' ')
-        print()
-    print()
+    change_state(board, changing_board, .15, .31)
+    
+    
+    board, changing_board = changing_board, board
+    draw_board(board)
+    
+    
+
+
+draw_board(board)
+
+

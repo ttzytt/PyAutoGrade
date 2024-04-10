@@ -1,28 +1,29 @@
 
 
 
+
 import random
 
 random.seed()
 
-random_number = random.randint(1, 10)
-
-player_guess = int(input('Guess the number: '))
-
-while player_guess != random_number:
-    
-    
-    if player_guess < random_number:
-        player_guess = int(input('Too low! Guess again: '))
-
-    elif player_guess > random_number:
-        player_guess = int(input('Too high! Guess again: '))
+user_guess = int(input('Input a number: '))
+computer_number = random.randint(1,10) 
+count = 1
 
 
+while(user_guess != computer_number): 
+    if (user_guess > computer_number): 
+        print('That\'s too high!')
+    else: #If not too high, too low
+        print('That\'s too low :( ')
+        
+    if (12 > count > 10):
+        print()
 
+        
+    print()
+    user_guess = int(input('Input a number: ')) 
 
-if player_guess == random_number:
-    
-    print('Well done! You guessed it right, it was ' + str(random_number) + '.')
+    count += 1
 
-
+print()

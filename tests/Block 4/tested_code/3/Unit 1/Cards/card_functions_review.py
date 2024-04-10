@@ -4,35 +4,57 @@
 
 
 
-
-
-
 def deal_3_hands(deck):
 
-    
-    hands = [[], [], []]
-    
+    hands = [[], [], []] 
+
     for i in range(len(deck)):
-        number = i % 3
-        hands[number].append(deck[i])
+        
+        hands[i%3].append(deck[i]) 
+        i = i + 1 
     return hands
-
-
 
 
 def uno_who_played_what(cards_played):
-    
-    hands = [[], [], [], []]
-    hands_index = 0
-    num_to_skip = 0  
 
-    
+    hands = [[], [], [], []] 
+    hands_index = 0  
+    reverse_times = 0 
+
     for i in range(len(cards_played)):
-        hands[hands_index].append(cards_played[i])
+
+        
+        hands[hands_index % 4].append(cards_played[i])
+         
         if cards_played[i] == 'skip':
-            hands_index = (hands_index + 1) % 4
-        hands_index = (hands_index + 1) % 4
+            
+            
+            
+            hands_index += 2 * ((-1) ** reverse_times) 
+
+        elif cards_played[i] == 'reverse':
+            
+            reverse_times += 1
+            
+            
+            hands_index += (-1) ** reverse_times
+
+        else:
+            
+            hands_index += (-1) ** reverse_times
+
+        
+        i += 1 
     return hands
 
-   
+
+
+
+
+
+
+
+
+
+
 

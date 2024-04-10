@@ -1,9 +1,6 @@
 
 
 
-
-
-
 from operator import itemgetter
 import random
 random.seed()
@@ -17,15 +14,14 @@ def deal_five_cards(deck):
 def is_full_house(hand):
     
     hand.sort(key=itemgetter(0))
-    
-    return (hand[0][0] == hand[1][0] and hand[3][0] == hand[4][0] and
+        return (hand[0][0] == hand[1][0] and hand[3][0] == hand[4][0] and
             (hand[2][0] == hand[1][0] or hand[2][0] == hand[4][0]))
 
 
 def is_straight(hand):
     
     hand.sort(key=itemgetter(0))    
-    
+   
     return ( hand[2][0] == hand[1][0]+1 and hand[3][0] == hand[2][0]+1 and hand[4][0] == hand[3][0]+1 ) and ( ( hand[1][0] == hand[0][0]+1 ) or ( hand[0][0] == 1 and hand[1][0] == 10) )
 
 
@@ -59,7 +55,7 @@ def tries_until_straight_flush(deck):
     
     while not is_straight_flush(hand) and tries < 100000:
         tries += 1 
-        hand = deal_five_cards(deck) 
+        hand = deal_five_cards(deck)
     return tries
 
 def average_tries_straight_flush(num_trials):
@@ -97,5 +93,3 @@ num_trials = int(input('How many trials would you like to run (around 10, otherw
 print('Probability of getting a full house is 1 out of', average_tries_full_house(num_trials))
 print('Probability of getting a straight flush is 1 out of', average_tries_straight_flush(num_trials))
 print('Probability of getting a flush is 1 out of', average_tries_flush(num_trials))
-
-

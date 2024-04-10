@@ -2,30 +2,40 @@
 
 
 
-
-temperature = int(input('What is the temperature today in °F? '))
-rain = input('Is it raining? ').lower()
+temperature = float(input('What is the temperature today(in °F)? '))
 
 
+if temperature < 32 or temperature > 95:
+        print()
+        print('You shouldn’t play outside today.')
 
-if(rain == 'yes') or (temperature >> 32 and temperature << 50):
-h_jacket = input('Do you have a jacket? ').lower()   
+        
+elif temperature > 50: 
+        rain = input('Is it raining?(answer yes or no) ')
+        if rain == 'no':
+                print()
+                print('You should play outside today.')
+        
+        else: 
+                jacket = input('Do you have a jacket?(answer yes or no) ')
+                if jacket == 'no':
+                        print()
+                        print('You shouldn’t play outside today.')
+                else:
+                        print()
+                        print('You should play outside today.')
+
+                 
+
+else:   
+        jacket = input('Do you have a jacket?(answer yes or no) ')
+        if jacket == 'no':
+                print()
+                print('You shouldn’t play outside today.')
+        else:
+                print()
+                print('You should play outside today.')
 
 
-if(rain == 'yes' and h_jacket == 'no') or (temperature >> 32 and temperature << 50 and h_jacket == 'no') or (temperature > 95 or temperature < 32):
-    print('You should not play outside today. ')
 
-
-else:
-    print('You should play outside today. ')
-    
-             
-
-
-
-
-
-
-
-
-
+        

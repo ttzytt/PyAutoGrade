@@ -2,20 +2,17 @@
 
 
 
-
-user = input('choose rock, paper, or scissors: ')
-
+import random
 
 
-if user == 'paper':
-    print('i choose scissors')
-
-if user == 'rock':
-    print('i choose paper')
-
-if user == 'scissors':
-    print('i choose rock')
-
-print('i win')
+a = input("Enter 'rock', 'paper', or 'scissors': ").lower()
 
 
+if (a == 'rock'):
+    print ("I choose paper, I win")  
+
+elif (a == 'paper'):
+    print ('I choose scissors, I win')  
+
+elif (a == 'scissors'):
+    print ('I choose rock, I win')  

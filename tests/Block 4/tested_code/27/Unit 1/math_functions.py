@@ -1,46 +1,54 @@
 
 
 
-n = int(input("Enter an integer: "))
-
-
 
 
 def factorial(n):
-    number_f = n
-    number_1 = number_f - 1
-    while number_1 > 1:
-            number_f = number_f * number_1
-            number_1 = number_1 - 1
-    return number_f	
+    n_factorial = 1
+    countdown = 1 
 
+    
+    while countdown <= n: 
+        n_factorial = n_factorial * countdown
+        countdown = countdown +1 
+        
+    
+    return n_factorial
 
 def triangular_number(n):
-    number_t = n
-    countdown = number_t - 1
+    n_triangular = 0
+    countdown = 1
 
-    while countdown > 0:
-        number_t = number_t + countdown
-        countdown = countdown - 1
-    return number_t
+    while countdown <= n: 
+        n_triangular = n_triangular + countdown
+        countdown = countdown + 1 
 
-
+    return n_triangular
 
 
 def new_triangular_number(n):
-    number_n = n
-    countdown = number_n - 2
+
+    
+    if n % 2 == 1:
+        
+        
+        
+        return int((n + 1) * (n + 1) / 4)
+    
+    if n % 2 == 0:
+        
+        
+        return int((n / 2) * (n / 2 + 1))
+
+user_input = int(input('Enter an integer: '))
 
 
-    while countdown > 0:
-        number_n = number_n + countdown
-        countdown = countdown - 2
-    return number_n
+
+print(str(user_input) + '! is ' + str(factorial(user_input)))
+print('Triangular number: ' + str(triangular_number(user_input)))
+print('"New" triangular number: ' + str(new_triangular_number(user_input)))
 
 
+    
 
-print( )
-print(str(n) + "! is " + str(factorial(n)))
-
-print("Triangular number: " + str(triangular_number(n)))
-print( + str(new_triangular_number(n)))
+    

@@ -2,38 +2,46 @@
 
 
 import random
+random.seed()
 
-def rolls_until_all_values():
-    
-    rolled_values = set()
-    rolls = 0
 
-    while len(rolled_values) < 6:
-        
-        roll = random.randint(1, 6)
-        rolls += 1
 
-        
-        rolled_values.add(roll)
-
-    return rolls
-
-def average_rolls_until_all_values(num_trials):
-    
-    total_rolls = 0
-
-    for _ in range(num_trials):
-        total_rolls += rolls_until_all_values()
-
-    average_rolls = total_rolls / num_trials
-    return average_rolls
-
-def run_simulation():
-    
-    num_trials = int(input("Enter the number of trials: "))
+def tries_until_duplicate_dices():
 
     
-    average = average_rolls_until_all_values(num_trials)
-    print(f"Average number of rolls needed to cover all six values: {average}")
 
-run_simulation()
+    dices = []
+
+    
+    
+    dice = random.randint(1,6) 
+            
+    while dice not in dices:
+        dices.append(dice)
+        dice = random.randint(1,6)    
+    return len(dices) + 1
+
+
+
+def avg_tries_until_duplicate_dices(num_trial):
+
+    
+    
+    dices = []
+
+    
+    for i in range(num_trial):
+        dices.append(tries_until_duplicate_dices())
+    sum_dices = sum(dices)
+    avg_dices = round(sum_dices/len(dices),2)
+    return avg_dices
+
+
+
+num_trial = int(input("How many trials do you want to do?"))
+print(avg_tries_until_duplicate_dices(num_trial))
+
+
+
+
+

@@ -3,18 +3,20 @@
 
 
 
+import random 
 
+random.seed()
 
+user = input("Enter 'rock' or 'paper' or 'scissors': ") 
 
-choice = str(input("Enter 'rock' , 'paper' or 'scissor': "))
+if user == 'rock': 
+    comp = 'paper'
 
-
-if choice == 'rock':
-    print("I choose paper")
-    print('I win.')
-elif choice == 'paper':
-    print("I choose scissor")
-    print('I win.')
+elif user == 'paper':
+    comp = 'scissors'
+        
 else:
-    print("I choose rock")
-    print('I win.')
+    comp = 'rock'
+
+print('I choose '+comp+'.')
+print('I win.')

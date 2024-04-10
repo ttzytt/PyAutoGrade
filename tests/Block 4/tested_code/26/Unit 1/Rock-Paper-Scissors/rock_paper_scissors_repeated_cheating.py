@@ -1,57 +1,47 @@
 
 
 
-
 import random
-random.seed()
 
-response = 'a' 
-while response != 'quit':
-    print()
-    probability = random.randint(1,10) 
-    if probability != 1:
-        human = input('Enter paper, scissors or rock: ')
-        computer = random.choice(['paper', 'rock', 'scissors'])
+def cheat_move(player_move):
 
-        
-        print()
-        print('I choose ' + computer + '.')
+    if player_move == "rock":
+        return "paper"
+    if player_move == "paper":
+        return "scissors"
+    if player_move == "scissors":
+        return "rock"
 
-        
-        if human == computer: 
-            print('We tie.')
-        elif human == 'paper': 
-            if computer == 'rock':
-                print('You win.')
-            else:
-                print('I win.')
-        elif human == 'scissors': 
-            if computer == 'rock':
-                print('I win.')
-            else:
-                print('You win.')   
-        else: 
-            if computer == 'paper':
-                print('I win.')
-            else:
-                print('You win.')
+print("Welcome to Rock, Paper, Scissors!")
+print("Enter 'rock', 'paper', 'scissors' to play.")
+print("Enter 'quit' anytime to stop playing.")
 
 
-    else: 
-        
-        print()
-        if human == 'paper':
-           print('I choose scissors.')
-        elif human == 'rock':
-           print('I choose paper.')
-        else:
-           print('I choose rock.')
 
-        
-        
-        print('I win.')
-        
+while True:
+    player_move = input("Make your move: ")
     
-    print()
-    response = input('Type quit to stop the game: ')
+    if player_move == 'quit':
+        print("Thanks for playing! Goodbye.")
+        break
 
+    if player_move not in ('rock', 'paper', 'scissors'):
+        print("Invalid choice. Please pick 'rock', 'paper', 'scissors' or type 'quit' to exit.")
+        continue
+
+    
+    if random.random() < 0.10:
+        computer_move = cheat_move(player_move)
+    else:
+        computer_move = random.choice(['rock', 'paper', 'scissors'])
+    
+    print("Computer selected:", computer_move)
+
+    if player_move == computer_move:
+        print("It's a tie!")
+    elif (player_move == 'rock' and computer_move == 'scissors') or \
+         (player_move == 'scissors' and computer_move == 'paper') or \
+         (player_move == 'paper' and computer_move == 'rock'):
+        print("You win!")
+    else:
+        print("Computer wins!")

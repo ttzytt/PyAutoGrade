@@ -2,30 +2,9 @@
 
 
 
-
-
-
-
-
-
-
-weather = int(input('What is the temperature today (in °F)? '))
-
-
-
-
-if weather > 95:
-    print('You should not play outside today')
-    
-
-
-
-elif weather < 50:
-     print('You should not play outside today')
-
-
-
-
+farenheit = int(input('What\'s the temparature in farenheit today? '))
+if farenheit <= 50 or farenheit >= 95:
+ print('You shouldn\'t play outside today')
+  
 else:
-    print('You should play outside today')
-
+ print('You should play outside today')

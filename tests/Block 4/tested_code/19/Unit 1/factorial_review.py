@@ -5,19 +5,20 @@
 
 
 
-n_changed = int(input('Enter your number(no spaces): '))
+number_n = int(input("Please type in your n: "))
+
+
+number_minus_1 = number_n - 1
 
 
 
-num_left = n_changed - 1
 
 
-original_n = n_changed
+
+while number_minus_1 > 1:
+
+    number_n = number_n * number_minus_1
+    number_minus_1 = number_minus_1 - 1
+print("Your factorial number is " + str(number_n))
 
 
-while num_left > 0:
-    
-    n_inputed = n_inputed * num_left
-    num_left -= 1
-    
-print('!' + str(original_n) + ' is equal to ' + str(n_changed))

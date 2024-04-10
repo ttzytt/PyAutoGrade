@@ -1,23 +1,25 @@
 
 
 
-def new_rabbits_and_sheep(rabbits, sheep):
-    new_rabbits = rabbits + 0.1 * (3 - rabbits) * rabbits - 0.2 * rabbits * sheep
-    new_sheep = sheep + 0.1 * (1 - sheep) * sheep - 0.02 * rabbits * sheep
-    if new_rabbits < 0:
-        new_rabbits = 0
-    if new_sheep < 0:
-        new_sheep = 0
-    return (new_rabbits, new_sheep)
+        
+rabbits = int(input("How many rabbits would you like? "))
+foxes = int(input("How many foxes would you like? "))
+days = int(input("How many days are you going to run? "))
+point = (rabbits, foxes)
 
-rabbits = 5
-sheep = 3
-list_of_points = [(rabbits, sheep)]
+def total_animals(point):
+    new_rabbits = point[0] + (0.01 * point[0]) - ((0.01 * point[0]) * point[1])
+    new_foxes = point[1] - (0.02 * point[1]) + ((0.01 * point[0]) * point[1])
+    new_rabbits = round(new_rabbits, 4)
+    new_foxes = round(new_foxes, 4)
 
-for i in range(100):
-    list_of_points.append(new_rabbits_and_sheep(rabbits, sheep))
-    rabbits = list_of_points[i+1][0]
-    sheep = list_of_points[i+1][1]
+    return (new_rabbits, new_foxes)
 
-print(list_of_points[99])
+rabbits_foxes = [point]
 
+for i in range(1, days + 1):
+    if i % 10 == 0:
+        point = total_animals(point)
+        rabbits_foxes.append(point)
+        
+print(rabbits_foxes)

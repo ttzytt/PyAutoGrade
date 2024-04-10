@@ -1,63 +1,65 @@
+import random 
 
-
-
-
-
-import random
 random.seed()
-cheat_number = random.randint(1, 10)
 
+whether_quit = 0 
 
-if cheat_number == 5:
-    user = input("Enter 'rock' 'paper' or 'scissors' : ")
-    if user == "rock":
-        print("I choose paper")
-        print("I win.")
+while whether_quit == 0:
+    human_choice = input("Enter 'rock' or 'paper'or 'scissors': ") 
+    computer_choice = random.choice(['rock', 'paper', 'scissors']) 
+    
+    random1 = random.randint(1, 10)
+    cheating = 0
 
-    elif user == "paper":
-        print("I choose scissors")
-        print("I win.")
+    
+    if random1 == 1: 
+        cheating = 1 
+    
+    if human_choice == 'quit':
+        whether_quit = 1
+    else:
+        if cheating == 1:
+            
+            if human_choice == 'rock':
+                computer_choice = 'paper'
+        
+            elif human_choice == 'paper':
+                computer_choice = 'scissors'
+        
+            elif human_choice == 'scissors':
+                computer_choice = 'rock'
+        
+            if human_choice == 'rock' or human_choice == 'paper' or human_choice == 'scissors': 
+                print('I choose ' + computer_choice + '.')
+                print('I win.')
+        
+            else:
+                
+                print('I choose ' + computer_choice + '.')
+                print('You cannot choose anything else than rock, paper or scissors!')
+                
+        
+        else:
+            print('I choose ' + computer_choice + '.')
+    
+            if human_choice == computer_choice:
+                print('We tie.')
+    
+            elif human_choice == 'rock' and computer_choice == 'scissors':
+                print('You win.')
+    
+            elif human_choice == 'paper' and computer_choice == 'rock':
+                print('You win.')
+    
+            elif human_choice == 'scissors' and computer_choice == 'paper':
+                print('You win.') 
+    
+            elif human_choice == 'rock' or human_choice == 'paper' or human_choice == 'scissors':
+                print('I win.') 
+        
+            else:
+                
+                print('You cannot choose anything else than rock, paper or scissors!')
+                
 
-    elif user == "scissors":
-        print("I choose rock.")
-        print("I win.")
-
-
-
-
-else:
-    user = input("Enter 'rock' 'paper' or 'scissors' : ")
-
-    computer_selection_list = ['rock', 'paper', 'scissors']
-
-
-    computer_selection = random.choice(computer_selection_list)
-
-    print("I choose " + computer_selection)
-
-    if user == "rock":
-        if computer_selection == "rock":
-            print("We tie.")
-        elif computer_selection == "paper":
-            print("I win.")
-        elif computer_selection == "scissors":
-            print("You win.")
-
-    elif user == "paper":
-        if computer_selection == "rock":
-            print("You win.")
-        elif computer_selection == "paper":
-            print("We tie.")
-        elif computer_selection == "scissors":
-            print("I win.")
-
-    elif user == "scissors":
-        if computer_selection == "rock":
-            print("You win.")
-        elif computer_selection == "paper":
-            print("I win.")
-        elif computer_selection == "scissors":
-            print("We tie.")
-
-
-
+print('End of the program.')

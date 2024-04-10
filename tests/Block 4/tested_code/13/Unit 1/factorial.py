@@ -3,20 +3,21 @@
 
 
 
-n = int(input("Enter a number, n: "))
+input_number = int(input('Give me a number: '))
 
 
-fact = 1  
-count = 1  
-factorial_expression = "1"  
+
+factorial_number = 1
 
 
-while count <= n:
-    fact *= count  
-    if count > 1:
-        factorial_expression += f" * {count}"  
-    count += 1  
+count = 1
+
+while count < input_number:
+    count = count + 1
+    
+    
+    
+    factorial_number = factorial_number * count
 
 
-print(+ n! = {factorial_expression} = {fact}")
-
+print(str(input_number) + '! is ' + str(factorial_number) + '.')

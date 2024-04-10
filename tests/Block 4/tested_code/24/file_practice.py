@@ -4,47 +4,60 @@
 
 
 
-
-import random
-random.seed()
-
-
-
-
-
-def generate_ten(my_file):
-    all_items = []
-    item_numbers = []
-    list_of_items = []
     
-    for line in my_file:
-        all_items.append(line)
-    
-    for i in range(10):
-        item_numbers.append(random.randint(1, len(all_items) - 1))
-
-    for number in item_numbers:
-        list_of_items.append(all_items[number])
-
-    for i in range(len(list_of_items)):
-        print(list_of_items[i])
+        
 
 
 
-def longest_line(read_file):
-    max_words = [''] 
+def vowel_count(read_file):
+    vowels = 'AaEeIiOoUu'
+    count = 0
     for line in read_file:
-        if (len(line) > len(max_words[0])):
-            max_words = [line]
-        elif(len(line) == max_words):
-            max_words.append(line)
-
-    return max_words
+        for letter in line:
+            if letter in vowels:
+                count += 1
+    return count
 
 
-file_name = 'Text files/greeneggs.txt'
+def consonant_count(read_file):
+    consonants = 'BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZz'
+    count = 0
+    for line in read_file:
+        for letter in line:
+            if letter in consonants:
+                count += 1
+    return count
+
+
+
+def character_count(read_file):
+    count = 0
+    for line in read_file:
+        count += len(line)
+    return count
+
+file_name = 'Text Files/names.txt'
 with open(file_name, 'r') as my_file:
-    print(longest_line(my_file))
+    list_of_lines = my_file.readlines()
+    vowels = vowel_count(list_of_lines)
+    consonants = consonant_count(list_of_lines)
+    characters = character_count(list_of_lines)
+
+print('Character count: ' + str(characters) + '.')
+print('Vowel count: ' + str(vowels) + '.')
+print('Consonant count: ' + str(consonants) + '.')
+print('Other Character Count: ' + str(characters - vowels - consonants) + '.')
+
+
+
+
+
+
+
+
+
+
+
 
 
 

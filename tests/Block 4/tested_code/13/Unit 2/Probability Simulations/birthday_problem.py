@@ -3,39 +3,49 @@
 
 
 
+
 import random
 
-def tries_until_duplicate_birthday(include_leap_year=False):
-    days_in_year = 366 if include_leap_year else 365
-    birthday_list = []
-    while True:
-        
-        birthday = random.randint(1, days_in_year)
+random.seed()
 
-        
-        if birthday in birthday_list:
-            return len(birthday_list) + 1  
-        else:
-            birthday_list.append(birthday)
 
-def average_until_duplicate_birthday(num_trials, include_leap_year=False):
-    total_people = 0
+
+def tries_until_duplicate_birthday():
+    people_asked = 0
+    birthdays_answered = [] 
+    current_birthday = 0 
+
+    while current_birthday not in birthdays_answered: 
+                                                       
+        birthdays_answered.append(current_birthday) 
+        current_birthday = random.randint(1, 365)
+        
+    return len(birthdays_answered)
+
+
+
+
+def average_until_duplicate_birthday(num_trials):
+    
+    sum_so_far = 0
     for i in range(num_trials):
-        total_people += tries_until_duplicate_birthday(include_leap_year)
-    return total_people / num_trials
+        sum_so_far += tries_until_duplicate_birthday() 
+                                                    
+    average = sum_so_far / num_trials
 
-if __name__ == "__main__":
+    return average
+
+
+
+while True:
     
-    num_trials = int(input("Enter the number of trials: "))
-    result = average_until_duplicate_birthday(num_trials)
-
-    print("Average number of people asked before a birthday is repeated:", result)
-
+    get_trials = int(input('How many times do you want to run the simulation? '))
     
-    known_solution = 24.6
-    print("Difference from the known solution (24.6):", result - known_solution)
+    print('The average of the results is ' +
+          str(average_until_duplicate_birthday(get_trials)) + '.')
 
-    
-    num_trials_leap_year = int(input("Enter the number of trials for leap year version: "))
-    result_leap_year = average_until_duplicate_birthday(num_trials_leap_year, include_leap_year=True)
-    print("Average number of people asked before a birthday is repeated (including leap year):", result_leap_year)
+
+
+
+
+

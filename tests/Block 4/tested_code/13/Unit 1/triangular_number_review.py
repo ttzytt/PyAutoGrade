@@ -3,20 +3,22 @@
 
 
 
-n = int(input("Enter a number, n: "))
+
+n = int(input('Give me a number: '))
 
 
-if n < 0:
-    print("Please enter a non-negative integer.")
-else:
+
+triangular_n = 0
+
+
+count = 0
+
+while count < n:
     
-    triangle_sum = 0
-    i = 1
+    count = count + 1
+
     
-    
-    while i <= n:
-        triangle_sum += i
-        i += 1
-    
-    
-    print("The" + n + "th triangle number is " + triangle_sum + ".")
+    triangular_n = triangular_n + count
+
+
+print(triangular_n)

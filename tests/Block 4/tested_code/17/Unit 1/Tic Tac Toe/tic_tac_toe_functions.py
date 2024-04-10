@@ -4,6 +4,7 @@
 
 
 
+
 def draw_row(row, row_number):
     print(str(row_number) + ' │ '
           + row[0] + ' │ '
@@ -24,36 +25,48 @@ def draw_board(board):
 
 
 
+
+
 def find_winner(board):
     
-    for row in range(3):
-        if (board[row][0] == board[row][1] and board[row][1] == board[row][2]) and board[row][0] != ' ':
-            return board[row][0]
+    for i in range(3):
+        
+        if board[i][0] == board[i][1] == board[i][2] and board[i][0] != ' ':
+            return board[i][0]
+
+        
+        if board[0][i] == board[1][i] == board[2][i] and board[0][i] != ' ':
+            return board[0][i]
+
     
-    for column in range(3):
-        if (board[0][column] == board[1][column] and board[1][column] == board[2][column]) and board[0][column] != ' ':
-            return board[0][column]
-    
-    if (board[0][0] == board[1][1] and board[1][1] == board[2][2]) and board[0][0] != ' ':
+    if board[0][0] == board[1][1] == board[2][2] and board[0][0] != ' ':
         return board[0][0]
-    if (board[0][2] == board[1][1] and board[1][1] == board[2][0]) and board[1][1] != ' ':
+
+    if board[0][2] == board[1][1] == board[2][0] and board[0][2] != ' ':
         return board[0][2]
+
+    
     return None
 
+ 
 
 
 
 def get_move(player):
-    return input(player + ' player, choose your move: ')
+    return input(player + ' player, chose your move: ')
+
+
 
 
 
 def make_move(player, move, board):
+    
     if len(move) != 2:
         return False
     
-    
-    if (not (1 <= int(move[0]) <= 3) or not (ord('A') <= ord(move[1]) <= ord('C'))):
+    if move[0] != '1' and move[0] != '2' and move[0] != '3':
+        return False
+    if move[1] != 'A' and move[1] != 'B' and move[1] != 'C':
         return False
 
     
@@ -61,13 +74,15 @@ def make_move(player, move, board):
     
     
     
+    
     column = ord(move[1]) - ord('A')
 
+    if board[row][column] != ' ':
+        return False
+
     
-    if board[row][column] == ' ':
-        board[row][column] = player
-        return True
-    return False
+    board[row][column] = player
+    return True
 
 
 

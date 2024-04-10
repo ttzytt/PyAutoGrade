@@ -3,110 +3,86 @@
 
 
 
+
 import random
-random.seed()
 
-
-def draw_row(row, row_number):
-    
-    print(str(row_number) + ' │ '
-          + row[0] + ' │ '
-          + row[1] + ' │ '
-          + row[2] + ' │ '
-          + row[3] + ' │ '
-          + row[4] + ' │ '
-          + row[5] + ' │ '
-          + row[6] + ' │ '
-          + row[7] + ' │ '
-          + row[8] + ' │ '
-          + row[9] + ' │ ')
-    
-
-
-def draw_board(board):
-
-    print('  ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐ ')
-    draw_row(board[0], 1)
-    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[1], 2)
-    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[2], 3)
-    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[3], 4)
-    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[4], 5)
-    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[5], 6)
-    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[6], 7)
-    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[7], 8)
-    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[8], 9)
-    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[9], 0)
-    print('  └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘ ')
-    print('    A   B   C   D   E   F   G   H   I   J   ')
-
-
-def original():
-    patients = []
-    board = [ [' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' '],
-          [' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' '],
-          [' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' '],
-          [' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' '],
-          [' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' '],
-          [' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' '],
-          [' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' '],
-          [' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' '],
-          [' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' '],
-          [' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' ']]
-    while len(patients) < 10: 
-        row = random.randint(0,9)
-        column = random.randint(0,9)
-        patient = [row,column]
-        if patient not in patients:
-            board[row][column] = '+'
-            patients.append(patient)
+def make_board(rows, columns):
+    board = []
+    for _ in range(rows):
+        row = []
+        for _ in range(columns):
+            row.append('·')
+        board.append(row)
     return board
 
+def make_players(board):
+    players_board = []
 
-def check_neighbors(board,row,column):
-    infected_neighbors = 0
-    if row > 0: 
-        if board[row-1][column] == '+':
-            infected_neighbors += 1
-    if row < 9: 
-        if board[row+1][column] == '+':
-            infected_neighbors += 1
-    if column > 0: 
-        if board[row][column-1] == '+':
-            infected_neighbors += 1
-    if column < 9: 
-        if board[row][column+1] == '+':
-            infected_neighbors += 1
-    return infected_neighbors
+    for row in board:
+        player_row = []
+        for i in row:
+            if i == '·':
+                player_row.append('·')
+            else:
+                player_row.append('x')
+        players_board.append(player_row)
+    return players_board
+    
+
+def infection_probability(board):
+    rows = len(board)
+    columns = len(board[0])
+    probability_infection = []
+    for row in range(rows):
+        store_row = []
+        for column in range(columns):
+            neighbor_infected  = num_infected_neighbors(board, row, column)
+            if not board[row][column] == 'x':
+                if neighbor_infected > 0:
+                    
+                    infection_prob = (neighbor_infected * 0.15)
+                    store_row.append(infection_prob) 
+                else:
+                    store_row.append(0)
+            else:
+                store_row.append(0)
+        probability_infection.append(store_row)
+    return probability_infection
+                        
 
 
+            
+def heal_probability(board):
+    rows = len(board)
+    columns = len(board[0])
+    probability_of_heal = []
 
-def draw_patients(board,patients,cured):
-    for count in range(len(patients)):
-        row = patients[count][0]
-        column = patients[count][1]
-        board[row][column] = '+' 
-    for i in range(len(cured)):
-        row = cured[i][0]
-        column = cured[i][1]
-        board[row][column] = ' ' 
-    return board
+    for row in range(rows):
+        store_row = []
+        for column in range(columns):
+            if board[row][column] == 'x':
+                
+                store_row.append(0.2)
+            else:
+                store_row.append(0)
+        probability_of_heal.append(store_row)
+    return probability_of_heal
+ 
+def num_infected_neighbors(board, row, column):
+    rows = len(board)
+    columns = len(board[0])
+    neighbors_infected = 0
+    
+    if row > 0 and board[row - 1][column] == 'x': 
+        neighbors_infected += 1
+    if row < rows - 1 and board[row + 1][column] == 'x': 
+        neighbors_infected += 1
+    
+    if column > 0 and board[row][column - 1] == 'x': 
+        neighbors_infected += 1
+    if column < columns - 1 and board[row][column + 1] == 'x': 
+        neighbors_infected += 1
+    return neighbors_infected
 
-
-def count_patients(board):
-    num_patients = 0
-    for r in range(10):
-        for c in range(10):
-            if board[r][c] == '+':
-                num_patients += 1
-    return num_patients
 
 

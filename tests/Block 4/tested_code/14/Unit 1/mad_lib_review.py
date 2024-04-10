@@ -5,40 +5,20 @@
 
 
 
-pluralNoun1 = input("noun, plural 1: ")
-adjective = input("adjective: ")
-place1 = input("place 1: ")
-place2 = input("place 2: ")
-landscapeFeature = input("landscape feature: ")
-number = input("number: ")
-pluralNoun2 = input("noun, plural 2: ")
-pluralNoun3 = input("noun, plural 3: ")
-verb = input("verb: ")
-store = input("store (i.e. mcdonalds): ")
-adverb = input("adverb: ")
+name_1 = input('name 1: ')
+name_2 = input('name 2: ')
+name_3 = input('name 3: ')
+food_1 = input('food 1 (plural): ')
+place_1 = input('place 1: ')
+verb_ing = input('verb with -ing: ')
+
+noun_3 = input('noun 3 (plural): ')
+noun_1 = input('noun 1 (plural): ')
+noun_2 = input('noun 2 (plural): ')
 
 
 
-madlibs = (
-
-"A long long time ago, there existed a group of " + pluralNoun1 + ". " +
-"These " + pluralNoun1 + " were rather " + adjective +
-" and traveled from " + place1 + " to " + place2 + ". " +
-"However, when they were crossing a " + landscapeFeature +
-", a North Carolinian troll stopped them in their paths." +
-"\"Fee Fi Fo Fum. If you wanna cross I\'ma need sum,\" it said. " +
-"Give me " + number + " " + pluralNoun2 + " and a stack of " + pluralNoun3 + ". " +
-"The " + pluralNoun1 + " then " + adverb + " hoverboared to the nearest " + store +
-" and " + verb + " the cashier."
-
-)
-
-
-print(madlibs)
-
-
-
-
-
-
-
+print( name_1 + ' loves eating ' + food_1 + '. One day, ' + name_1 + ' decided to make his own '
++ food_1 + '. ' + name_1 +' realized they needed ' + noun_2 + ' to make ' + food_1 + '. In the end, '
++ name_1 + ' tried calling ' + name_2 + ', but they were ' + verb_ing + ' ' + noun_3 + '. ' + name_1
++ ' gave up trying to make ' + food_1 + ', and went to the ' + place_1 + ' that sells ' + food_1 + ', called ' + name_3 + "'s " + place_1 + '.')

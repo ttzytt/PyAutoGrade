@@ -2,36 +2,46 @@
 
 
 
-weather = input("What's the weather like today? (Sunny/Cloudy/Rainy) ")
 
-if weather == "sunny":
+temperature = float(input('What is the temperature today (in °F)? '))
+
+
+if temperature > 95:
     
-    sunscreen = input("Do you have sunscreen? (Yes/No) ")
-    hat = input("Do you have a hat? (Yes/No) ")
+    print("You shouldn't play outside today.")
+elif temperature > 32:
     
-    
-    if sunscreen == "yes" and hat == "yes":
-        print("It's a great day for a hike! Enjoy the sunshine.")
+    raining = input('Is it raining? ')
+    if raining.lower() == 'yes':
+        
+        waterproof = input('Are you waterproof? ')
+        if waterproof.lower() == 'no':
+            
+            print("You shouldn't play outside today.")
+        elif temperature < 50:
+            arctic = input('Are you from the arctic? ')
+            if arctic.lower() == 'no':
+                
+                print("You shouldn't play outside today.")
+            else:
+                
+                print("You should play outside today.")
+        else:
+            
+            print("You should play outside today.")
+    elif temperature < 50:
+        arctic = input('Are you from the arctic? ')
+        if arctic.lower() == 'no':
+            
+            print("You shouldn't play outside today.")
+        else:
+            
+            print("You should play outside today.")
     else:
-        print("You should go for a hike, but don't forget sunscreen and a hat!")
-elif weather == "cloudy":
-    
-    water = input("Do you have a water bottle? (Yes/No) ")
-    
-    
-    if water == "yes":
-        print("It's a good day for a hike, even though it's cloudy. Stay hydrated!")
-    else:
-        print("You should go for a hike, but remember to bring a water bottle.")
-elif weather == "rainy":
-    
-    umbrella = input("Do you have an umbrella? (Yes/No) ")
-    
-    
-    if umbrella == "yes":
-        print("You can still go for a hike, but be prepared for rain with an umbrella.")
-    else:
-        print("It's not a good day for a hike without an umbrella.")
+        
+        print("You should play outside today.")
 else:
     
-    print("I'm not sure about the weather conditions. Check a weather forecast and decide.")
+    print("You shouldn't play outside today.")
+
+

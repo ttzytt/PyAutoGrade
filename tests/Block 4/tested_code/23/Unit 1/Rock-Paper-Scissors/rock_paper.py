@@ -1,39 +1,26 @@
 
 
 
+import random
 
-import random 
+
+player_input = input('Enter rock or paper: ')
 random.seed()
 
 
-user_choice = input("Enter 'rock' or 'paper': ") 
+bot_choice = random.choice(['rock', 'paper'])
+print('I chose ' + bot_choice)
 
 
-comp_choice = random.choice(['rock', 'paper']) 
-print('I choose ' + comp_choice + '.')
-
-
-if user_choice == 'rock':   
-    if comp_choice == 'rock':
-        print('We tie.')
-    else:
-        
-        print('I win.')
-
-elif user_choice == 'paper':
-    if comp_choice == 'rock':
-        print('You win.')
-    else:
-        
-        print('We tie.')
+if player_input == 'rock' and bot_choice == 'rock':
+    print('We tied!')
+elif player_input == 'rock' and bot_choice == 'paper':
+    print('I won!')
+elif player_input == 'paper' and bot_choice == 'paper':
+    print('We tied!')
+elif player_input == 'paper' and bot_choice == 'rock':
+    print('You won!')
+    
 
 else:
-    
-    print('I already chose, you need to choose from rock and paper too!')
-
-
-
-
-        
-        
-
+    print('Invalid choice; type rock or paper!')

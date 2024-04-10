@@ -2,13 +2,16 @@
 
 
 
-
 import random
+random.seed()
 
 
 
-def draw_row(row):
-    print('  │ '
+
+
+
+def draw_row(row, row_number):
+    print(str(row_number) + ' │ '
           + row[0] + ' │ '
           + row[1] + ' │ '
           + row[2] + ' │ '
@@ -21,92 +24,138 @@ def draw_row(row):
           + row[9] + ' │ ')
 
 
-def draw_board(board):
+
+def draw_grid(grid):
     print('  ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐ ')
-    draw_row(board[0])
+    draw_row(grid[0], 1)
     print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[1])
+    draw_row(grid[1], 2)
     print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[2])
+    draw_row(grid[2], 3)
     print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[3])
+    draw_row(grid[3], 4)
     print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[4])
+    draw_row(grid[4], 5)
     print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[5])
+    draw_row(grid[5], 6)
     print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[6])
+    draw_row(grid[6], 7)
     print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[7])
+    draw_row(grid[7], 8)
     print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[8])
+    draw_row(grid[8], 9)
     print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
-    draw_row(board[9])
+    draw_row(grid[9], 10)
     print('  └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘ ')
+    print('    A   B   C   D   E   F   G   H   I   J   ')
 
 
-def initialize_board(size, initial_infected):
+
+
+
+
+def cell_infection_probability(infection_probability):
+
+    num_infected_neighbors = 0
+
     
-    
-    board = [['·' for _ in range(size)] for _ in range(size)]
+    for i in range(1,9):
+        for j in range(1,9):
+            if grid[i-1][j] == 'x':
+                num_infected_neighbors += 1
+            elif grid[i][j-1] == 'x':
+                num_infected_neighbors += 1
+            elif grid[i][j+1] == 'x':
+                num_infected_neighbors += 1
+            elif grid[i+1][j] == 'x':
+                num_infected_neighbors += 1
 
     
-    for _ in range(initial_infected):
-        
-        row = random.randint(0, size - 1)
-        col = random.randint(0, size - 1)
-        board[row][col] = 'x'
+    for i = 0:
+        for j in range(1,9):
+            if grid[i][j-1] == 'x':
+                num_infected_neighbors += 1
+            elif grid[i][j+1] == 'x':
+                num_infected_neighbors += 1
+            elif grid[i+1][j] == 'x':
+                num_infected_neighbors += 1
+    for i = 9:
+        for j in range(1,9):
+            if grid[i-1][j] == 'x':
+                num_infected_neighbors += 1
+            elif grid[i][j-1] == 'x':
+                num_infected_neighbors += 1
+            elif grid[i][j+1] == 'x':
+                num_infected_neighbors += 1
 
-    return board
-
-def count_infected_neighbors(board, row, col):
-    size = len(board)
-    infected_neighbors = 0
     
+    for i = 0:
+        for j = 0:
+            if grid[i][j+1] == 'x':
+                num_infected_neighbors += 1
+            elif grid[i+1][j] == 'x':
+                num_infected_neighbors += 1
+    for i = 0:
+        for j = 9:
+            if grid[i][j-1] == 'x':
+                num_infected_neighbors += 1
+            elif grid[i+1][j] == 'x':
+                num_infected_neighbors += 1
+    for i = 9:
+        for j = 0:
+            if grid[i-1][j] == 'x':
+                num_infected_neighbors += 1
+            elif grid[i][j+1] == 'x':
+                num_infected_neighbors += 1
+    for i = 9:
+        for j = 9:
+            if grid[i-1][j] == 'x':
+                num_infected_neighbors += 1
+            elif grid[i][j-1] == 'x':
+                num_infected_neighbors += 1
+
+    return (infection_probability * num_infected_neighbors)
     
-    if col > 0 and board[row][col - 1] == 'x':
-        infected_neighbors += 1
-        
+
+
+def updated_infection_grid():
     
-    if col < size - 1 and board[row][col + 1] == 'x':
-        infected_neighbors += 1
-        
-    
-    if row > 0 and board[row - 1][col] == 'x':
-        infected_neighbors += 1
-        
-    
-    if row < size - 1 and board[row + 1][col] == 'x':
-        infected_neighbors += 1
-
-    return infected_neighbors
 
 
 
-def update_board(board, infection_probability, heal_probability):
-    size = len(board) 
-    new_board = [['·' for _ in range(size)] for _ in range(size)]
 
-    for row in range(size):
-        for col in range(size):
-            if board[row][col] == 'x':
-                      
-                
-                if random.random() < heal_probability:
-                    new_board[row][col] = '·'
-                else:
-                    new_board[row][col] = 'x'
-            else:
-                
-                num_infected_neighbors = count_infected_neighbors(board, row, col)
 
-                
-                if num_infected_neighbors != 0:
-                    infection_chance = infection_probability * num_infected_neighbors
-                else:
-                    infection_chance = infection_probability
-                
-                if random.random() < infection_chance:
-                    new_board[row][col] = 'x'
 
-    return new_board
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

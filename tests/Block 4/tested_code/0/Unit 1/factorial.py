@@ -1,15 +1,18 @@
 
 
 
-number = int(input('Please enter a integer greater than 0: '))
-factorial = 1
+number = int(input('Give me a random integer! '))
+print()
+
+number_print = number
+
+
+product = 1
+
 
 while number > 0:
-    factorial = factorial * number
+    product = product*number
     number = number - 1
     
-print(factorial)
-
-
-
-
+print(str(number_print) + ' factorial is ' + str(product) + '.')
+                                        

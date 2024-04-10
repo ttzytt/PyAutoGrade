@@ -2,14 +2,17 @@
 
 
 
-user_input = int(input('Input an integer n: '))
-count = 1
-result = 0
+n = int(input('Enter a number: '))
+
+count = 0
+
+triangular_number = 0
 
 
-while count <= user_input: 
-    result = result + count
+while count < n:
     count = count + 1
+    triangular_number = triangular_number + count
 
-print('The triangular number of ' + str(user_input)+ ' is '  + str(result) + '.')
-    
+
+print('The nth triangle number would be ' + str(triangular_number))
+

@@ -4,29 +4,15 @@
 
 
 
+def draw_row(row, row_number):
+    print(str(row_number) + ' │ '
+          + row[0] + ' │ '
+          + row[1] + ' │ '
+          + row[2] + ' │ ')
 
-
-def all_equal(my_list):
-    if len(my_list) == 0:
-        return "Empty list"
-
-
-    comparison_value = my_list[0] 
-                                  
-    for i in range(len(my_list)):
-        if my_list[i] is not comparison_value: 
-                                               
-            return False
-    return True 
 
 
 def draw_board(board):
-    def draw_row(row, row_number):
-        print(str(row_number) + ' │ '
-              + row[0] + ' │ '
-              + row[1] + ' │ '
-              + row[2] + ' │ ')
-    
     print('  ┌───┬───┬───┐ ')
     draw_row(board[0], 1)
     print('  ├───┼───┼───┤ ')
@@ -40,46 +26,66 @@ def draw_board(board):
 
 
 def find_winner(board):
-    diagonal_1 = []
-    diagonal_2 = []
-    for i in range(len(board)):
-        
-        testing_sequence = [] 
-        testing_sequence = board[i] 
-        if all_equal(testing_sequence) and board[i][0] != ' ':
-            return testing_sequence[0]
-
-        
-        testing_sequence = [] 
-        for j in range(len(board[i])):
-            testing_sequence.append(board[j][i]) 
-        if all_equal(testing_sequence) and board[j][0] != ' ':
-            return testing_sequence[0]
-
-        
-        diagonal_1.append(board[i][i])
-        diagonal_2.append(board[2-i][i])
-    if all_equal(diagonal_1) and diagonal_1[0] != ' ':
-        return diagonal_1[0]
-    if all_equal(diagonal_2) and diagonal_2[0] != ' ':
-        return diagonal_2[0]
     
+    
+    
+    def convert_to_string_bitboard(board, value):
+        bitboard = ''
+        for row in range(len(board)):
+            for column in range(len(board[row])):
+                if board[row][column] == value:
+                    bitboard += '1'
+                else:
+                    bitboard += '0'
+        return bitboard
+
+    
+    
+    winning_groups = [
+        [1,2,3], [4,5,6], [7,8,9],
+        [1,4,7], [2,5,8], [3,6,9],
+        [1,5,9], [3,5,7], 
+        ]
+
+    
+    x_bitboard = convert_to_string_bitboard(board, 'x')
+    for group in winning_groups:
+        is_all_value = True
+        for i in group:
+            
+            if x_bitboard[i-1] == '0':
+                is_all_value = False
+        if is_all_value:
+            return 'x'
+    
+    o_bitboard = convert_to_string_bitboard(board, 'o')
+    for group in winning_groups:
+        is_all_value = True
+        for i in group:
+            if o_bitboard[i-1] == '0':
+                is_all_value = False
+        if is_all_value:
+            return 'o'
     return None
 
 
 
 
 def get_move(player):
-    return input(player + ' player, chose your move: ')
-
+    return input(player + ' player, choose your move: ')
 
 
 def make_move(player, move, board):
     
-    if len(move) != 2 or not (('1' <= move[0] <= '3') and \
-                              ('A' <= move[1] <= 'C')):
-
+    
+    
+    if (len(move) != 2):
+        return False          
+    is_valid_row = ((move[0] == '1') or (move[0] == '2') or (move[0] == '3'))
+    is_valid_column = ((move[1] == 'A') or (move[1] == 'B') or (move[1] == 'C'))
+    if not (is_valid_row and is_valid_column):
         return False
+    
     
     row = int(move[0]) - 1
     
@@ -88,7 +94,7 @@ def make_move(player, move, board):
     column = ord(move[1]) - ord('A')
 
     
-    if board[row][column] != ' ': 
+    if board[row][column] != ' ':
         return False
     board[row][column] = player
     return True

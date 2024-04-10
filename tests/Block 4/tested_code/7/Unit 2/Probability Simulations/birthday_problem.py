@@ -1,39 +1,71 @@
 
 
 
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ 
+
+
+
+
 import random
 
-random.seed()
 
 
+def repeats_until_duplicate_birthday():
 
-def tries_until_duplicate_birthday():
+    counter = 0
+    roll = random
+    birthday_rolls = [] 
 
-    birthdays = []
-    new_birthday = 1 
     
-    while new_birthday not in birthdays:
-        birthdays.append(new_birthday)
-        new_birthday = random.randint(1, 365)
-
-
-    return len(birthdays)
-
-
-
-def average_until_duplicate_birthday(num_trials):
-    total_trials = []
+    roll = random.randint(1, 365) 
     
-    for _ in range(num_trials):
-        total_trials.append(tries_until_duplicate_birthday())
+
+    
+    birthday_rolls.append(roll)
+
+
+    while : 
+
         
+        roll = random.randint(1, 365) 
 
-    return sum(total_trials)/num_trials
+        
+        birthday_rolls.append(roll)
+
+    
+
+    
+            
 
 
 
 
-tries = int(input('How many trials do you want to run?'))
 
-print('The average number of people is ' + str(average_until_duplicate_birthday(tries)) + '.')
+
+
+
+
+
+
+
+
+
+
+
 

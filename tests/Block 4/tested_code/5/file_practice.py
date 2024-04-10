@@ -3,69 +3,82 @@
 
 
 
+print('1')
+file_name = 'Text files/greeneggs.txt'
+with open(file_name, 'r') as my_file:
+    full_content = my_file.read()
+print(full_content[:10000])  
+print()
 
+
+
+print('2')
+file_name = 'Text files/commonwords.txt'
+with open(file_name, 'r') as my_file:
     
-        
+    
+    list_of_lines = my_file.readlines()
+print('Line 4 says: ' + list_of_lines[4])
+
+with open(file_name, 'r') as my_file:
+    
+    
+    one_line = my_file.readline()
+print('The first line says: ' + one_line)
+
+with open(file_name, 'r') as my_file:
+    character_count = 0
+    
+    
+    
+    
+    for line in my_file:  
+        character_count += len(line)
+print('Total characters: ' + str(character_count))
+print()
+
+file = input('Which file do you want to read, greeneggs or names?')
+if file == 'greeneggs':
+    print('1')
+    file_name = 'Text files/greeneggs.txt'
+    with open(file_name, 'r') as my_file:
+        full_content = my_file.read()
+    print(full_content[:10000])  
+    print()
+elif file == 'names':
+    print('2')
+    file_name = 'Text files/names.txt'
+    with open(file_name, 'r') as my_file:
+        full_content = my_file.read()
+    print(full_content[:10000])  
+    print()
+character = int(input('How many words do you think is in this file? '))
+if file == 'greeneggs':
+    if character == 3465:
+        print('Congratuation, you are right!')
+    else:
+        print('Nah, it is 3465')
+elif file == 'names':
+    if character == 329:
+        print('Congratuation, you are right!')
+    else:
+        print('Nah, it is 329')
 
 
 
-def vowel_count(read_file):
-    vowels = 'AaEeIiOoUu'
-    count = 0
-    for line in read_file:
-        for letter in line:
-            if letter in vowels:
-                count += 1
-    return count
-
-
-def consonant_count(read_file):
-    consonants = 'BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZz'
-    count = 0
-    for line in read_file:
-        for letter in line:
-            if letter in consonants:
-                count += 1
-    return count
-
-
-
-def character_count(read_file):
-    count = 0
-    for line in read_file:
+print('3')
+def count_characters(read_file):
+    count = 0  
+    for line in read_file:  
         count += len(line)
     return count
 
-file_name = 'Text Files/names.txt'
+
+file_name = 'Text files/names.txt' 
 with open(file_name, 'r') as my_file:
-    list_of_lines = my_file.readlines()
-    vowels = vowel_count(list_of_lines)
-    consonants = consonant_count(list_of_lines)
-    characters = character_count(list_of_lines)
+    num_characters = count_characters(my_file)
 
-print('Character count: ' + str(characters) + '.')
-print('Vowel count: ' + str(vowels) + '.')
-print('Consonant count: ' + str(consonants) + '.')
-print('Other Character Count: ' + str(characters - vowels - consonants) + '.')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print('The file ' + file_name + ' contains ' + str(num_characters)
+      + ' characters.')
+print()
 

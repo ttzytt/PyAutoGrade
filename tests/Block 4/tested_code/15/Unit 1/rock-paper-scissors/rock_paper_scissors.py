@@ -1,34 +1,38 @@
 
 
-
 import random
 
-def main():
+random.seed() 
+
+player = input("Enter 'rock', 'paper' or 'scissors': ")
+
+computer = random.choice(('rock', 'paper', 'scissors'))
+
+print ("I choose " + computer + ".")
+if player == computer:
+    print('We tie.')
 
 
-user_choice = input("Enter 'rock', 'paper', or 'scissors': ").lower().strip()
+if player == 'rock':
+    if computer == 'paper':
+        print('I win.')
+    elif computer == 'scissors':
+        print('You win.')
+
+elif player == 'paper':
+    if computer =='rock':
+        print('You win.')
+    elif computer == 'scissors':
+        print('I win.')
+
+elif player == 'scissors':
+    if computer == 'rock':
+        print ('I win.')
+    elif computer == 'paper':
+        print('You win.')
+
+
+
     
-
-if user_choice not in ['rock', 'paper', 'scissors']:
-    print("Invalid choice. Please enter 'rock', 'paper', or 'scissors'.")
-    
-    
-
-computer_choice = random.choice(['rock', 'paper', 'scissors'])
-print(f"I choose {computer_choice}.")
-
-
-if user_choice == computer_choice:
-    print("We tie.")
 else:
-    if user_choice == 'rock':
-        print("You win.") if computer_choice == 'scissors' else print("I win.")
-    elif user_choice == 'paper':
-        print("You win.") if computer_choice == 'rock' else print("I win.")
-    elif user_choice == 'scissors':
-        print("You win.") if computer_choice == 'paper' else print("I win.")
-
-if __name__ == "__main__":
-    main()
-
-
+    print("Silly! That's not rock paper scissors! :(") 

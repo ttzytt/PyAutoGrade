@@ -3,61 +3,59 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 from infection_functions import *
 
-import random
-random.seed()
 
 
-board =  [['·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·'],
-          ['·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·'],
-          ['·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·'],
-          ['·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·'],
-          ['·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·'],
-          ['·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·'],
-          ['·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·'],
-          ['·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·'],
-          ['·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·'],
-          ['·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·'],
-          ['·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·'],
-          ['·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·', '·']]
 
 
-infection_probability = float(input("Enter the infection probability:"))
-heal_probability = float(input("Enter the heal probability:"))
-total_days = int(input("How many days would you like to run the simulation for:"))
-days = 1
-next_day = 1
 
-board_generator(board)
+board =   [ [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '] ]
 
 
-while days < total_days and next_day == 1:
-    num_infected_neighbors(board, probability_board)
-    if_heal(board, heal_probability)
-    if_infect(board, probability_board, infection_probability)
-    print("Day " + str(days))
-    draw_board(board)
-    draw_board(probability_board)
+from infection_functions import initialize_board, update_board
+
+
+
+initial_infected = 99
+infection_probability = 0.1
+heal_probability = 0.2
+
+print('Welcome to the Infection simulation')
+print('This simulation will start with people in a 10x10 grid, where 10 are infected')
+print('infected people are marked with an x and healthy people are marked with a ·')
+print()
+print(f'Each healthy person has a {infection_probability} chance to get sick')
+print(f'Each infected person has a  {heal_probability} chance to heal')
+print()
+
+
+board = initialize_board(10, initial_infected)
+
+
+num_rounds = 1000
+
+for round_num in range(num_rounds):
+    print(f'Round {round_num + 1}')
+    draw_board(board)  
+
+    
+    input('Press Enter to continue')
     print()
-    days += 1
-    print("1 = yes, 2 = no")
+
     
-    next_day = int(input("Would you like to proceed to the next day?"))
-    
-print("Simulation ended")
-        
+    board = update_board(board, infection_probability, heal_probability)
+
+
+print()
+print('Simulation complete. Max rounds gone through')

@@ -2,7 +2,9 @@
 
 
 
-n = int(input('Enter an integer: '))
+
+n = int (input ('enter an integer: '))
+print ()
 
 
 def factorial (n):
@@ -13,8 +15,7 @@ def factorial (n):
         result_of_factorial = result_of_factorial * count
     return result_of_factorial
 
-
-print(str(n) + '! is ' + str (factorial (n)))
+print(str(n) + '! is ' + str(factorial (n)))
 
 
 def triangular_number (n):
@@ -25,8 +26,7 @@ def triangular_number (n):
         triangular_number = triangular_number + count
     return triangular_number
 
-
-print ('Triangular number: ' + str(triangular_number (n)))
+print('triangular number: ' + str(triangular_number (n)))
 
 
 def new_triangular_number (n):
@@ -37,7 +37,6 @@ def new_triangular_number (n):
         count = count - 2
     return new_triangular_number
 
-
-print ('"New" triangular number: ' + str(new_triangular_number(n)))
+print('new triangular number: ' + str(new_triangular_number (n)))
 
 

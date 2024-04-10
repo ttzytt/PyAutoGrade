@@ -1,83 +1,42 @@
 
 
 
-import random 
+import random
 
 random.seed()
 
-player_choice = input("Enter 'rock', 'paper', or 'scissors', or 'q' to quit: ")
 
-total_score = 0
+def rps_score_round(choice_1, choice_2): 
+    if choice_1 == choice_2: 
+        bonus = 0 
+    elif(((choice_1 == 'rock') and (choice_2 == 'paper')) or
+        ((choice_1 == 'scissors') and (choice_2 == 'rock')) or
+        ((choice_1 == 'paper') and (choice_2 == 'scissors'))):
+            bonus = -1 
+    else:
+        bonus = 1 
 
-while player_choice != 'q': 
-        
-        computer_choice = random.choice(('rock', 'paper', 'scissors'))
-
-        
-
-        print ("I choose " + computer_choice + ".")
-
-        if player_choice == computer_choice:
-                print('We tie.')
+    return bonus 
 
 
-        elif player_choice == 'rock':
-                if computer_choice == 'paper':
-                        print('I win.')
-                elif computer_choice == 'scissors':
-                        print('You win.')
 
-        elif player_choice == 'paper':
-                if computer_choice =='rock':
-                        print('You win.')
-                elif computer_choice == 'scissors':
-                        print('I win.')
+choice_1 = input('Enter \'rock\', \'paper\', or \'scissors\', or \'q\' to quit: ')
+score = 0
 
-        elif player_choice == 'scissors':
-                if computer_choice == 'rock':
-                        print ('I win.')
-                elif computer_choice == 'paper':
-                        print('You win.')
+while choice_1 != 'q': 
+    choice_2 = random.choice(['rock', 'paper', 'scissors']) 
+    if ((choice_1.lower() == 'rock') or
+        (choice_1.lower() == 'scissors') or
+        (choice_1.lower() == 'paper')): 
+        score += rps_score_round(choice_1.lower(), choice_2)
+        print() 
+        print(str(score)) 
+    else:
+        print('That\'s not valid. Try agian.') # tells user to try again
 
-        elif player_choice == 'q':
-                print('Bye bye!')
-                        
-        else:
-                print("Silly! That's not rock paper scissors! :(")
-        
+    print() #adds new line
+    choice_1 = input('Enter \'rock\', \'paper\', or \'scissors\', or \'q\' to quit: ')
 
-        
-            
-
-        def rps_score_round(player_choice, computer_choice):
-                if player_choice == computer_choice:
-                        return 0
-        
-                elif player_choice == 'rock':
-                        if computer_choice == 'paper':
-                                return -1
-                        elif computer_choice == 'scissors':
-                                return 1
-
-                elif player_choice == 'paper':
-                        if computer_choice =='rock':
-                                return 1
-                        elif computer_choice == 'scissors':
-                                return -1
-
-                elif player_choice == 'scissors':
-                        if computer_choice == 'rock':
-                                return -1
-                        elif computer_choice == 'paper':
-                                return 1
-
-        total_score += rps_score_round(player_choice, computer_choice)
-        
-
-
-                
-        print('Your score right now is: ' + str(total_score))        
-        print()
-        
-        player_choice = input("Enter 'rock', 'paper' or 'scissors', or 'q' to quit: ")
-
+print() #adds new line
+print('See you later! :)')
+    

@@ -4,19 +4,32 @@
 
 
 
-name1 = input('a name: ')
-place1 = input('a place: ')
-place2 = input('another place: ')
-verb = input('a verb: ')
-animal = input('an animal: ')
-animal2 = input('a creature: ')
-adjective = input('an adjective: ')
-food = input('a food: ')
+
+noun1 = input('noun1 ')  
+
+color = input('color ')
+
+verb1 = input('verb1 (past tense) ')
+
+adj1 = input('adj1 ')  
+                       
+
+verb2 = input('verb2 ')
+
+place = input('place ')
+
+noun2 = input('noun2 ')
 
 
-story = ('Once upon a time, ' + name1 + ' woke up in the ' + place1 + ' where he has never been before. However, he began to ' + verb + ' calmly. Then, he tried to escape from ' + place1 + ' to ' +
-      place2 + ' with his cute ' + animal + ' and ' + animal2 + '. In ' + place2 + ', there are ' + adjective + ' ' + food + ', so ' + name1 + ' ate the ' + food + ' in a hurry since he was really hungry.')
 
 
 
-print(story)
+
+print() 
+
+
+print('This is a typical day for a '+noun1+' in West Chester, PA. It wore a wig that is dyed in the color '+color+'. The others '+verb1+' the wig at lunch. It was '+adj1+'. Its favourite thing to do is to '+verb2+' in '+place+'. However, it ate a '+noun2+' and got into trouble. ') 
+
+
+
+

@@ -1,85 +1,50 @@
 
 
 
+
+
+
+
+
 import random
 random.seed()
 
 
 
-def tries_until_duplicate_birthday():
-    birthday = random.randint(1, 365)
+def tries_until_duplicate_birthday(include_leap_year):
     birthdays = []
-    while birthday not in birthdays:
-        birthdays.append(birthday)
-        birthday = random.randint(1, 365)
-    return len(birthdays) + 1 
-                              
-                              
+    new_birthday = random.randint(1,365)
+
+    
+    
+    
+    
+    if include_leap_year == True:
+        choose_birthday = []
+        for i in range(365 * 4):
+            choose_birthday.append(new_birthday)
+        choose_birthday.append(366)
+        new_birthday = random.choose(choose_birthday)
             
+    
+    
+    while new_birthday not in birthdays:
+        birthdays.append(new_birthday)
+        new_birthday = random.randint(1,365)
+    return len(birthdays)+ 1
 
 
 
-def average_until_duplicate_birthday(num_trials):
-    times = 0
-    average = 0
-    while (times <= num_trials):
-        birthday = random.randint(1, 365)
-        birthdays = []
-        while birthday not in birthdays:
-            birthdays.append(birthday)
-            birthday = random.randint(1, 365)
-        average += len(birthdays) + 1 
-        times += 1
-    average /= times
+def average_until_duplicate_birthday(num_trials, include_leap_year):
+    sum_tries = 0
+
+    for _ in range(num_trials):
+        sum_tries = sum_tries + tries_until_duplicate_birthday(include_leap_year)
+        
+    average = sum_tries / num_trials
     return average
 
 
-
-def run_B():
-    num_trials = int(input('For how many times do you want it to run? '))
-    print(average_until_duplicate_birthday(num_trials))
-
-
-
-
-
-
-
-
-
-
-def tries_until_duplicate_birthday(include_leap_year = False):
-    leap = random.randint(1, 4)
-    if leap == 4:
-        days = 366
-        print('it is a leap year')
-    else:
-        days = 365
-    birthday = random.randint(1, days)
-    birthdays = []
-    while birthday not in birthdays:
-        birthdays.append(birthday)
-        birthday = random.randint(1, days)
-    return len(birthdays) + 1 
-
-def average_until_duplicate_birthday(num_trials, include_leap_year = False):
-    leap = random.randint(1, 4)
-    if leap == 4:
-        days = 366
-        print('it is a leap year')
-    else:
-        days = 365
-    times = 0
-    average = 0
-    while (times <= num_trials):
-        birthday = random.randint(1, 365)
-        birthdays = []
-        while birthday not in birthdays:
-            birthdays.append(birthday)
-            birthday = random.randint(1, 365)
-        average += len(birthdays) + 1 
-        times += 1
-    average /= times
-    return average
-
-
+num_trials = int(input('Birthday problem: How many trails do you want to do? '))
+include_leap_year = input('Include leap year? True/False: ')
+print(average_until_duplicate_birthday(num_trials, include_leap_year))

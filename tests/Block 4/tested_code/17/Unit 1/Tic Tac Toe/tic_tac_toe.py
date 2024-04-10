@@ -8,30 +8,37 @@ board = [ [' ', ' ', ' '],
           [' ', ' ', ' '],
           [' ', ' ', ' '] ]
 player = 'x'
-number_played = 0
 
 
-while find_winner(board) is None and number_played < 9:
+def is_board_full(board):
+    for row in range(len(board)):
+        for col in range(len(board[row])):
+            if board[row][col] == ' ':
+                return False
+
+    return True
+
+
+
+while find_winner(board) is None   and   not is_board_full(board):  
     draw_board(board)
     next_move = get_move(player)
+    
     success = make_move(player, next_move, board)
-    while success is not True:
+    while not success:
         print('That is not a valid move.')
-        print()
         next_move = get_move(player)
         success = make_move(player, next_move, board)
+
     player = next_player(player)
-    number_played += 1
 
 
 
 draw_board(board)
-print()
 
 
-
-if number_played == 9:
-    print('The game ties.')
+if find_winner(board):
+    print('The ' + find_winner(board) + ' player wins!')
 else:
-    print('The '+ next_player(player) +' player wins!')
+    print('It is a draw!')
 

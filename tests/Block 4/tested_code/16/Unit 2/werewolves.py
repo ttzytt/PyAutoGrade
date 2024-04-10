@@ -2,48 +2,78 @@
 
 
 
-
-
 import random
+
 random.seed()
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def find_winner(num_werewolves, num_villager):
-    time = 'day' 
-    while num_werewolves != 0 and num_werewolves < num_villager: 
-         
-        total_num = num_werewolves + num_villager
-        if time == 'night': 
-            num_villager -= 1
-            time = 'day'
+    while (num_werewolves > 0):
+        if (num_villager <= num_werewolves):
+            return 'werewolves'
+        num_villager -= 1 
+        if (num_villager <= 0):
+            return 'werewolves'
+        werewolf_or_villlager = random.randint(1, num_villager + num_werewolves)
+        
+        if (werewolf_or_villlager > num_werewolves):
+            
+            num_villager -= 1 
         else:
-            chosen_kill = random.randint(1, total_num) 
-            if chosen_kill <= num_werewolves: 
-                num_werewolves -= 1
-            else: 
-                num_villager -= 1
-            time = 'night'
-    if num_werewolves == 0: 
-        return 'villagers'
-    elif num_werewolves >= num_villager: 
-        return 'werewolves'
+            num_werewolves -= 1 
+
+    return 'village'
 
 
 
 
 def odds_of_werewolves_winning(num_werewolves, num_villager):
-    werewolf_win = 0
-    for _ in range (10000): 
-        if find_winner(num_werewolves, num_villager) == 'werewolves':
-            werewolf_win += 1
-    return (werewolf_win / 10000)
+    werewolves_won = 0.0
+    for i in range(100000):
+        winner = find_winner(num_werewolves, num_villager)
+        if(winner == 'werewolves'):
+            werewolves_won += 1.0
+
+    return werewolves_won / 100000.00
+    
 
 
-num_villager = int(input('How many villagers would you like? '))
-num_werewolves = int(input('How many werewolves would you like? '))
-print(odds_of_werewolves_winning(num_werewolves, num_villager))
 
+num_werewolves = int(input('Enter how many werewolves you want: '))
+num_villager = int(input('Enter how many villagers you want: '))
+percentage = odds_of_werewolves_winning(num_werewolves, num_villager)
+print('There is a ' + str(percentage * 100) + '% chance of the werewolves winning')
 
 

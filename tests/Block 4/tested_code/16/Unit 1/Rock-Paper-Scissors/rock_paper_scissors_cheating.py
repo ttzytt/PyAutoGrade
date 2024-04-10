@@ -1,25 +1,17 @@
 
 
 
-player = input("Enter 'rock', 'paper' or 'scissors': ")
+user_rps_choice = input('Enter \'rock\' \'paper\' or \'scissors\': ')
 
-
-if player == 'rock':
-    computer = 'paper.'
-    print("I choose " + computer)
-    print ('I win.')
-    
-
-elif player == 'paper':
-    computer = 'scissors.'
-    print("I choose " + computer)
-    print ('I win.')
-
-elif player == 'scissors':
-    computer = 'rock.'
-    print("I choose " + computer)
-    print ('I win.')
-
-
+if (user_rps_choice == 'rock'):                                 
+        rps_choice = 'paper'
+        print('I choose ' + rps_choice + ' I win!')
+elif (user_rps_choice == 'paper'):                              
+        rps_choice = 'scissors'
+        print('I choose ' + rps_choice + ' I win!')
+elif (user_rps_choice == 'scissors'):                           
+        rps_choice = 'rock'
+        print('I choose ' + rps_choice + ' I win!')
 else:
-    print("Silly! That's not rock paper scissors! :(")
+    print()
+

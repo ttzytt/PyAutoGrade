@@ -2,19 +2,14 @@
 
 
 
-number_n = int(input("Please type in the number you want to be factorialized: "))
+user_input = int(input('Type in a number: '))
+user_input_factorial = 1
+countdown = 1
 
 
+while countdown <= user_input:
+    user_input_factorial = user_input_factorial * countdown
+    countdown = countdown +1
 
 
-number_1 = number_n - 1
-
-
-
-
-while number_1 > 1:
-
-    number_n = number_n * number_1
-    number_1 = number_1 - 1
-print("The factoral of your number is " + str(number_n))
-
+print('The value of n! equals to ' + str(user_input_factorial) +'.')

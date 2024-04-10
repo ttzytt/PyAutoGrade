@@ -1,27 +1,27 @@
 
 
 
-print('Mad Lib! Created by Frank Wang.')
-noun_1 = input('noun 1(start with Capital letter):')
-noun_2 = input('noun 2:')
-noun_3 = input('noun 3(plural):')
-noun_4 = input('noun 4:')
-noun_5 = input('noun 5(start with Capital letter):') 
-verb = input('verb:')
-print(' ')
-print('    There used to be a huge building called ' + noun_1 + '(noun 1), with a large ' + noun_2
-      + '(noun 2) on its top. Every day, ' + noun_3
-      + '(noun 3) go on to the top of the building and watch the scenery of '
-      + noun_4 + '(noun 4) city. The building is used as the headquarters for ' + noun_5
-      + '(noun 5) Corportation, which ' + verb + '(verb) ' + noun_2 + '(noun 2) '
-      + 'and makes the greatest profit in the world ever. The ' + noun_3
-      + '(noun 3) feel that this building is always the best building ever in the ' + noun_4 + '(noun 4) city!' )
 
 
+adjective1 = input('Enter an adjective: ')
+color1 = input('Enter a color: ')
+color2 = input('Enter a color: ')
+color3 = input('Enter a color: ')
+type_of_furniture = input('Enter a type of furniture: ')
+plural_animal = input('Enter a plural animal: ')
+type_of_food = input('Enter a type of food: ')
+adjective2 = input('Enter an adjective: ')
+noun = input('Enter a noun: ')
+verb = input('Enter an action verb: ')
 
 
+story = ('There was once a school that most people would find to be ' + adjective1 + '. Lockers were both ' + color1
+         + ' and ' + color2 + '. ' + 'The walls were painted to be a neon ' + color3 + '. Instead of desks, there were '
+         + type_of_furniture + '! ' + 'Throughout the different classrooms, ' + plural_animal +
+         ' were kept in glass tanks. These ' + plural_animal + ' would scare all the students. During lunch, ' +
+         type_of_food + ' was served, and it always tasted ' + adjective2 + '. At the end of a day, a ' + noun +
+         ' is rung, and all the students ' + verb + ' out of the school.')
 
- 
-
+print(story)
 
 

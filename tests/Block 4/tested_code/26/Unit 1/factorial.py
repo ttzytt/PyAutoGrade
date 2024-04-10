@@ -2,18 +2,23 @@
 
 
 
-
-number = int(input('Type a number less than 1558: '))
-
-
-count = 1 
-factorial = 1 
+integer = input(' Tell me a random integer ')
 
 
-while count <= number:
-    factorial = factorial * count
-    count = count + 1
 
 
-print()
-print('The factorial of '+ str(number) +' is '+ str(factorial) + '.')
+
+
+integer = int(float(integer))
+number = 1
+result = 1
+
+
+
+while number <= integer:
+    result = result * number
+    number = number + 1
+
+
+print(result)
+    

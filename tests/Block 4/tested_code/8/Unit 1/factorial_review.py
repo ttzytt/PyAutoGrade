@@ -1,15 +1,18 @@
 
 
 
+number = int(input("Please enter a number.")) 
+factnumber = number
 
-
-number = int(input("Enter a number:"))
-factorial = number
-
-
+factorial = factnumber 
 while number > 1:
-    factorial = factorial*(number - 1)
+    factorial = factorial * (number - 1) 
     number = number - 1
-print("The factorial of your number is: " + str(factorial))
+
+
+print('The factorial of ' + str(factnumber) + ' is ' + str(factorial))
+
+
+
 
 

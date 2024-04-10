@@ -1,56 +1,49 @@
 
 
-def ask(question):
-    while True: 
-        response = input(question + " ").lower()
-        if response == 'yes' or response == 'y':
-            return True
-        elif response == 'no' or response == 'n':
-            return False
-        else:
-            print("Invalid Input.")
 
 
 
+print('Think of a number between 1,10')
 
+print("Enter 'y' for yes and 'no' for no")
 
+odd_or_not = input('Is your number odd?: ')
 
-    
-
-
-
-
-
-print('Choose a number between 1 and 10')
-print('I\'ma try to guess it, answer "yes" or "no" to the following questions:')
-
-if ask('Is your number odd?'):
-    if ask('Is it divisible by 3?'):
-        if ask('Is it prime?'):
-            print('Your number is 3.')
-        else:
-            print('Your number is 9.')
+if odd_or_not == 'y':
+    greater_7 = input('Is your number greater than 7(not incl. 7): ')
+    if greater_7 == 'y':
+        print('Your number is 9')
     else:
-        if ask('Is it prime?'):
-            if ask('Is it divisible by 5?'):
-                print('Your number is 5.')
-            else:
-                print('Your number is 7.')
+        div_5 = input('Is your number divisible by 5: ')
+        if div_5 == 'y':
+            print('Your number is 5')
         else:
-            print('Your number is 1.')
+            div_3 = input('Is your number divisible by 3: ')
+            if div_3 == 'y':
+                print('Your number is 3')
+            else:
+                prime_or_not = input('Is your number prime or not: ')
+                if prime_or_not == 'y':
+                    print('Your number is 7')
+                else:
+                    print('Your number is 1')
 else:
-    if ask('Is it greater than 7? (not including 7)'):
-        if ask('Is it divisible by 5?'):
-            print('Your number is 10.')
-        else:
-            print('Your number is 8.')
+    prime_or_not = input('Is your number prime or not: ')
+    if prime_or_not == 'y':
+        print('Your number is 2')
     else:
-        if ask('Is it prime?'):
-            print('Your number is 2.')
+        div_3 = input('Is your number divisible by 3: ')
+        if div_3 == 'y':
+            print('Your number is 6')
         else:
-            if ask('Is it divisible by 3?'):
-                print('Your number is 6.')
+            div_5 = input('Is your number divisible by 5: ')
+            if div_5 == 'y':
+                print('Your number is 5')
             else:
-                print('Your number is 4.')
+                greater_7 = input('Is your number greater than 7: ')
+                if greater_7 == 'y':
+                    print('Your number is 8')
+                else:
+                    print('Your number is 4')
+        
 
-print("Let's play again later!")

@@ -4,175 +4,62 @@
 
 
 
-
-
-
-
 import random
-random.seed()
 
 
 
-
-def make_board(board, board_length, board_copy, board_infected_count):
-    
-    for row in range (board_length):
-        board.append([])
-    for row in range (board_length):
-        for column in range(board_length):
-            board[row].append(0)
-    
-    for row in range (board_length):
-        board_copy.append([])
-    for row in range (board_length):
-        for column in range(board_length):
-            board_copy[row].append(0)
-
-    for row in range (board_length):
-        board_infected_count.append([])
-    for row in range (board_length):
-        for column in range(board_length):
-            board_infected_count[row].append(0)
+def board_initialize(board):
+    for i in range(1, 11):
+        for j in range(1, 11):
+            a = random.randint(1, 100)
+            if a <= 10:
+                board[i][j] = 1 
 
 
 
+def know_nearby(board, nearby_infections):
+    for i in range(1, 11):
+        for j in range(1, 11):
+            
+            nearby_infections[i][j] = board[i - 1][j] + board[i + 1][j] + board[i][j - 1] + board[i][j + 1]
 
-def setup_board(board, board_length, infected_row, infected_column):
-    
-    if (infected_row>0 and infected_row < board_length
-            and infected_column >0 and infected_column < board_length):
-        board[infected_row][infected_column] = 1 
+
+
+def board_modify(board, nearby_infections, infection_possibility = 0.35, cure_possibility = 0.10):
+    for i in range(1, 11):
+        for j in range(1, 11):
+            a = random.random()
+            if board[i][j] == 1:
+                if a < float(cure_possibility):
+                    board[i][j] = 0
+            else:
+                if a < float(infection_possibility) * nearby_infections[i][j]:
+                    board[i][j] = 1
+
+
+
+def find_ending(board):
+    ending = 0
+    for i in range(1, 11):
+        for j in range(1, 11):
+            ending += board[i][j]
+    if ending == 0:
+        return 1 
+    elif ending == 100:
+        return 0 
     else:
-        print("Please re-enter")
-    
+        return None
 
 
 
 
-
-
-
-
-
-def infecting_neighbor(board, board_length, infect, heal, board_copy):
-    
-    copy_board(board, board_copy, board_length) 
-    row = 1
-    column = 1 
-    infected_neighbor_count = 0
-    
-    while (row< (board_length-1)):
-        column = 1
-        while (column< (board_length-1)):
-            if board[row][column] == 0:
-                
-                if board_copy[row-1][column] == 1:  
-                    infected_neighbor_count += 1
-                if board_copy[row][column-1] == 1:
-                    infected_neighbor_count += 1
-                if board_copy[row][column+1] == 1:
-                    infected_neighbor_count += 1
-                if board_copy[row+1][column] == 1:
-                    infected_neighbor_count += 1
-
-            if (infected_neighbor_count >= 1 and board[row][column] == 0):
-                
-                if random.random() < (infect * infected_neighbor_count):
-                    board[row][column] = 1
-                    infected_neighbor_count = 0
-                else:
-                    infected_neighbor_count = 0
-                
-            column += 1
-        row += 1
-    
-    copy_board(board, board_copy, board_length)
-    
-
-
-def heal_process(board_length, board, board_copy, heal):
-    row = 1
-    column = 1
-    
-    while (row< (board_length-1)):
-        column = 1
-        while (column< (board_length-1)):
-            if board[row][column] == 1:
-                if random.random() < heal:
-                    board[row][column] = 0
-            column += 1
-        row += 1
-
-    
-    
-    copy_board(board, board_copy, board_length)
-
-    
-    
-
-def copy_board(board, board_copy, board_length):
-    
-    row = 1
-    while (row< (board_length-1)):
-        column = 1
-        while (column< (board_length-1)):
-            board_copy[row][column] = 0
-            column += 1
-        row+= 1
-
-    row = 1
-    
-    
-    while (row< (board_length-1)):
-        column = 1
-        while (column< (board_length-1)):
-            if board[row][column] == 1:
-                board_copy[row][column] = 1
-            if board[row][column] == 0:
-                board_copy[row][column] = 0 
-            column += 1
-        row+=1
-
-
-
-def print_board(board, board_length):
-    print()
-    row = 1
-    column = 1
-    while (row< (board_length-1)):
-        column = 1
-        while (column< (board_length-1)):
-            if board[row][column] == 1:
-                print('X', end = ' ')
-                
-            if board[row][column] == 0:
-                print('·', end = ' ')
-        
-            column += 1
-        print()
-        row += 1
-        
-
-def count_infected_time(board_length, board, board_infected_count):
-    row = 1
-    column = 1
-    while (row< (board_length-1)):
-        column = 1
-        while (column< (board_length-1)):
-            if board[row][column] == 1:
-                board_infected_count[row][column] += 1
-            column += 1
-        row += 1
-
-
-def print_infected_board(board_infected_count, board_length):
-    print()
-    row = 1
-    column = 1
-    while (row< (board_length-1)):
-        column = 1
-        while (column< (board_length-1)):
-            print(board_infected_count[row][column], end = ' ')
-            column += 1
-        print()
-        row += 1
+def find_difference(board):
+    ending = 0
+    all_board = 0
+    for i in range(2, 10):
+        for j in range(2, 10):
+            ending += board[i][j]
+    for i in range(1, 11):
+        for j in range(1, 11):
+            all_board += board[i][j]
+    return (ending*1.00/64)/((all_board-ending)*1.00/36)

@@ -1,27 +1,25 @@
 
 
 
+
+
 import random
 
-random.seed()
+
+userchoice = input("Enter 'rock' or 'paper': ").lower()
 
 
-
-user = input('choose rock or paper: ')
-
+ranchoice = random.choice(['rock', 'paper'])
 
 
-me = random.choice(['rock','paper'])
-print('i choose ' + me)
+print("I choose " + ranchoice + ".")
 
 
-if user == 'rock' and me == 'paper':
-    print('i win')
-elif user == 'rock' and me == 'rock':
-    print('we tie')
-elif user == 'paper' and me == 'rock':
-    print('you win')
-elif me == 'paper' and user == 'paper':
-    print('we tie')
-
-
+if userchoice == ranchoice:
+    print("We tie.")  
+elif (userchoice == 'rock' and ranchoice == 'paper'):
+    print("You win")  
+elif (userchoice == 'paper' and ranchoice == 'rock'):
+    print("You win.")  
+else:
+    print("I win.")  

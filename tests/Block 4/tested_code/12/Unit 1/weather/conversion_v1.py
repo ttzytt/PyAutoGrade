@@ -3,12 +3,18 @@
 
 
 
-Integer = int(input('What is temperature today in °F? '))
+fahrenheit = float(input("What is the temperature today(in °F)? "))
+celsius = float(5 * (fahrenheit - 32) / 9)
 
 
-if Integer >= 90:
-    print('Wow that is hot.')
+if fahrenheit > 90:
+    
+    print("Wow that's hot.")
 
 
-Celsius = (Integer - 32) / 1.8
-print('That is ' + str(Celsius) + '°C.')
+print("That's " + str(celsius) + " °C.")
+
+
+    
+    
+

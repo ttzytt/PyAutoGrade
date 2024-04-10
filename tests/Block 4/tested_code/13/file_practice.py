@@ -1,37 +1,38 @@
 
 
 
-def count_characters(read_file):
+
+
+def count_a_word(string):
+
+    word_counter = 0
+
+    file_name = 'Text files/greeneggs.txt'
+    with open(file_name, 'r') as my_file:
+        contents = my_file.read()
+
     
-    count = 0  
-    for line in read_file:  
-        count += len(line)
-    return count
+    delimiters = [',', '-', '.', '!', ' ', '?']
+    for delimiter in delimiters:
+        
+        contents = " ".join(contents.split(delimiter))
+     
+    words = contents.split()
 
-def count_lines(read_file):
+    for word in words:
+        if word == string:
+            word_counter += 1
+
+    return word_counter
+
+
+
+while True:
+    input_word = input('What word would you like to count? ')
     
-    line_count = 0
-    for _ in read_file:
-        line_count += 1
-    return line_count
-
-file_name = 'Text files/names.txt'
-
-
-my_file = open(file_name, 'r')
+    print('The word ' + input_word + ' appears ' + str(count_a_word(input_word))
+          + ' times.')
 
 
 
-full_content = my_file.read()
 
-
-with open(file_name, 'r') as my_file:
-    num_characters = count_characters(my_file)
-
-print('The file ' + file_name + ' contains ' + str(num_characters) + ' characters.')
-
-
-with open(file_name, 'r') as my_file:
-    num_lines = count_lines(my_file)
-
-print('The file ' + file_name + ' contains ' + str(num_lines) + ' lines.')

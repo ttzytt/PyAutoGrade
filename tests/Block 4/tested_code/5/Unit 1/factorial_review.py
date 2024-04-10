@@ -3,20 +3,12 @@
 
 
 
+i=int(input('Enter a integer'))
 
-factorial = 1
+f=int(1)
 
-
-changed_number = int(input("Which factorial do you want me to calculate? "))
-print()
-
-
-original_number = changed_number 
-
-
-while changed_number >= 1:
-    factorial = factorial * changed_number
-    changed_number = changed_number - 1
-    
-
-print('The factorial of ' + str(original_number) + ' is ' + str(factorial) + '.')
+while i > 1:
+        f = f * i
+        i = i-1
+print(f)
+        

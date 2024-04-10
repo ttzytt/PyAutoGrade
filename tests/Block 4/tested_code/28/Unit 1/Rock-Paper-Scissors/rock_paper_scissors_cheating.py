@@ -2,27 +2,23 @@
 
 
 
-user_choice = input("Enter 'rock' or 'paper' or 'scissors': ").lower()
 
 
 
 
-if user_choice == 'rock':
-    print('I choose paper.')
-    print('I win.')
+user_choice = input("Rock, Paper, or Scissors: ").lower()
 
-elif user_choice == 'paper':
-    print('I choose scissors.')
-    print('I win.')
-
-elif user_choice == 'scissors':
-    print('I choose rock.')
-    print('I win.')
+winning_battles = {
+        "rock": "paper",
+        "paper": "scissors",
+        "scissors": "rock"
+    }
 
 
-else:
-    print('Invalid answer.')
 
+computer_choice = winning_battles.get(user_choice, "nothing since you're cheating.")
 
+print("I choose " + computer_choice)
+print("I win.")
 
 

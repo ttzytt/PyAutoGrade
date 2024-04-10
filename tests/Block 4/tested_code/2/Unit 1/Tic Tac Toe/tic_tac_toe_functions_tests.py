@@ -1,6 +1,5 @@
 
 
-
 from tic_tac_toe_functions import *
 
 
@@ -31,16 +30,14 @@ def find_winner_TEST():
     print('Start find_winner_TEST')
 
     
-    board = [ [' ', ' ', ' ', ' '],
-              [' ', ' ', ' ', ' '],
-              [' ', 'o', 'o', 'o'],
-              ['x', 'x', 'x', 'x'] ]
+    board = [ [' ', ' ', ' '],
+              ['x', 'x', 'x'],
+              ['x', 'o', ' '] ]
     TEST('row win', 'x', find_winner(board))
     
-    board = [ [' ', ' ', ' ', ' '],
-              ['x', ' ', 'x', ' '],
-              ['o', 'o', 'o', 'o'],
-              ['x', 'o', 'x', 'x'] ]
+    board = [ [' ', ' ', ' '],
+              ['x', ' ', 'x'],
+              ['o', 'o', 'o'] ]
     TEST('row win', 'o', find_winner(board))
 
     

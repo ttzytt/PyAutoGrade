@@ -2,19 +2,26 @@
 
 
 
-triangular_number = 1
 
 
-changed_number = int(input("Which factorial do you want me to calculate? "))
-print()
+
+ 
+
+integer = int(input('Enter a number: '))
 
 
-original_number = changed_number 
+n = 1
+count = 1
+value = 1
+while n <= integer:
+    factor = count
+    count = 1
+    while count <= n:
+        count = count +1
+        a = factor
+        value = value + 1
+    n = n + 1
+    factor = count
 
-
-while changed_number > 1:
-    triangular_number = triangular_number + changed_number
-    changed_number = changed_number - 1
-    
-
-print('The triangular number of ' + str(original_number) + ' is ' + str(triangular_number) + '.')
+value = value - 1
+print(value)

@@ -1,12 +1,10 @@
 
 
 
-player_number = int(input("Enter a number: ")) 
-triangular = player_number
-print_number = player_number
+user_number = int(input("Please enter a number."))
+triangle_number = user_number
+while user_number > 1:
+    triangle_number = (triangle_number * (user_number + 1)) / 2
+    user_number = 0  
 
-while player_number > 1:
-    triangular = triangular + (player_number - 1)
-    player_number = player_number - 1
-
-print(str(print_number) + "'s triangle number is: " + str(triangular))
+print('The triangular number of your number is ' + str(round(triangle_number)))

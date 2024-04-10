@@ -3,36 +3,33 @@
 
 
 
-user = input("Enter 'rock' 'paper' or 'scissors' : ")
 
+import random 
 
-import random
 random.seed()
-computer_select_list = ['rock', 'paper', 'scissors']
 
-computer_select = random.choice(computer_select_list)
-
-
-print("I choose " + computer_select)
-
-if user == computer_select:
-    print("We tie.")
+human_choice = input("Enter 'rock' or 'paper'or 'scissors': ") 
+computer_choice = random.choice(['rock', 'paper', 'scissors']) 
+print('I choose ' + computer_choice + '.') 
 
 
-if user == "rock":
-    if computer_select == "paper":
-        print("I win.")
-    elif computer_select == "scissors":
-        print("You win.")
+if human_choice == computer_choice:
+    print('We tie.')
 
-elif user == "paper":
-    if computer_select == "rock":
-        print("You win.")
-    elif computer_select == "scissors":
-        print("I win.")
 
-elif user == "scissors":
-    if computer_select == "rock":
-        print("You win.")
-    elif computer_select == "paper":
-        print("I win.")
+elif human_choice == 'rock' and computer_choice == 'scissors':
+    print('You win.')
+    
+elif human_choice == 'paper' and computer_choice == 'rock':
+    print('You win.')
+    
+elif human_choice == 'scissors' and computer_choice == 'paper':
+    print('You win.')
+
+
+elif human_choice == 'rock' or human_choice == 'paper' or human_choice == 'scissors':
+    print('I win.')
+
+else:
+    
+    print('You cannot choose anything else than rock, paper or scissors!')

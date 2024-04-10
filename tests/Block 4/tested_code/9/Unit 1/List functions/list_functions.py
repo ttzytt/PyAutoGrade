@@ -5,182 +5,182 @@
 
 
 
-def count_number_larger_than(target, numbers):
-    
-    total = 0
-    
-    for count in range(len(numbers)):
-        if numbers[count] > target:
-            total += 1
-            
-    return total           
 
+
+
+def count_number_larger_than(target, numbers):
+    count = 0 
+    for i in range(len(numbers)):
+        if numbers[i] > target : 
+            count += 1 
+    return count
 
 
 def average(numbers):
-
-    if len(numbers) == 0:
-        return None
-
-    total = 0
-    for count in range(len(numbers)):
-        total += numbers[count] 
-        
-    return total/len(numbers) 
-
+    if len(numbers) == 0: 
+        return 0
+      
+    
+    sum_function = 0 
+    for i in numbers:
+        sum_function = i + sum_function
+    return sum_function/len(numbers) 
 
 
 
 def largest_element(numbers):
     
-    if len(numbers) == 0:
-        return None
+    if len(numbers) == 0: 
+        return 0
+      
+    else: 
+        max_value = numbers[0] 
+        for i in numbers: 
+            if (i > max_value): 
+                max_value = i
+        return max_value
+
+
+
+
+def all_equal(my_list):
     
-    max = numbers[0]
-    for count in range(len(numbers)):
-        if numbers[count] >= max: 
-            max = numbers[count] 
-            
-    return max
-
-
-
-
-def all_equal(numbers):
-    
-    if len(numbers) == 0:
-        return None
-    
-    elif len(numbers) == 1:
+    if len(my_list) <= 1:
         return True
     
-    for count in range(len(numbers)-1):
-          if numbers[count] != numbers[count+1]:
-              return False
-              
-            
-    return True 
-
-
-
-def alternate_sum(numbers): 
     
-    if len(numbers) == 0:
-        return None
+    for i in range(1, len(my_list)):
+        if my_list[0] != my_list[i]:
+            return False
+    return True
 
-    alternate_sum = 0
-    for count in range(len(numbers)):
+
+
+
         
-        if count % 2 == 0: 
-            alternate_sum += numbers[count]
+
+def alternate_sum(numbers):
+    total_sum = 0 
+    for i in range(len(numbers)):
+        if i % 2 == 0: 
+            total_sum += numbers[i] 
+        else: 
+            total_sum -= numbers[i] 
+    return total_sum
+
+
+
+
+def is_ordered(numbers, is_strict):
+    is_ordered = True
+
+    if len(numbers) <= 1:
+        return True
+    
+    for number in range(1,len(numbers)-1):
+        if is_strict == True:
+            if numbers[number] >= numbers[number + 1]:
+                return False
+            
+        elif is_strict == False:
+            if numbers[number] > numbers[number + 1]:
+                return False
             
         else: 
-            alternate_sum -= numbers[count]
-            
-    return alternate_sum
+            if numbers[number] < numbers[number+1]:
+                return True
+    return True
 
 
 
 
-def is_ordered(numbers, is_strict): 
+def rotate_right(my_list):
+    if len(my_list) <= 1:
+        return my_list
 
-    if len(numbers) == 0: 
-        return None
-    
-    if is_strict == True: 
-        for count in range(len(numbers)-1):
-            if numbers[count+1] <= numbers[count]:
-                return False
-            
-    elif is_strict == False: 
-        for count in range(len(numbers)-1):
-            if numbers[count+1] < numbers[count]:
-                return False
-            
-    return True 
-    
-  
-
-
-def rotate_right(my_list): 
-
-    new_list = [] 
+    new_list = []
 
     new_list.append(my_list[len(my_list)-1])
-    
-    for count in range(len(my_list)-1):
-        new_list.append(my_list[count])
-
+    for i in range(len(my_list)-1):
+      new_list.append(my_list[i])  
+        
     return new_list
         
 
+
+
+def weird_double(numbers):
+    if len(numbers) <= 1:
+        return numbers
     
-
-
-
-
-def weird_double(numbers): 
-    
-    count = 0
-    while count < len(numbers):
-        
-        if numbers[count] % 3 == 0: 
-            count += 3 
-            
+    new_list = []
+    skip_number = 0
+    i = 0
+    while i < len(numbers):
+        if numbers[i] % 3 == 0:
+            i += 4
         else:
-            numbers[count] *= 2
-            
-        count += 1 
-        
+            numbers[i] *= 2
+            i += 1
     return numbers
 
+def merge_ordered_lists(ordered_numbers_1,ordered_numbers_2):
+    if (len(ordered_numbers_1) <= 1) and (len(ordered_numbers_2)) <= 1: 
 
-
-
-def merge_ordered_lists(ordered_numbers_1, ordered_numbers_2): 
-    
-    if len(ordered_numbers_1) == 0 or len(ordered_numbers_2) == 0: 
-        if len(ordered_numbers_1) == 0 and len(ordered_numbers_2) == 0:
-            return None
-        elif len(ordered_numbers_1) == 0 and len(ordered_numbers_2) != 0:
+        if ((len(ordered_numbers_1)) and (len(ordered_numbers_2))) == 1:
+            return ordered_numbers_1 + ordered_numbers_2 
+        
+        elif (len(ordered_numbers_1)) == 0:
+            
             return ordered_numbers_2
-        elif len(ordered_numbers_1) != 0 and len(ordered_numbers_2) == 0:
+        
+        else:
             return ordered_numbers_1
 
     
+    point_1 = 0
+    point_2 = 0
+    my_list = []
+    list_1_lastelement = ordered_numbers_1[len(ordered_numbers_1) - 1]
+    list_2_lastelement = ordered_numbers_2[len(ordered_numbers_2) - 1]
+
     
-    
-    output = []
-    count_1 = 0
-    count_2 = 0
-    
-    
-    
-    while count_1 < len(ordered_numbers_1) and count_2 < len(ordered_numbers_2):
+    if list_1_lastelement <= list_2_lastelement: 
+        while point_2 < len(ordered_numbers_2): 
+            if ordered_numbers_1[point_1] <= ordered_numbers_2[point_2]:
+                my_list.append(ordered_numbers_1[point_1]) 
+                point_1 += 1
+                if point_1 == len(ordered_numbers_1):
+                    while point_2 < len(ordered_numbers_2):
+                        my_list.append(ordered_numbers_2[point_2])
+                        point_2 += 1
+            else:
+                my_list.append(ordered_numbers_2[point_2])
+                point_2 += 1
+            
         
-        if ordered_numbers_1[count_1] >= ordered_numbers_2[count_2]: 
-            output.append(ordered_numbers_2[count_2])
-            count_2 += 1
-            
-            
-        else:
-            output.append(ordered_numbers_1[count_1])
-            count_1 += 1
-            
+    else:
+        while point_1 < len(ordered_numbers_1):
+            if ordered_numbers_2[point_2] <= ordered_numbers_1[point_1]:
+                my_list.append(ordered_numbers_2[point_2])
+                point_2 += 1
+                if point_2 == len(ordered_numbers_2):
+                    while point_1 < len(ordered_numbers_1):
+                        my_list.append(ordered_numbers_1[point_1])
+                        point_1 += 1
+            else:
+                my_list.append(ordered_numbers_1[point_1])
+                point_1 += 1
+
+    return my_list
+        
+                
+
     
+
+
+        
     
-    if count_1 == len(ordered_numbers_1):
-        for count_2 in range(count_2,len(ordered_numbers_2)):
-            output.append(ordered_numbers_2[count_2])
             
-    elif count_2 == len(ordered_numbers_2):
-        for count_1 in range(count_1,len(ordered_numbers_1)):
-            output.append(ordered_numbers_1[count_1])
-
-    return output
-
-
-
-
 
 

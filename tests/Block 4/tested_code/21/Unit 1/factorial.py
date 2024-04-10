@@ -3,18 +3,17 @@
 
 
 
-user_input = int(input('Type in a Number: '))
-factor = 1
-result = 1
+number = int(input('Type a number less than 1558: '))
 
 
-while factor <= user_input:
-    result = result * factor
-    factor = factor + 1
-    
-
-print('The factorial of ' + str(user_input) + ' is ' + str(result) + '.')
+count = 1 
+factorial = 1 
 
 
+while count <= number:
+    factorial = factorial * count
+    count = count + 1
 
 
+print()
+print('The factorial of '+ str(number) +' is '+ str(factorial) + '.')

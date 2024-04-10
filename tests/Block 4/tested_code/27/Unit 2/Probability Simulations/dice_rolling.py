@@ -3,36 +3,34 @@
 
 
 
+
 import random
-random.seed
+random.seed()
 
+def tries_until_different_values():
+    dice = [0,0,0,0,0,0] 
+    i = 0
+    while True:
+        a = random.randint(0, 5) 
+        if dice != [1,1,1,1,1,1]: 
+            dice[a] = 1
+            i += 1
+            
+        else:
+            return i 
 
-
-
-
-def tries_until_all_dice_in_list():
-    dice_list = []
-    new_dice = 0
-    count = 0
-    while ((len(dice_list))< 6):
-        new_dice = random.randint(1, 6) 
-        if (new_dice not in dice_list):
-            dice_list.append(new_dice)
-        count += 1
-    return count
-
- 
-
-def average_until_all_dice_in_list(num_trials):
-    total = 0
+def average_until_different_values(num_trials):
+    f = 0 
     for _ in range(num_trials):
-        total += tries_until_all_dice_in_list()
-    average = (total/num_trials)
-    print(average)
-    return average
-    
-num_trials = int(input("How many times you want to try: "))
-average_until_all_dice_in_list(num_trials)
+        f += tries_until_different_values()
+    return f / num_trials * 1.00 
 
+num_trial = input("How many trials do you want to have? ")
+
+
+j = average_until_different_values(int(num_trial))
+
+print("The average amount of rolling we need to have to have rolled six different values is "
+        + str(j))
 
 

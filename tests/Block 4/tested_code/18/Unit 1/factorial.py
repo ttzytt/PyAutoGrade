@@ -2,20 +2,14 @@
 
 
 
+number = int(input("Write a random positive number 'n': ")) 
+multi = 1 
+num = number
 
-number = int(input('Type any number greater than zero: '))
+while num > 1: 
+    multi = multi * num
+    num = num - 1 
+
+print('The factorial of ' + str(number) + ' is ' + str(multi)) 
 
 
-final_text =number
-
-if number <= 0:
-    print("Please enter a positive integer.")
-else:
-    
-    factorial = 1
-    
-    while number > 0:
-        factorial = number * factorial  
-        number = number - 1  
-
-    print(f'The factorial of {final_text} is {factorial}.')

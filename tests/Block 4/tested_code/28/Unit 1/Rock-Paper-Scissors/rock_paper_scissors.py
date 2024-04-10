@@ -1,51 +1,50 @@
 
 
 
-import random
-
-random.seed()
-
-
-random_choice = random.randint(0, 2)
-if random_choice == 0:
-    computer_choice = 'rock'
-elif random_choice == 1:
-    computer_choice = 'paper'
-else:
-    computer_choice = 'scissors'
-
-
-user_choice = input("Enter 'rock' or 'paper' or 'scissors': ").lower()
-
-
-
-print('I choose ' + str(computer_choice) + '.')
 
 
 
 
+
+
+
+from random import choice, seed
+seed()
+
+
+user_choice = input('Rock, Paper, or Scissors: ').lower()
+
+computer_choice = choice(['rock','paper','scissors'])
+
+print('I choose ' + computer_choice)
+
+if user_choice == 'rock':
+    
+    
+    rock_battles = {
+        'rock': 'We tie.',
+        'paper': 'I win.',
+        'scissors': 'You win'
+    }
+
+    print(rock_battles.get(computer_choice))
+    
 if user_choice == 'paper':
-    if computer_choice == 'rock':
-        print('You win.')
-    elif computer_choice == 'scissors':
-        print('I win.')
-    else:
-        print('We tie.')
-        
+    
+    paper_battles = {
+        'rock': 'You win.',
+        'paper': 'We tie.',
+        'scissors': 'I win.'
+    }
 
-elif user_choice == 'rock':
-    if computer_choice == 'scissors':
-        print('You win.')
-    elif computer_choice == 'paper':
-        print('I win.')
-    else:
-        print('We tie.')
+    print(paper_battles.get(computer_choice))
+    
+if user_choice == 'scissors':
+    
+    scissors_battles = {
+        'rock': 'I win.',
+        'paper': 'You win.',
+        'scissors': 'We tie.'
+    }
 
-
-else:
-    if computer_choice == 'paper':
-        print('You win.')
-    elif computer_choice == 'rock':
-        print('I win.')
-    else:
-        print('We tie.')
+    print(scissors_battles.get(computer_choice))

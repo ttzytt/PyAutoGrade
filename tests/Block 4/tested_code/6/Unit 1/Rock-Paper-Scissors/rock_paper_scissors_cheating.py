@@ -2,22 +2,20 @@
 
 
 
-user_choice = input("Enter 'rock', 'paper', or 'scissors': ")
+Answer = input("Enter 'rock' or 'paper' or 'scissors' ")
 
 
 
-if user_choice == 'rock':
-    
-    computer_choice = 'paper'
-    
-elif user_choice == 'paper':
-    
-    computer_choice = 'scissors'
+if Answer == 'rock':
+    print('I choose paper.')
+    print('I win.')
 
-else:
-     
-    computer_choice = 'rock'
+if Answer == 'paper':
+    print('I choose scissors.')
+    print('I win.')
 
 
+if Answer == 'scissors':
+    print('I choose rock.')
+    print('I win.')
 
-print(f"I choose {computer_choice}. \nAHA! I WIN!")

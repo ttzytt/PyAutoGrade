@@ -1,14 +1,15 @@
 
 
-temp = int(input('What is the temperature today (in °F)? '))
+
+tone = int(input('What is the temperature today (in °F)? '))
+if(tone>90):
+           print(" Wow that's hot.")
+
+ttwo = (tone - 32)*5/9
+float(ttwo)
+convstr = str(ttwo)
 
 
-if (temp > 90):
-    print("Wow that's hot")
+pri = "That's " + convstr +" °C."
+print(pri)
 
-    print("That's " + str((temp-32)*5/9) + ' °C.')
-else:
-    print("That's " + str((temp-32)*5/9) + ' °C.')
-
-
-           

@@ -2,14 +2,12 @@
 
 
 
-number = int(input("Write a random positive number 'n': ")) 
-multi = 1 
-num = number
 
-while num > 1: 
-    multi = multi * num
-    num = num - 1 
-
-print('The factorial of ' + str(number) + ' is ' + str(multi)) 
+player_number = int(input("Enter a number:"))
+factorial = player_number
 
 
+while player_number > 1:
+    factorial = factorial * (player_number - 1)
+    player_number = player_number - 1
+print("The factorial of your number is: " + str(factorial))

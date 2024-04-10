@@ -1,20 +1,12 @@
 
 
 
+num = int(input('Enter in an integer: ')) 
+num_factorial = 1 
+count = num
 
+while(count > 0):
+    num_factorial = num_factorial * count
+    count -= 1
 
-n = int(input('Please enter a number: '))
-
-count = 0
-
-factorial = 1
-
-while count < n:
-    
-    count = count + 1
-    factorial = factorial * count
-  
-print()   
-print("n! would be: " + str(factorial))
-
-
+print(str(num) + ' factorial is ' + str(num_factorial))

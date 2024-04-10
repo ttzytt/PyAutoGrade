@@ -50,11 +50,6 @@ def find_winner_TEST():
               ['x', ' ', 'o'],
               ['o', 'x', 'o'] ]
     TEST('column win', 'o', find_winner(board))
-
-    board = [ ['x', 'o', ' '],
-              ['o', 'o', 'x'],
-              ['x', 'o', 'x'] ]
-    TEST('column win', 'o', find_winner(board))
     
 
     

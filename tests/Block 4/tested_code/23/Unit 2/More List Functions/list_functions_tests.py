@@ -2,13 +2,17 @@
 
 
 
-
-
 from list_functions import *
 
 
 
-def TEST(expected_result, actual_result):
+
+
+
+
+
+def TEST(description, expected_result, actual_result):
+    print(description, end = ': ')
     if actual_result == expected_result:
         print('pass')
     else:
@@ -18,22 +22,20 @@ def TEST(expected_result, actual_result):
         
 
 
-
 def item_moved_to_end_TEST():
     print('Start item_moved_to_end_TEST')
-
-    my_list = [1, 2, 3, 4]
-    index = 2
-    TEST([1, 2, 4, 3], item_moved_to_end(my_list, index))
-
-    my_list = [1, 2, 3, 4, 5, 6]
-    index = 0
-    TEST([2, 3, 4, 5, 6, 1], item_moved_to_end(my_list, index))
     
-    my_list = ['a', 'b', 'c'] 
-    index = 1
-    TEST(['a', 'c', 'b'], item_moved_to_end(my_list, index))
-
+    
+    my_list = [1, -3, 5, 8, -7]
+    expected_list = my_list
+    TEST('Regular item_moved_to_end', [1, -3, 8, -7, 5], item_moved_to_end(my_list, 2))
+    TEST("Don't change my_list", expected_list, my_list)
+    
+    
+    my_list = [8, -6, 1, 8, -9]
+    expected_list = my_list
+    TEST('Max index item_moved_to_end', [8, -6, 1, 8, -9], item_moved_to_end(my_list, 4))
+    TEST("Don't change my_list", expected_list, my_list)
     
     print('End item_moved_to_end_TEST')
     print()
@@ -41,35 +43,20 @@ def item_moved_to_end_TEST():
 def move_item_to_end_TEST():
     print('Start move_item_to_end_TEST')
 
-    my_list = [1, 2, 3, 4]
-    index = 2
-    move_item_to_end(my_list, index)
-    TEST([1, 2, 4, 3], my_list)
-
-    my_list = [1, 2, 3, 4, 5, 6]
-    index = 0
-    move_item_to_end(my_list, index)
-    TEST([2, 3, 4, 5, 6, 1], my_list)
     
-    my_list = ['a', 'b', 'c'] 
-    index = 1
-    move_item_to_end(my_list, index)
-    TEST(['a', 'c', 'b'], my_list)
+    my_list = [1, -3, 5, 8, -7]
+    TEST('No return value', None, move_item_to_end(my_list, 2))
+    TEST('Change original list', [1, -3, 8, -7, 5], my_list)
 
+    
+    my_list = [0, -9, 2, -4, 11]
+    TEST('No return value', None, move_item_to_end(my_list, 4))
+    TEST('Change original list', [0, -9, 2, -4, 11], my_list)
+    
     print('End move_item_to_end_TEST')
+    print()
 
 
 
 item_moved_to_end_TEST()
 move_item_to_end_TEST()
-
-
-    
-    
-
-    
-    
-
-        
-
-

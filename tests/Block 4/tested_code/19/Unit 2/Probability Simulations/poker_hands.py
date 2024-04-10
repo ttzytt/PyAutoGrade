@@ -4,105 +4,104 @@
 
 
 import random
-
-deck_cards = []
-
+random.seed
 
 
 
+def find_full_house(deck,trys):
+        x = 0
+        for i in range (trys):
+                hand = []
+                random.shuffle(deck)
+                hand = deck[0:5]
+                hand.sort()     
+                if ((hand[0][0] == hand[1][0]) and (hand[3][0] == hand[4][0])): 
+                        if (hand[1][0] == hand[2][0]) or (hand[2][0] == hand[3][0]): 
+                                x += 1
+        if x == 0:
+                print ("None found")
+                return 0
+        print ('The odds of being dealt a full house is 1 in',trys/x,)
+        return (trys/x)
 
-def create_deck(deck_cards):
-    for rank in range(1, 14):
-        
-        for suit in range(1,5):
-            deck_cards.append([rank, suit])
 
 
-
-
-
-
-
-
-def full_house(deck_cards):
-    
-    random.shuffle(deck_cards)
-
-    
-    temp_cards = deck_cards[:5]
-
-    
-    temp_cards.sort()
-
-    
-    if temp_cards[0][0] == temp_cards[1][0]:
-        if temp_cards[1][0] == temp_cards[2][0]:
-            if temp_cards[3][0] == temp_cards[4][0]:
+def find_straight_flush(deck,trys):
+        x = 0
+        for i in range (trys):
+                hand = []
+                random.shuffle(deck)
+                hand = deck[0:5]
+                hand.sort()
                 
-                return 1
-    
-    return 0
+                if hand[0][1] == hand[1][1] == hand[2][1]== hand[3][1] == hand[4][1]:
+                        
+                        if (hand[1][0] + 3) == ((hand[2][0])+2) == ((hand[3][0])+1) == (hand[4][0]):
+                                
+                                if (((hand[0][0]) + 4) == ((hand[1][0]) + 3) or ((hand[0][0] == 1) and (hand[4][0] == 13))):
+                                        
+                                        
+                                        x += 1
+        if x == 0:
+                print ("None found")
+                return 0
+        print ('The odds of being dealt a straight flush is 1 in', trys/x)
+        return (trys/x)
 
 
 
 
-def straight_flush(deck_cards):
+def find_flush(deck,trys):
+        x = 0
+        for i in range(trys):
+                hand = []
+                random.shuffle(deck)
+                hand = deck[0:5]
+                hand.sort()
+                if (hand[0][1] == hand[1][1] == hand[2][1]== hand[3][1] == hand[4][1]):
+                        
+                        x += 1
 
-    random.shuffle(deck_cards)
-
-    temp_cards = deck_cards[:5]
-
-    
-    for i in range(1,5):
-        if temp_cards[i][1] != temp_cards[i - 1][1]:
-            return 0
-    temp_cards.sort()
-
-    
-    
-    for i in range(1,5):
-        if temp_cards[i][0] != temp_cards[i - 1][0] + 1:
-            return 0
-
-    return 1
+        if x == 0:
+                print ("None found")
+                return 0
+        print ('The odds of being dealt a flush is 1 in ',trys/x)
+        return (trys/x)
 
 
 
-
-def flush(deck_cards):
-
-    random.shuffle(deck_cards)
-
-    temp_cards = deck_cards[:5]
-
-    
-    for i in range(1,5):
-        if temp_cards[i][1] != temp_cards[i - 1][1]:
-            return 0
-    return 1
-
-
+def flush_comparison(trys):
+        dice = ['♠','♥','♦','♣'] 
+        x = 0
+        for i in range (trys):
+                suits = []
+                for i in range (5): 
+                        random.shuffle(dice)
+                        suits.append(dice[0])
+                if (suits[0] == suits[1] == suits[2]== suits[3] == suits[4]):
+                        x += 1
+        if x == 0:
+                print ("None found")
+                return 0
+        print ('The odds of being dealt a flush comparison is 1 in',trys/x)
+        return (trys/x)
 
 
 
 
-def odds_hand(num_trial, hand_type, deck_cards):
-    create_deck(deck_cards)
 
-    total = 0
-    
-    for i in range(num_trial):
-        if hand_type == 'f':
-            total += flush(deck_cards)
-        if hand_type == 'sf':
-            total += straight_flush(deck_cards)
-        if hand_type == 'fh':
-            total += full_house(deck_cards)
 
-    
-    if hand_type == 'fh':
-        total *= 2
-    
-    return ('There is one in a ' + str(num_trial/total) + ' chance of getting a ' + hand_type)
 
-    
+
+deck = []
+for rank in range(1, 14): 
+        for suit in ['♠', '♥', '♦','♣']:
+                deck.append([rank, suit])
+
+trys = int(input('How many times you want to try: '))
+
+find_full_house(deck,trys)
+find_straight_flush(deck,trys)
+find_flush(deck,trys)
+flush_comparison(trys)
+

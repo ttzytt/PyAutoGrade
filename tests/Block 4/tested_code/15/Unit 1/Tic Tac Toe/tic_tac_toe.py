@@ -3,35 +3,36 @@
 from tic_tac_toe_functions import *
 
 
+
 board = [ [' ', ' ', ' '],
           [' ', ' ', ' '],
           [' ', ' ', ' '] ]
 player = 'x'
+count = 0
 
-steps = 0
-
-
-while not (find_winner(board) != None or steps > 8):  
+while find_winner(board) == None and count < 9:
+    count += 1
     draw_board(board)
-
     next_move = get_move(player)
     success = make_move(player, next_move, board)
     while not success:
         print('That is not a valid move.')
         next_move = get_move(player)
         success = make_move(player, next_move, board)
-        
     player = next_player(player)
-    steps += 1
+
+if count == 9 and find_winner(board) == None:
+    print()
+    print("It's a tie!")
 
 
+if find_winner(board) != None:
+    draw_board(board)
+    print()
+    print('The ' + find_winner(board) + ' player wins!')
 
-draw_board(board)
-print()
+    
+    
 
-if find_winner(board) == 'x':
-    print('The x player wins!')
-elif find_winner(board) == 'o':
-    print('The o player wins!')
-else:
-    print('This is a tie.')
+    
+

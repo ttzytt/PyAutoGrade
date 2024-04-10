@@ -2,43 +2,53 @@
 
 
 
-interger = int(input('Pick a number from 1 - 99: '))
+temperature = float(input('What is the temperature today (in °F)? ')
 
 
-if interger >= 90 :
-    print('Wow, you fit ' + ' perfectly! ')
+agree = input('Does your MOM agree you to play outside? (Yes/No) ')
 
-elif interger >= 51 and interger < 87:
+if agree == 'Yes':
 
-    answer1 = input('When is your birthday? (month) ')
-    
-    if answer1 == 'July' or 'October':
-        answer2 = input('Can you fly? ')
-        if answer2 == 'No':
-                print("You'd better choose a number between 12 and 45.")
+    if temperature > 95 or temperature < 32:
+        print("You shouldn't play outside today.")
+
+    elif temperature >= 32 and temperature <= 50:
+        
+        jacket = input('Do you have a jacket? ')  
+
+        if jacket == 'Yes':
+            print("You should play outside today.")
         else:
-            print('Wow, you are sooo lucky!!!!')
+            
+            print("You shouldn't play outside today.")
 
     else:
-        print('Nice try~')
-    
-
-elif interger > 12 and interger < 45:
-
-    answer2 = input('Can you fly? ')
-
-    if answer2 == 'Yes':
         
-        print("You'd better choose a number bettween 51 and 87")
-        
-    else:
-        answer1 = input('When is your birthday? (month) ')
-        if answer1 == 'June' or 'Feberary':
-            print("Wow, it's your lucky number! ")
-        
+        rain = input('Is it raining? (Capitalize the first letter) ')
+
+        if rain == 'Yes':
+            jacket = input('Do you have a jacket? ')
+            if jacket == 'Yes':
+                print("You should play outside today.")
+            else:
+                print("You shouldn't play outside today.")
         else:
-            print("That's a good number! ")
+            
+            print("You should play outside today.")
 
-    
 else:
-    print("That's cool! Why not try again? ")
+    
+    
+    
+    for i in range(27): 
+        print('*', end='')
+        
+    print()
+    print('* How Dare You!!! BWAAAAA *')
+    
+    for i in range(27):
+        print('*', end='')
+
+       
+            
+

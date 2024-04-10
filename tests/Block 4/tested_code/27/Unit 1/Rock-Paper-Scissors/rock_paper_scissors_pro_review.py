@@ -1,54 +1,73 @@
 
 
+
+
+
+
 import random
+
 random.seed()
-loop = "continue"
-choice_2_list = ['rock', 'paper', 'scissors']
 
-
-score_1 = 0
-score_2 = 0
-
-ret = 0
 
 
 
 def rps_score_round(choice_1, choice_2):
+    if choice_1 == choice_2:
+        return 0
+
+    
+    elif choice_1 == 'rock' and choice_2 == 'scissors':
+        return 1
+    
+    elif choice_1 == 'paper' and choice_2 == 'rock':
+        return 1
+    
+    elif choice_1 == 'scissors' and choice_2 == 'paper':
+        return 1
+
+    
+    elif choice_1 == 'rock' or choice_1 == 'paper' or choice_1 == 'scissors':
+        return -1
+
+    elif choice_1 == 'q':
+        return 2
+    
+    else:
         
-                
-        if choice_1 == choice_2:
-                return 0
-        elif choice_1 == "rock":
-                if choice_2 == "paper":
-                        return -1
-                elif choice_2 == "scissors":
-                        return 1
-        elif choice_1 == "paper":
-                if choice_2 == "rock":
-                        return 1
-                elif choice_2 == "scissors":
-                        return -1
-        elif choice_1 == "scissors":
-                if choice_2 == "rock":
-                        return -1
-                elif computer_select == "paper":
-                        return 1
+        return -2
 
 
-while loop != "q":     
-        choice_1 = input('Enter the first choice: ')
-        if choice_1 != 'rock':
-                if choice_1 != 'paper':
-                        if choice_1 != 'scissors':
-                                print("Please enter something that's valid")
-                                choice_1 = input('Enter the first choice: ')
-        choice_2 = random.choice(choice_2_list)
-        ret = rps_score_round(choice_1, choice_2)
-        if(ret == 1):
-                score_1 += 1
-        elif(ret == -1):
-                score_2 += 1
-        print("score of you: ", score_1)
-        print("score of computer", score_2)     
-        loop = input("Do you want to continue playing? Enter quit or anything else: Enter q for quit ")
-	
+whether_continue = 'Yes'
+
+while whether_continue == 'Yes': 
+
+    
+    human_choice = input("Enter 'rock', 'paper', or 'scissors', or 'q' to quit: ")
+    
+    computer_choice = random.choice(['rock', 'paper', 'scissors']) 
+
+    if human_choice != 'q':
+        print('I choose ' + computer_choice + '.') 
+
+    output_number = rps_score_round(human_choice, computer_choice)
+    
+    if output_number == 1: 
+        print('You win.')
+        
+    elif output_number == -1:
+        print('I win.')
+        
+    elif output_number == 0:
+        print('We tie.')
+        
+    elif output_number == 2:
+        whether_continue = 'No'
+        
+    elif output_number == -2:
+        print('You cannot choose anything else than rock, paper or scissor!')
+        
+    print() 
+
+print('End of the program.')
+       
+

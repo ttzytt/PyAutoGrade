@@ -1,6 +1,10 @@
 
 
+
+
+
 from tic_tac_toe_functions import *
+
 
 
 board = [ [' ', ' ', ' '],
@@ -8,13 +12,13 @@ board = [ [' ', ' ', ' '],
           [' ', ' ', ' '] ]
 player = 'x'
 
-steps = 0
 
+turns_played = 1
 
-while not (find_winner(board) != None or steps > 8):  
+while turns_played <= 9 and find_winner(board) != 'x' and find_winner(board) != 'o':
     draw_board(board)
-
     next_move = get_move(player)
+    
     success = make_move(player, next_move, board)
     while not success:
         print('That is not a valid move.')
@@ -22,17 +26,16 @@ while not (find_winner(board) != None or steps > 8):
         success = make_move(player, next_move, board)
         
     player = next_player(player)
-    steps += 1
-
-
+    turns_played += 1
+    
 
 
 draw_board(board)
 print()
 
-if find_winner(board) == 'x':
-    print('The x player wins!')
-elif find_winner(board) == 'o':
-    print('The o player wins!')
+
+if turns_played < 9:
+    print('The ' + str(find_winner(board)) + ' player wins!')
 else:
-    print('This is a tie.')
+    print('Tie')
+

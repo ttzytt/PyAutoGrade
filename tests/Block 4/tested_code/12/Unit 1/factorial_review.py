@@ -1,15 +1,15 @@
 
 
 
-number = int(input("Write a random number 'n': ")) 
-
-multi = 1 
-while number > 1: 
-    multi = multi * number
-    number = number - 1 
-
-print('The value of n! is ' + str(multi)) 
 
 
+number = int(input("Enter a number:"))
+factorial = number
+
+
+while number > 1:
+    factorial = factorial*(number - 1)
+    number = number - 1
+print("The factorial of your number is: " + str(factorial))
 
 

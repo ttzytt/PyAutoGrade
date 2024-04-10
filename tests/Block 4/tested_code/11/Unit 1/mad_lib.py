@@ -4,32 +4,38 @@
 
 
 
-name = input ('enter a name: ')
+
+# Prompts for user input, ensuring spaces after colons.
+adjective = input('adjective: ')
+
+noun = input('noun: ')
+
+verb = input('verb in present tense: ')
+
+adverb = input('adverb: ')
+
+plural_noun = input('plural_noun: ')# Changed variable name to 'plural_noun'.
+
+color = input('color: ')
+
+animal = input('animal: ')
+
+number = input('number: ')
+
+# Generate and print the story with appropriate spaces.
+print('Once upon a time in a ' +
+      adjective + ' kingdom, there lived a ' + noun +
+      ' the ' + color + ' ' + animal + '. ' + noun +
+      ' was known throughout the land for ' + verb + ' ' + number +
+      ' ' + plural_noun + ' in one sitting, and the townsfolk were always amazed by how ' +
+      adverb + ' ' + noun + ' could do it. People came from far and wide to watch ' +
+      noun + "'s incredible feats of eating. It was a sight to behold.")
 
 
 
 
-adjective1 = input ('enter a adjective: ')  
-adjective2 = input ('enter a adjective again: ')
-verb1  = input ('enter a verb: ')
-verb2 = input ('enter another verb: ')
-place = input ('enter a place: ') 
-adjective3 = input ('enter yet another adjective: ')
-city = input ('enter a city: ')
-animal1  = input ('enter an animal: ')
-animal2 = input ('last but not least enter an animal: ')
 
 
 
 
 
-
-
-print ('one day a ' + animal1 + ' ' + 'named ' + name + ' ' + 'was walking down the hill to the ' + adjective1
-       + ' ' + city + ' ' + '. ' + 'it was just an ordianry day until a ' + animal2 + ' ' + verb1 + ' ' + name + '. '
-       + 'but the ' + animal2 + ' ' + 'did not even apologize. that messed up ' + name + 's' + ' '  +
-       'daily routine because ' + name + ' ' + 'might be late. now ' + name + ' ' + 'will not have time to go '
-       + 'to the ' + place + ' ' + 'to ' + verb2 + ' ' + '. ' + name + ' ' + 'was feeling ' + adjective2 + ' ' + '. ' +
-       'but when ' + name + ' ' + 'got to ' + place + ' ' + ', ' + name + ' ' + 'was on time' + '. now ' + name + 's '
-       + adjective3 + ' ' + 'day has returned to plain old ordinary.')
-    

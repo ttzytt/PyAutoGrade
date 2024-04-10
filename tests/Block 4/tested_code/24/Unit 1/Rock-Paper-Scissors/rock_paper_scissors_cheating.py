@@ -1,17 +1,21 @@
 
 
 
-user_rps_choice = input('Enter \'rock\' \'paper\' or \'scissors\': ')
+import random
 
-if (user_rps_choice == 'rock'):                                 
-        rps_choice = 'paper'
-        print('I choose ' + rps_choice + ' I win!')
-elif (user_rps_choice == 'paper'):                              
-        rps_choice = 'scissors'
-        print('I choose ' + rps_choice + ' I win!')
-elif (user_rps_choice == 'scissors'):                           
-        rps_choice = 'rock'
-        print('I choose ' + rps_choice + ' I win!')
-else:
-    print()
+print("Hello, lets play a game of rock paper scissors.")
+
+player = input("Choose one: Rock, Paper, Or Scissors? (all lowercase) ")
+
+computer = random.choice(['rock', 'paper', 'scissors'])
+
+
+if player == str('rock'):
+    print('I choose paper. I win.')
+
+elif player == str('scissors'):
+    print('I choose rock. I win.')
+
+elif player == str('paper'):
+    print('I choose scissors. I win.')
 

@@ -1,21 +1,17 @@
 
 
 
-import random
-
-print("Hello, lets play a game of rock paper scissors.")
-
-player = input("Choose one: Rock, Paper, Or Scissors? (all lowercase) ")
-
-computer = random.choice(['rock', 'paper', 'scissors'])
 
 
-if player == str('rock'):
-    print('I choose paper. I win.')
+choice = str(input("Enter 'rock' , 'paper' or 'scissors': "))
 
-elif player == str('scissors'):
-    print('I choose rock. I win.')
 
-elif player == str('paper'):
-    print('I choose scissors. I win.')
-
+if choice == 'rock':
+    print("I choose paper")
+    print('I win.')
+elif choice == 'paper':
+    print("I choose scissors")
+    print('I win.')
+else:
+    print("I choose rock")
+    print('I win.')

@@ -1,22 +1,16 @@
 
 
 
-temperature = int(input('what temperature is it today (in °F)? '))
-conversion = str(round((temperature - 32)*(5/9),2)) 
+
+
+
+temperature = int(input('What is the temperature today(in °F): '))
+
+
+celsius = round(float(( int(temperature) - 32 ) * 5 / 9), 2)
 
 
 if temperature >= 90:
-        
-        print('Wow thats hot.')
-        print('Thats ' + conversion + '°C')
+    print('Wow that is hot. ')
 
-elif temperature > 32:
-        
-        print('Thats a normal temperature.')
-        print('Thats ' + conversion + '°C')
-        
-
-else:
-        
-        print('Wow thats freezing.')
-        print('Thats ' + conversion + '°C')
+print('That is ' + str(celsius) + 'C. ')

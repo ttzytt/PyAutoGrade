@@ -3,26 +3,35 @@
 
 import random
 
-random.seed()
+print("Hello, lets play a game of rock paper scissors.")
 
-userChoice = input(' Enter \'rock\' \'paper\' or \'scissors\': ')
+player = input("Choose one: rock, paper, or scissors? (all lowercase, no spaces) ")
 
-num = random.randint(1,3)                                       
-if (num == 1):                                                  
-    computer_rps_choice = 'rock'
-elif (num == 2):                                                
-    computer_rps_choice = 'paper'
-elif (num == 3):
-    computer_rps_choice = 'scissors'
+computer = random.choice(['rock', 'paper', 'scissors'])
 
-if (userChoice == 'rock' or userChoice == 'paper' or userChoice == 'scissors'):  
 
-        if(userChoice == computer_rps_choice):              
-            print('I played ' + computer_rps_choice + '! Draw!')
-        elif((computer_rps_choice =='rock' and userChoice == 'scissors') or (computer_rps_choice =='scissors' and userChoice == 'paper') or (computer_rps_choice =='paper' and userChoice == 'rock')): 
-            print('I played ' + computer_rps_choice + '! I win!') 
-        else:                                               
-            print('I played ' + computer_rps_choice + '! You win! Good game!')
+print("I choose " + computer + ".")
 
-else:
-    print( )
+if computer == player:
+    print("Looks like we tied.")
+
+
+if computer == ('rock'):
+    if player == ('paper'):
+        print("Looks like I lost, Good Game!")
+    elif player == ('scissors'):
+        print("I win gg ez.")
+
+elif computer == ('paper'):
+    if player == ('rock'):
+        print("I win gg ez.")
+    elif player == ('scissors'):
+        print("Looks like I lost, Good Game!")
+
+elif computer == ('scissors'):
+    if player == ('rock'):
+       print("Looks like I lost, Good Game!")
+    elif player == ('paper'):
+        print("I win gg ez.")
+
+

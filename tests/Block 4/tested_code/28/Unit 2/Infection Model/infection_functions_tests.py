@@ -5,7 +5,6 @@
 
 
 from infection_functions import *
-from infection_simulation import *
 
 
 
@@ -13,119 +12,116 @@ from infection_simulation import *
 
 
 
-def TEST(has_passed):
-    if has_passed:
+
+def TEST(description, expected_result, actual_result):
+    print(description, end = ': ')
+    if actual_result == expected_result:
         print('pass')
     else:
         print('FAIL')
+        print('   Expected result:', expected_result)
+        print('   Actual result:', actual_result)
+    print()
 
-
-
-
-
-
-def count_infected_neighbors_TEST():
-    print('Start count_infected_neighbors_TEST')
-    
-
-    
-    grid = create_grid(10, 10)
-    TEST(count_infected_neighbors(5, 5, grid) == 0)
-    
-    
-    grid = create_grid(10, 10)
-    grid[5][6] = 'x'
-    TEST(count_infected_neighbors(5, 5, grid) == 1)
+def get_magnitude(num):
+    magnitude = 10
+    while num // (1/10**(magnitude)) >= 1:
+        magnitude -= 1
+    return magnitude + 1
 
     
-    grid = create_grid(10, 10)
-    grid[7][6] = 'x'
-    grid[6][7] = 'x'
-    TEST(count_infected_neighbors(5, 5, grid) == 2)
 
+def RNG_TEST(description, expected_result, actual_result):
+    print(description, ":")
     
-    grid = create_grid(10, 10)
-    grid[5][6] = 'x'
-    grid[7][6] = 'x'
-    grid[6][7] = 'x'
-    TEST(count_infected_neighbors(5, 5, grid) == 3)
-
-    
-    grid = create_grid(10, 10)
-    grid[5][6] = 'x'
-    grid[7][6] = 'x'
-    grid[6][7] = 'x'
-    grid[6][5] = 'x'
-    TEST(count_infected_neighbors(5, 5, grid) == 4)
-
-    
-    grid = create_grid(10, 10)
-    grid[5][5] = 'x'
-    TEST(count_infected_neighbors(5, 5, grid) == 0)
-
-    
-    grid = create_grid(10, 10)
-    grid[5][5] = 'x'
-    grid[5][7] = 'x'
-    grid[3][2] = 'x'
-    grid[8][7] = 'x'
-    grid[1][9] = 'x'
-    grid[9][8] = 'x'
-    grid[4][5] = 'x'
-    grid[6][7] = 'x'
-    TEST(count_infected_neighbors(5, 5, grid) == 1)
-
-    
-    grid = create_grid(10, 10)
-    grid[2][5] = 'x'
-    grid[1][6] = 'x'
-    TEST(count_infected_neighbors(4, 0, grid) == 2)
-
-    
-    grid = create_grid(10, 10)
-    grid[1][2] = 'x'
-    grid[2][1] = 'x'
-    TEST(count_infected_neighbors(0, 0, grid) == 2)
-
-    print('End count_infected_neighbors_TEST')
-
-
-def infection_simulation_TEST():
-    print('Start infection_simulation_TEST')
+    print("difference w/ magnitude ", get_magnitude(abs(expected_result-actual_result)))
+    print('   Expected probability:', expected_result)
+    print('   Actual probability:', actual_result)
+    print()
     
 
-    x = 5
-    y = 5
-    grid = create_grid(x, y)
+
+
+
+def determine_if_infected_TEST(total_trials):
+
+    infection_probabilities = [0.1,0,0.24,0.9,1,1]
+    neighbors = [2,4,4,0,1,0]
+
     
-    grid[1][1] = 'x'
-    grid[2][1] = 'x'
-    grid[5][1] = 'x'
-    grid[4][5] = 'x'
-    grid[2][4] = 'x'
+
+    for i in range(len(neighbors)):
+        infected = 0
+        for _ in range(total_trials):
+            if determine_if_infected(infection_probabilities[i], neighbors[i]):
+                    infected += 1
+        RNG_TEST(f"Infection Probability {infection_probabilities[i]} chance; {neighbors[i]} neighbors"
+                 , infection_probabilities[i] * neighbors[i], infected/total_trials)
+
+def determine_if_still_infected_TEST(total_trials):
+
+    heal_probabilities = [0.63, 0.1, 0.9, 0, 1]
+
     
-    expected_grid = create_grid(x, y)
 
-    expected_grid[1][2] = 'x'
-    expected_grid[1][4] = 'x'
-    expected_grid[2][2] = 'x'
-    expected_grid[2][3] = 'x'
-    expected_grid[2][5] = 'x'
-    expected_grid[3][1] = 'x'
-    expected_grid[3][4] = 'x'
-    expected_grid[3][5] = 'x'
-    expected_grid[4][1] = 'x'
-    expected_grid[4][4] = 'x'
-    expected_grid[5][2] = 'x'
-    expected_grid[5][5] = 'x'
+    for heal_probability in heal_probabilities:
+        infected = 0
+        healed = 0
+        for _ in range(total_trials):
+            if not determine_if_still_infected(heal_probability):
+                healed += 1
+        RNG_TEST(f"Heal Probability {heal_probability}", heal_probability, healed/total_trials)
+            
 
-    grid = infection_simulation(grid, 1, 1, 1)
+def check_neighbors_TEST():
+    TEST("4 neighbors", 4,
+         check_neighbors([[False,True,False],[True,False,True],[False,True,False]],1,1))
+    TEST("3 neighbors", 3,
+         check_neighbors([[False,False,False],[True,False,True],[False,True,False]],1,1))
+    TEST("2 neighbors", 2,
+         check_neighbors([[False,True,False],[True,False,False],[False,False,False]],1,1))
+    TEST("1 neighbor", 1,
+         check_neighbors([[False,False,False],[True,False,False],[False,False,False]],1,1))
+    TEST("0 neighbors", 0,
+         check_neighbors([[False,False,False],[False,False,False],[False,False,False]],1,1))
+    TEST("2 Neighbors Corner", 2,
+         check_neighbors([[False,False,False],[False,False,True],[False,True,False]],2,2))
+    TEST("3 Neighbors Edge", 3,
+         check_neighbors([[True,False,True],[False,True,False],[False,False,False]],1,0))
+    TEST("Full Board Infected Middle", 4,
+         check_neighbors([[True,True,True],[True,True,True],[True,True,True]],1,1))
+    TEST("1x1 Grid", 0,
+         check_neighbors([[True]],0,0))
 
-    TEST(grid == expected_grid)
-    
-    print('End infection_simulation_TEST')
+def is_everyone_healed_TEST():
+    TEST("3x3 Everyone Infected", False,
+        is_everyone_healed([[True,True,True],[True,True,True],[True,True,True]]))
+    TEST("Random 1", False,
+         is_everyone_healed([[True,False,True],[False,True,True],[True,True,False]]))
+    TEST("Random 2", False,
+         is_everyone_healed([[False,False,True],[False,True,False],[True,False,False]]))
+    TEST("3x3 Everyone Healed", True,
+         is_everyone_healed([[False,False,False],[False,False,False],[False,False,False]]))
+    TEST("1x1 Everyone Healed", True,
+         is_everyone_healed([[False]]))
+
+def is_everyone_infected_TEST():
+    TEST("3x3 Everyone Infected", True,
+         is_everyone_infected([[True,True,True],[True,True,True],[True,True,True]]))
+    TEST("Random 1", False,
+         is_everyone_infected([[True,False,True],[False,True,True],[True,True,False]]))
+    TEST("Random 2", False,
+         is_everyone_infected([[False,False,True],[False,True,False],[True,False,False]]))
+    TEST("3x3 Everyone Healed", False,
+         is_everyone_infected([[False,False,False],[False,False,False],[False,False,False]]))
+    TEST("1x1 Everyone Healed", False,
+         is_everyone_infected([[False]]))
+    TEST("1x1 Everyone Infected", True,
+         is_everyone_infected([[True]]))
 
 
-count_infected_neighbors_TEST()
-print()
-infection_simulation_TEST()
+print("HIGHER MAGNITUDE = MORE ACCURATE")
+determine_if_infected_TEST(10000)
+determine_if_still_infected_TEST(10000)
+is_everyone_healed_TEST()
+is_everyone_infected_TEST()

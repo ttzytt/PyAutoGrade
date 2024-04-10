@@ -1,37 +1,44 @@
 
 
+
 import random
 
 random.seed()
 
-user_guess = int(input('Input a number: '))
-computer_number = random.randint(1,100) 
-count = 1
+print("Let's play a number game.")
 
 
-while(user_guess != computer_number): 
-    if (user_guess > computer_number): 
-        print('That\'s too high!')
-    else: # If not too high, too low
-        print('That\'s too low :( ')
-    if(count == 5): 
-        if(computer_number % 2 == 0): 
-            print('Hint: the number is even!')
-        else: 
-            print('Hint: The number is odd!')
-    elif(count == 10): 
-        if(computer_number > 9):
-            sum_of_numbers = int(str(computer_number)[0]) + int(str(computer_number)[1])
-        else:
-            sum_of_numbers = int(str(computer_number)[0])
-        print('Hint: The sum of the digits are ' + str(sum_of_numbers))
-    elif (count == 101):
-        print()
+response = str('yes')
+want_hint = str('yes')
 
+
+while response == 'yes':
+    
+    
+    random_number = str(random.randint(1, 10))
+    player = str(input("I have chosen a number between 1 and 10 (exclusive). Try to guess it! "))
+    
+    while player != random_number: 
+        if player > random_number:
+            print("That number is too high!")
+        elif player < random_number:
+            print("That number is too low.")
+        want_hint = input("Do you want a hint?(yes or no) ")
         
-    print()
-    user_guess = int(input('Input a number: ')) 
+        if want_hint == 'yes':
+            if random_number == '5':
+                print("The number is greater than or equal to 5")
+            elif random_number < '5':
+                print("The number is less than 5")
+            elif random_number > '5':
+                print("The number is greater than 5")
 
-    count += 1
-
-print()
+        player = input("Guess again! ")
+        
+    print("Nice guess! Thats right!")
+        
+    
+    response = input("Do you want to play again? ('yes' or 'no') ")
+    
+else:
+    print("I'm sad to see you leave, come play another time!")

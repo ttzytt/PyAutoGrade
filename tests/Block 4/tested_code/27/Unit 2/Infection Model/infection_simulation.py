@@ -3,54 +3,61 @@
 
 
 
-import random
-random.seed()
 
 from infection_functions import *
 
-board = [] 
 
-board_length = (int(input("Input the board size: ")))+2
-
-heal = 0 
-infect = 0 
-board_copy =[] 
-infected_row = 0 
-infected_column = 0
-board_infected_count = []
-
-run = 1
-make_board(board,board_length,board_copy, board_infected_count)
-
-
-while (run == 1):
-    if ((type(infected_row) == int) and (type (infected_column) == int)):
-        infected_row = int(input("Input the row: "))
-        infected_column = int(input("Input the column: "))
-        setup_board(board,board_length,infected_row,infected_column)
-      
-        print_board(board,board_length)
-        print("Enter 1 to continue, enter anything else to quit setup")
-        run = int(input("Do you want to continue: "))
-    else:
-        print("Enter Valid value")
-
-infect = float(input("Input the infection probability: "))
-heal = float(input("Input the heal probability: "))
+human_board = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
 
+nearby_infections = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
 
-time_run = int(input("How many time to you want to run: "))
-for runtime in range(time_run):
-	infecting_neighbor(board, board_length, infect, heal, board_copy)
-	count_infected_time(board_length, board, board_infected_count)
-	heal_process(board_length, board, board_copy,heal)
-	runtime += 1
+board_initialize(human_board)
+time_cure = 0
+time = 0
 
 
-print_board(board, board_length)
-print_infected_board(board_infected_count,board_length)
+infection_possibility = input("Type in infection possibility(in decimals): ")
+cure_possibility = input("Type in cure possibility(in decimals): ")
+
+
+
+
+for _ in range(10):
+    while find_ending(human_board) is None:
+        know_nearby(human_board, nearby_infections)
+        board_modify(human_board, nearby_infections, infection_possibility, cure_possibility)
+        time+=1
+        
+    time_cure += find_ending(human_board)
+    board_initialize(human_board)
+
+
+
+print("Possibility of being cured: " + str(time_cure * 10) + "%")
 
 
 

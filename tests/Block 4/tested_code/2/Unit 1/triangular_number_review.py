@@ -2,19 +2,24 @@
 
 
 
-n = int(input('Enter a number: '))
-
-count = 0
-
-triangular_number = 0
+n = int(input('Enter a positive integer n: '))
 
 
-
-while count < n:
-    count = count + 1
-    triangular_number = triangular_number + count
+result = 0
+i = 1
 
 
-print('The nth triangle number would be ' + str(triangular_number))
+if n <= 0:
+    print('Please enter a positive integer.')
+else:
+    while i <= n:
+        result += i
+        i += 1
+
+
+result = str(result)
+
+
+print('The nth triangle number is ' + result)
 
 

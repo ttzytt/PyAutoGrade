@@ -2,31 +2,15 @@
 
 
 
+name=input('Name:')
+number=input('Number Greater Than 1:')
+place=input('Place:')
+food=input('Food(Plural):')
+animal=input('Animal(Plural):')
+place2=input('Place 2:')
+adjective=input('Adjective: ')
 
 
-
-name_1 = input('Name 1: ')
-name_2 = input('Name 2: ')
-place_1 = input('Place 1: ')
-place_2 = input('Place 2: ')
-food = input('Food: ')
-adjective = input('Adjective: ')
-noun = input('Noun: ')
+print( 'There exists a sport named ' + name + '.' + ' In this sport, ' + number + ' teams compete to score the most points. Teams can score points by running into a ' + place + ' with ' + food + '. ' + animal + ' play a key part by dancing in a ' + place2 + '. Many describe this game as ' + adjective + '.' ) 
 
 
-
-
-phrase = ('Once upon a time, a child called ' + name_1
-          + ' went to ' + place_1 + ' all by him/herself'
-          + ', for ' + name_1 + ' wanted to explore ' +
-          'the world. ' + name_1 + ', however, went to '
-          + place_2 + ' first, met ' + name_2 + ' there' 
-          + ' because they were at the same ' + food +
-          ' restaurant. At that place, ' + name_1
-          + ' and ' + name_2 + ' spent ' + adjective
-          + ' days together, finding out they'
-          + ' love ' + noun + ' in common.')
-
-
-
-print(phrase)

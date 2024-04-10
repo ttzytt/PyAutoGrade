@@ -4,24 +4,19 @@
 
 
 
-adjective = input('adjective:')
-noun = input('noun:')
-verb = input('verb in present tense:')
-adverb = input('adverb:')
-pluralnoun = input('plural noun:')
-color = input('color:')
-animal = input('animal:')
-number = input('number:')
+place = str(input("Place: "))
+name = str(input("Name: "))
+noun1 = str(input("Noun 1: "))
+verb = str(input("Verb: "))
+adjective1 = str(input("Adjective 1: "))
+noun2 = str(input("Noun 2: "))
+adjective2 = str(input("Adjective 2: "))
 
 
 
 
-print('Once upon a time in a ' \
-         + adjective + 'kindom, there lived a' + noun \
-          + ' the '+ color + animal + '. ' + noun +\
-          'was known throughout the land for' \
-          + verb + number +pluralnoun + \
-          'in one sitting, and the townsfolk were always amazed by how'\
-          + adverb + noun + \
-          'could do it. People came from far and wide to watch'\
-          + noun + 's incredible feats of eating. It was a sight to behold')
+print("Today I went to " + place + " to see my friend " + name + ". " + name \
+      + " had recently bought a " + noun1 + " to " + verb \
+      + " their cat with. I watched them do it at " + place + ", and now I am very very " \
+      + adjective1 + ". " + name + " has inspired me. Now I will obtain a " \
+      + noun2 + " and get up to some " + adjective2 + " business.")

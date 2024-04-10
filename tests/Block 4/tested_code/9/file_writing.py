@@ -1,118 +1,90 @@
 
 
 
-import random
-random.seed()
-
 
 
 
 def write_diamond_pattern(out_file, width):
-    string_d = ''
-    for n in range(1,width,2):
-        string_d += n * 'x'
-        string_d += '\n'
+    width = 5
+    # Determines the rows
+    rows = (width + 1) // 2
+    # Prints upper part of diamond
+    for top_rows in range(1, rows + 1):
+        space = ' ' * (rows - top_rows)
+        diamond = 'x' * (2 * top_rows - 1)
+        out_file.write(space + diamond + '\n')
+    # Prints the lower part of the diamond
+    for bottom_row in range(rows - 1, 0, -1):
+        # Calculates the spaces and diamond count for each row depending on the width
+        space = ' ' * (rows - bottom_row)
+        diamond = 'x' * (2 * bottom_row - 1)
+        out_file.write(space + diamond + '\n')
     
-    for n in range(width,0,-2):
-        string_d += n * 'x'
-        string_d += '\n'
+
     
-    return string_d
 
 
 
 def last_name_first(in_file, out_file):
-    new_names = ''
+    new_name = []
     for line in in_file:
-        splited_line = line.split()
-        new_names += str(splited_line[1])
-        new_names += ', '
-        new_names += str(splited_line[0])
-        new_names += '\n'
-    return new_names
-    
+        words = line.split()
+        new_name = (words[1] + ', ' + words[0] +'\n')
+        out_file.write(new_name)
+
 
 
 def add_and_write(in_file, out_file):
-    new_string = ''
     for line in in_file:
-        splited_line = line.split()
-        for n in range(len(splited_line)):
-            new_string += splited_line[n]
-            new_string += ' '
-        new_string += '= '
-        new_string += str(int(splited_line[0]) + int(splited_line[2]))
-        new_string += '\n'
-    return new_string
+        expression = line.split('+')
+        addition_list = []
+        for adding in expression:
+            addition_list.append(int(adding))
+        result = sum(addition_list)
+        out_file.write(str(expression[0]) + '+' + str(expression[1]) + ' = ' + str(result) + '\n')
+        
+              
 
 
 
 def blah_blah_blah(in_file_name, out_file_name):
-    new_string = ''
     for line in in_file_name:
-        characters_in_line = 0
-        splited_line = line.split()
-        for n in range(len(splited_line)):
-            word = splited_line[n]
-            
-            for i in range(len(word)):
-                if word[i] != ',' and word[i] != '.':
-                    characters_in_line += 1
+        if len(line) > 20:
+            new_line = (str(line[:15]) + ', blah blah blah' + "\n")
+        else:
+            new_line = line
+    out_file_name.write(new_line)
                     
-
-        if characters_in_line <= 20:
-            new_string += line
+    
             
-        elif characters_in_line > 20:
-            word_count = 0
-            n = 0
-            while word_count < 15:
-                new_string += line[n]
-                if line[n] != ' ' and line[n] != ',' and line[n] != '.' and line[n] != '\'':
-                    word_count += 1
-                n += 1
-            new_string += ', blah blah blah'
-            new_string += '\n'
-    return new_string
+        
+def main():
+    
+    my_file_name = "Text files/diamond.txt"
+    with open(my_file_name, "w") as read_file:
+        write_diamond_pattern(read_file, 5)
+
+            
+    in_file_name = "Text files/names.txt"
+    out_file_name = "Text files/names_reversed.txt"
+    with (open(in_file_name, "r") as file_in,
+            open(out_file_name, "w") as file_out):
+        last_name_first(file_in, file_out)
+        
+    in_file_name = "Text files/addition.txt"
+    out_file_name = "Text files/addition_answers.txt"
+    with (open(in_file_name, "r") as file_in,
+            open(out_file_name, "w") as file_out):
+        add_and_write(file_in, file_out)
+
+
+    in_file_name = "Text files/test file.txt"
+    out_file_name = "Text files/test file output.txt"
+
+    with (open(in_file_name, "r") as file_in,
+            open(out_file_name, "w") as file_out):
+        (blah_blah_blah(file_in, file_out))
 
         
-
-
-
-# T11
-print('T11 finished')
-file_name = 'Text files/write_diamond_pattern.txt'
-with open(file_name, 'w') as my_file:
-    width = 11
-    diamond = write_diamond_pattern(my_file, width)
-    my_file.write(diamond)
-print()
-
-# T12
-print('T12 finished')
-input_file = 'Text files/names.txt'
-output_file = 'Text files/last_name_first.txt'
-with (open(input_file, 'r') as my_file1,
-      open(output_file, 'w') as my_file2):
-    new_name = last_name_first(my_file1,my_file2)
-    my_file2.write(new_name)
-print()
-
-# T13
-print('T13 finished')
-input_file = 'Text files/addition.txt'
-output_file = 'Text files/addition_solutions.txt'
-with (open(input_file, 'r') as my_file1,
-      open(output_file, 'w') as my_file2):
-    solutions = add_and_write(my_file1,my_file2)
-    my_file2.write(solutions)
-print()
-
-# T14
-print('T14 finished')
-input_file = 'Unit 2/payphone_lyrics.py'
-output_file = 'Text files/blah blah blah.txt'
-with (open(input_file,'r') as my_file1,
-      open(output_file,'w') as my_file2):
-    blah = blah_blah_blah(my_file1,my_file2)
-    my_file2.write(blah)
+if __name__ == "__main__":
+    main()

@@ -2,29 +2,41 @@
 
 
 
-information other than from the teacher and the course materials
-def largest_element(numbers):
+
+
+
+
+def largest_element(input_list):
+    if len(input_list) == 0:
+        return "Empty list"
     
-    if not numbers:
-        return None
-    numbers.sort()
-    return numbers[-1]
+    input_list.sort()
+    return input_list[-1]
 
 
 
-def alternate_sum(numbers):
+
+
+
+def alternate_sum(input_list):
+    return sum(input_list[::2]) - sum(input_list[1::2])
+
+
+
+
+
+
+def rotate_right(input_list):
+    if len(input_list) == 0:
+        return []
     
-    return sum(numbers[::2]) - sum(numbers[1::2])
+    return [input_list[-1]] + input_list[:-1]
 
 
 
-def rotate_right(my_list):
-    
-    return [my_list[-1]] + my_list[:-1] if my_list else my_list
 
 
 
 def deal_3_hands(deck):
+    return [deck[::3], deck[1::3], deck[2::3]]
     
-    return deck[0::3], deck[1::3], deck[2::3]
-

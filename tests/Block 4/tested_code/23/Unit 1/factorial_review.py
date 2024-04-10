@@ -2,15 +2,18 @@
 
 
 
-user_input = int(input('Input an integer n: ')) 
-count = 1
-result = 1
+number = int(input('Enter an integer n: '))
 
-while count <= user_input: 
-    result = result * count
+count = 0
+
+factorial = 1
+
+
+while count < number:
     count = count + 1
-
-print('n! is ' + str(result))
+    factorial = factorial * count
     
 
-              
+print('n factorial is equal to ' + str(factorial))
+
+

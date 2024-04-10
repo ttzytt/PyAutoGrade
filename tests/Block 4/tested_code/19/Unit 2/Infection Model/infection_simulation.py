@@ -3,73 +3,54 @@
 
 
 
+import random
+random.seed()
+
+from infection_functions import *
+
+board = [] 
+
+board_length = (int(input("Input the board size: ")))+2
+
+heal = 0 
+infect = 0 
+board_copy =[] 
+infected_row = 0 
+infected_column = 0
+board_infected_count = []
+
+run = 1
+make_board(board,board_length,board_copy, board_infected_count)
+
+
+while (run == 1):
+    if ((type(infected_row) == int) and (type (infected_column) == int)):
+        infected_row = int(input("Input the row: "))
+        infected_column = int(input("Input the column: "))
+        setup_board(board,board_length,infected_row,infected_column)
+      
+        print_board(board,board_length)
+        print("Enter 1 to continue, enter anything else to quit setup")
+        run = int(input("Do you want to continue: "))
+    else:
+        print("Enter Valid value")
+
+infect = float(input("Input the infection probability: "))
+heal = float(input("Input the heal probability: "))
 
 
 
 
+time_run = int(input("How many time to you want to run: "))
+for runtime in range(time_run):
+	infecting_neighbor(board, board_length, infect, heal, board_copy)
+	count_infected_time(board_length, board, board_infected_count)
+	heal_process(board_length, board, board_copy,heal)
+	runtime += 1
 
 
-from infection_function import *
-
-num_rows = int(input("Input how many rows u want: "))
-num_columns = int(input("Input how many columns u want: "))
-
-heal_probability = float(input('Input chance of healing as a decimal: '))
-infection_probability = float(input('Input chance of infection as a decimal(keep value small): '))
-
-num_infected_start = int(input('Input number of people infected at start: '))
-
-()
-
-
-num_infected = 0
-
-
-round_number = 0
-
-print('-------START SIMULATION-------')
+print_board(board, board_length)
+print_infected_board(board_infected_count,board_length)
 
 
 
-board = []
-
-create_grid(num_rows, num_columns, board)
-
-place_infected(num_rows, num_columns, board, num_infected_start)
-
-
-
-
-num_infected = count_infected(board, num_rows, num_columns)
-print(num_infected)
-print()
-
-
-while(num_infected > 0 and (num_rows * num_columns - num_infected) > 0):
-    print()
-    print('start ROUND ' + str(round_number))
-    draw_board(board, num_rows, num_columns)
-
-    
-    
-    
-    board = execute_round(num_rows, num_columns, board, infection_probability, heal_probability)
-
-    
-    
-
-    
-    num_infected = count_infected(board, num_rows, num_columns)
-    print(num_infected)
-    print()
-    
-    
-
-    round_number += 1
-    
-    ()
-
-    
-    
-    
-    

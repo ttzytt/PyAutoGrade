@@ -1,26 +1,23 @@
 
 
 
+def new_rabbits_and_sheep(rabbits, sheep):
+    new_rabbits = rabbits + 0.1 * (3 - rabbits) * rabbits - 0.2 * rabbits * sheep
+    new_sheep = sheep + 0.1 * (1 - sheep) * sheep - 0.02 * rabbits * sheep
+    if new_rabbits < 0:
+        new_rabbits = 0
+    if new_sheep < 0:
+        new_sheep = 0
+    return (new_rabbits, new_sheep)
 
+rabbits = 5
+sheep = 3
+list_of_points = [(rabbits, sheep)]
 
-romeo = float(input('Input Romeo:'))
-juliet = float(input('Input Juliet:'))
-a = 0.2
-b = 0.3
-romeo_new = 0
-juliet_new = 0
-point = (romeo, juliet)
-list_affection = []
-list_affection.append(point)
-def romeo_and_juliet(point):
-    romeo = point[0]
-    juliet = point[1]
-    romeo_new = romeo - a*romeo + b*juliet
-    juliet_new = juliet - a*juliet + b*romeo
-    return (romeo_new, juliet_new)
-for i in range(50):
-    point = romeo_and_juliet(point)
-    list_affection.append(point)
-print(list_affection)
+for i in range(100):
+    list_of_points.append(new_rabbits_and_sheep(rabbits, sheep))
+    rabbits = list_of_points[i+1][0]
+    sheep = list_of_points[i+1][1]
 
+print(list_of_points[99])
 

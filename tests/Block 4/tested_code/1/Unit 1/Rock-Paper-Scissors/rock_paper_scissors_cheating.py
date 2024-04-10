@@ -1,18 +1,23 @@
-
-
-
-
-import random
-
-
-user_action = input("Enter a choice rock, paper, scissors:) ")
-
-
-if user_action == "paper" :
-    print("I choose scissors. I win:p")
-
-elif user_action == "rock" :
-    print("I chose paper. I win:)")
-
-elif user_action == "scissors":
-    print("I choose rock. I win:D")
+while True :
+    user_choise = input("Chose rock, paper or scissors. ")
+    if user_choise == "rock" :
+        print ("You chose rock")
+        print ("The computer chose paper")
+        print ("The computer wins!")
+    
+    elif user_choise == "scissors" :
+        print ("You chose scissors")
+        print ("The computer chose rock")
+        print ("The computer wins!")
+    
+    elif user_choise == "paper" :
+        print ("You chose paper")
+        print ("The computer chose scissors")
+        print ("The computer wins!")
+    else :
+        print ("Try again. Please chose rock, paper or scissors.")
+    
+    play_again = input("Do you want to play again? (yes/no): ").lower()
+    if play_again != "yes":
+        break
+print ("See you next time")

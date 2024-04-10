@@ -1,15 +1,7 @@
 
 
 
-
-
 from card_functions import *
-
-
-
-
-
-
 
 
 def TEST(has_passed):
@@ -18,38 +10,59 @@ def TEST(has_passed):
     else:
         print('FAIL')
 
-
-
-
-def approx_equal(a, b):
-    return abs(a - b) < 0.0001
-
-
-
-
-
-
 def deal_3_hands_TEST():
-    print ('Start deal_3_hands')
-    TEST(deal_3_hands([1, 2, 3, 4, 5, 6, 7]) == [[1, 4, 7], [2, 5], [3, 6]])
-    TEST(deal_3_hands([5, 23]) == [[5], [23], []])
-    TEST(deal_3_hands([]) == [[], [], []])
-    TEST(deal_3_hands([7]) == [[7], [], []])
-    TEST(deal_3_hands(['skip']) == [['skip'], [], []])
-    print ('End deal_3_hands')
+    print('Start deal_3_hands_TEST')
+    TEST(deal_3_hands([1, 2, 3, 4, 5, 6, 7]) == [ [1, 4, 7], [2, 5], [3, 6] ])
+    TEST(deal_3_hands([]) == [[], [], []]) 
+    TEST(deal_3_hands([1, 2]) == [ [1], [2], [] ]) 
+    
+    TEST(deal_3_hands(['a', 'b', 'c', 'd', 'e' ]) == [ ['a', 'd'], ['b','e'], ['c'] ])
+    print('End deal_3_hands_TEST')
     print()
 
 def uno_who_played_what_TEST():
-    print('Start uno_who_played_what')
-    TEST(uno_who_played_what(['1', '2', '3', '4', '5', 'skip', '7' ]) == [['1', '5'], ['2', 'skip'], ['3'], ['4', '7']])
-    TEST(uno_who_played_what(['skip', 'skip', '7' ]) == [['skip', '7'], [], ['skip'], []])
-    TEST(uno_who_played_what([]) == [[], [], [], []])
-    print('End uno_who_played_what')
+    print('Start uno_who_played_what_TEST')
+    
+    TEST(uno_who_played_what([]) == [[], [], [], []]) 
+    
+    TEST(uno_who_played_what(['1', '2', 'reverse', '2', 'skip', '3', '7']) == 
+         [ ['1', 'skip'], ['2', '2', '7'], ['reverse', '3'], [] ]) 
+    
+    TEST(uno_who_played_what(['1', '2', 'skip', 'skip', 'skip', '3', '7']) ==
+         [ ['1', 'skip', '3'], ['2', '7'], ['skip', 'skip'], [] ])
+    
+    TEST(uno_who_played_what(['1', '2', 'reverse', 'reverse', 'reverse', '3', '7']) ==
+         [ ['1', '7'], ['2', 'reverse', '3'], ['reverse', 'reverse'], [] ])
+    
+    TEST(uno_who_played_what(['1', 'skip', 'reverse', 'reverse', 'skip', '3', 'skip']) ==
+         [ ['1'], ['skip', '3'], ['reverse', 'skip'], ['reverse', 'skip' ]])
+    
+    print('End uno_who_played_what_TEST')
     print()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 deal_3_hands_TEST()
 uno_who_played_what_TEST()
+
 

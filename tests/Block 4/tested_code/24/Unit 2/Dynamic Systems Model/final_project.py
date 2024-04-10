@@ -3,31 +3,30 @@
 
 
 
+def get_next_point(point, a, b):
+    Romeo = point[0]
+    Juliet = point[1]
+    
+    Romeo_new = Romeo + a * Romeo + b * Juliet
+    Juliet_new = Juliet + a * Juliet + b * Romeo
+    
+    return (Romeo_new, Juliet_new)
+
+
+def list_of_points(point):
+    list_of_points = []
+    count = 50 
+    list_of_points.append(point)
+    
+    for _ in range(count):
+        point = get_next_point(point, a, b)
+        list_of_points.append(point)
+    return list_of_points
 
 
 
-def love_hate(love, a, b):
-    romeo = love[0]
-    juliet = love[1]
-    romeo_new = romeo - a * romeo + b * juliet
-    juliet_new = juliet - a * juliet + b * romeo
-    return (round(romeo_new, 4), round(juliet_new, 4))
 
-
-
-def love_hate_simulation(a, b, time, romeo_start, juliet_start):
-    love_meter = [(romeo_start, juliet_start)]
-
-    for i in range(time):
-        love_meter.append(love_hate(love_meter[i], a, b))
-
-    print(love_meter)
-
-
+initial_point = (1, -2)
 a = 0.3
-b = 0.2
-romeo_start = 5
-juliet_start = -5
-time = 50
-love_hate_simulation(a, b, time, romeo_start, juliet_start)
-
+b = 0.3
+print(list_of_points(initial_point))

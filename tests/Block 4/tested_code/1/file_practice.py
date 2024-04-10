@@ -2,41 +2,56 @@
 
 
 
-lista = (['hloloh','hoho'],['ha'],['wuwu'])
-listb = ('halo', 'ha', 'wuwu')
-number1 = '122 '
-file_name = 'Text files/greeneggs.txt'
-opened_file = open(file_name, 'r')
-
-with open(file_name,'r') as myy_file:
-    full_content = myy_file.read()
-    print(full_content[:100])
-
-with open(file_name,'r') as my_file:
-    list_of_lines = my_file.readlines()
-print('Line 4 says: ' + list_of_lines[4])
-
-
 def count_characters(read_file):
     count = 0  
-    for line in read_file:
+    for line in read_file:  
         count += len(line)
     return count
 
-def count_char_without_space(read_file):
-    count = 0  
-    for line in read_file:
-        for words in line:
-            if words != ' ':
-                count += 1
-    return count
 
+file_name = 'Text files/names.txt'
 with open(file_name, 'r') as my_file:
     num_characters = count_characters(my_file)
 
-with open(file_name, 'r') as my_file: 
-    num_words = count_char_without_space(my_file)
+print('The file ' + file_name + ' contains ' + str(num_characters)
+      + ' characters.')
+print()
 
-    print(num_characters)
-    print(num_words)
 
+names = [
+    'Lisa Goliyad',
+    'Derek Li',
+    'Vivian Li',
+    'Echo Ma',
+    'Tom Qiu',
+    'Jeffrey Yang',
+    'Annie Ye',
+    'Amy (Yihan) Chen',
+    'Rachel Wang',
+    'Gracie Anghelescu',
+    'Ethan Che',
+    'Kaylee Gordon',
+    'David Hsu',
+    'Sam Kemp',
+    'Arun Pratik',
+    'Maggie Rao',
+    'William Pearce',
+    'Jessie Wang',
+    'Frank Wang',
+    'Mark Zhao',
+    'Alex Zhu',
+    'Maya Fey',
+    'Sky Hu',
+    'Austin Huang',
+    'Albert Zhao',
+    'Daniel Rashidi',
+    'Joy Wu',
+    'Valentine Liu',
+    'Qixiang Feng'
+]
+
+
+
+for name in names:
+    last_name = name.split()[-1] 
+    print (last_name)

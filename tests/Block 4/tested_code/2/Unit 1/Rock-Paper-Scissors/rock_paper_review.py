@@ -3,29 +3,25 @@
 
 import random
 
-
-
-playerinput = input('Enter rock or paper: ')
 random.seed()
 
 
 
-botchoice = random.choice(['rock', 'paper'])
-print('I chose ' + botchoice)
+user = input('choose rock or paper: ')
 
 
 
-if playerinput == 'rock' and botchoice == 'rock':
-    print('We tied!')
-elif playerinput == 'rock' and botchoice == 'paper':
-    print('I won!')
-elif playerinput == 'paper' and botchoice == 'paper':
-    print('We tied!')
-elif playerinput == 'paper' and botchoice == 'rock':
-    print('You won!')
-else:
-    print('Invalid choice; type rock or paper!')
+me = random.choice(['rock','paper'])
+print('i choose ' + me)
 
 
+if user == 'rock' and me == 'paper':
+    print('i win')
+elif user == 'rock' and me == 'rock':
+    print('we tie')
+elif user == 'paper' and me == 'rock':
+    print('you win')
+elif me == 'paper' and user == 'paper':
+    print('we tie')
 
-    
+

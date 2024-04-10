@@ -3,18 +3,29 @@
 
 
 
-n1 = input ('Noun1: ')
-n2 = input ('Noun2: ')
-n3 = input ('Noun3: ')
-n4 = input ('Noun4: ')
-adv = input ('Adverb: ')
-adj = input ('Adjective: ')
-v1 = input ('Verb1: ')
-v2 = input ('Verb2: ')
-v3 = input ('Verb-ing: ')
+
+
+
+scientist_name = input("Enter a Scientist's Name: ")
+adjective = input("Enter an Adjective: ")
+plural_noun = input("Enter a Plural Noun: ")
+verb = input("Enter a Verb: ")
+noun = input("Enter a Noun: ")
+liquid = input("Enter a Liquid: ")
+type_of_container = input("Enter a Type of Container: ")
+number = input("Enter a Number: ")
+solid_substance = input("Enter a Solid Substance: ")
+object_ = input("Enter an Object: ")  
+heat_source = input("Enter a Heat Source: ")
 
 
 
 
-print ('Eric is a ' + n1 + ' in prisms and he is a great video game player. He can win many ' + n2 + '. One day, he scored a lot in a game' + ' and he wanted a cup of ' + n3 + ' to drink to celebrate. Unfortunenately, when he open the ' + n4 + ', he ' + adv + ' found that it was run out. He felt ' + adj + ' and he ' + v1 + ' at the play ground to adjust his emotion. He got tired soon and ' + v2 +' in the bathroom. At last he went back to the dorm for '+ v3)
+
+madlib_story = f
+
+
+print(madlib_story)
+
+
 

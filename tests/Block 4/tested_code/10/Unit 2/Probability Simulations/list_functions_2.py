@@ -3,19 +3,31 @@
 
 
 
+
+
 def largest_element(numbers):
-    numbers.sort()
-    return numbers[-1]
+    if not numbers: 
+        return None
+    
+    return max(numbers) 
+
+
 
 
 def alternate_sum(numbers):
-    return sum(numbers[::2])
-
-
-def rotate_right(numbers):
-    return [numbers[-1]] + numbers[0:-1]
+    return sum(numbers[::2]) - sum(numbers[1::2])
 
 
 
-def deal_3_hands(numbers):
-    return numbers[0::3], numbers[1::3], numbers[2::3]
+
+
+
+
+
+def rotate_right(my_list):
+    return my_list[-1:] + my_list[:-1]
+
+
+
+def deal_3_hands(deck):
+    return [deck[i::3] for i in range(3)]

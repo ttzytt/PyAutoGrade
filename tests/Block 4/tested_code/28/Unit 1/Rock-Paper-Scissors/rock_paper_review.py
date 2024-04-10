@@ -2,31 +2,25 @@
 
 
 
-import random
 
 
-random_choice = random.randint(0,1)
+
+from random import choice
 
 
-choices = ['rock', 'paper']
+user_choice = input("Rock or Paper: ").lower()
 
+computer_choice = choice(["rock","paper"])
 
-user_choice = input("Enter 'rock' or 'paper': ").lower()
+print("I choose %s." % computer_choice)
 
-
-computer_choice = choices[random_choice]
-
-
-print('I choose ' + str(computer_choice) + '.')
-
-
-if user_choice == 'paper':
-    if computer_choice == 'rock':
-        print('You win.')
-    else:
-        print('We tie.')
-else:
-    if computer_choice == 'rock':
-        print('We tie.')
-    else:
-        print('I win.')
+if user_choice == "rock":
+    if computer_choice == "rock":
+        print("We tie.")
+    if computer_choice == "paper":
+        print("I win.")
+if user_choice == "paper":
+    if computer_choice == "rock":
+        print("You win.")
+    if computer_choice == "paper":
+        print("We tie.")

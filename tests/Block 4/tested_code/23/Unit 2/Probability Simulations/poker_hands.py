@@ -4,158 +4,98 @@
 
 
 
-from operator import itemgetter  
-import random  
+from operator import itemgetter
+import random
 random.seed()
 
 
-
-number = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-color = ['♠', '♥', '♦', '♣']
-deck = []
-for rank in range(13):
-    for suit in range(4):
-        deck.append([number[rank], color[suit]])
+def deal_five_cards(deck):
+    random.shuffle(deck) 
+    return deck[0:5]  
 
 
-
-def random_five_hand():
-    random.shuffle(deck)
-    hands = deck[:5]
-    return hands
-
-
-
-
-def full_house():
-    count = 0
-    tries = 200000
+def is_full_house(hand):
     
-    for _ in range(tries):
-        hand = random_five_hand()
-        
-        hand.sort(key = itemgetter(0))
-
-        
-        if hand[0][0] == hand[1][0] and hand[3][0] == hand[4][0] and hand[0][0] != hand[4][0]:
-            if hand[1][0] == hand[2][0] or hand[2][0] == hand[3][0]:
-                count = count + 1
+    hand.sort(key=itemgetter(0))
     
-    result = round(tries / count)
-    return result
+    return (hand[0][0] == hand[1][0] and hand[3][0] == hand[4][0] and
+            (hand[2][0] == hand[1][0] or hand[2][0] == hand[4][0]))
 
 
+def is_straight(hand):
+    
+    hand.sort(key=itemgetter(0))    
+    
+    return ( hand[2][0] == hand[1][0]+1 and hand[3][0] == hand[2][0]+1 and hand[4][0] == hand[3][0]+1 ) and ( ( hand[1][0] == hand[0][0]+1 ) or ( hand[0][0] == 1 and hand[1][0] == 10) )
 
+
+def is_flush(hand):
+    return hand[0][1] == hand[1][1] == hand[2][1] == hand[3][1] == hand[4][1]
 
 
 def is_straight_flush(hand):
+    return is_straight(hand) and is_flush(hand)
+    
 
+def tries_until_full_house(deck):
+    tries = 0
+    hand = deal_five_cards(deck)
     
-        hand.sort(key = itemgetter(1, 0))
-        if hand[0][1] == hand[4][1]:
+    while not is_full_house(hand) and tries < 5000:
+        tries += 1 
+        hand = deal_five_cards(deck) 
+    return tries
+    
 
-            
-            if hand[4][0] - hand[0][0] == 4:
-                return True
-            
-            elif hand[0][0] == 1 and hand[1][0] == 10 and hand[4][0] == 13:
-                return True
-            else:
-                return False
-        return False
+def average_tries_full_house(num_trials):
+    total_tries_until_full_house = 0
+    for _ in range(num_trials):  
+        total_tries_until_full_house += tries_until_full_house(deck)  
+    return int(total_tries_until_full_house / num_trials)  
+
+def tries_until_straight_flush(deck):
+    tries = 0
+    hand = deal_five_cards(deck)
     
-def straight_flush():
-    count = 0
-    tries = 500000
+    while not is_straight_flush(hand) and tries < 100000:
+        tries += 1 
+        hand = deal_five_cards(deck) 
+    return tries
+
+def average_tries_straight_flush(num_trials):
+    total_tries_until_straight_flush = 0
+    for _ in range(num_trials):  
+        total_tries_until_straight_flush += tries_until_straight_flush(deck)  
+    return int(total_tries_until_straight_flush / num_trials)  
+
+def tries_until_flush(deck):
+    tries = 0
+    hand = deal_five_cards(deck)
     
-    for _ in range(tries):
-        hand = random_five_hand()
+    while not is_flush(hand) and tries < 5000:
+        tries += 1 
+        hand = deal_five_cards(deck) 
+    return tries
+    
+def average_tries_flush(num_trials):
+    total_tries_until_flush = 0
+    for _ in range(num_trials):  
+        total_tries_until_flush += tries_until_flush(deck)  
+    return int(total_tries_until_flush / num_trials)  
+
+
+
+
+deck = []
+for rank in range(1, 14):
+    for suit in ['♠', '♥', '♦', '♣']:
+        deck.append([rank, suit])
         
-        if is_straight_flush(hand) == True:
-                count = count + 1
-
-    result = round(tries / count)
-    return result
+num_trials = int(input('How many trials would you like to run (around 10, otherwise it takes a long time...): '))
 
 
+print('Probability of getting a full house is 1 out of', average_tries_full_house(num_trials))
+print('Probability of getting a straight flush is 1 out of', average_tries_straight_flush(num_trials))
+print('Probability of getting a flush is 1 out of', average_tries_flush(num_trials))
 
 
-def flush():
-    count = 0
-    tries = 200000
-    
-    for _ in range(tries):
-        hand = random_five_hand()
-
-        
-        hand.sort(key = itemgetter(1, 0))
-
-        
-        if hand[0][1] == hand[4][1]:
-    
-            
-            if hand[4][0] - hand[0][0] != 4:
-                
-                if [hand[0][0], hand[1][0], hand[2][0]] != [1, 10, 13]:
-
-                    count = count + 1
-    
-    result = round(tries / count)
-    return result
-
-
-
-
- 
-def same_suit_dice():
-    count = 0
-    tries = 100000
-
-    for _ in range(tries):
-        
-        dice = ['♠', '♥', '♦', '♣']
-        dice_hand = []
-    
-        for _ in range(5):
-            random.shuffle(dice)
-            dice_hand.append(dice[0])
-
-        
-        dice_hand.sort()
-        if dice_hand[0] == dice_hand[4]:
-            count = count + 1
-
-    result = round(tries / count)
-    return result
-
-
-
-
-check = input('You can check the odds of Full House, Straight Flush, Flush, and Five Dice'
-              ' return the one you want to check (capitalize first letter of each word): ')
-if check == 'Full House':
-    odds = full_house()
-elif check == 'Straight Flush':
-    odds = straight_flush()
-elif check == 'Flush':
-    odds = flush()
-else:
-    odds = same_suit_dice()
-
-print('The odds of being dealt a ' + str(check) + ' is 1 in ' + str(odds) + '.')
-
-
-    
-
-
-
-
-
-
-
-
-        
-        
-
-
-    

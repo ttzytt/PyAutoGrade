@@ -2,16 +2,19 @@
 
 
 
-user = input("Enter 'rock', 'paper', or 'scissors': ")
+human = input('Enter paper, scissors or rock: ')
 
-if user == 'rock':
-    computer = 'paper'
+print()
 
-elif user == 'paper':
-    computer = 'scissors'
-
+if human == 'paper':
+   print('I choose scissors.')
+elif human == 'rock':
+   print('I choose paper.')
 else:
-   computer = 'rock' 
+   print('I choose rock.')
 
-print("I choose", comp)
+
+
 print('I win.')
+
+

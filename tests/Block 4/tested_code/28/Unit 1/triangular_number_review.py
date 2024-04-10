@@ -3,22 +3,26 @@
 
 
 
-
-n = int(input('Give me a number: '))
-
+num = int(input("Enter a positive integer: "))
 
 
-triangular_n = 0
+count = 1
 
 
-count = 0
 
-while count < n:
-    
+final_sum = 0
+
+
+
+while count <= num:
+    final_sum = final_sum + count
     count = count + 1
 
+
+
+
+
+
+
     
-    triangular_n = triangular_n + count
-
-
-print(triangular_n)
+print("The " + str(num) + "th triangular number is " + str(final_sum))

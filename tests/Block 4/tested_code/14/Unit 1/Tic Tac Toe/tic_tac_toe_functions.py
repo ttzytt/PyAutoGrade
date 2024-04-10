@@ -27,64 +27,49 @@ def draw_board(board):
 
 def find_winner(board):
     
-    
-    
-    def convert_to_string_bitboard(board, value):
-        bitboard = ''
-        for row in range(len(board)):
-            for column in range(len(board[row])):
-                if board[row][column] == value:
-                    bitboard += '1'
-                else:
-                    bitboard += '0'
-        return bitboard
+    if board[0][0] == board[0][1] and board[0][0] == board[0][2] and board[0][0] != ' ':
+        return board[0][0]
+    if board[1][0] == board[1][1] and board[1][0] == board[1][2] and board[1][0] != ' ':
+        return board[1][0]
+    if board[2][0] == board[2][1] and board[2][0] == board[2][2] and board[2][0] != ' ':
+        return board[2][0]
 
     
-    
-    winning_groups = [
-        [1,2,3], [4,5,6], [7,8,9],
-        [1,4,7], [2,5,8], [3,6,9],
-        [1,5,9], [3,5,7], 
-        ]
+    if board[0][0] == board[1][0] and board[2][0] == board[0][0] and board[0][0] != ' ':
+        return board[0][0]
+    if board[0][1] == board[1][1] and board[2][1] == board[0][1] and board[0][1] != ' ':
+        return board[0][1]
+    if board[0][2] == board[1][2] and board[2][2] == board[0][2] and board[0][2] != ' ':
+        return board[0][2]
 
     
-    x_bitboard = convert_to_string_bitboard(board, 'x')
-    for group in winning_groups:
-        is_all_value = True
-        for i in group:
-            
-            if x_bitboard[i-1] == '0':
-                is_all_value = False
-        if is_all_value:
-            return 'x'
+    if board[0][0] == board[1][1] and board[0][0] == board[2][2] and board[0][0] != ' ':
+        return board[0][0]
+    if board[0][2] == board[1][1] and board[0][2] == board[2][0] and board[0][2] != ' ':
+        return board[0][2]
     
-    o_bitboard = convert_to_string_bitboard(board, 'o')
-    for group in winning_groups:
-        is_all_value = True
-        for i in group:
-            if o_bitboard[i-1] == '0':
-                is_all_value = False
-        if is_all_value:
-            return 'o'
     return None
 
 
 
 
 def get_move(player):
-    return input(player + ' player, choose your move: ')
+    return input(player + ' player, chose your move: ')
+
+
+
 
 
 def make_move(player, move, board):
     
     
-    
-    if (len(move) != 2):
-        return False          
-    is_valid_row = ((move[0] == '1') or (move[0] == '2') or (move[0] == '3'))
-    is_valid_column = ((move[1] == 'A') or (move[1] == 'B') or (move[1] == 'C'))
-    if not (is_valid_row and is_valid_column):
+    if len(move) == 0 or len(move) > 2:
         return False
+    if move[0] != '1' and move[0] != '2' and move[0] != '3':
+        return False
+    if move[1] != 'A' and move[1] != 'B' and move[1] != 'C':
+        return False
+
     
     
     row = int(move[0]) - 1
@@ -93,11 +78,12 @@ def make_move(player, move, board):
     
     column = ord(move[1]) - ord('A')
 
-    
     if board[row][column] != ' ':
         return False
-    board[row][column] = player
-    return True
+    else:
+        
+        board[row][column] = player
+        return True
 
 
 
@@ -108,4 +94,3 @@ def next_player(player):
         return 'o'
     else:  
         return 'x'
-

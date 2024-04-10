@@ -3,21 +3,27 @@
 
 
 
-input_number = int(input('Give me a number: '))
 
-
-
-factorial_number = 1
+num = int(input('Enter a positive integer: '))
 
 
 count = 1
 
-while count < input_number:
+
+
+final_product = 1
+
+
+
+while count <= num:
+    final_product = final_product * count
     count = count + 1
-    
-    
-    
-    factorial_number = factorial_number * count
 
 
-print(str(input_number) + '! is ' + str(factorial_number) + '.')
+
+
+
+
+
+    
+print(str(num) + '! is equal to ' + str(final_product))

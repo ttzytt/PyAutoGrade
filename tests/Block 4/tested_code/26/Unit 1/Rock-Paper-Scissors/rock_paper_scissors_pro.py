@@ -1,43 +1,39 @@
-
-
-
-
-
 import random
-random.seed()
-
 
 
 def rps_score_round(choice_1, choice_2):
     if choice_1 == choice_2:
         return 0
-    elif ((choice_1 == 'paper' and choice_2 == 'scissors')
-          or (choice_1 == 'scissors' and choice_2 == 'rock')
-          or (choice_1 == 'rock' and choice_2 == 'paper')):
-        return -1
-    elif ((choice_2 == 'paper' and choice_1 == 'scissors')
-          or (choice_2 == 'scissors' and choice_1 == 'rock')
-          or (choice_2 == 'rock' and choice_1 == 'paper')):
+    if (choice_1 == 'rock' and choice_2 == 'scissors') or 
+       (choice_1 == 'scissors' and choice_2 == 'paper') or 
+       (choice_1 == 'paper' and choice_2 == 'rock'):
         return 1
+    return -1
+
+user_score = 0
+
+while True:
+    user_input = input("Enter 'rock', 'paper', or 'scissors', or 'q' to quit: ")
+
+    if user_input == 'q':
+        print("Thanks for playing! Your total score is:", user_score)
+        break
+
+    if user_input not in ['rock', 'paper', 'scissors']:
+        print("Invalid input. Please try again.")
+        continue
+
+    computer_choice = random.choice(['rock', 'paper', 'scissors'])
+    print("Computer chose:", computer_choice)
+
+    round_score = rps_score_round(user_input, computer_choice)
+    if round_score == 0:
+        print("It's a tie!")
+    elif round_score == 1:
+        print("You win this round!")
+        user_score += 1
     else:
-        return None
+        print("Computer wins this round!")
+        user_score -= 1
 
-    
-human = 'a'
-score = 0
-while human != 'q':
-    human = input("Enter 'rock', 'paper', or 'scissors', or 'q' to quit: ")
-    computer = random.choice(['paper', 'rock', 'scissors'])
-    
-    if rps_score_round(human,computer) is not None :
-        score = score + rps_score_round(human,computer)
-          
-        print('I choose ' + computer + '.')
-        print("Score: " + str(score))
-
-    elif human != 'q':
-        print("Try again!")
-
-  
-
-
+    print("Current score:", user_score)

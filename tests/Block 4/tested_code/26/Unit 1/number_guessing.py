@@ -1,31 +1,20 @@
 
-
-
-
-
 import random
-random.seed ()
 
 
-target_number = random.randint(1,10)
+target_number = random.randint(1, 10)
 
-human = 0
+print("Guess the number between 1 and 10!")
 
-
-
-while human != target_number:
-    print()
+while True:
     
-    human = int(input('type a number between 1 and 10 to guess the number: ')) 
-    print()
+    guess = int(input("Enter your guess: "))
 
     
-    if human > target_number:
-        print('Your number is larger than the answer')
-    elif human < target_number:
-        print('Your number is smaller than the answer')
-
-
-print("You're correct!")
-     
-
+    if guess == target_number:
+        print("Congratulations! You guessed it right.")
+        break
+    elif guess < target_number:
+        print("Your guess is too low. Try again!")
+    else:
+        print("Your guess is too high. Try again!")

@@ -3,14 +3,16 @@
 
 
 
-n = int(input('Type in a number: '))
-n_triangular = 0
-countdown = 1
+user_input = int(input('Enter a number: '))
 
-while countdown <= n:
-    n_triangular = n_triangular + countdown
-    countdown = countdown + 1
-    
-print('The value of the ' + str(n) + 'th triangular number is ' + str(n_triangular) + '.')
+count = 0
+
+triangular_number = 0
 
 
+while count < user_input:
+    count = count + 1
+    triangular_number = triangular_number + count
+
+
+print('The nth triangle number would be ' + str(triangular_number))

@@ -46,7 +46,7 @@ class TestCase(ABC):
     
     def __init__(self, test_case, tested_func_name: str, case_name : str = "", test_limits : TestLimits = TestLimits()):
         self.tested_func_name = tested_func_name
-        self.case_name = case_name
+        self.case_name = case_name 
         self.test_case = test_case
         self.test_results : list[TestCase.TestResult] = []
         self.test_limits = test_limits
@@ -85,6 +85,11 @@ class PrewrittenScriptCase(TestCase):
 
         def assert_eq(self, value : Any, *input_args, **input_kwds):
             def evaluator(func : Callable) -> PrewrittenScriptCase.EvaluatorResult:
+                # print stack trace
+                # print("assert eq-----------------------------------")
+                # # print(traceback.format_stack())
+                # print(input_args, input_kwds)
+                # print(input_args[0].closed)
                 ret = func(*input_args, **input_kwds)
                 cond = ret == value
                 if isinstance(ret, float) and isinstance(value, float):
@@ -265,7 +270,7 @@ class PrewrittenFileCase(PrewrittenScriptCase):
     
     def __init__(self, testcase_path : str, tested_func_name, case_name: str = "", test_limits: TestCase.TestLimits = TestCase.TestLimits()):
         # test_case is the path to the yml file
-        self.testcase_path = testcase_path
+        self.testcase_pxath = testcase_path
         self.test_args = []
         self.test_expected = None
         def file_syle_case_handler(func : Callable) -> PrewrittenScriptCase.EvaluatorResult: 

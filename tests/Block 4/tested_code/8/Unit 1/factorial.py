@@ -1,13 +1,16 @@
 
 
 
+user_number = int(input("Please enter a number: ")) 
+factorial = user_number 
+while user_number > 1:
+    factorial = factorial * (user_number - 1) 
+    user_number = user_number - 1
 
 
-player_number = int(input("Enter a number:"))
-factorial = player_number
+print('The factorial of your number is ' + str(factorial))
 
 
-while player_number > 1:
-    factorial = factorial * (player_number - 1)
-    player_number = player_number - 1
-print("The factorial of your number is: " + str(factorial))
+
+
+

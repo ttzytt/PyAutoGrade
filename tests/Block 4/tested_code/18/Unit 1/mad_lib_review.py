@@ -5,20 +5,28 @@
 
 
 
-
-adjective_1 = input('Write an adjective') 
-                                                                          
-name = input('Write a name')
-animal = input('Write an animal ')
-distance = input('Write a distance')
-restaurant = input('Write the name of a restaurant or fast food chain')
-food_1 = input('Write a food item')
-food_2 = input('Write a different food item')
-transportation = input('Write a type of transportation')
+name_1 = input('Name 1: ')
+name_2 = input('Name 2: ')
+place_1 = input('Place 1: ')
+place_2 = input('Place 2: ')
+food = input('Food: ')
+adjective = input('Adjective: ')
+noun = input('Noun: ')
 
 
-print ('One' + adjective_1 + ' day,' + name + ' decided to go on a walk with her pet ' + animal + 
-       '. ' + name + ' walked for' + distance + ' before getting hungy. She then walked to the' 
-       ' nearest' + restaurant + ' and ate some' + food_1 + '. She fed her ' + animal + ' some' + 
-       food_2 + '. ' + name + ' then took a ' + transportation + ' home.')
-       
+
+
+phrase = ('Once upon a time, a child called ' + name_1
+          + ' went to ' + place_1 + ' all by him/herself'
+          + ', for ' + name_1 + ' wanted to explore ' +
+          'the world. ' + name_1 + ', however, went to '
+          + place_2 + ' first, met ' + name_2 + ' there' 
+          + ' because they were at the same ' + food +
+          ' restaurant. At that place, ' + name_1
+          + ' and ' + name_2 + ' spent ' + adjective
+          + ' days together, finding out they'
+          + ' love ' + noun + ' in common.')
+
+
+
+print(phrase)

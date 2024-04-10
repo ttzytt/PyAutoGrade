@@ -1,27 +1,45 @@
 
 
 
-import random
-
+import random 
 random.seed()
 
 
-choice = str(input("Enter 'rock', 'paper' or 'scissors': "))
+user_choice = input("Enter 'rock' or 'paper' or 'scissors': ") 
 
 
-choice2 = random.choice(['rock', 'paper', 'scissors'])
-print("I choose " + choice2)
+comp_choice = random.choice(['rock', 'paper', 'scissors'])
+print('I choose '+ comp_choice + '.')
 
 
-if (choice == 'rock' and choice2 == 'paper')
-        or (choice == 'paper' and choice2 == 'scissors')
-        or (choice == 'scissors' and choice2 == 'rock'):
-    print('I win.')
-    
-elif (choice == 'paper' and choice2 == 'rock')
-        or (choice == 'scissors'and choice2 == 'paper')
-        or (choice == 'rock' and choice2 == 'scissors'):
-    print('You win.')
-    
+if user_choice == 'rock':
+    if comp_choice == 'rock':
+        print('We tie.')
+    elif comp_choice == 'paper':
+        print('I win.')
+    else:
+        
+        print('You win.') 
+
+elif user_choice == 'paper':
+    if comp_choice == 'rock':
+        print('You win.')
+    elif comp_choice == 'paper':
+        print('We tie.')
+    else:
+        
+        print('I win.')
+        
+elif user_choice == 'scissors':
+    if comp_choice == 'rock':
+        print('I win.')
+    elif comp_choice == 'paper':
+        print('You win.')
+    else:
+        
+        print('We tie.')
+
 else:
-    print('We tie.')
+    
+    print('I already chose, you need to choose from rock, paper, and scissors too!')
+        

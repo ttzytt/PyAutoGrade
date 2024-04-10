@@ -2,26 +2,27 @@
 
 
 
-def largest(list):
-    list.sort()
-    
-    return list[-1] 
-    
 
 
-def alternate_sum(list):
-    return sum(list[::2]) - sum(list[1: :2])
+
+def largest_element(numbers):
+    if len(numbers) == 0:
+        return None
     
-    
+    numbers.sort()
+    return numbers[-1]
 
 
-def rotate_right(list):
-    return list[-1:-2:-1] + list[0:-1]
-    
-    
+def alternate_sum(numbers):
+    return sum(numbers[::2]) - sum(numbers[1::2])
 
 
-def deal_3_hands(list):
-    return list[0: :3],list[1: :3],list[2: :3]
+def rotate_right(my_list):
+    if len(my_list) == 0:
+        return my_list
     
-    
+    return ([my_list[-1]]) + (my_list[0:-1]) 
+
+
+def deal_3_hands(deck):
+    return ([deck[0::3], deck[1::3], deck[2::3]])

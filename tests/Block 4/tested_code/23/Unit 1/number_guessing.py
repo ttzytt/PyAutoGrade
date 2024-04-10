@@ -1,23 +1,28 @@
 
 
 
+
 import random
+
 random.seed()
 
-
-program_choose = random.randint(1,10)
-user_guess = int(input('Guess the number between 1 to 10: '))
+bot_choice = random.randint(1,10)
 
 
-while user_guess != program_choose:
+player_input = int(input('Guess an integer 1-10: '))
 
-    if user_guess > program_choose:
-        print('Too high!')
-    elif user_guess < program_choose:
-        print('Too low!')
+
+while player_input != bot_choice:
+    if player_input > bot_choice:
+        print('Your guess is too high, try again!')
+    elif player_input < bot_choice:
+        print('Your guess is too low, try again!')
+    else:
+         print('Invalid choice; enter an integer 1-10!')
 
     
-    user_guess = int(input('Guess again: '))
+    player_input = int(input('Enter an integer 1-10: '))
 
-print() 
-print('You guessed it right! The number is ' + str(program_choose) + '.') 
+print('You got it! Great job!')
+
+

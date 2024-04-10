@@ -2,41 +2,30 @@
 
 
 
+number = int(input("Enter a positive integer: ")) 
+multi = 1 
+add = 0 
+jump_add = 0
+num = number
+ber = number
+umb = number
 
-def factorial(n):
+while num > 0: 
+    add = add + num
+    num = num - 1 
 
-    
-    factorial = 1
-    
-    while n > 0:
-        factorial = n * factorial 
-        n = n - 1  
-    return factorial 
-    
+while ber > 1: 
+    multi = multi * ber
+    ber = ber - 1 
 
-def triangular_number(n):
-     
-    triangle_number = 0 
-    while n > 0:  
-        triangle_number = n + triangle_number 
-        n = n - 1 
-    return triangle_number    
-
-def new_triangular_number(n):
-
-    new_triangle_number = 0 
-    while n > 0:  
-        new_triangle_number = n + new_triangle_number 
-        n = n - 2 
-    return new_triangle_number
-        
-
-user_input = int(input('Enter a positive integer: '))
-while user_input <= 0:
-    print('Invalid input. Please try again')
-    user_input = int(input('Enter a positive integer: '))
+while umb > 0: 
+    jump_add = jump_add + umb
+    umb = umb - 2 
 
 
-print(f'user_input is {factorial(user_input)}')
-print(f'Triangular number: {triangular_number(user_input)}')
-print(f'"New" triangular number: {new_triangular_number(user_input)}')
+print('The factorial of ' + str(number) + ' is ' + str(multi))
+print('The triangular number of ' + str(number) + ' is ' + str(add))
+print('The "new" triangular number of ' + str(number) + ' is ' + str(jump_add))
+
+
+

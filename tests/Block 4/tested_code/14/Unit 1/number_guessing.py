@@ -1,32 +1,25 @@
 
 
 
+import random
+random.seed()
 
 
+computer_choice = random.randint(1,10)
 
 
-
-from random import randint, seed
-
-seed()
-
-target_number = randint(1,10)
-
-guess = int(input("Choose a number between 1 and 10: "))
+player_choice = 0
 
 
-while guess != target_number:
+while player_choice != computer_choice:
     
-    
-    if 1 <= guess and guess < target_number:
-        print("That's too low!")
-    
-    elif 10 >= guess and guess > target_number:
-        print("That's too high!")
-    else:
-    
-        print("That's not a valid input...")
-    
-    guess = int(input("Choose a number between 1 and 10: "))
-print("You got it!")
+    player_choice = int(input('choose and integer between 1 and 10 (inclusive): '))
 
+    if player_choice > computer_choice:
+        print('too high')
+    elif player_choice < computer_choice:
+        print('too low')
+
+
+print('Congrats u got it')
+        

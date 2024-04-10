@@ -2,17 +2,14 @@
 
 
 
-factorial = 1
 
-changed_number = int(input("Which factorial do you want me to calculate? "))
-
-
-original_number = changed_number 
+integer=int(input('Enter a integer '))
 
 
-while changed_number >= 1:
-    factorial = factorial * changed_number
-    changed_number = changed_number - 1
-    
+factor=int(1)
 
-print('The factorial of ' + str(original_number) + ' is ' + str(factorial) + '.')
+while integer > 1:
+        factor = factor * integer
+        integer = integer - 1
+print('the factorial is ' + str(factor))
+        

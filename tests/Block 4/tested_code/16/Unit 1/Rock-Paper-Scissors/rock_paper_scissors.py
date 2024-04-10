@@ -1,38 +1,28 @@
 
 
+
 import random
 
-random.seed() 
+random.seed()
 
-player = input("Enter 'rock', 'paper' or 'scissors': ")
+userChoice = input(' Enter \'rock\' \'paper\' or \'scissors\': ')
 
-computer = random.choice(('rock', 'paper', 'scissors'))
+num = random.randint(1,3)                                       
+if (num == 1):                                                  
+    computer_rps_choice = 'rock'
+elif (num == 2):                                                
+    computer_rps_choice = 'paper'
+elif (num == 3):
+    computer_rps_choice = 'scissors'
 
-print ("I choose " + computer + ".")
-if player == computer:
-    print('We tie.')
+if (userChoice == 'rock' or userChoice == 'paper' or userChoice == 'scissors'):  
 
+        if(userChoice == computer_rps_choice):              
+            print('I played ' + computer_rps_choice + '! Draw!')
+        elif((computer_rps_choice =='rock' and userChoice == 'scissors') or (computer_rps_choice =='scissors' and userChoice == 'paper') or (computer_rps_choice =='paper' and userChoice == 'rock')): 
+            print('I played ' + computer_rps_choice + '! I win!') 
+        else:                                               
+            print('I played ' + computer_rps_choice + '! You win! Good game!')
 
-if player == 'rock':
-    if computer == 'paper':
-        print('I win.')
-    elif computer == 'scissors':
-        print('You win.')
-
-elif player == 'paper':
-    if computer =='rock':
-        print('You win.')
-    elif computer == 'scissors':
-        print('I win.')
-
-elif player == 'scissors':
-    if computer == 'rock':
-        print ('I win.')
-    elif computer == 'paper':
-        print('You win.')
-
-
-
-    
 else:
-    print("Silly! That's not rock paper scissors! :(") 
+    print( )

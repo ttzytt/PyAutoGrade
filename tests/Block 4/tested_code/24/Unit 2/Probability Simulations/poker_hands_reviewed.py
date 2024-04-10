@@ -1,118 +1,234 @@
 
 
 
-
-from operator import itemgetter 
-import random 
+from operator import itemgetter
+import random
 random.seed()
 
 
-
-def create_deck():
+def random_hand():
     deck = []
-    for rank in range(1, 14):
-        deck.append([rank, '♥'])
-        deck.append([rank, '♦'])
-        deck.append([rank, '♣'])
-        deck.append([rank, '♠'])
-    return deck
-
-
-def check_if_full_house(hand):
-    hand.sort()
-    if((hand[0][0] == hand[1][0]) and (hand[3][0] == hand[4][0])):
-        if((hand[2][0] == hand[0][0]) or (hand[2][0] == hand[4][0])):
-            return 1
-    return 0
-
-
-
-def check_if_straight_flush(hand):
-    hand.sort(key = itemgetter(1))
-    if not(hand[0][1] == hand[4][1]):
-        return 0
-    hand.sort()
-    if((hand[0][0] == 1) and (hand[1][0] == 10) and (hand[2][0] == 11) and (hand[3][0] == 12)
-       and (hand[4][0] == 13)):
-        return 1
-        
-    for i in range(1, 5):
-        if not(hand[0][0] + i  == hand[i][0]):
-            return 0
-    return 1
-
-
-
-def check_if_flush(hand):
-    for i in range(4):
-        if (hand[i][1] != hand[i+1][1]):
-            return 0
-    if(check_if_straight_flush(hand) > 0):
-        return 0
-    return 1
-
-
-
-
-
-def calculate_odds(type, num_success):
-    success = 0
-    times = 0
-    deck = create_deck()
+    suits = ['♠', '♥', '♦', '♣']
+    ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     
-    while (success != num_success):
-        hand = make_hand(deck)
-        if (type == "flush"):
-            success += check_if_flush(hand)
-        elif (type == "straight flush"):
-            success += check_if_straight_flush(hand)
-        elif (type == "full house"):
-            success += check_if_full_house(hand)
-        times += 1
+    for suit in suits:
+        for rank in ranks:
+            deck.append([rank, suit])
 
-    return times/num_success
-
-
-def make_hand(deck):
     random.shuffle(deck)
-    return deck[:5]
-
-
-def roll_die(die):
-    random.shuffle(die)
-    return die[0]
-
-
-
-
-def comparison(die):
-    roll1 = roll_die(die)
-    for i in range(4):
-        roll2 = roll_die(die)
-        if(roll1 != roll2):
-            return 0
-
-    return 1
-
-
-
-def calculate_die_odds(nums_success):
-    success = 0
-    times = 0
-    die = ['♥', '♦', '♣', '♠']
     
-    while (success != nums_success):
-        success += comparison(die)
-        times += 1
-
-    return times/nums_success
+    return deck[:5:]
+        
+def tries_until_full_house():
     
+    count = 0
+    full_house = False
+
+    
+    while full_house == False:
+        hands = random_hand()
+        hands.sort()
+
+        
+        if (hands[0][0] == hands[1][0]
+                and hands[2][0] == hands[3][0]
+                and hands[2][0] == hands[4][0]):
+            full_house = True
+        
+        elif (hands[0][0] == hands[1][0]
+                and hands[0][0] == hands[2][0]
+                and hands[3][0] == hands[4][0]):
+            full_house = True
+        else:
+            full_house = False
+        count += 1
+    
+    return count
+
+def average_amount_of_tries_until_full_house(num_trials):
+    total = 0
+    for _ in range(1, num_trials):
+        total += tries_until_full_house()
+    return total/num_trials
+
+def tries_until_straight_flush():
+    count = 0
+    straight_flush = False
+
+    while straight_flush == False:
+        hands = random_hand()
+        hands.sort()
+
+        
+        
+        
+        if hands[0][0] == 1:
+            if int(hands[0][0] + 1 != int(hands[1][0])):
+                hands[0][0] = 14
+        hands.sort()
+
+        
+        if (int(hands[0][0]) + 1 == int(hands[1][0])
+                and int(hands[1][0]) + 1 == int(hands[2][0])
+                and int(hands[2][0]) + 1 == int(hands[3][0])
+                and int(hands[3][0]) + 1 == int(hands[4][0])):
+            if (hands[0][1] == hands[1][1]
+                    and hands[0][1] == hands[2][1]
+                    and hands[0][1] == hands[3][1]
+                    and hands[0][1] == hands[4][1]):
+                straight_flush = True
+        else:
+            straight_flush = False
+            
+        count += 1
+            
+    return count
 
 
-type = input('Enter what card arrangment you would like to check for "straight flush", "flush", or "full house". ')
-num_success = int(input('Enter the number of times you want it to succeed: '))
-odds = calculate_odds(type, num_success)
-print("The odds of being dealt a " + type + " is 1 in " + str(odds) + ".")
-die_num_success = int(input('Enter the number of times you want your die to succeed: '))
-die_odds = calculate_die_odds(die_num_success)
-print("The odds of rolling 5 of the same suit is 1 in " + str(die_odds) + ".")
+def average_amount_of_tries_until_straight_flush(num_trials):
+    total = 0
+    for _ in range(1, num_trials):
+        total += tries_until_straight_flush()
+    return total/num_trials
+
+def tries_until_flush():
+    count = 0
+    flush = False
+    
+    
+    while flush == False:
+        hands = random_hand()
+        hands.sort()
+
+        
+        
+        
+        if hands[0][0] == 1:
+            if int(hands[0][0] + 1 != int(hands[1][0])):
+                hands[0][0] = 14
+        hands.sort()
+
+        
+        if (hands[0][1] == hands[1][1]
+                and hands[0][1] == hands[2][1]
+                and hands[0][1] == hands[3][1]
+                and hands[0][1] == hands[4][1]):
+            if (int(hands[0][0]) + 1 == int(hands[1][0])
+                    and int(hands[1][0]) + 1 == int(hands[2][0])
+                    and int(hands[2][0]) + 1 == int(hands[3][0])
+                    and int(hands[3][0]) + 1 == int(hands[4][0])):
+                flush = False
+                
+            else:
+                flush = True
+                
+        count += 1
+
+    return count
+
+
+def average_amount_of_tries_until_flush(num_trials):
+    total = 0
+    for _ in range(1, num_trials):
+        total += tries_until_flush()
+    return total/num_trials
+
+
+def dice_roll():
+    dice = ['♠', '♥', '♦', '♣']
+    random.shuffle(dice)
+    
+    return dice[0]
+
+
+
+def dice_roll_until_flush():
+    count = 0
+    flush = False
+
+    while flush == False:
+        rolls = []
+        roll_count = 0
+
+        
+        while roll_count <= 5:
+            roll = dice_roll()
+            rolls.append(roll)
+            roll_count += 1
+        
+        count += 5
+
+        
+        if (rolls[0] == rolls[1]
+                and rolls[0] == rolls[2]
+                and rolls[0] == rolls[3]
+                and rolls[0] == rolls[4]):
+            flush = True
+            
+        else:
+            flush = False
+    return count/5
+
+
+def average_tries_until_dice_flush(num_trials):
+    total = 0
+    for _ in range(1, num_trials):
+        total += dice_roll_until_flush()
+    return total/num_trials
+
+
+
+
+
+
+
+input_valid = True
+print("Which hand do you want to know the odds of getting?")
+
+while input_valid == True:
+    user_input = str(input("Straight Flush, Flush, Dice Flush, Full House or quit: "))
+    if user_input == 'quit':
+        print('See you next time.')
+        break
+    
+    num_trials = int(input("How many trials do you want to go through? "))
+    print("Give me one second... ")
+    
+    if user_input == 'Straight Flush':
+        straight_flush = average_amount_of_tries_until_straight_flush(num_trials)
+        print("The odds of being dealt a Straight Flush is 1 in " + str(straight_flush) + ".")
+        print()
+                           
+    elif user_input == 'Flush':
+        flush = average_amount_of_tries_until_flush(num_trials)
+        print("The odds of being dealt a Flush is 1 in " + str(flush) + ".")
+        print()
+
+    elif user_input == 'Full House':
+        Full_House = average_amount_of_tries_until_full_house(num_trials)
+        print("The odds of being dealt a Full House is 1 in " + str(Full_House) + ".")
+        print()
+
+    elif user_input == 'Dice Flush':
+        Dice_Flush = average_tries_until_dice_flush(num_trials)
+        print("The odds of being dealt a Dice Flush is 1 in " + str(Dice_Flush) + ".")
+        print()
+        
+    else:
+        input_valid = False
+        while input_valid == False:
+            print("That input was invalid, please try again")
+            print()
+            input_valid = True
+            
+
+            
+
+
+
+
+
+
+
+
+        

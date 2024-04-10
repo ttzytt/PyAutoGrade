@@ -5,138 +5,136 @@
 
 
 
+
 def count_number_larger_than(target, numbers):
-    count = 0
-    for i in range(len(numbers)):
-        if numbers[i] > target:
-            count += 1
-        else:
-            count += 0
-    return count
+    counter = 0
+    return_value = 0
+    while counter < len(numbers):
+        if numbers[counter] > target:
+            return_value = return_value + 1
+        counter = counter + 1
+    return return_value  
+
 
 
 
 def average(numbers):
-    if len(numbers) >= 2:
-        sum = 0
-        for i in range(len(numbers)):
-            sum += numbers[i]
-        return sum / len(numbers)
-    elif len(numbers) == 1:
-        return numbers[0]
-    else:
+    if len(numbers) == 0:
         return 0
+
+    counter = 0
+    return_value = 0
+    while counter < len(numbers):
+        return_value = numbers[counter] + return_value
+        counter = counter + 1
+    return return_value / len(numbers)
 
 
 
 def largest_element(numbers):
-    if len(numbers) >= 2:
-        max = numbers[0]
-        for i in range(len(numbers)):
-            if numbers[i] > max:
-                max = numbers[i]
-        return max
-    elif len(numbers) == 1:
-        return numbers[0]
-    else:
+    counter = 0
+    return_value = 0
+    maximum = -99999
+    if len(numbers) == 0:
         return 0
+    
+    while counter < len(numbers):
+        maximum = max(maximum,numbers[counter])
+        counter = counter + 1
+
+    return maximum
+
+
 
 
 def all_equal(my_list):
-    x = True
-    if len(my_list) >= 2:
-        counter = 0
-        while counter <= len(my_list) and x == True :
-            if my_list[counter] == my_list[counter + 1]:
-                x = True
-            else:
-                x = False
-            return x
-    elif len(my_list) == 1:
+    counter = 0
+    return_value = 0
+    if len(my_list) == 0:
         return True
-    else:
-        return False
+    
+    firstvalue = my_list[0]
+    while counter < len(my_list):
+        if firstvalue != my_list[counter]:
+            return False
+        counter = counter + 1
+    return True
+
+
+
 
 def alternate_sum(numbers):
-    if len(numbers) == 0:
-        return []
-    sum = 0
+    return_value = 0
     for i in range(len(numbers)):
         if i % 2 == 0:
-            sum += numbers[i]
+            return_value += numbers[i]
         else:
-            sum -= numbers[i]
-    return sum
+            return_value -= numbers[i]
+    return return_value
 
 
-def is_ordered(numbers, is_strict):
+def is_ordered(numbers,is_strict):
     if len(numbers) == 0:
         return False
-    counter = 0
-    x = True
-    if is_strict == False:
-        while x == True and counter <= (len(numbers) - 2):
-            if numbers[counter] <= numbers[counter + 1]:
-                x = True
-            else:
-                x = False
-            counter += 1
-        return x
-    else:
-        while x == True and counter <= (len(numbers) - 2):
-            if numbers[counter] < numbers[counter + 1]:
-                x = True
-            else:
-                x = False
-            counter += 1
-        return x 
+    for i in range(1, len(numbers)):
+        if numbers[i] < numbers[i - 1] and is_strict == False:
+            return False
+        elif numbers[i] <= numbers[i - 1] and is_strict == True:
+            return False
+    return True
 
 
-def rotate_right(numbers):
-    if len(numbers) == 2:
-        return [numbers[1], numbers[0]]
-    elif len(numbers) == 1:
-        return [numbers[0]]
-    elif len(numbers) == 0:
-        return "Empty list"
-    else:
-        new_set = list(range(len(numbers)))
-        for i in range(1, len(numbers)):
-            new_set[i] = numbers[i - 1]
-        new_set[0] = numbers[len(numbers) - 1]
-        return new_set
+
+def rotate_right(my_list):
+    temp_list = my_list.copy()
+    
+    
+    
+    
+    if len(temp_list) == 0:
+        return 0
+    for i in range(1,len(my_list)):
+        my_list[i] = temp_list[i-1]
+    my_list[0] = temp_list[len(temp_list) - 1]
+    return my_list
 
 
 def weird_double(numbers):
     if len(numbers) == 0:
-        return "Empty list"
+        return 0
     counter = 0
-    while counter < len(numbers):
-        if numbers[counter] % 3 == 0:
-            counter += 4
-        else:
+    while counter <= len(numbers) - 1:
+        if numbers[counter] % 3 != 0:
             numbers[counter] *= 2
             counter += 1
+        else:
+            counter += 4
     return numbers
 
+
 def merge_ordered_lists(ordered_numbers_1, ordered_numbers_2):
+    if len(ordered_numbers_1) == 0 or len(ordered_numbers_2) == 0:
+        return 0
+
+    index_1 = 0
+    index_2 = 0
     new_list = []
-    counter_1 = 0
-    counter_2 = 0
-    while counter_1 < (len(ordered_numbers_1)) and (counter_2 < len(ordered_numbers_2)):
-        if ordered_numbers_1[counter_1] < ordered_numbers_2[counter_2]:
-            new_list.append (ordered_numbers_1[counter_1])
-            counter_1 += 1
+
+    while index_1 < len(ordered_numbers_1) and index_2 < len(ordered_numbers_2):
+        if ordered_numbers_1[index_1] <= ordered_numbers_2[index_2]:
+            new_list.append(ordered_numbers_1[index_1])
+            index_1 += 1
         else:
-            new_list.append(ordered_numbers_2[counter_2])
-            counter_2 += 1
-    if counter_2 < len(ordered_numbers_2):
-        for i in range(counter_2, len(ordered_numbers_2)):
-            new_list.append(ordered_numbers_2[i])
-    elif counter_1 < len(ordered_numbers_1):
-        for i in range(counter_1, len(ordered_numbers_1)):
-            new_list.append(ordered_numbers_1[i])
+            new_list.append(ordered_numbers_2[index_2])
+            index_2 += 1
+
+    if len(ordered_numbers_1) == index_1:
+        while index_2 < len(ordered_numbers_2):
+            new_list.append(ordered_numbers_2[index_2])
+            index_2 = index_2 + 1
+    else:
+        while index_1 < len(ordered_numbers_1):
+            new_list.append(ordered_numbers_1[index_1])
+            index_1 = index_1 + 1
     return new_list
 
-    
-        

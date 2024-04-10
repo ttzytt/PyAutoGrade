@@ -1,18 +1,31 @@
 
 
 
-
-n = input('write a number: ')
-
-
-
-i = 1
-product = 0
+print('The triangular number of n stands for the value of 1+2+3+...+n')
+print('In this program we are going to show you how it works')
 
 
-while i <= int(n):
-    product = i + product
-    i = i + 1
+user = int(input('Please input an integral: '))
 
+answer = user
 
-print(product)
+x = 1
+
+if user > 1:
+
+ while x < user:
+  
+  print(str(answer) + '+' + str(x) + '=')
+  
+  answer = answer+x
+  
+  x = x+1
+  
+  print(answer)
+  
+
+elif user == 1:
+ print('The triangular number of 1 is 1')
+  
+else:
+ print('Only positive number is accepted')

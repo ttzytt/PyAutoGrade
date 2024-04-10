@@ -3,27 +3,25 @@
 
 
 
-name = ''
+
+adjective = input('adjective:')
+noun = input('noun:')
+verb = input('verb in present tense:')
+adverb = input('adverb:')
+pluralnoun = input('plural noun:')
+color = input('color:')
+animal = input('animal:')
+number = input('number:')
 
 
 
-adjective = ''
-adjectives = ''
-verb  = ''
-verbs = ''
-place = ''
-adjectivess = ''
-city = ''
-animal  = ''
-animals = ''
 
-
-
-print ('one day a ' + animal + ' ' + 'named ' + name + ' ' + 'was walking down the hill to the ' + adjective
-       + ' ' + city + ' ' + '. ' + 'it was just an ordianry day until a ' + animals + ' ' + verb + ' ' + name + '. '
-       + 'but the ' + animals + ' ' + 'did not even apologize. that messed up ' + name + 's' + ' '  +
-       'daily routine because ' + name + ' ' + 'might be late. now ' + name + ' ' + 'will not have time to go '
-       + 'to the ' + place + ' ' + 'to ' + verbs + ' ' + '. ' + name + ' ' + 'was feeling ' + adjectives + ' ' + '. ' +
-       'but when ' + name + ' ' + 'got to ' + place + ' ' + ', ' + name + ' ' + 'was on time' + '. now ' + name + 's '
-       + adjectivess + ' ' + 'day has returned to plain old ordinary.')
-    
+print('Once upon a time in a ' \
+         + adjective + 'kindom, there lived a' + noun \
+          + ' the '+ color + animal + '. ' + noun +\
+          'was known throughout the land for' \
+          + verb + number +pluralnoun + \
+          'in one sitting, and the townsfolk were always amazed by how'\
+          + adverb + noun + \
+          'could do it. People came from far and wide to watch'\
+          + noun + 's incredible feats of eating. It was a sight to behold')

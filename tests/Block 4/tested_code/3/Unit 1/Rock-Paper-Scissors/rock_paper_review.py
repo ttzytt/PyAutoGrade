@@ -3,22 +3,28 @@
 
 
 
-import random
+
+import random 
 
 random.seed()
 
+user = input("Enter 'rock' or 'paper': ") 
 
+comp = random.choice(['rock', 'paper']) 
 
-choice = str(input("Enter 'rock' or 'paper': "))
+print('I choose ' + comp + '.')
 
+if user == 'rock':   
 
-choice2 = random.choice(['rock', 'paper'])
-print("I choose " + choice2)
+    if comp == 'rock':
+        print('We tie.')
+    else:
+        print('I win.')
 
-
-if choice == 'rock' and choice2 == 'paper':
-    print('I win.')
-elif choice == 'paper' and choice2 == 'rock':
-    print('You win.')
 else:
-    print('We tie.')
+
+    if comp == 'rock':
+        print('You win.')
+    else:
+        print('We tie.')
+

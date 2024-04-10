@@ -4,27 +4,27 @@
 
 
 
+
 def draw_row(row, row_number):
     print(str(row_number) + ' │ '
           + row[0] + ' │ '
           + row[1] + ' │ '
-          + row[2] + ' │ ')
+          + row[2] + ' │ '
+          + row[3] + ' │ ')
 
 
 
 def draw_board(board):
-    print('  ┌───┬───┬───┐ ')
+    print('  ┌───┬───┬───┬───┐ ')
     draw_row(board[0], 1)
-    print('  ├───┼───┼───┤ ')
+    print('  ├───┼───┼───┼───┤ ')
     draw_row(board[1], 2)
-    print('  ├───┼───┼───┤ ')
+    print('  ├───┼───┼───┼───┤ ')
     draw_row(board[2], 3)
-    print('  └───┴───┴───┘ ')
-    print('    A   B   C   ')
-
-
-
-
+    print('  ├───┼───┼───┼───┤ ')
+    draw_row(board[3], 4)
+    print('  └───┴───┴───┴───┘ ')
+    print('    A   B   C   D   ')
 
 
 
@@ -32,45 +32,32 @@ def draw_board(board):
 
 def find_winner(board):
     
-    winner_board = [ [ 0, 0, 0],
-                     [ 0, 0, 0],
-                     [ 0, 0, 0] ]
+    for row in range (4):
+        if board[row][0] == board[row][1] and board[row][0] == board[row][2] and board[row][0] == board[row][3]:
+            if board[row][0] == 'x':
+                return 'x'
+            elif board[row][0] == 'o':
+                return 'o'
 
     
-    for i in range(3):
-        for j in range(3):
-            if board[i][j] == 'o':
-                winner_board[i][j] = 1
-            if board[i][j] == 'x':
-                winner_board[i][j] = -1
+    for column in range (4):
+        if board[0][column] == board[1][column] and board[0][column] == board[2][column] and board[0][column] == board[3][column]:
+            if board[0][column] == 'x':
+                return 'x'
+            elif board[0][column] == 'o':
+                return 'o'
 
     
-    for test_row in range(3):
-        if sum(winner_board[test_row]) == 3:
+    if board[0][0] == board[1][1] and board[0][0] == board[2][2] and board[0][0] == board[2][2] and board[0][0] == board[3][3]:
+        if board [0][0] == 'x':
+            return 'x'
+        elif board[0][0] == 'o':
             return 'o'
-        if sum(winner_board[test_row]) == -3:
+    elif board[0][3] == board[1][2] and board[0][3] == board[2][1] and board[0][3] == board[3][0]:
+        if board [0][3] == 'x':
             return 'x'
-
-    
-    column_value = [[],[],[]]
-    for i in range(3):
-        for j in range(3):
-            column_value[i].append(winner_board[j][i])
-
-    for test_column in range(3):
-        if sum(column_value[test_column]) == 3:
-             return 'o'
-        if sum(column_value[test_column]) == -3:
-            return 'x'
-
-    
-    diag_1 = winner_board[0][0] + winner_board[1][1]+ winner_board[2][2]
-    diag_2 = winner_board[2][0] + winner_board[1][1]+ winner_board[0][2]
-
-    if diag_1 == 3 or diag_2 == 3:
-        return 'o'
-    if diag_1 == -3 or diag_2 == -3:
-        return 'x'
+        elif board[0][3] == 'o':
+            return 'o'
         
     return None
 
@@ -86,9 +73,9 @@ def make_move(player, move, board):
     
     if len(move) != 2:
         return False
-    elif str(move[0]) != '1' and str(move[0]) != '2' and str(move[0]) != '3':
+    elif not ('1' <= move[0] <= '4'):
         return False
-    elif move[1] != 'A' and move[1] != 'B' and move[1] != 'C':
+    elif not ('A' <= move[1] <= 'D'):
         return False
 
     
@@ -99,7 +86,7 @@ def make_move(player, move, board):
     column = ord(move[1]) - ord('A')
 
     
-    if board[row][column] == ' ':
+    if board[row][column] == (' '):
         board[row][column] = player
         return True
     else:
@@ -108,10 +95,9 @@ def make_move(player, move, board):
 
 
 
-
 def next_player(player):
     if player == 'x':
         return 'o'
-    else:   
+    else:  
         return 'x'
 

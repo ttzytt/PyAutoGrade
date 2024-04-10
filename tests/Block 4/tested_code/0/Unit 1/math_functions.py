@@ -1,53 +1,43 @@
 
 
 
-input_number = int(input('Please input a positive integer: ')) 
-def factorial(input_number):
-    factorial = 1
-    while input_number > 0:
-        factorial = factorial * input_number
-        input_number = input_number - 1
-    return factorial
 
-def triangular_number(input_number):
-    triangular_number = 1
-    number = input_number
-    while number > 1:
+
+number = int(input('Give me a random integer: '))
+print()
+
+
+def factorial_function(number):
+    product = 1
+    while number > 0:
+        product = product*number
+        number = number - 1
+    return product
+
+
+def triangular_number_function(number):
+    triangular_number = 0
+    while number > 0:
         triangular_number = triangular_number + number
-        number =  number - 1
+                                                      
+        number = number - 1
     return triangular_number
 
 
-def new_triangular_number(input_number):
+
+def new_triangular_number_function(number):
     new_triangular_number = 0
-    number = input_number
-    while number > 0: 
-           new_triangular_number = new_triangular_number + number
-           number =  number - 2
+    while number > 0:
+        new_triangular_number = new_triangular_number + number
+        number = number - 2
+                           
+                           
     return new_triangular_number
 
-def bonus_triangular_number(input_number):
-    if input_number % 2 == 0:
-        return int((input_number/2)*(input_number/2 + 1))
-    else:
-        return int((input_number/2 + 1)*(input_number/2 + 1))
-    
-    
 
-print(f' {input_number}! is {factorial(input_number)}')
-print(f' Triangular number: {triangular_number(input_number)}')
-print(f' "New" triangular number: {new_triangular_number(input_number)}')
-print(bonus_triangular_number(input_number))
-
-
-    
-
-
-
-
-
-
-
-
-    
+print(str(number) + '! is ' + str(factorial_function(number)))
+print()
+print('Triangular Number: ' + str(triangular_number_function(number)))
+print()
+print( + str(new_triangular_number_function(number)))
 

@@ -2,57 +2,72 @@
 
 
 import random
+random.seed()
 
-
-
-computer = ['rock', 'paper', 'scissors']
-
-
-
-
-Flag = False
-while Flag == False:
-
+while True:   
     
-
-
-    user_choice = input("Enter 'rock' or 'paper' or 'scissors', if you wish to exit the game, enter 'quit': ")
-
+    user_choice = input("Enter 'rock', 'paper', 'scissors' or 'quit' to stop: ").lower()
     if user_choice == 'quit':
-        print('Game over')
-        Flag = True
+        break   
 
-    if Flag == False:
-        
-        computer_choice = random.choice(computer)
-        print('I choose ' + computer_choice  + '.')
+    
+    if user_choice not in ['rock', 'paper', 'scissors']:
+        print("Invalid input. Try again.")
+        continue
 
-        
-        if computer_choice == user_choice:
-            print('We tie.')
-        elif user_choice == 'rock': 
-            if computer_choice == 'scissors':
-                print('You win.')
-            else:  
-                print('I win.')
+    computer_choice = random.choice(['rock', 'paper', 'scissors'])
 
-        elif user_choice == 'paper':
-            if computer_choice == 'scissors':
-                print('I win.')
-            if computer_choice == 'rock':
-                print('You win.')
-
-        elif user_choice == 'scissors':
-            if computer_choice == 'paper':
-                print('You win.')
-            if computer_choice == 'rock':
-                print('I win.')
-
-
+    
+    print("I choose " + computer_choice + ".")
 
 
     
-       
+    if user_choice == computer_choice:
+        print("We Tie.")
+    
+    elif (user_choice == 'rock' and computer_choice == 'scissors') or \
+         (user_choice == 'scissors' and computer_choice == 'paper') or \
+         (user_choice == 'paper' and computer_choice == 'rock'):
+        print("You Win.")
+    
+    else:
+        print("I win!")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

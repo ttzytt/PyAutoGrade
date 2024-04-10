@@ -3,56 +3,67 @@
 
 
 import random
+random.seed()
 
-def find_winner(num_werewolves, num_villagers):
-    
-    
-    while num_werewolves > 0 and num_villagers > num_werewolves:
-        
-        
-        
-        total_players = num_werewolves + num_villagers
-        
-        
-        killed_person = random.randint(1, total_players) 
-        if killed_person <= num_werewolves: 
-            num_werewolves -= 1
-        else:
-            num_villagers -= 1
-            
-        
-        if num_werewolves > 0 and num_villagers > 0: 
-            num_villagers -= 1
 
-    
-    if num_villagers <= num_werewolves:
-        return 'werewolves'  
+
+
+
+
+def find_winner(num_werewolf, num_villager):
+
+    if num_werewolf == 0:
+        return 'villager'
+    elif num_werewolf >= num_villager:
+        return 'werewolf'
     else:
-        return 'village'  
+        return None
 
-def odds_of_werewolves_winning(num_werewolves, num_villagers    werewolves_wins = 0
-    num_trials = 0
+
+
+def one_simulation(num_werewolf, num_villager):
+
+    while find_winner(num_werewolf, num_villager) is None: 
+        num_villager -= 1 
+
+        if find_winner(num_werewolf, num_villager) is None: 
+
+            num_total = num_werewolf + num_villager
+            day_kill = random.randint(1, num_total) 
+
+            if day_kill <= num_werewolf: 
+                num_werewolf -= 1
+            else:
+                num_villager -= 1 
+
+            if find_winner(num_werewolf, num_villager) is not None: 
+                return find_winner(num_werewolf, num_villager)
+            
+
+        else: 
+            return find_winner(num_werewolf, num_villager)
+
+
+
+
+def odds_of_werewolves_winning(num_villager, num_werewolf, num_simulation):
+
+    num_werewolf_win = 0
     
-    while werewolves_wins < 20: 
-        winner = find_winner(num_werewolves, num_villagers)
-    
-        if winner == 'werewolves': 
-            werewolves_wins += 1 
-        num_trials += 1 
+    for i in range(num_simulation):
+        if one_simulation(num_werewolf, num_villager) == 'werewolf':
+            num_werewolf_win += 1 
 
-    return (werewolves_wins / num_trials) * 100 
-
-
-
-num_werewolves = int(input("Enter the number of werewolves you would like: "))
-num_villagers = int(input("Enter the number of villagers you would like: "))
-
-
-werewolf_win = odds_of_werewolves_winning(num_werewolves, num_villagers)
-print(f"The chance of the werewolves winning is approximately {werewolf_win:.4f}% ")
+    return round((num_werewolf_win / num_simulation), 2) 
 
 
 
 
-
-
+num_villager = int(input('How many villagers would you like to start with? '))
+num_werewolf = int(input('How many werewolves would you like to start with? '))
+print("You're starting with " + str(num_villager) + " villagers and ") 
+print(str(num_werewolf) + " werewolves.")
+num_simulation = int(input('How many times of simulation would you like to have? '))
+print("You're doing " + str(num_simulation) + " times of simulation.")
+print("The simulations are starting with night first.")
+print("The odds of werewolves winning is " + str(odds_of_werewolves_winning(num_villager, num_werewolf, num_simulation)))

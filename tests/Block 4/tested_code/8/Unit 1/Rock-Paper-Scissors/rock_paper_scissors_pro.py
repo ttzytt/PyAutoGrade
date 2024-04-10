@@ -2,65 +2,65 @@
 
 
 
-
-
 import random
 
 random.seed()
-player = input("Enter rock, paper, scissors: ")
 
-def rps():
-        score = 0
-        if player == 'rock' and bot == 'scissors':
-            score = score + 1
-        if player == 'scissors' and bot == 'paper':
-            score = score + 1
-        if player == 'paper' and bot == 'rock':
-            score = score + 1
-        if player == 'rock' and bot == 'paper':
-            score = score - 1
-        if player == 'paper' and bot == 'scissors':
-            score = score - 1
-        if player == 'scissors' and bot == 'rock':
-            score = score - 1
-        else:
-            score = score
-        return(score)
-rps_score = 0
 
-while player != 'quit':
-    bot = random.choice(['rock' , 'paper' , 'scissors'])
+def rps_score_round():
+    score = 0
+    if computer == player:
+        score = score + 0
+    elif player == 'rock' and computer == 'paper':
+        score = score - 1
+    elif player == 'paper' and computer == 'rock':
+        score = score + 1
+    elif computer == 'scissors' and player == 'paper':
+        score = score - 1
+    elif player == 'scissors' and computer == 'paper':
+        score = score + 1
+    elif computer == 'rock' and player == 'scissors':
+        score = score - 1
+    elif player == 'rock' and computer == 'scissors':
+        score = score + 1
+    return(score)
 
+rps = 0
+print('Welcome to rock paper scissors! ')
+loopvar = 0
+while loopvar == 0:
+    player = input("Enter 'rock', 'paper', 'scissors', or 'q' to quit: ") 
+    computer = random.choice(['rock', 'paper', 'scissors'])
+    if player == 'q': 
+        loopvar = 1
+        print('Goodbye.')
     
-    if player == 'rock' and bot == 'paper':
-        print('I chose paper.')
-        print('You lose!')
-    elif player == 'rock' and bot == 'scissors':
-        print('I chose scissors.')
-        print('You win!')
-    elif player == 'paper' and bot == 'rock':
-        print('You win!')
-        print('I chose rock.')
-    elif player == 'paper' and bot == 'scissors':
-        print('I chose scissors.')
-        print('You lose!')
-    elif player == 'scissors' and bot == 'paper':
-        print('I chose paper.')
-        print('You win!')
-    elif player == 'scissors' and bot == 'rock':
-        print('I chose rock.')
-        print('You lose!')
-    elif player == bot:
-        print('I chose ' + player + '.')
-        print('We tie!')
-    elif player != 'rock' or player != 'paper' or player != 'scissors' or player != 'quit':
-        print('Please enter rock, paper, or scissors')
+    elif loopvar == 0:
+        print('I choose ' + computer)
+    elif computer == player:
+        
+        print('We tie.')
+    elif player == 'rock' and computer == 'paper':
+        print('I win.')
+    elif player == 'paper' and computer == 'rock':
+        print('You win.')
+    elif computer == 'scissors' and player == 'paper':
+        print('I win')
+    elif player == 'scissors' and computer == 'paper':
+        print('You win')
+    elif computer == 'rock' and player == 'scissors':
+        print('I win')
+    elif player == 'rock' and computer == 'scissors':
+        print('You win')
+    else:
+        print('What do you mean? Are you trying to cheat??')
+    if player != 'q':
+        rps = rps + rps_score_round()
+        print('Your score is ' + str(rps))
+    else:
+        print('Your final score is ' + str(rps))
+        
 
-    rps_score = rps_score + rps()
-    print("Your score is: " + str(rps_score))
-    player = input("Enter rock, paper, scissors(Enter 'quit' if you want to stop playing): ")
 
-print("Thanks for playing!")
-print("Your final score was: " + str(rps_score))
 
 

@@ -2,24 +2,31 @@
 
 
 
-
 import random
 
 
-userchoice = input("Enter 'rock' or 'paper': ").lower()
+random_choice = random.randint(0,1)
 
 
-ranchoice = random.choice(['rock', 'paper'])
+choices = ['rock', 'paper']
 
 
-print("I choose " + ranchoice + ".")
+user_choice = input("Enter 'rock' or 'paper': ").lower()
 
 
-if userchoice == ranchoice:
-    print("We tie.")  
-elif (userchoice == 'rock' and ranchoice == 'paper'):
-    print("You win")  
-elif (userchoice == 'paper' and ranchoice == 'rock'):
-    print("You win.")  
+computer_choice = choices[random_choice]
+
+
+print('I choose ' + str(computer_choice) + '.')
+
+
+if user_choice == 'paper':
+    if computer_choice == 'rock':
+        print('You win.')
+    else:
+        print('We tie.')
 else:
-    print("I win.")  
+    if computer_choice == 'rock':
+        print('We tie.')
+    else:
+        print('I win.')

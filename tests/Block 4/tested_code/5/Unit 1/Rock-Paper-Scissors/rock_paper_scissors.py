@@ -3,35 +3,25 @@
 
 import random
 
-print("Hello, lets play a game of rock paper scissors.")
-
-player = input("Choose one: rock, paper, or scissors? (all lowercase, no spaces) ")
-
-computer = random.choice(['rock', 'paper', 'scissors'])
+random.seed()
 
 
-print("I choose " + computer + ".")
-
-if computer == player:
-    print("Looks like we tied.")
+choice = str(input("Enter 'rock', 'paper' or 'scissors': "))
 
 
-if computer == ('rock'):
-    if player == ('paper'):
-        print("Looks like I lost, Good Game!")
-    elif player == ('scissors'):
-        print("I win gg ez.")
-
-elif computer == ('paper'):
-    if player == ('rock'):
-        print("I win gg ez.")
-    elif player == ('scissors'):
-        print("Looks like I lost, Good Game!")
-
-elif computer == ('scissors'):
-    if player == ('rock'):
-       print("Looks like I lost, Good Game!")
-    elif player == ('paper'):
-        print("I win gg ez.")
+choice2 = random.choice(['rock', 'paper', 'scissors'])
+print("I choose " + choice2)
 
 
+if (choice == 'rock' and choice2 == 'paper')
+        or (choice == 'paper' and choice2 == 'scissors')
+        or (choice == 'scissors' and choice2 == 'rock'):
+    print('I win.')
+    
+elif (choice == 'paper' and choice2 == 'rock')
+        or (choice == 'scissors'and choice2 == 'paper')
+        or (choice == 'rock' and choice2 == 'scissors'):
+    print('You win.')
+    
+else:
+    print('We tie.')

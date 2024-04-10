@@ -1,23 +1,25 @@
 
 
-import random
 
+
+import random
 random.seed()
 
 
-
-user = input("Enter 'rock' or 'paper': ")
-computer = random.choice(['rock', 'paper'])
-
-print("I choose", computer)
+human = input('Enter rock or paper: ')
+computer = random.choice(['paper', 'rock'])
 
 
-if (user == computer):
+print()
+
+
+print('I choose ' + computer + '.')
+
+
+if human == computer:
     print('We tie.')
-
-elif (user == 'paper' and computer == 'rock'):
+elif human == 'paper':
     print('You win.')
-
 else:
     print('I win.')
 

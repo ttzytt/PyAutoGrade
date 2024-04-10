@@ -1,18 +1,15 @@
 
 
 
-number = int(input('Give me a random integer! '))
-print()
-
-number_print = number
-
-
-product = 1
-
-
-while number > 0:
-    product = product*number
-    number = number - 1
+user_input = int(input('Choose a number '))
+counter = 1
+factorial = 1
+flag = False
+while flag == False:
+    factorial = factorial * counter
     
-print(str(number_print) + ' factorial is ' + str(product) + '.')
-                                        
+    if counter == user_input:
+        flag = True
+    counter = counter + 1   
+
+print('Your n! number is ' + str(factorial))

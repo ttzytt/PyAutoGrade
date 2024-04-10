@@ -3,49 +3,48 @@
 
 import random
 
-
-
-playerinput = input('Enter rock, paper, scissors, or quit: ')
 random.seed()
 
 
-while playerinput != 'quit':
-    
-    
-    botchoice = random.choice(['rock', 'paper', 'scissors'])
-    print('I chose ' + botchoice)
 
-    
-    
-    if playerinput == 'rock':
-        if botchoice == 'rock':
-            print('We tied.')
-        elif botchoice == 'paper':
-            print('I won!')
-        elif botchoice == 'scissors':
-            print('You won!')
+user = input("enter rock, paper, scissors or enter 'quit' to quit: ")
 
-    elif playerinput == 'paper':
-        if botchoice == 'paper':
-            print('We tied.')
-        elif botchoice == 'scissors':
-            print('I won!')
-        elif botchoice == 'rock':
-            print('You won!')
 
-    elif playerinput == 'scissors':
-        if botchoice == 'scissors':
-            print('We tied.')
-        elif botchoice == 'rock':
-            print('I won!')
-        elif botchoice == 'paper':
-            print('You won!')
-            
-    
-    else:
-        print('Invalid choice: type rock, paper, or scissors!')
 
+while user != 'quit':
+
+
+    me = random.choice(['rock','paper','scissors'])
+    print('i choose ' + me)
+
+
+    if user == 'rock':
+        if me == 'paper':
+            print('i win')
+        elif me == 'rock':
+            print('we tie')
+        elif me == 'scissors':
+            print('you win')
+
+    if user == 'paper':
+        if me == 'rock':
+            print('you win')
+        elif me == 'paper':
+            print('we tie')
+        elif me == 'scissors':
+            print('i win')
+
+    if user == 'scissors':
+        if me == 'scissors':
+            print('we tie')
+        elif me == 'paper':
+            print('i win')
+        elif me == 'rock':
+            print('you win')
+
+
+    user = input("enter rock, paper, scissors or enter 'quit' to quit: ")
     
-    playerinput = input('Enter rock, paper, scissors, or quit ')
+
 
 

@@ -3,60 +3,34 @@
 
 
 
-
 import random
-random.seed()
 
+def tries_until_duplicate_birthday():
+    birthdays = []
+    tries = 0
 
-def tries_until_duplicate_birthday(include_leap_year = False): 
-    birthdays = [] 
-    i = 0
-    if include_leap_year is True:
-        while True:
-            
-            a = random.randint(0, 1460) 
-            if a != 0:
-                b = a%365
-            else:
-                b = 365 
-                
-            if not(b in birthdays):
-                birthdays.append(b) 
-                i += 1
-                
-                
-            else:
-                return i+1 
-    else:
-        while True:
-            a = random.randint(1, 365) 
-            if not(a in birthdays):
-                birthdays.append(a) 
-                i += 1
-                
-                
-            else:
-                return i+1 
+    while True:
+        birthday = random.randint(1, 365)
+        tries += 1
 
-def average_until_duplicate_birthday(num_trials, include_leap_year = False):
-    f = 0 
+        if birthday in birthdays:
+            break
+        else:
+            birthdays.append(birthday)
+
+    return tries
+    
+def average_until_duplicate_birthday(num_trials):
+    
+    total_tries = 0
+
     for _ in range(num_trials):
-        f += tries_until_duplicate_birthday(include_leap_year)
-    return f / num_trials * 1.00 
+        total_tries += tries_until_duplicate_birthday()
 
-num_trial = input("How many trials do you want to have? ")
-leap_year = input("Do you want to include leap years (Enter Yes or No)? ")
+    average_tries = total_tries / num_trials
+    return average_tries
 
-
-if leap_year == "Yes":
-    include_leap_year = True
     
-    j = average_until_duplicate_birthday(int(num_trial), include_leap_year)
+    result = average_until_duplicate_birthday(num_trials)
+    print(result)
     
-else: 
-    j = average_until_duplicate_birthday(int(num_trial))
-
-print("The average amount of person we need to ask to find two with the same birthday is "
-        + str(j))
-
-

@@ -1,23 +1,22 @@
 
 
 
-
-
-
-import random
+import random 
 
 random.seed()
 
-guess = int(input('Guess a number 1-10(inclusive): '))
-number = random.choice([1 , 2 , 3, 4, 5, 6, 7, 8, 9, 10])
+player_guess = int(input('The computer has thought of a number from 1 to 10. Guess what it is.'))
+computer_number = random.choice([1,2,3,4,5,6,7,8,9,10])
+
+while player_guess != computer_number:
+
+    if player_guess > computer_number:
+        print('Too high!')
+    elif player_guess < computer_number:
+        print('Too low!')
+    player_guess = int(input('Guess again!'))
+else:
+    print('You guessed correctly!')
 
 
-while guess != number:
 
-    if guess > number:
-        guess = int(input('Too high! Guess again:'))
-
-    elif guess < number:
-        guess = int(input('Too low! Guess again:'))
-
-print("That's correct!")

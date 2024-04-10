@@ -1,66 +1,44 @@
+Python 3.11.5 (v3.11.5:cce6ba91b3, Aug 24 2023, 10:50:31) [Clang 13.0.0 (clang-1300.0.29.30)] on darwin
+Type "help", "copyright", "credits" or "license()" for more information.
 
+======= RESTART: /Users/pcsp3/Dropbox/PCS 3 - Sam Kemp/math_functions.py =======
+Enter an integer: 6
+n! = 720
+Triangular number: 21
+"New" triangular number:12
 
+============= RESTART: /Users/pcsp3/Dropbox/PCS 3 - Sam Kemp/math_functions.py ============
+Enter an integer: 5
+n! = 120
+Triangular number: 15
+"New" triangular number:9
 
-
-
-import random
-
-random.seed()
-player = input("Enter rock, paper, scissors: ")
-
-def rps():
-        score = 0
-        if player == 'rock' and bot == 'scissors':
-            score = score + 1
-        if player == 'scissors' and bot == 'paper':
-            score = score + 1
-        if player == 'paper' and bot == 'rock':
-            score = score + 1
-        if player == 'rock' and bot == 'paper':
-            score = score - 1
-        if player == 'paper' and bot == 'scissors':
-            score = score - 1
-        if player == 'scissors' and bot == 'rock':
-            score = score - 1
-        else:
-            score = score
-        return(score)
-rps_score = 0
-
-while player != 'quit':
-    bot = random.choice(['rock' , 'paper' , 'scissors'])
-
-    
-    if player == 'rock' and bot == 'paper':
-        print('I chose paper.')
-        print('You lose!')
-    elif player == 'rock' and bot == 'scissors':
-        print('I chose scissors.')
-        print('You win!')
-    elif player == 'paper' and bot == 'rock':
-        print('You win!')
-        print('I chose rock.')
-    elif player == 'paper' and bot == 'scissors':
-        print('I chose scissors.')
-        print('You lose!')
-    elif player == 'scissors' and bot == 'paper':
-        print('I chose paper.')
-        print('You win!')
-    elif player == 'scissors' and bot == 'rock':
-        print('I chose rock.')
-        print('You lose!')
-    elif player == bot:
-        print('I chose ' + player + '.')
-        print('We tie!')
-    elif player != 'rock' or player != 'paper' or player != 'scissors' or player != 'quit':
-        print('Please enter rock, paper, or scissors')
-
-    rps_score = rps_score + rps()
-    print("Your score is: " + str(rps_score))
-    player = input("Enter rock, paper, scissors(Enter 'quit' if you want to stop playing): ")
-
-print("Thanks for playing!")
-print("Your final score was: " + str(rps_score))
-
-
-
+= RESTART: /Users/pcsp3/Dropbox/PCS 3 - Sam Kemp/Rock-Paper-Scissors/rock_paper_scissors_pro.py
+Welcome to rock paper scissors! 
+Enter 'rock', 'paper', 'scissors', or 'q' to quit: rock
+I choose rock
+Your score is 0
+Enter 'rock', 'paper', 'scissors', or 'q' to quit: paper
+I choose paper
+Your score is 0
+Enter 'rock', 'paper', 'scissors', or 'q' to quit: scissors
+I choose scissors
+Your score is 0
+Enter 'rock', 'paper', 'scissors', or 'q' to quit: dsafadf
+I choose rock
+Your score is 0
+Enter 'rock', 'paper', 'scissors', or 'q' to quit: quit
+I choose scissors
+Your score is 0
+Enter 'rock', 'paper', 'scissors', or 'q' to quit: quit
+I choose rock
+Your score is 0
+Enter 'rock', 'paper', 'scissors', or 'q' to quit: quit
+I choose rock
+Your score is 0
+Enter 'rock', 'paper', 'scissors', or 'q' to quit: quit
+I choose scissors
+Your score is 0
+Enter 'rock', 'paper', 'scissors', or 'q' to quit: q
+Goodbye.
+Your final score is 0

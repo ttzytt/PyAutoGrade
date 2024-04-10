@@ -1,73 +1,52 @@
 
 
 
-
-
 import random
 random.seed()
 
 
-def find_current_winner(num_werewolves, num_villagers):
-    if num_werewolves >= num_villagers:
+def find_current_winner(num_werewolves, num_villager):
+    if num_werewolves == num_villager:
         return 'werewolves'
     elif num_werewolves == 0:
-        return 'villagers'
+        return 'villager'
     else:
-        return None
+        return 'no one'
 
-def find_winner(num_werewolves, num_villagers):
 
+def find_winner(num_werewolves, num_villager):
     day_night = 1
-    
     while True:
+        if find_current_winner(num_werewolves, num_villager) != 'no one':
+           return find_current_winner(num_werewolves, num_villager)
         
-        if find_current_winner(num_werewolves, num_villagers) != None:
-           return find_current_winner(num_werewolves, num_villagers)
-        
-        
-        if day_night % 2 != 0: 
-            total_people = num_werewolves + num_villagers
-            
-            
+        if day_night % 2 != 0:
+            total_people = num_werewolves + num_villager
             person_killed = random.randint(1, total_people)
             
-            
             if person_killed <= num_werewolves:
-                return find_winner(num_werewolves - 1, num_villagers)
-            
+                return find_winner(num_werewolves - 1, num_villager)
             else:
-                return find_winner(num_werewolves, num_villagers - 1)
-
-        
+                return find_winner(num_werewolves, num_villager - 1)
         else:
-            return find_winner(num_werewolves, num_villagers - 1)
-
+            return find_winner(num_werewolves, num_villager - 1)
         day_night += 1
 
 
-def odds_of_werewolves_winning(num_werewolves, num_villagers):
-  num_trials = 10000
-  werewolves_wins = 0
-  for i in range (num_trials):
-      if find_winner(num_werewolves, num_villagers) == 'werewolves':
-          werewolves_wins += 1
-  return werewolves_wins/num_trials
 
 
-print('Welcome! Please input the following starting conditions for your game.')
-num_werewolves = int(input('Enter the number of werewolves: '))
-num_villagers = int(input('Enter the number of villagers: '))
-print('The odds of the werewolves winning was '
-      + str(odds_of_werewolves_winning(num_werewolves, num_villagers)) + '. ')
-
-
-
-
-
-
-
-
-
+def odds_of_werewolves_winning(num_werewolves, num_villager):
+    num_trials = 10000
+    werewolf_wins = 0
+    for i in range(num_trials):
+        if find_winner(num_werewolves, num_villager) == 'werewolves':
+            werewolf_wins += 1
+    return werewolf_wins/num_trials
+    
+print('hi :)')
+num_werewolves = int(input('number of werewolves: '))
+num_villager = int(input('number of villager: '))
+print(str(odds_of_werewolves_winning(num_werewolves, num_villager)))
 
 
 

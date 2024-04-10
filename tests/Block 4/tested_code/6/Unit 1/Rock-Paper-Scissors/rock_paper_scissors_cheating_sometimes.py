@@ -3,48 +3,66 @@
 
 
 import random
+
 random.seed()
 
-
-
-user_choice = input("Enter 'rock', 'paper', or 'scissors': ")
-
+answer = input("Enter 'rock' or 'paper' or 'scissors' ")
 
 
 
-computer_choice = random.choice(['rock', 'paper', 'scissors'])
+computer_cheating_choice = random.randint(0, 9)
 
 
 
-if random.random() < 0.1:
-    
-    cheat_map = {'rock': 'paper', 'paper': 'scissors', 'scissors': 'rock'}
-    computer_choice = cheat_map[user_choice]
+if computer_cheating_choice == 0:
+
+   
+   if answer == 'rock':
+      print('I choose paper.')
+      print('I win.')
+
+   if answer == 'paper':
+      print('I choose scissors.')
+      print('I win.')
+
+   if answer == 'scissors':
+      print('I choose rock.')
+      print('I win.')
+
+else: 
+
+    computer_answer = random.randint(1,3)
 
 
 
-win_cases = [('rock', 'scissors'), ('scissors', 'paper'), ('paper', 'rock')]
+    if computer_answer == 1:
+        print('I choose rock.')
+        if answer == 'rock':
+           print('We tie.')
+        if answer == 'paper':
+           print('You win.')
+        if answer == 'scissors':
+           print('I win.')
 
 
 
-if (user_choice, computer_choice) in win_cases:
-    
-    result = "You win."
-    
-elif user_choice != computer_choice:
-    
-    result = "I win."
-    
-else:
-    result = "We tie."
+    elif computer_answer == 2:
+        print('I choose paper.')
+        if answer == 'rock':
+           print('I win.')
+        if answer == 'paper':
+           print('We tie.')
+        if answer == 'scissors':
+           print('You win.')
 
 
 
-print(f"I choose {computer_choice}. \n{result}")
-
-
-
-
-
-
+    else:
+        print('I choose scissors.')
+        if answer == 'rock':
+            print('You win.')
+        if answer == 'paper':
+            print('I win.')
+        if answer == 'scissors':
+            print('We tie.')
 

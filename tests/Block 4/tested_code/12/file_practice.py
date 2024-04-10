@@ -2,34 +2,30 @@
 
 
 
-file_name = 'Text files/commonwords.txt'
+def count_characters(read_file):
+    count = 0  
+    for line in read_file:  
+        count += len(line)
+    return count
 
 
-def read_lines():
-    with open(file_name, 'r') as my_file:
-        
-        
-        list_of_lines = my_file.readlines()
-    return(list_of_lines[line_number]) 
-
-line_number = int(input('Which line would you like to read?(enter number): '))
-print("Line " + str(line_number) + " reads: " + read_lines())
+def made_backwards(line):
+    return line[-1 : : -1]
 
 
-def word_looking_read_lines():
-    with open(file_name, 'r') as my_file:
-        
-        
-        list_of_lines = my_file.readlines()
+file_name = 'Text files/greeneggs.txt'
+with open(file_name, 'r') as my_file:
+    num_characters = count_characters(my_file)
 
-        count = 0
+print('The file ' + file_name + ' contains ' + str(num_characters)
+      + ' characters.')
+print()
 
-        for i in range(0, len(list_of_lines)):
-            if list_of_lines[i][0] == initial:
-                count += 1
-        
-    return(str(count))
 
-initial = input("Which initial are you looking for?(enter lower case): ")
-print("There are " + word_looking_read_lines() + " words starting with ")
-print(initial + " in the commonwords list.")
+with open(file_name, 'r') as my_file:
+    
+    
+    list_of_lines = my_file.readlines()
+    line_one_backwards = made_backwards(list_of_lines[0])
+    print(line_one_backwards)
+    

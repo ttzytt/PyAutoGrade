@@ -1,37 +1,34 @@
 
 
 
-
 import random
-random.seed()
 
-human = input('Enter paper, scissors or rock: ')
-computer = random.choice(['paper', 'rock', 'scissors'])
+def main():
 
 
-print()
+user_choice = input("Enter 'rock', 'paper', or 'scissors': ").lower().strip()
+    
+
+if user_choice not in ['rock', 'paper', 'scissors']:
+    print("Invalid choice. Please enter 'rock', 'paper', or 'scissors'.")
+    
+    
+
+computer_choice = random.choice(['rock', 'paper', 'scissors'])
+print(f"I choose {computer_choice}.")
 
 
-print('I choose ' + computer + '.')
+if user_choice == computer_choice:
+    print("We tie.")
+else:
+    if user_choice == 'rock':
+        print("You win.") if computer_choice == 'scissors' else print("I win.")
+    elif user_choice == 'paper':
+        print("You win.") if computer_choice == 'rock' else print("I win.")
+    elif user_choice == 'scissors':
+        print("You win.") if computer_choice == 'paper' else print("I win.")
 
-
-if human == computer: 
-    print('We tie.')
-elif human == 'paper':  
-    if computer == 'rock':
-        print('You win.')
-    else:
-        print('I win.')
-elif human == 'scissors': 
-    if computer == 'rock':
-        print('I win.')
-    else:
-        print('You win.')  
-else: 
-    if computer == 'paper':
-        print('I win.')
-    else:
-        print('You win.')
-
+if __name__ == "__main__":
+    main()
 
 

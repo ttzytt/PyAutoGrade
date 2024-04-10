@@ -1,27 +1,32 @@
 
 
+import random
 
-file_name = 'Text files/greeneggs.txt'
 
 
-def return_backwards():
-    forward_list = []
-    backwards_list = []
 
-    with open(file_name, 'r') as my_file:
+file_name = 'Text files/names.txt'
+with open(file_name, 'r') as my_file: 
+    full_content = my_file.read()
+    names = full_content.splitlines() 
+    random.shuffle(names)
+
+next_round_lists = []
+
+for i in range(0, len(names), 2): 
+    if i <= len(names) - 2:
+        first_competitor = names[i] 
+        second_competitor = names[i + 1] 
         
+        winner = random.randint(1, 2) 
         
-        list_of_lines = my_file.readlines()
-        
+        if winner == 1:
+            next_round_lists.append(first_competitor) 
+            
+        else: 
+            next_round_lists.append(second_competitor)
+    else:
+        next_round_lists.append(names[i]) 
+
+print(next_round_lists) 
     
-    i = len(list_of_lines)
-    while i > 0:
-        backwards_list.append(list_of_lines[i - 1])
-        i -= 1
-        
-    return backwards_list
-
-return_backwards_list = return_backwards()
-
-for i in range(len(return_backwards_list)):
-    print(return_backwards_list[i])

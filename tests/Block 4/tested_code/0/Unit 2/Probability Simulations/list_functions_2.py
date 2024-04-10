@@ -5,24 +5,37 @@
 
 
 
-def largest_element(numbers):
-    if len(numbers) == 0:
+
+def largest_element(nums):
+    if len(nums) == 0:
         return None
     
-    numbers.sort()
-    return numbers[-1]
+    nums.sort()
+    return nums[-1]
 
 
-def alternate_sum(numbers):
-    return sum(numbers[::2]) - sum(numbers[1::2])
 
-
-def rotate_right(my_list):
-    if len(my_list) == 0:
-        return my_list
+def alternate_sum(nums):
+    if len(nums) == 0:
+        return None
     
-    return ([my_list[-1]]) + (my_list[0:-1]) 
+    return sum(nums[0:len(nums):2]) - sum(nums[1:len(nums):2])
+
+
+
+
+def rotate_right(nums):
+    if len(nums) == 0:
+        return []
+
+    
+    
+    return ([nums[-1]] + nums[:-1])
+
+
 
 
 def deal_3_hands(deck):
-    return ([deck[0::3], deck[1::3], deck[2::3]])
+    return [deck[:len(deck):3], deck[1:len(deck):3], deck[2:len(deck):3]]
+
+

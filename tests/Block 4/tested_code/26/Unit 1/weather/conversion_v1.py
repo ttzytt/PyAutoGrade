@@ -2,18 +2,22 @@
 
 
 
-temperature = float(input('What is the temperature today(in °F)? '))
 
 
-print()
 
 
-if temperature > 90:
-    print('Wow, that is hot.')
 
 
-temp = round(((temperature - 32) * 5/9), 2)
+farenheit = int(input(' What is the temperature today (in °F)? '))
 
 
-print('That is '+ str(temp) + ' °C')    
+celsius = (farenheit - 32) * 5/9
 
+
+if farenheit >= 90:
+    print (' Wow that is hot. ')
+
+
+
+
+print (f'That is {celsius:.2f} °C. ')

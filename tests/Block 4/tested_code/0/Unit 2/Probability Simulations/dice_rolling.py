@@ -1,35 +1,41 @@
 
 
 
-
-
 import random
+
 random.seed()
 
-def tries_until_duplicate_roll():
-    values = []
-    rolls = 0
-   
 
+
+def tries_until_all_six_values():
+    values_rolled = []
+        
+    number_of_rolls = 0
     
-    while len(values) < 6:
-        roll = random.randint(1,6)
-        if roll not in values:
-            values.append(roll)
-        rolls += 1
-    return rolls
-
+    while len(values_rolled) != 6: 
     
+        current_roll = random.randint(1, 6)
 
-def average_until_duplicate_roll(num_trials):
-    total_rolls = 0
-    for i in range(1, num_trials):
-        total_rolls += tries_until_duplicate_roll()
-    return total_rolls/num_trials
+        if current_roll not in values_rolled:
+                                            
+            values_rolled.append(current_roll)
 
-
-num_trials = int(input('Enter how many trials you want to go through: '))
-average_result = average_until_duplicate_roll(num_trials)
+        number_of_rolls += 1
+    return number_of_rolls
 
 
-print(f'The average amount of trials until you get all values of a 6 sided dice is {average_result}')
+
+
+
+def average_until_all_six_values(num_trials):
+    total_trials = []
+    
+    for _ in range(num_trials):
+        total_trials.append(tries_until_all_six_values())
+
+    return sum(total_trials)/num_trials
+
+
+num_trials = int(input('How many trials do you want to run?'))
+
+print('The average number of tries was ' + str(average_until_all_six_values(num_trials)) + '.')

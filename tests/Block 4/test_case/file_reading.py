@@ -24,10 +24,10 @@ def gen_random_file(
 
 def gen_file_assert_eq(string : str, expected : Any, tested_func_name : str, *extra_args, **extra_kwargs) -> PrewrittenScriptCase:
     peb = ps.EvaluatorBuilder()
-    with io.StringIO() as f:
-        f.write(string)
-        f.seek(0)
-        return ps(peb.assert_eq(expected, f, extra_args, extra_kwargs), tested_func_name)
+    f = io.StringIO()
+    f.write(string)
+    f.seek(0)
+    return ps(peb.assert_eq(expected, f, *extra_args, **extra_kwargs), tested_func_name)
 
 def average_length_sol(read_file):
     total_length = 0
@@ -140,10 +140,7 @@ def test_case_constructor() -> list[TestCase]:
             "ab cd ef gh ij kl", 2
         ),
         file_param_assert_eq(
-            "a ab \t a \n ab \n a ab a ab.", 1.5
-        ),
-        file_param_assert_eq(
-            "8\n-1888\n90\n3.3390", 3.5
+            "a ab \t a \n ab \n a ab a ab", 1.5
         ),
         file_param_assert_eq(
             "Thisisonewordhoweverlongitmayseem", 33
@@ -156,12 +153,6 @@ def test_case_constructor() -> list[TestCase]:
         ),
         file_param_assert_eq(
             "", None
-        ),
-        file_param_assert_eq(
-            "   ", None
-        ),
-        file_param_assert_eq(
-            " ", None
         ),
         _ps(peb.assert_eq_correct_sol(
             average_length_sol, 
@@ -181,145 +172,145 @@ def test_case_constructor() -> list[TestCase]:
     ])
 
     # -------- T2 ---------
-    TESTED_FUNC_NAME = "longest_word"
-    test_cases.extend([
-         file_param_assert_eq(
-            "Hi! my names is bob. this is weird!\n I'm writing a test!",
-            ['writing']
-        ),
-        file_param_assert_eq(
-            "Hi hi Hi hi hi Hi hi hi",
-            ['hi']
-        ),
-        file_param_assert_eq(
-            "Hello! How are you? Great! this is fun.",
-            ['hello!', 'great!']
-        ), 
-        _ps(peb.assert_eq_correct_sol(
-            longest_word_sol, 
-            gen_random_file(1000)
-            )
-        ),
-        _ps(peb.assert_eq_correct_sol(
-            longest_word_sol, 
-            gen_random_file(2000)
-            )
-        ),
-        _ps(peb.assert_eq_correct_sol(
-            longest_word_sol, 
-            gen_random_file(8000)
-            )
-        )
-    ])
+    # TESTED_FUNC_NAME = "longest_word"
+    # test_cases.extend([
+    #      file_param_assert_eq(
+    #         "Hi! my names is bob. this is weird!\n I'm writing a test!",
+    #         ['writing']
+    #     ),
+    #     file_param_assert_eq(
+    #         "Hi hi Hi hi hi Hi hi hi",
+    #         ['hi']
+    #     ),
+    #     file_param_assert_eq(
+    #         "Hello! How are you? Great! this is fun.",
+    #         ['hello!', 'great!']
+    #     ), 
+    #     _ps(peb.assert_eq_correct_sol(
+    #         longest_word_sol, 
+    #         gen_random_file(1000)
+    #         )
+    #     ),
+    #     _ps(peb.assert_eq_correct_sol(
+    #         longest_word_sol, 
+    #         gen_random_file(2000)
+    #         )
+    #     ),
+    #     _ps(peb.assert_eq_correct_sol(
+    #         longest_word_sol, 
+    #         gen_random_file(8000)
+    #         )
+    #     )
+    # ])
 
-    # -------- T3 ---------
-    TESTED_FUNC_NAME = "longest_palindrome"
-    test_cases.extend([
-        file_param_assert_eq(
-            "anna civic kayak level madam mom noon racecar radar " +
-            "redder refer rotor solos stats tenet wow", ['racecar']
-        ),
-        file_param_assert_eq(
-            "Anna Civic Kayak Level madam Mom Noon Racecar Radar " +
-            "Redder refer Rotor Solos Stats Tenet Wow", ['racecar']
-        ),
-        file_param_assert_eq(
-            "HI, none, of, these, Words, are, Palindromes", []
-        ),
-        file_param_assert_eq(
-            "Anna Civic kayak Level madam Mom Noon Radar " +
-            "refer Rotor Solos Stats Tenet Wow",
-            ['civic', 'kayak', 'level', 'madam', 'radar', 'refer', 'rotor', 'solos', 'stats', 'tenet']
-        ),
-        _ps(peb.assert_eq_correct_sol(
-            longest_palindrome_sol, 
-            gen_random_file(1000)
-            )
-        ),
-        _ps(peb.assert_eq_correct_sol(
-            longest_palindrome_sol,
-            gen_random_file(2000),
-            )
-        ),
-        _ps(peb.assert_eq_correct_sol(
-            longest_palindrome_sol,
-            gen_random_file(8000),
-            )
-        )
-    ])
+    # # -------- T3 ---------
+    # TESTED_FUNC_NAME = "longest_palindrome"
+    # test_cases.extend([
+    #     file_param_assert_eq(
+    #         "anna civic kayak level madam mom noon racecar radar " +
+    #         "redder refer rotor solos stats tenet wow", ['racecar']
+    #     ),
+    #     file_param_assert_eq(
+    #         "Anna Civic Kayak Level madam Mom Noon Racecar Radar " +
+    #         "Redder refer Rotor Solos Stats Tenet Wow", ['racecar']
+    #     ),
+    #     file_param_assert_eq(
+    #         "HI, none, of, these, Words, are, Palindromes", []
+    #     ),
+    #     file_param_assert_eq(
+    #         "Anna Civic kayak Level madam Mom Noon Radar " +
+    #         "refer Rotor Solos Stats Tenet Wow",
+    #         ['civic', 'kayak', 'level', 'madam', 'radar', 'refer', 'rotor', 'solos', 'stats', 'tenet']
+    #     ),
+    #     _ps(peb.assert_eq_correct_sol(
+    #         longest_palindrome_sol, 
+    #         gen_random_file(1000)
+    #         )
+    #     ),
+    #     _ps(peb.assert_eq_correct_sol(
+    #         longest_palindrome_sol,
+    #         gen_random_file(2000),
+    #         )
+    #     ),
+    #     _ps(peb.assert_eq_correct_sol(
+    #         longest_palindrome_sol,
+    #         gen_random_file(8000),
+    #         )
+    #     )
+    # ])
 
-    # -------- T4 ---------
-    TESTED_FUNC_NAME = "all_vowels_counter"
+    # # -------- T4 ---------
+    # TESTED_FUNC_NAME = "all_vowels_counter"
 
-    test_cases.extend([
-        file_param_assert_eq(
-            "The sequoia tree was not facetiously speaking because\n"
-            + "it lived in an utopia.",
-            2
-        ),
-        file_param_assert_eq(
-            "The elephant learned the vowels aeiou, and it learned"
-            + "aeronautics. Do you know the word acuminose?",
-            3
-        ),
-        file_param_assert_eq(
-            "AAEEIIOOU, said the asteroidu",
-            2
-        ),
-        file_param_assert_eq(
-            "I live in the ghetto so ratatata",
-            0
-        ),
-        _ps(peb.assert_eq_correct_sol(
-            all_vowels_counter_sol, 
-            gen_random_file(1000)
-            )
-        ),
-        _ps(peb.assert_eq_correct_sol(
-            all_vowels_counter_sol,
-            gen_random_file(2000),
-            )
-        ),
-        _ps(peb.assert_eq_correct_sol(
-            all_vowels_counter_sol,
-            gen_random_file(8000),
-            )
-        )
-    ])
+    # test_cases.extend([
+    #     file_param_assert_eq(
+    #         "The sequoia tree was not facetiously speaking because\n"
+    #         + "it lived in an utopia.",
+    #         2
+    #     ),
+    #     file_param_assert_eq(
+    #         "The elephant learned the vowels aeiou, and it learned"
+    #         + "aeronautics. Do you know the word acuminose?",
+    #         3
+    #     ),
+    #     file_param_assert_eq(
+    #         "AAEEIIOOU, said the asteroidu",
+    #         2
+    #     ),
+    #     file_param_assert_eq(
+    #         "I live in the ghetto so ratatata",
+    #         0
+    #     ),
+    #     _ps(peb.assert_eq_correct_sol(
+    #         all_vowels_counter_sol, 
+    #         gen_random_file(1000)
+    #         )
+    #     ),
+    #     _ps(peb.assert_eq_correct_sol(
+    #         all_vowels_counter_sol,
+    #         gen_random_file(2000),
+    #         )
+    #     ),
+    #     _ps(peb.assert_eq_correct_sol(
+    #         all_vowels_counter_sol,
+    #         gen_random_file(8000),
+    #         )
+    #     )
+    # ])
 
-    # -------- T5 ---------
-    test_cases.extend([
-        gen_file_assert_eq("", 0, "count_long_lines"),
-        gen_file_assert_eq("This isn't a long line.\n"
-                        + "This line is a very, very, very, very, very, very, very, "
-                        + "very, very, very, very, long line.\n"
-                        + "This a medium length line, I guess.", 1, "count_long_lines", 40),
-        gen_file_assert_eq("This is a short line.\n"
-                        + "This one is, too.\n"
-                        + "And this one.\n"
-                        + "Short line!!!!!", 0, "count_long_lines", 40),
-        gen_file_assert_eq("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n"
-                        + "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\n"
-                        + "ccccccccccccccccccccccccccccccccccc\n"
-                        + "\n"
-                        + "ddddddddddddddddddddddddddddddddddd\n"
-                        + "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n", 5, "count_long_lines", 30), 
-        # _ps(peb.assert_eq_correct_sol(
-        #     count_long_lines_sol, 
-        #     gen_random_file(1000)
-        #     )
-        # ),
-        # _ps(peb.assert_eq_correct_sol(
-        #     count_long_lines_sol, 
-        #     all_vowels_counter_sol(2000)
-        #     )
-        # ),
-        # _ps(peb.assert_eq_correct_sol(
-        #     count_long_lines_sol, 
-        #     all_vowels_counter_sol(8000)
-        #     )
-        # )
-    ])
+    # # -------- T5 ---------
+    # test_cases.extend([
+    #     gen_file_assert_eq("", 0, "count_long_lines"),
+    #     gen_file_assert_eq("This isn't a long line.\n"
+    #                     + "This line is a very, very, very, very, very, very, very, "
+    #                     + "very, very, very, very, long line.\n"
+    #                     + "This a medium length line, I guess.", 1, "count_long_lines", 40),
+    #     gen_file_assert_eq("This is a short line.\n"
+    #                     + "This one is, too.\n"
+    #                     + "And this one.\n"
+    #                     + "Short line!!!!!", 0, "count_long_lines", 40),
+    #     gen_file_assert_eq("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n"
+    #                     + "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\n"
+    #                     + "ccccccccccccccccccccccccccccccccccc\n"
+    #                     + "\n"
+    #                     + "ddddddddddddddddddddddddddddddddddd\n"
+    #                     + "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n", 5, "count_long_lines", 30), 
+    #     # _ps(peb.assert_eq_correct_sol(
+    #     #     count_long_lines_sol, 
+    #     #     gen_random_file(1000)
+    #     #     )
+    #     # ),
+    #     # _ps(peb.assert_eq_correct_sol(
+    #     #     count_long_lines_sol, 
+    #     #     all_vowels_counter_sol(2000)
+    #     #     )
+    #     # ),
+    #     # _ps(peb.assert_eq_correct_sol(
+    #     #     count_long_lines_sol, 
+    #     #     all_vowels_counter_sol(8000)
+    #     #     )
+    #     # )
+    # ])
 
 
     return test_cases

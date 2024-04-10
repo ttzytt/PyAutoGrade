@@ -4,64 +4,54 @@
 
 
 
-
-from infection_functions import *
 import random
-random.seed()
+from infection_functions import *
 
+rows = 10
+columns = 10
+rounds_of_simulation = 10 
 
-board = original()
-draw_board(board)
-stop = '' 
+board = make_board(rows, columns)
+for _ in range((rows * columns) // rows): 
+    row = random.randint(0, rows - 1) 
+    column = random.randint(0, columns - 1)
+    board[row][column] = 'x'
 
-print()
-print('Current patients: 10')
-print()
-
-
-healing_rate = int(input('Input the healing rate(%): '))
-infection_rate = int(input('Input the infection rate(%): '))
-
-
-
-while 0 < count_patients(board) < 100 and stop != 'stop':
+for number_of_rounds in range(rounds_of_simulation):
+    number_of_round = number_of_rounds + 1
+    print('Round ' + str(number_of_round))
+    print('Initial board: ')
     
-    patients = []
-    cured = []
-    
-    for row in range(10):
-        
-        for column in range(10):
+    for row in board:
+        for cell in row:
             
-            if board[row][column] == ' ': 
-                neighbors = check_neighbors(board,row,column)
-                actual_infection_rate = neighbors * infection_rate
-                get_infected = random.randint(1,100)
-                if get_infected <= actual_infection_rate: 
-                    new_patient = [row,column]
-                    patients.append(new_patient) 
-                    
-            elif board[row][column] == '+': 
-                get_cured = random.randint(1,100)
-                if get_cured <= healing_rate: 
-                    new_cured = [row,column]
-                    cured.append(new_cured) 
+            
+            print(cell, end= ' ')
+        print()
+    print()
+    
+    heal_probabilities = heal_probability(board)
+    infect_probabilities = infection_probability(board)
+    new_board = make_board(rows, columns)
+    
+    for row in range(rows):
+        for column in range(columns):
+            if board[row][column] == 'x':
+                if random.random() < heal_probabilities[row][column]:
+                    new_board[row][column] = '·'
                 else:
-                    new_patient = [row,column]
-                    patients.append(new_patient) 
+                    new_board[row][column] = 'x'
+            else:
+                if random.random() < infect_probabilities[row][column]:
+                    new_board[row][column] = 'x'
+                else:
+                    new_board[row][column] = '·'
+    board = new_board
 
-    board = draw_patients(board,patients,cured)
-    draw_board(board)
     
+    print('New board')
+    for row in board:
+        for cell in row:
+            print(cell, end= ' ')
+        print()
     print()
-    print('Current patients: ' + str(count_patients(board)))
-    print()
-    
-    if 0 < count_patients(board) < 100:
-        print('Press return/enter to continue, input \'stop\' to stop')
-        stop = input()
-    
-print('Simulation ended')
-
-
-                

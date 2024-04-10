@@ -2,34 +2,25 @@
 
 
 
-Romeo_new_love = 0
-Juliet_new_love = 0
 
-status_list = []
-
-num_trial = int(input("Days to run: "))
-Romeo_love = int(input("Romeos starting love: "))
-Juliet_love = int(input("Juliets starting love: "))
-
-for i in range(num_trial):
-    Romeo_new_love = Romeo_love + 0.4 * Juliet_love
-    Juliet_new_love = Juliet_love - 0.2 * Romeo_love
-
-    Romeo_love = Romeo_new_love
-    Juliet_love = Juliet_new_love
-
-    status_list.append((Romeo_love, Juliet_love))
-
-print(status_list)
-
-
-
-
-
-
-
-
-
-
+romeo = float(input('Input Romeo:'))
+juliet = float(input('Input Juliet:'))
+a = 0.2
+b = 0.3
+romeo_new = 0
+juliet_new = 0
+point = (romeo, juliet)
+list_affection = []
+list_affection.append(point)
+def romeo_and_juliet(point):
+    romeo = point[0]
+    juliet = point[1]
+    romeo_new = romeo - a*romeo + b*juliet
+    juliet_new = juliet - a*juliet + b*romeo
+    return (romeo_new, juliet_new)
+for i in range(50):
+    point = romeo_and_juliet(point)
+    list_affection.append(point)
+print(list_affection)
 
 

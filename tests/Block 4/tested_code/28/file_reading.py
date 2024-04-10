@@ -1,39 +1,31 @@
 
 
 
-
 import random
 
+names = 'Text files/names.txt'
+green_eggs = 'Text files/greeneggs.txt'
+words = 'Text files/words.txt'
 
-delimiters = [' ']
+
+
 
 
 
 
 
 def average_length(read_file):
-    sum_so_far = 0
-    words_so_far = 0
-
     
-    for line in read_file:
+    with open(read_file, 'r') as my_file: 
+        my_file_content = my_file.read()
         
-        for delimiter in delimiters:
-            
-            
-            line = " ".join(line.split(delimiter))
-            
-        words = line.split()
-
+    words = my_file_content.split() 
+    sum_so_far = 0
+    
+    for word in words: 
+        sum_so_far += len(word)
         
-        for word in words:
-            sum_so_far += len(word)
-            words_so_far += 1
-
-    return sum_so_far / words_so_far
-
-
-
+    return sum_so_far/len(words) 
 
 
 
@@ -41,66 +33,44 @@ def average_length(read_file):
 
 
 def longest_word(read_file):
-    longest_words = ['']
-
     
-    for line in read_file:
+    with open(read_file, 'r') as my_file:
+        my_file_content = my_file.read()
         
-        for delimiter in delimiters:
-            
-            
-            line = " ".join(line.split(delimiter))
-            
-        words = line.split()
-
-        if len(words) > 0:
-
-            for word in words:
-                if len(word) > len(longest_words[0]): 
-                    
-                    longest_words = [word]
-                if ((len(word) == len(longest_words[0]))
-                     and (word not in longest_words)): 
-                    longest_words.append(word)
-
-    if longest_word != ['']: 
-        return longest_words
-
-
-
-
-
-
-
-
-
-
-def longest_palindrome(read_file):
+    words = my_file_content.split()
+    longest_words = []
+    max_so_far = 0
     
-    
-    
-    longest_palindromes = ['']
-
-    
-    for line in read_file:
-        for delimiter in delimiters:
-            line = " ".join(line.split(delimiter))
+    for word in words:
+        if len(word) > max_so_far:
+            max_so_far = len(word)
+            longest_words = []
+        if len(word) == max_so_far and word not in longest_words:
+            longest_words.append(word)
             
-        words = line.split()
+    return longest_words
 
-        if len(words) > 0:
 
-            for word in words:
-                word = word.lower()
-                if word == word[::-1]: 
-                    if len(word) > len(longest_palindromes[0]): 
-                        longest_palindromes = [word]
-                    if ((len(word) == len(longest_palindromes[0]))
-                         and (word not in longest_palindromes)): 
-                        longest_palindromes.append(word)
 
-    if longest_palindromes != ['']:
-        return longest_palindromes
+
+
+
+
+def longest_palindrome(read_file, case_sensitive = False):
+    with open(read_file, 'r') as my_file:
+        my_file_content = my_file.read()
+    words = my_file_content.split()
+    longest_words = []
+    max_so_far = 0
+    for word in words:
+        
+        if word == word[::-1] or (not case_sensitive and word.lower() == word[::-1].lower()):
+            if len(word) > max_so_far: 
+                max_so_far = len(word) 
+                longest_words = []
+            if len(word) == max_so_far and word not in longest_words:
+                longest_words.append(word)
+    return longest_words
 
 
 
@@ -109,25 +79,22 @@ def longest_palindrome(read_file):
 
 
 def all_vowels_counter(read_file):
-    
-    
-    num_all_vowels = 0
+    with open(read_file, 'r') as my_file:
+        my_file_content = my_file.read()
+    words = my_file_content.split()
+    count = 0
+    for word in words:
+        
+        
+        
+        if (('e' in word or 'E' in word) and 
+            ('a' in word or 'A' in word) and 
+            ('i' in word or 'I' in word) and 
+            ('o' in word or 'O' in word) and 
+            ('u' in word or 'U' in word)):
+            count += 1
+    return count
 
-    
-    for line in read_file:
-        for delimiter in delimiters:
-            line = " ".join(line.split(delimiter))
-            
-        words = line.split()
-
-        for word in words:
-            word = word.lower() 
-            if ('a' in word and 'e' in word and 'i' in word and 'o' in word
-                and 'u' in word):
-                 num_all_vowels += 1
-
-
-    return num_all_vowels
 
 
 
@@ -137,16 +104,14 @@ def all_vowels_counter(read_file):
 
 
 def count_long_lines(read_file, min_length):
-    num_long_lines = 0
-    lines = [] 
-
-    for line in read_file:
-        if len(line) - 2 >= min_length: 
-                                        
-            num_long_lines += 1
-            lines.append(line)
-
-    return num_long_lines
+    with open(read_file, 'r') as my_file:
+       my_file_content = my_file.read()
+    lines = my_file_content.splitlines()
+    count = 0
+    for line in lines:
+        if len(line) >= min_length:
+            count += 1
+    return count
 
 
 
@@ -156,23 +121,15 @@ def count_long_lines(read_file, min_length):
 
 
 def random_word(read_file):
-    contents = []
+    with open(read_file, 'r') as my_file:
+        my_file_content = my_file.read()
+    words = my_file_content.split()
+    return words[random.randint(0,len(words)-1)]
 
-    
-    for line in read_file:
-        
-        for delimiter in delimiters:
-            line = " ".join(line.split(delimiter))
-        line = line.split()
 
-        
-        for word in line:
-            contents.append(word)
 
-    
-    random_word_index = random.randint(0, len(contents))
-    return contents[random_word_index]
-    
+
+
 
 
 
@@ -182,27 +139,24 @@ def random_word(read_file):
 
 
 def random_words(read_file, num_words):
+    with open(read_file, 'r') as my_file:
+        my_file_content = my_file.read()
+    words = my_file_content.split()
     
-    
-
-    random_words_list = []
-    contents = []
-
-    
-    for line in read_file:
-        for delimiter in delimiters:
-            line = " ".join(line.split(delimiter))
-        line = line.split()
-
-        for word in line:
-            contents.append(word)
-
-    
-    for i in range(num_words):
-        random_word_index = random.randint(0, len(contents))
-        random_words_list.append(contents[random_word_index])
+    if num_words > len(set(words)):
+        raise(ValueError,
+              'num_words should not be greater than the number of distinct words in a given file.')
+    chosen_indexes = []
+    chosen_words = []
+    for _ in range(num_words):
         
-    return random_words_list
+        index = random.randint(0,len(words)-1) 
+        word = words[index]
+        while word.lower() in chosen_words:
+            index = random.randint(0,len(words)-1)
+            word = words[index]
+        chosen_words.append(words[index].lower())
+    return chosen_words
 
 
 
@@ -211,24 +165,18 @@ def random_words(read_file, num_words):
 
 
 
-def specific_word_count(read_file, counting_word):
-    word_counter = 0
-    counting_word = counting_word.lower()
 
-    
-    for line in read_file:
-        
-        
-        for delimiter in delimiters:
-            line = " ".join(line.split(delimiter))
-        words = line.split()
+def specific_word_count(read_file, word):
+    with open(read_file, 'r') as my_file:
+        my_file_content = my_file.read()
+    file_words = my_file_content.split()
+    count = 0
+    for file_word in file_words:
+        if word.lower() == file_word.lower():
+            count += 1
+    return count
 
-        for word in words:
-            word = word.lower()
-            if word == counting_word:
-                word_counter += 1
 
-    return word_counter
 
 
 
@@ -237,96 +185,70 @@ def specific_word_count(read_file, counting_word):
 
 
 def starts_with_counter(read_file, word_beginning):
-    word_counter = 0
-    word_beginning = word_beginning.lower() 
+    with open(read_file, 'r') as my_file:
+        my_file_content = my_file.read()
+    file_words = my_file_content.split()
+    prefix_length = len(word_beginning)
+    count = 0
+    for file_word in file_words:
+        if word_beginning.lower() == file_word[:prefix_length].lower():
+            count += 1
+    return count
+
+
+
+
+def main():
+    files = ['Text files/addition.txt',
+             'Text files/commonwords.txt',
+             'Text files/greeneggs.txt',
+             'Text files/names.txt',
+             'Text files/words.txt']
 
     
-    for line in read_file:
-        
-        for delimiter in delimiters:
-            line = " ".join(line.split(delimiter))
-        words = line.split()
+    for i in range(5):
+        print("Average Length of", files[i], "is",
+              average_length(files[i]))
 
-        for word in words:
-            word = word.lower()
-            if word_beginning == word[:len(word_beginning)]: 
-                                                             
-                word_counter += 1
-
-    return word_counter
     
+    for i in range(5):
+        print("Longest Word of", files[i], "is",
+              longest_word(files[i]))
 
-green_eggs_file = 'Text files/greeneggs.txt'
-words_file = 'Text files/words.txt'
-common_words_file = 'Text files/commonwords.txt'
-names_file = 'Text files/names.txt'
-addition_file = 'Text files/addition.txt'
+    
+    for i in range(5):
+        print("Longest Palindrome of", files[i], "is",
+              longest_palindrome(files[i]))
 
+    
+    for i in range(5):
+        print("# of words with aeiou in", files[i], "is",
+              all_vowels_counter(files[i]))
 
+    
+    for i in range(5):
+        print("Lines w/ length > 10 of", files[i], "is",
+              count_long_lines(files[i], 10))
 
+    
+    for i in range(5):
+        print("A random word of", files[i], "is",
+              random_word(files[i]))
 
-with open(green_eggs_file, 'r') as my_file:
-    average_length_of_words = average_length(my_file)
+    
+    for i in range(5):
+        print("Some random words of", files[i], "is",
+              random_words(files[i], 5))
 
-print('The average length of words in greeneggs.txt is '
-      + str(average_length_of_words) + '.')
-print()
+    
+    for i in range(5):
+        print("Specific word count of 'I' in", files[i], "is",
+              specific_word_count(files[i], 'I'))
 
+    
+    for i in range(5):
+        print("# of words that start with 'a' in", files[i], "is",
+              starts_with_counter(files[i], 'a'))
 
-
-
-with open(words_file, 'r') as my_file:
-    longest_words = longest_word(my_file)
-
-print('The longest words in words.txt are '
-      + ', '.join(longest_words) + '.')
-print()
-
-
-
-
-with open(words_file, 'r') as my_file:
-    longest_palindromes = longest_palindrome(my_file)
-
-print('The longest palindromes in words.txt are '
-      + ', '.join(longest_palindromes) + '.')
-print()
-
-
-
-
-with open(words_file, 'r') as my_file:
-    num_all_vowels = all_vowels_counter(my_file)
-
-print('The number of words with all of the vowels in words.txt is '
-      + str(num_all_vowels) + '.')
-print()
-
-
-
-
-with open(green_eggs_file, 'r') as my_file:
-    num_long_lines = count_long_lines(my_file, 6)
-
-print('The number of lines with at least 6 characters in greeneggs.txt is '
-      + str(num_long_lines) + '.')
-print()
-
-
-
-
-with open(words_file, 'r') as my_file:
-    one_random_word = random_word(my_file)
-
-print('A random word from words.txt is ' + one_random_word + '.')
-print()
-
-
-
-
-with open(green_eggs_file, 'r') as my_file:
-    random_word_list = random_words(my_file, 10)
-
-print('10 random words from greeneggs.txt are '
-      + ', '.join(random_word_list) + '.')
-print()
+if __name__ == '__main__':
+    main()

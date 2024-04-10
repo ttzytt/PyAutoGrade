@@ -2,15 +2,19 @@
 
 
 
-a = int(input('What is the temperature today (in °F)? '))
+
+temperature_f = float(input('What is the temperature today (in °F)? '))
+
+if temperature_f > 90:
+    print("Wow that's hot.")
 
 
-b = str((a - 32) / 1.8)
+temperature_c = (temperature_f - 32) * 5/9
 
 
-if a >= 90:
-    
-    print("Wow, that's hot. That's " + b + " °C")
+
+
+if temperature_c % 1 == 0: 
+    print("That's " + str(int(temperature_c)) + " °C.")
 else:
-    
-    print("That's " + b + "°C")
+    print("That's " + str(round(temperature_c, 2)) + " °C.")

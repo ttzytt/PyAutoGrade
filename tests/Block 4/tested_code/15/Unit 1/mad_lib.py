@@ -1,29 +1,25 @@
 
 
 
-scientist_name = input("Enter a Scientist's Name: ")
-adjective = input("Enter an Adjective: ")
-plural_noun = input("Enter a Plural Noun: ")
-verb = input("Enter a Verb: ")
-noun = input("Enter a Noun: ")
-liquid = input("Enter a Liquid: ")
-type_of_container = input("Enter a Type of Container: ")
-number = input("Enter a Number: ")
-solid_substance = input("Enter a Solid Substance: ")
 
-substance_ = input("Enter a substance: ")  
-heat_source = input("Enter a Heat Source: ")
+noun_1 = input('Choose a noun: ')  
+noun_2 = input('Choose another one!: ')
 
+print("Let's change things up a bit :) ")  
+
+verb = input("This time, choose a verb that ends in 'ing': ")
+adjective_1 = input('Adjective? ')  
+adjective_1 = input('You can do better... choose something else :( ')
+adjective_2 = input('Another one: ')
+emotion = input('How are feeling today? (noun) ')
 
 
+print('Great job! Now, enjoy a story...')
+print(noun_1 + ' loves ' + verb + ' at Texas Outback Steakhouse.')
+print('Ever since ' + verb + ' at Outback Steakhouse, ' + noun_1 + ' grew a ' + adjective_1 + ', ' + adjective_2 + ' beard.')
+print('Unfortunately, because of ' + noun_1 + "'s" + " violation of the customers' " + noun_2 + ' code, he was fired, to his ' + emotion + '.')
 
 
-
-
-madlib_story = (' One day, ' + str(scientist_name) + ' was working in their ' + str(adjective) + ' laboratory, ' + ' mixing various ' + str(adjective) + ' in test tubes and Erlenmeyer flasks. ' + 'Suddenly, they had an idea to create a new substance that could ' + str(verb) + ' ' + str(noun) + '.' + ' First, they took 50 mL of ' + str(liquid) + ' and poured it into a ' + str(type_of_container) + '.' + ' Next, they added ' + str(number) + ' grams of ' + str(solid_substance) + ' and stirred the mixture with a ' +str(substance_) + '.' + ' To make the reaction faster, they heated the solution using a ' + str(heat_source) + '.')
-
-
-print(madlib_story)
 
 
 

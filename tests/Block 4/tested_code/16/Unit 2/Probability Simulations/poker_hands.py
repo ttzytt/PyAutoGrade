@@ -3,139 +3,120 @@
 
 
 
-from operator import itemgetter
-import random
+from operator import itemgetter 
+import random 
 random.seed()
 
 
 
+def create_deck():
+    deck = []
+    for rank in range(1, 14):
+        for suit in ['♥', '♦', '♣', '♠']:
+            deck.append([rank, suit])
+    return deck
+
+
+def check_if_full_house(hand):
+    hand.sort()
+    if((hand[0][0] == hand[1][0]) and (hand[3][0] == hand[4][0])):
+        if((hand[2][0] == hand[0][0]) or (hand[2][0] == hand[4][0])):
+            return 1
+    return 0
 
 
 
-def deal_five_card_hand(deck):
+def check_if_straight_flush(hand):
+    hand.sort(key = itemgetter(1))
+    if not(hand[0][1] == hand[4][1]):
+        return 0
+    hand.sort()
+    if((hand[0][0] == 1) and (hand[1][0] == 10) and (hand[2][0] == 11) and (hand[3][0] == 12)
+       and (hand[4][0] == 13)):
+        return 1
+        
+    for i in range(1, 5):
+        if not(hand[0][0] + i  == hand[i][0]):
+            return 0
+    return 1
+
+
+
+def check_if_flush(hand):
+    for i in range(4):
+        if (hand[i][1] != hand[i+1][1]):
+            return 0
+    if(check_if_straight_flush(hand) > 0):
+        return 0
+    return 1
+
+
+
+
+
+def calculate_odds(type, num_success):
+    success = 0
+    times = 0
+    deck = create_deck()
+    
+    while (success != num_success):
+        hand = make_hand(deck)
+        if (type == "flush"):
+            success += check_if_flush(hand)
+        elif (type == "straight flush"):
+            success += check_if_straight_flush(hand)
+        elif (type == "full house"):
+            success += check_if_full_house(hand)
+        times += 1
+
+    return times/num_success
+
+
+def make_hand(deck):
     random.shuffle(deck)
-    hand = deck[ :5]  
-    return hand
+    return deck[:5]
+
+
+def roll_die(die):
+    random.shuffle(die)
+    return die[0]
+
+
+
+
+def comparison(die):
+    roll1 = roll_die(die)
+    for i in range(4):
+        roll2 = roll_die(die)
+        if(roll1 != roll2):
+            return 0
+
+    return 1
+
+
+
+
+
+
+
+
+def calculate_die_odds(nums_success):
+    success = 0
+    times = 0
+    die = ['♥', '♦', '♣', '♠']
+    
+    while (success != nums_success):
+        success += comparison(die)
+        times += 1
+
+    return times/nums_success
     
 
 
-def check_full_house():
-    hand = deal_five_card_hand(deck) 
-    hand.sort(key = itemgetter(0)) 
-    
-    if hand[0][0] == hand[1][0] and hand[3][0] == hand[4][0] and (hand[2][0] == hand[0][0] or hand[2][0] == hand[4][0]):
-        return True
-    
-    return False
-    
-
-def tries_till_full_house():
-    tries = 0
-    while check_full_house() == False:
-        tries += 1
-    return tries
-
-
-def average_tries_till_full_house(num_trials):
-    sum_of_tries = 0
-    for _ in range(num_trials): 
-        sum_of_tries += tries_till_full_house()
-
-    return(sum_of_tries/num_trials)
-
-
-
-def check_straight_flush():
-    hand = deal_five_card_hand(deck) 
-    
-    for card in hand:
-        if card[1] != hand[0][1]: 
-            return False
-    hand.sort(key = itemgetter(0))  
-    if hand[4][0] - hand[0][0] == 4: 
-        return True
-    elif hand[0][0] == 1 and hand[1][0] == 11:
-        return True
-    return False
-
-
-def tries_till_straight_flush():
-    tries = 0
-    while check_straight_flush() == False: 
-        tries += 1
-    return tries
-
-
-def average_tries_till_straight_flush(num_trials):
-    sum_of_tries = 0
-    for _ in range(num_trials):
-        sum_of_tries += tries_till_straight_flush()
-    return (sum_of_tries/num_trials)
-
-
-def check_flush():
-    hand = deal_five_card_hand(deck)
-    for card in hand:
-        if card[1] != hand[0][1]: 
-            return False
-    hand.sort(key = itemgetter(0))
-    
-    if hand[4][0] - hand[0][0] == 4:
-        return False
-    return True
-
-
-def tries_till_flush():
-    tries = 0
-    while check_flush() == False:
-        tries += 1
-    return tries
-
-
-def average_tries_till_flush(num_trials):
-    sum_of_tries = 0
-    for _ in range(num_trials):
-        sum_of_tries += tries_till_flush()
-    return (sum_of_tries/num_trials)
-
-
-def dice_rolling(dice):
-    dice_rolls = [] 
-    
-    for i in range (6):
-        dice_rolls.append(random.choice(dice)) 
-    dice_rolls.sort()
-    if dice_rolls[0] == dice_rolls[4]:
-        return True
-    return False
-
-def tries_till_same_suit():
-    tries = 0
-    while dice_rolling(dice) == False:
-        tries += 1
-    return tries
-
-def average_tries_till_same_suit(num_trials):
-    sum_of_tries = 0
-    for _ in range(num_trials):
-        sum_of_tries += tries_till_same_suit()
-    return (sum_of_tries/num_trials)
-
-
-    
-
-
-
-deck = []
-for rank in range(1, 14):
-    for suit in ['♠', '♥', '♦', '♣']:
-        deck.append([rank, suit])
-
-dice = ['♠', '♥', '♦', '♣']
-
-num_trials = int(input('How many trials do you want? '))
-
-print ('Probablility of getting a full house is 1 out of ' + str(average_tries_till_full_house(num_trials)))
-print ('Probablility of getting a straight flush is 1 out of ' + str(average_tries_till_straight_flush(num_trials)))
-print ('Probablility of getting a flush is 1 out of ' + str(average_tries_till_flush(num_trials)))
-print ('Probablility of getting 5 same suits is 1 out of ' + str(average_tries_till_same_suit(num_trials)))
+type = input('Enter what card arrangment you would like to check for "straight flush", "flush", or "full house". ')
+num_success = int(input('Enter the number of times you want it to succeed: '))
+odds = calculate_odds(type, num_success)
+print("The odds of being dealt a " + type + " is 1 in " + str(odds) + ".")
+die_num_success = int(input('Enter the number of times you want your die to succeed: '))
+die_odds = calculate_die_odds(die_num_success)
+print("The odds of rolling 5 of the same suit is 1 in " + str(die_odds) + ".")

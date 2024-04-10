@@ -1,36 +1,43 @@
 
 
+
+
+
 import random
+random.seed()
 
-player_score = 0
-computer_score = 0
 
-print("This is rock paper scissors but it keeps track of your score everytime you play a round. Have fun! ")
-user_choice = input("Enter 'rock', 'paper', 'scissors', or 'quit' to quit: ").lower()
 
-while user_choice != 'quit':
-    if user_choice not in ('rock', 'paper', 'scissors'):
-        print("Invalid input. Please try again.")
+def rps_score_round(choice_1, choice_2):
+    if choice_1 == choice_2:
+        return 0
+    elif ((choice_1 == 'paper' and choice_2 == 'scissors')
+          or (choice_1 == 'scissors' and choice_2 == 'rock')
+          or (choice_1 == 'rock' and choice_2 == 'paper')):
+        return -1
+    elif ((choice_2 == 'paper' and choice_1 == 'scissors')
+          or (choice_2 == 'scissors' and choice_1 == 'rock')
+          or (choice_2 == 'rock' and choice_1 == 'paper')):
+        return 1
     else:
-        computer_choice = random.choice(['rock', 'paper', 'scissors'])
-        print()
+        return None
 
-        if user_choice == computer_choice:
-            print("We tie! You don't gain or lose any points.")
-        elif (user_choice == 'paper' and computer_choice == 'rock') or (user_choice == 'scissors' and
-            computer_choice == 'paper') or (user_choice == 'rock' and computer_choice == 'scissors'):
-            player_score += 1
-            
-            print("You won. Computer chose " + computer_choice + ".")
-        else:
-            print("The computer wins this round! Computer chose " + computer_choice + ".")
-            computer_score += 1
-            
-    print("Player Score: " + str(player_score) + ", Computer Score: " + str(computer_score))
-    user_choice = input("Enter 'rock', 'paper', 'scissors', or 'quit' to quit: ").lower()
+    
+human = 'a'
+score = 0
+while human != 'q':
+    human = input("Enter 'rock', 'paper', or 'scissors', or 'q' to quit: ")
+    computer = random.choice(['paper', 'rock', 'scissors'])
+    
+    if rps_score_round(human,computer) is not None :
+        score = score + rps_score_round(human,computer)
+          
+        print('I choose ' + computer + '.')
+        print("Score: " + str(score))
+
+    elif human != 'q':
+        print("Try again!")
+
+  
 
 
-print()
-print("Final Score:")
-print("Player Score: " + str(player_score) + ", Computer Score: " + str(computer_score))
-print("Thank you for playing! ")

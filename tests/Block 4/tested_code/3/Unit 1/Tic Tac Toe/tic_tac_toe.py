@@ -1,44 +1,39 @@
 
 
-
 from tic_tac_toe_functions import *
+
+
 
 
 board = [ [' ', ' ', ' '],
           [' ', ' ', ' '],
           [' ', ' ', ' '] ]
 player = 'x'
-time = 0
+count = 1
+winner = None
 
 
-while not (find_winner(board) != None or time == 9):  
+while count < 10 and winner == None:
     draw_board(board)
+    
     
     next_move = get_move(player)
     success = make_move(player, next_move, board)
-    
-    while not success: 
+    while not success:
         print('That is not a valid move.')
         next_move = get_move(player)
         success = make_move(player, next_move, board)
         
     player = next_player(player)
-    time += 1
+    winner = find_winner(board)
+    count = count + 1
+    
 
 
 draw_board(board)
-
-
-if (find_winner(board)) == 'x':
-    print('The x player wins!')
-elif (find_winner(board)) == 'o':
-    print('The o player wins!')
+print()
+if winner == None:
+    print("You tied.")
 else:
-    print('No player wins!')
-        
-
-
-
-
-
+    print('The winner is player ' + str(winner) + '!')
 

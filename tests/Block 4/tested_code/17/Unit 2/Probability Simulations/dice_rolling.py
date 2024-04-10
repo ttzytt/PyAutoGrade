@@ -3,34 +3,34 @@
 
 
 
-
 import random
-random.seed()
 
-def tries_until_different_values():
-    dice = [0,0,0,0,0,0] 
-    i = 0
-    while True:
-        a = random.randint(0, 5) 
-        if dice != [1,1,1,1,1,1]: 
-            dice[a] = 1
-            i += 1
-            
-        else:
-            return i 
+def rolls_until_all_values():
+    
+    rolled_values = []
+    rolls = 0
 
-def average_until_different_values(num_trials):
-    f = 0 
+    while len(rolled_values)<6:
+        roll = random.randint(1, 6)
+        if roll not in rolled_values:
+            rolled_values.append(roll)
+        rolls +=1
+
+    return rolls
+
+def average_rolls_until_all_values(num_trials):
+    total_rolls = 0
     for _ in range(num_trials):
-        f += tries_until_different_values()
-    return f / num_trials * 1.00 
+        total_rolls += rolls_until_all_values()
 
-num_trial = input("How many trials do you want to have? ")
+    average_rolls = total_rolls / num_trials + 1
+    return average_rolls
 
+def run_simulation():
+    
+    num_trials = int(input("Enter the number of trials: "))
 
-j = average_until_different_values(int(num_trial))
-
-print("The average amount of rolling we need to have to have rolled six different values is "
-        + str(j))
-
+    
+    average = average_rolls_until_all_values(num_trials)
+    print(f"Average number of rolls needed to cover all six values: {average}")
 

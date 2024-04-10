@@ -1,43 +1,86 @@
 
 
 
-
 import random
 
 random.seed()
 
 
-def rps_score_round(choice_1, choice_2): 
-    if(choice_1 == choice_2): 
-        bonus = 0 
-    elif(((choice_1 == 'rock') and (choice_2 == 'paper')) or
-        ((choice_1 == 'scissors') and (choice_2 == 'rock')) or
-        ((choice_1 == 'paper') and (choice_2 == 'scissors'))):
-            bonus = -1 
-    else:
-        bonus = 1 
 
-    return bonus 
+def rock_paper_scissors(choice_1, choice_2):
+    if choice_1 == choice_2:
+        return 0
+    elif choice_2 == ('rock'):
+        if choice_1 == ('paper'):
+            return +1
+        elif choice_1 == ('scissors'):
+            return -1
+
+    elif choice_2 == ('paper'):
+        if choice_1 == ('rock'):
+            return -1
+        elif choice_1 == ('scissors'):
+            return +1
+
+    elif choice_2 == ('scissors'):
+        if choice_1 == ('rock'):
+           return +1
+        elif choice_1 == ('paper'):
+            return -1
+
+print("Hello, lets play a game of rock paper scissors.")
 
 
+point = 0
 
-choice_1 = input('Enter \'rock\', \'paper\', or \'scissors\', or \'q\' to quit: ')
-score = 0
+new_point = point
+response = 'yes'
 
-while(choice_1 != 'q'): 
-    choice_2 = random.choice(['rock', 'paper', 'scissors']) 
-    if ((choice_1.lower() == 'rock') or
-        (choice_1.lower() == 'scissors') or
-        (choice_1.lower() == 'paper')): 
-        score += rps_score_round(choice_1.lower(), choice_2)
-        print() 
-        print(str(score)) 
-    else:
-        print('That\'s not valid. Try agian.') # tells user to try again
 
-    print() #adds new line
-    choice_1 = input('Enter \'rock\', \'paper\', or \'scissors\', or \'q\' to quit: ')
+while response == 'yes':
 
-print() #adds new line
-print('See you later! :)')
     
+    random.seed()
+    
+    choice_1 = input("Choose one: rock, paper, or scissors? (all lowercase, no spaces) ")
+    choice_2 = random.choice(['rock', 'paper', 'scissors'])
+    print("I choose " + choice_2 + ".")
+
+    if rock_paper_scissors(choice_1, choice_2) == -1:
+        print('I won, gg ez')
+        new_point = new_point - 1
+        
+    elif rock_paper_scissors(choice_1, choice_2) == +1:
+        print('Looks like I lost, GG')
+        new_point = new_point + 1
+        
+    elif rock_paper_scissors(choice_1, choice_2) == 0:
+        print('We tie')
+        
+        
+        new_point = new_point
+        
+    
+    
+    point = new_point
+    
+    print('You have ' + str(point) + ' points.')
+
+    
+    
+    
+    
+    
+    response = input("To play again type yes, to quit type q ")
+    if response == 'yes':
+        response == 'yes'
+
+    elif response == 'q':       
+        print("I'm sad to see you go :(")
+        print("You total amount of points is " + str(point) + ".")
+        response == 'no'
+    
+    elif response != 'yes' or response != 'q':
+        print("Follow instructions boi.")
+        
+        response = input("Try again.")

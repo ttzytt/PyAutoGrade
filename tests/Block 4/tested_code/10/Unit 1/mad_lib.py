@@ -2,30 +2,29 @@
 
 
 
-print ('A Mad Lib by Sam Kemp')
 
 
 
 
 
 
-noun1 = input ('Noun: ')
-verb1 = input ('Verb (Past Tense): ')   
-noun2 = input ('Noun: ')
-adjective1 = input ('Adjective (not ending in "ily" or "ing"): ')
-verb2 = input ('Verb: ')
-noun3 = input ('Noun (Name): ')
-adjective2 = input ('Adjective (not ending in "ily"): ')
-noun4 = input ('Noun (Plural): ')
-adjective3 = input ('Adjective: ')
-noun5 = input ('Noun (Plural): ')
 
-
-
-print ('There was a' + ' ' + noun1 + ' ' + 'named Bob who' + ' ' + verb1 + ' ' + 'to their job at Walmart every day. At work, Bob saw a' + ' ' + noun2 + ' ' + 'that was very' + ' ' + adjective1 + '. ' + 'A guy that kind of looked like' + ' ' + noun3 + ' ' + 'asked if this store sold' + ' ' + adjective2 + ' ' + noun4 + '. '+ 'Bob told them no and that they only sold' + ' ' + adjective3 + ' ' + noun5 + '.' + ' ' + 'The guy walked away and Bob clocked out of his shift and went home. The end.')
+adjective_1 = input('Write an adjective: ')
+name = input('Write a name: ')
+animal = input('Write an animal: ')
+distance = input('Write a distance:')
+restaurant = input('Write the name of a restaurant or fast food chain: ')
+food_1 = input('Write a food item: ')
+food_2 = input('Write a different food item ')
+transportation = input('Write a type of transportation ')
 
 
 
 
+print ()
+print ('One' + adjective_1 + ' day,' + name + ' decided to go on a walk with her pet ' + animal + 
+       '. ' + name + ' walked for' + distance + ' before getting hungy. She then walked to the' 
+       ' nearest' + restaurant + ' and ate some' + food_1 + '. She fed her ' + animal + ' some' + 
+       food_2 + '. ' + name + ' then took a ' + transportation + ' home.') 
 
 

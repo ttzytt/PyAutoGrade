@@ -2,38 +2,29 @@
 
 
 
-
 import random
+
 random.seed()
 
 
-user_choice = input("Enter 'rock' or 'paper': ")
-
-
-computer_choice = random.choice(['rock', 'paper'])
+answer = input(" Enter 'rock' or 'paper' ")
 
 
 
-print(f"I choose {computer_choice}.")
+
+if random.randint(0,1) == 1:
+    print('I choose paper')
+    if answer == 'rock':
+        print('I win')
+    else:
+        print('We tie')
 
 
 
-if user_choice == computer_choice:
-    
-    print("We tie.")
-    
 else:
-    
-    print("You win." if user_choice == 'paper' else "I win.")
-
-
-
-
-
-
-
-
-
-
-
+    print('I choose rock')
+    if answer == 'rock':
+        print('We tie')
+    else:
+        print('You win')
 

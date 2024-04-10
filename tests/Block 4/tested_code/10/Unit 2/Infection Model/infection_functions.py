@@ -3,146 +3,110 @@
 
 
 
-
-
-probability_board =[[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-          [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
-
-
 import random
-random.seed()
 
 
 
-def board_generator(board):
-    current_row = 1
-    current_column = 1
-    times_ran = 0
-    random_num = 0
-    while times_ran < 100:
-        random_num = random.random()
-        if random_num < 0.1:
-            board[current_row][current_column] = 'X'
-
-        if current_column < 10:
-            current_column += 1
-        else:
-            current_row += 1
-            current_column = 1
-
-        times_ran += 1
-        
+def draw_row(row):
+    print('  │ '
+          + row[0] + ' │ '
+          + row[1] + ' │ '
+          + row[2] + ' │ '
+          + row[3] + ' │ '
+          + row[4] + ' │ '
+          + row[5] + ' │ '
+          + row[6] + ' │ '
+          + row[7] + ' │ '
+          + row[8] + ' │ '
+          + row[9] + ' │ ')
 
 
 def draw_board(board):
-    print(board[0])
-    print(board[1])
-    print(board[2])
-    print(board[3])
-    print(board[4])
-    print(board[5])
-    print(board[6])
-    print(board[7])
-    print(board[8])
-    print(board[9])
-    print(board[10])
-    print(board[11])
+    print('  ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐ ')
+    draw_row(board[0])
+    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
+    draw_row(board[1])
+    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
+    draw_row(board[2])
+    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
+    draw_row(board[3])
+    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
+    draw_row(board[4])
+    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
+    draw_row(board[5])
+    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
+    draw_row(board[6])
+    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
+    draw_row(board[7])
+    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
+    draw_row(board[8])
+    print('  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤ ')
+    draw_row(board[9])
+    print('  └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘ ')
+
+
+def initialize_board(size, initial_infected):
     
-
-        
-
-
-def num_infected_neighbors(board, probability_board):
     
-    current_row = 1
-    current_column = 1
-    amount_infected = 0
-    times_ran = 0
+    board = [['·' for _ in range(size)] for _ in range(size)]
+
     
-    while times_ran < 100:
+    for _ in range(initial_infected):
         
-        amount_infected = 0
+        row = random.randint(0, size - 1)
+        col = random.randint(0, size - 1)
+        board[row][col] = 'x'
+
+    return board
+
+def count_infected_neighbors(board, row, col):
+    size = len(board)
+    infected_neighbors = 0
+    
+    
+    if col > 0 and board[row][col - 1] == 'x':
+        infected_neighbors += 1
         
-        if board[current_row][current_column] == '·':
-            if board[current_row + 1][current_column] == 'X':
-                amount_infected += 1
-            if board[current_row - 1][current_column] == 'X':
-                amount_infected += 1
-            if board[current_row][current_column + 1] == 'X':
-                amount_infected += 1
-            if board[current_row][current_column - 1] == 'X':
-                amount_infected += 1
-            probability_board[current_row][current_column] = str(amount_infected)
-        else:
-            
-            probability_board[current_row][current_column] = '-1'
+    
+    if col < size - 1 and board[row][col + 1] == 'x':
+        infected_neighbors += 1
         
-        if current_column < 10:
-            current_column += 1
-        else:
-            current_row += 1
-            current_column = 1
-            
-        times_ran += 1
-
-
-
-
-
-
-def if_heal(board, heal_probability):
-    current_row = 1
-    current_column = 1
-    times_ran = 0
-    while times_ran < 100:
+    
+    if row > 0 and board[row - 1][col] == 'x':
+        infected_neighbors += 1
         
-        if board[current_row][current_column] == 'X':
-            rand_num = random.randint(0,100)
-            
-            if rand_num < heal_probability:
-                board[current_row][current_column] = '·'
-                num_infected_neighbors(board,probability_board)
+    
+    if row < size - 1 and board[row + 1][col] == 'x':
+        infected_neighbors += 1
 
-        
-        if current_column < 10:
-            current_column += 1
-        else:
-            current_row += 1
-            current_column = 1
-        times_ran += 1
-
-
-def if_infect(board, probability_board, infection_probability):
-    current_row = 1
-    current_column = 1
-    times_ran = 0
-    while times_ran < 100: 
-        if board[current_row][current_column] == '·':
-            rand_num = random.randint(0,99)
-            
-            if rand_num < (infection_probability * int(probability_board[current_row][current_column])):
-                board[current_row][current_column] = 'X'
-                num_infected_neighbors(board,probability_board)
-
-        
-        if current_column < 10:
-            current_column += 1
-        else:
-            current_row += 1
-            current_column = 1
-        times_ran += 1
+    return infected_neighbors
 
 
 
+def update_board(board, infection_probability, heal_probability):
+    size = len(board) 
+    new_board = [['·' for _ in range(size)] for _ in range(size)]
 
-            
+    for row in range(size):
+        for col in range(size):
+            if board[row][col] == 'x':
+                      
+                
+                if random.random() < heal_probability:
+                    new_board[row][col] = '·'
+                else:
+                    new_board[row][col] = 'x'
+            else:
+                
+                num_infected_neighbors = count_infected_neighbors(board, row, col)
+
+                
+                if num_infected_neighbors != 0:
+                    infection_chance = infection_probability * num_infected_neighbors
+                else:
+                    infection_chance = infection_probability
+                
+                if random.random() < infection_chance:
+                    new_board[row][col] = 'x'
+
+    return new_board

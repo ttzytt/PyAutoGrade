@@ -2,80 +2,56 @@
 
 
 
-
-
-
 import random
 
 random.seed()
 
-money = 100 
+
+print("You are gambling to win in rock paper scissors. You start with $100 and you can bet up to the total amount you have.")
+print("You may quit at any time, but you automatically lose when you lose all your money.")
+print()
 
 
-print("Welcome to the gambling game!")
-print("Game rule: You have 100 dollar at the start of the game."
-      "In each time two dices with 30 sides will be thrown."
-      "You will guess a number between 1 and 30."
-      "If the number you guess is between the two numbers shown on the two dices,"
-      "you win and get 10 dollar. Otherwize, you will lose 10 dollar. However,"
-      "if the number you guess is the same with one of the numbers showed on the dices,"
-      "you will lose 100 dollar at once.You will be out if you lose all your money."
-      "You can quit the game at all time.")
+money = 100
 
+
+ready = input('Ready to play? ').lower()
 
 
 
-whether_continue = 'Yes'
 
-while whether_continue == 'Yes': 
-    
-    dice_1 = random.randint(1, 30)
-    dice_2 = random.randint(1, 30)
-    user_guess = input("Guess a number (Type 'quit' to end the game): ")
 
-    if user_guess == 'quit':
-        whether_continue = 'No'
-        
-    
+while money > 0 and ready == 'yes':
+    betting_money = int(input('How much money would you like to bet? '))
+
+    if betting_money > money:
+        print("You can't bet more than you have. Please enter a valid bet.")
+        continue
+
+    print('Okay, now your total is ' + str(money - betting_money) + ' dollars.')
+    print()
+
+    user = input("Choose rock, paper, scissors, or quit: ")
+
+    if user == 'quit':
+        break
+
+    computer = random.choice(['rock', 'paper', 'scissors'])
+    print("I choose... ", computer)
+
+    if user == computer:
+        print('We tie. Your bet is returned. You now have: ' + str(money))
+    elif (user == 'paper' and computer == 'rock') or (user == 'scissors' and computer == 'paper') or (user == 'rock' and computer == 'scissors'):
+        money += betting_money
+        print('You won. You earn double your bet. You now have: ' + str(money))
     else:
-        print ("Number showed on dice A: " + str(dice_1))
-        print ("Number showed on dice B: " + str(dice_2))
-        user_guess = int(user_guess)
-
-        
-        if user_guess < dice_1 and user_guess > dice_2:
-            print('You win. You gain ten dollar!')
-            money = money + 10
-        
-        elif user_guess > dice_1 and user_guess < dice_2:
-            print('You win. You gain ten dollar!')
-            money = money + 10
-        
-        elif user_guess == dice_1 or user_guess == dice_2:
-            print('You are so unluky! You lose 100 dollar!')
-            money = money - 100
-        
-        else:
-            print('You lose. You lose ten dollar!')
-            money = money - 10
-        
-    if money < 0:
-        money = 0
-
-    
-    if money == 0:
-        whether_continue = 'No'
-
-    
-    print('You now have ' + str(money) + ' dollar.')
-
-    print() 
+        money -= betting_money
+        print('I win. You lose your bet. You now have: ' + str(money))
 
 
-print('You are out!') 
-print('End of the game.')
-        
-    
-        
+if money <= 0:
+    print("You've run out of money. You lost the game.")
+elif ready != 'yes':
+    print("It's unfortunate you must go...")
 
-
+print('Hope you come back later!')

@@ -1,47 +1,35 @@
 
 
 
+
+
+
 import random
+random.seed
 
 
 
-def tries_until_duplicate_birthday(include_leap_year = False):
-    
-    birthdays = []
-    birthday = random.randint(1,365)
-    
-    while birthday not in birthdays:
-        
-        birthdays.append(birthday)
 
-        if include_leap_year:
-            
-            if random.randint(1,4) == 1:
-                birthday = random.randint(1, 366)
-            else:
-                birthday = random.randint(1,365)
-        
-        else:
-            birthday = random.randint(1, 365)
-                
-
-    
-    return len(birthdays)
+def tries_until_duplicate_birthday():
+	new = random.randint(1, 6)
+	birthday_list = []
+	while new not in birthday_list:	
+		birthday_list.append(new)
+		new = random.randint(1, 365)
+	return (len(birthday_list) + 1)
 
 
+def average_until_duplicate_birthday(num_trials):
+	total = 0
+	for _ in range (num_trials):
+		total += tries_until_duplicate_birthday()
+	print (total/num_trials)
+	return (total/num_trials)
 
-def average_until_duplicate_birthday(num_trial, include_leap_year = False):
-    sum = 0
-    for i in range(num_trial):
-        sum += tries_until_duplicate_birthday(include_leap_year)
+num_trials = int(input("How many times you want to try: "))	
+average_until_duplicate_birthday(num_trials)
 
-    return sum/num_trial
 
-while True:
-    
-    num_trial = input('How many trials do you want to run: ')
-
-    print('Your average was ' + str(average_until_duplicate_birthday(int(num_trial), True)) + ' times.')
 
 
 

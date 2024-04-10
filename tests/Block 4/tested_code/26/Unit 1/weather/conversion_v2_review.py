@@ -3,22 +3,23 @@
 
 
 
-temperature = float(input('What is the temperature today(in °F)? '))
+
+farenheit = int(input(' What is the temperature today (in °F)? '))
 
 
-
-if (temperature > 90 ):
-    print('Wow that is hot.')
-elif( temperature < 32 ):
-    print('That’s freezing.')
-elif (temperature < 50):
-    
-    print('That’s so cold.')
-else:
-    print('That’s normal.')
-
-print('That is '+ str((temperature - 32) * 5/9) + ' °C')
+celsius = (farenheit - 32) * 5/9
 
 
 
 
+
+if farenheit >= 90:
+    print (' Wow that is hot. ')
+elif farenheit >= 32 and farenheit < 50:
+    print (' That is so cold ')
+elif farenheit < 32:
+    print (' That is freezing. ')
+
+
+
+print (f'That is {celsius:.2f} °C. ')

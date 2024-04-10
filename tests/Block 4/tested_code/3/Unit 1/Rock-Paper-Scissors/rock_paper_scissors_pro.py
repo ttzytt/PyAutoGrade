@@ -2,51 +2,65 @@
 
 
 
-
-import random
+import random 
 random.seed()
 
 
-choice = input("Enter 'rock', 'paper', 'scissors' or 'q' to quit: ")
-choice2 = random.choice(['rock', 'paper', 'scissors'])
-score = 0
-def rps_score_round(choice, choice2):
-    if choice == choice2:
-        return 0
-    elif ((choice == 'rock' and choice2 == 'paper')
-              or (choice == 'paper' and choice2 == 'scissor')
-              or (choice == 'scissor' and choice2 == 'rock')):
-        return -1
-    else:
-        return +1
-
-
-while choice != "q":
+def rps_score_round(choice_1, choice_2):
 
     
-    
-    computer_choice = random.choice(['rock', 'paper', 'scissors'])
-    print("I choose " + computer_choice)
- 
-    
-    if ((choice == 'rock' and computer_choice == 'paper')
-            or (choice == 'paper' and computer_choice == 'scissors')
-            or (choice == 'scissors' and computer_choice == 'rock')):
-        print('I win.')
-        score = score -1
-        print('You score is ' + str(score))
-    
-    elif ((choice == 'paper' and computer_choice == 'rock')
-            or (choice == 'scissors'and computer_choice == 'paper')
-            or (choice == 'rock' and computer_choice == 'scissors')):
-        print('You win.')
-        score = score + 1
-        print('You score is ' + str(score))
-    elif choice != ('rock' or 'paper' or 'scissors' or 'q'):
-        print('Try again!')
+    if choice_1 == 'rock':
+        if choice_2 == 'rock':
+            return 0
+        elif choice_2 == 'paper':
+            return 1
+        else:
+            
+            return -1
 
-    else:
-        print('We tie.')
-        print('You score is ' + str(score))
-    choice = input("Enter 'rock', 'paper', 'scissors' or 'q': ")
-print('Bye.')
+    elif choice_1 == 'paper':
+        if choice_2 == 'rock':
+            return -1
+        elif choice_2 == 'paper':
+            return 0
+        else:
+            
+            return  1
+        
+    elif choice_1 == 'scissors':
+        if choice_2 == 'rock':
+            return 1
+        elif choice_2 == 'paper':
+            return -1
+        else:
+            
+            return 0
+    
+
+continue_play = 'continue'
+total_score = 0
+print('Your score is 0 now.')
+
+while continue_play == 'continue':
+
+    
+    choice_1 = input("Enter 'rock' or 'paper' or 'scissors': ")
+    while choice_1 != 'rock' and choice_1 != 'paper' and choice_1 != 'scissors':
+        print('Invalid input, try again.')
+        choice_1 = input("Enter 'rock' or 'paper' or 'scissors': ")
+        
+    
+    choice_2 = random.choice(['rock', 'paper', 'scissors'])
+
+    
+    round_score = rps_score_round(choice_1, choice_2)
+    total_score = total_score + round_score
+    print('Your score is ' + str(total_score) + ' now.')
+
+    
+    continue_play = input("Enter 'continue' if you want to keep playing: ")
+    print() 
+
+print('Bye!')
+
+

@@ -2,8 +2,9 @@
 
 
 
+import random
 
-from random import randint
+random.seed()
 
 
 
@@ -11,64 +12,91 @@ from random import randint
 
 
 def find_winner(num_werewolves, num_villager):
-    is_day = True
-    while num_werewolves < num_villager and num_werewolves > 0:
-        if is_day: 
-            if randint(1, num_werewolves + num_villager) <= num_werewolves:
-                
-                num_werewolves -= 1
-            else:
-                num_villager -= 1
-        else: 
+
+    
+    
+
+    while num_werewolves > 0 and num_villager != num_werewolves and num_villager > 0:
+        
+        
+        
+
+        num_total = num_werewolves + num_villager
+
+        
+        if random.randint(0, num_total) < num_werewolves:
+            
+            
+            num_werewolves -= 1
+
+            
+            
+            if num_werewolves == num_villagers:
+                return 'werewolves'
+            elif num_werewolves == 0:
+                return 'village'
+            
+        
+        else:
             num_villager -= 1
-        is_day = not is_day 
+
+            
+            if num_werewolves == num_villagers:
+                return 'werewolves'
+            elif num_werewolves == 0:
+                return 'village'
+
+        num_villager -= 1
+
+        
+        if num_werewolves == num_villagers:
+            return 'werewolves'
+        elif num_werewolves == 0:
+            return 'village'
+        
+        
+    
     if num_werewolves > 0:
         return 'werewolves'
-    return 'village'
+    else:
+        return 'village'
+        
 
-def odds_of_werewolves_winning(num_werewolves, num_villager, tries = 100):
-    werewolves_wins = 0
-    for _ in range(tries):
+
+def one_in_werewolves_winning(num_werewolves, num_villager):
+
+    werewolve_wins = 0
+
+    while find_winner(num_werewolves, num_villager) != 'village':
+        werewolve_wins += 1
+        
+        
+    return ('the odds of village winning in one in ' + str(werewolve_wins))
+
+
+
+
+def odds_of_werewolves_winning(num_werewolves, num_villager, num_trial):
+
+    werewolve_wins = 0
+
+    for i in range(num_trial):
         if find_winner(num_werewolves, num_villager) == 'werewolves':
-            werewolves_wins += 1
-    return werewolves_wins / tries
+            werewolve_wins += 1
+
+    return('The werewolves won ' + str(werewolve_wins/num_trial * 100) + '% of the games')
+    
+        
+
 
 
 while True:
-    werewolves = input("Number of Werewolves: ")
-    if not werewolves.isnumeric():
-        print("not a number")
-        werewolves = input("Number of Werewolves: ")
-    werewolves = int(werewolves)
-    villagers = input("Number of Villagers: ")
-    if not villagers.isnumeric():
-        print("not a number")
-        villagers = input("Number of Villagers: ")
-    villagers = int(villagers)
-    tries = input("Number of Tries: ")
-    if not tries.isnumeric():
-        print("not a number")
-        tries = input("Number of Tries: ")
-    tries = int(tries)
 
-    odds = odds_of_werewolves_winning(werewolves, villagers, tries)
-    print("Odd of werewolves winning with", werewolves,
-          "werewolves and", villagers, "villagers is",
-          round(odds,4), "(",round(odds*100,2) ,"% )")
+    num_trial = int(input('how many times u wanna run: '))
 
+    num_werewolves = int(input('num werewoles: '))
+    num_villagers = int(input('num villagers: '))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    print(odds_of_werewolves_winning(num_werewolves, num_villagers, num_trial))
 
 

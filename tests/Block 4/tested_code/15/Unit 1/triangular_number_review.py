@@ -1,21 +1,18 @@
 
 
 
+n = int(input('Please enter a number:'))
+
+count = 0
+
+triangular_number = 0
+
+while count < n:
+    
+    count = count + 1
+    triangular_number = triangular_number + count 
+    
+print("The nth triangle number would be: " + str(triangular_number))
 
 
 
-integer = input(' Tell me a random integer ')
-integer = int(integer)
-number = 1
-triangle_number = 0
-
-
-while number <= integer:
-    triangle_number = triangle_number + number
-    number = number + 1
-
-
-
-
-
-print(' The nth triangular number is  ' + str(triangle_number))

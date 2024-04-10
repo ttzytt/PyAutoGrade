@@ -3,26 +3,21 @@
 
 
 
-num = int(input("Enter a positive integer: "))
 
 
-count = 1
-
-
-
-final_product = 1
+n_changed = int(input('Enter your number(no spaces): '))
 
 
 
-while count <= num:
-    final_product = final_product * count
-    count = count + 1
+num_left = n_changed - 1
 
 
+original_n = n_changed
 
 
-
-
-
+while num_left > 0:
     
-print(str(num) + "! is equal to " + str(final_product))
+    n_inputed = n_inputed * num_left
+    num_left -= 1
+    
+print('!' + str(original_n) + ' is equal to ' + str(n_changed))
