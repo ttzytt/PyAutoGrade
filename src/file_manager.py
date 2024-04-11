@@ -82,10 +82,9 @@ class FileManager(CfgFileRelated):
         """
         stus : list[str] = self.student_list
         stus_to_num : dict[str, int] = {}
-        if hash_func is not None:
-            random.shuffle(stus)
         hash_vals = set()
         if hash_func is None:
+            random.shuffle(stus)
             for num, stu in enumerate(stus):
                 stus_to_num[stu] = num
         else: 
