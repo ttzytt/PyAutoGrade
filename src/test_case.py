@@ -13,7 +13,7 @@ from typing import Generic, TypeAlias, TypeVar, Callable
 import sys
 import traceback
 from typing import Any
-
+import pdb
 class TestCase(ABC): 
     # abstract class for all kinds of testers 
     # e.g. pre-written test cases, solution code + data generator, etc.
@@ -38,6 +38,7 @@ class TestCase(ABC):
         err_message : str   = None     # error message
         stack_trace : str   = None     # stack trace
         test_case_id: int   = -1
+        tested_func_name : str = ""
         
     @dataclasses.dataclass
     class TestLimits:
@@ -47,7 +48,7 @@ class TestCase(ABC):
     def __init__(self, test_case, tested_func_name: str, case_name : str = "", test_limits : TestLimits = TestLimits()):
         self.tested_func_name = tested_func_name
         self.case_name = case_name 
-        self.test_case = test_case
+        self.test_case : Callable[[Callable], TestCase.TestResult] = test_case
         self.test_results : list[TestCase.TestResult] = []
         self.test_limits = test_limits
     @abstractmethod
@@ -85,11 +86,6 @@ class PrewrittenScriptCase(TestCase):
 
         def assert_eq(self, value : Any, *input_args, **input_kwds):
             def evaluator(func : Callable) -> PrewrittenScriptCase.EvaluatorResult:
-                # print stack trace
-                # print("assert eq-----------------------------------")
-                # # print(traceback.format_stack())
-                # print(input_args, input_kwds)
-                # print(input_args[0].closed)
                 ret = func(*input_args, **input_kwds)
                 cond = ret == value
                 if isinstance(ret, float) and isinstance(value, float):
@@ -153,10 +149,10 @@ class PrewrittenScriptCase(TestCase):
             return evaluator
 
         @staticmethod
-        def assert_content_in_set(value : set, *input_args, **input_kwds):
+        def assert_content_in_set(value : set, ret_to_set_converter : Callable[[str], set], *input_args, **input_kwds):
             def evaluator(func : Callable) -> PrewrittenScriptCase.EvaluatorResult:
                 ret = func(*input_args, **input_kwds)
-                ret = set(ret)
+                ret = ret_to_set_converter(ret)
                 if ret.issubset(value):
                     return PrewrittenScriptCase.EvaluatorResult(True)
                 else:
@@ -171,7 +167,6 @@ class PrewrittenScriptCase(TestCase):
         # start a new process 
         # this is to prevent dangerous behavior from the tested code
         # use chroot and seccomp to do this
-        
         # check if /tmp/autograde exists
         # if not present, make folder called /tmp/autograde
         # and chmod it to no permission
@@ -247,7 +242,8 @@ class PrewrittenScriptCase(TestCase):
         prog.join()
         ret = parent_pip.recv()
         assert isinstance(ret, TestCase.TestResult)
-        ret.memory_used = max_mem_usage
+        ret.memory_used = max_mem_usage 
+        ret.tested_func_name = self.tested_func_name
         parent_pip.close()
         return ret
 class PrewrittenFileCase(PrewrittenScriptCase):

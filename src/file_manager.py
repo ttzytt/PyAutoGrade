@@ -83,12 +83,21 @@ class FileManager(CfgFileRelated):
         stus : list[str] = self.student_list
         stus_to_num : dict[str, int] = {}
         random.shuffle(stus)
+        hash_vals = set()
         if hash_func is None:
             for num, stu in enumerate(stus):
                 stus_to_num[stu] = num
         else: 
             for stu in stus:
                 stus_to_num[stu] = hash_func(stu)
+                if stus_to_num[stu] in hash_vals:
+                    stu_words = stu.split()
+                    # do xor for the hash of each word 
+                    extra_hash = 0
+                    for word in stu_words:
+                        extra_hash ^= hash_func(word)
+                    stus_to_num[stu] += extra_hash
+                hash_vals.add(stus_to_num[stu])
         
         def remove_comments(program : str) -> str:
             # Remove single-line comments
