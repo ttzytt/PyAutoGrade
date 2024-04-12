@@ -1,2 +1,0 @@
-alternate_sum(numbers):
-    

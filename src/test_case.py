@@ -93,7 +93,7 @@ class PrewrittenScriptCase(TestCase):
                 if cond:
                     return PrewrittenScriptCase.EvaluatorResult(True)
                 else:
-                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert eq evaluator, the return value of the tested function is " + str(ret) + " which does not equal to " + str(value))
+                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert eq evaluator, the return value of the tested function is " + str(ret) + " of type " + str(type(ret)) + " which does not equal to " + str(value) + " of type " + str(type(value)))
             return evaluator
         
         def assert_eq_correct_sol(self, correct_sol : Callable, *input_args, **input_kwds):
@@ -109,7 +109,7 @@ class PrewrittenScriptCase(TestCase):
                 if cond:
                     return PrewrittenScriptCase.EvaluatorResult(True)
                 else:
-                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert lt evaluator, the return value of the tested function is " + str(ret) + " which is not less than " + str(value))
+                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert lt evaluator, the return value of the tested function is " + str(ret) + str(ret) + " of type " + str(type(ret)) +  " which is not less than " + str(value) + " of type " + str(type(value)))
             return evaluator
      
         def assert_gt(self, value : Any, *input_args, **input_kwds):
@@ -121,7 +121,7 @@ class PrewrittenScriptCase(TestCase):
                 if cond:
                     return PrewrittenScriptCase.EvaluatorResult(True)
                 else:
-                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert gt evaluator, the return value of the tested function is " + str(ret) + " which is not greater than " + str(value))
+                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert gt evaluator, the return value of the tested function is " + str(ret) + " of type " + str(type(ret))+ " which is not greater than " + str(value) + " of type " + str(type(value)))
             return evaluator
         
         def assert_le(self, value : Any, *input_args, **input_kwds):
@@ -133,7 +133,7 @@ class PrewrittenScriptCase(TestCase):
                 if cond:
                     return PrewrittenScriptCase.EvaluatorResult(True)
                 else:
-                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert le evaluator, the return value of the tested function is " + str(ret) + " which is not less than or equal to " + str(value))
+                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert le evaluator, the return value of the tested function is " + str(ret) + " of type " + str(type(ret)) + " which is not less than or equal to " + str(value) + " of type " + str(type(value)))
             return evaluator
         
         def assert_ge(self, value : Any, *input_args, **input_kwds):
@@ -145,7 +145,7 @@ class PrewrittenScriptCase(TestCase):
                 if cond:
                     return PrewrittenScriptCase.EvaluatorResult(True)
                 else:
-                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert ge evaluator, the return value of the tested function is " + str(ret) + " which is not greater than or equal to " + str(value))
+                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert ge evaluator, the return value of the tested function is " + str(ret) + " of type " + str(type(ret)) +  " which is not greater than or equal to " + str(value) + " of type " + str(type(value)))
             return evaluator
 
         @staticmethod
@@ -156,7 +156,7 @@ class PrewrittenScriptCase(TestCase):
                 if ret.issubset(value):
                     return PrewrittenScriptCase.EvaluatorResult(True)
                 else:
-                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert content in set evaluator, the return value of the tested function is " + str(ret) + " which is not a subset of " + str(value))
+                    return PrewrittenScriptCase.EvaluatorResult(False, msg="in assert content in set evaluator, the return value of the tested function is " + str(ret) + " of type " + str(type(ret))+ " which is not a subset of " + str(value) + " of type " + str(type(value)))
             return evaluator
                 
     EvaluatorT  = Callable[[Callable], EvaluatorResult]

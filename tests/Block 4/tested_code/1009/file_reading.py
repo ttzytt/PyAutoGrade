@@ -1,7 +1,7 @@
 
 
 
-import pdb
+
 import random
 '''
 Returns the average length for the file, as a string.

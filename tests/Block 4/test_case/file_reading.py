@@ -118,10 +118,11 @@ def count_long_lines_sol(read_file, min_length):
 
 def specific_word_count_sol(read_file, word):
     count = 0
+    word = word.lower()
     for line in read_file:
         # Split the line into words
         words = line.split()
-        words = [word.lower() for word in words]
+        words = [w.lower() for w in words]
         # Count occurrences of the target word
         count += words.count(word)
     read_file.seek(0)

@@ -101,10 +101,11 @@ def random_words(read_file, num_words):
 
 def specific_word_count(read_file, word):
     count = 0
+    word = word.lower()
     for line in read_file:
         # Split the line into words
         words = line.split()
-        words = [word.lower() for word in words]
+        words = [w.lower() for w in words]
         # Count occurrences of the target word
         count += words.count(word)
     return count
@@ -115,7 +116,7 @@ def starts_with_counter(read_file, word_beginning):
     for line in read_file:
         # Split the line into words
         words = line.split()
-        words = [word.lower() for word in words]
+        words = [w.lower() for w in words]
         # Count words that start with the specified prefix
         count += sum(1 for word in words if word.startswith(word_beginning))
     return count
