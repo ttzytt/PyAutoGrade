@@ -5,7 +5,8 @@
 
 
 '''
-Returns the average length of the words in the file.
+Returns the average length of the words in the file. If there are no words it
+would return none.
     inputs:
         read_file    A file that is open for reading.
 '''
@@ -20,14 +21,17 @@ def average_length(read_file):
         for word in words:
             count_character += len(word)
 
-    return count_character / count_word
+    if count_word == 0:
+        return None
+    else:
+        return count_character / count_word
         
 
 
 
 
 '''
-Returns the list of the longest words of the file.
+Returns the list of the longest words of the file. (Not repetitive)
     inputs:
         read_file    A file that is open for reading.
 '''
@@ -39,11 +43,12 @@ def longest_word(read_file):
         words = line.lower().split()
         
         for word in words:
-            if len(word) == length:
-                longest_word.append(word)
-            elif len(word) > length:
-                longest_word = [word]
-                length = len(word)
+            if word not in longest_word:
+                if len(word) == length:
+                    longest_word.append(word)
+                elif len(word) > length:
+                    longest_word = [word]
+                    length = len(word)
 
     return longest_word
 
@@ -93,7 +98,7 @@ def all_vowels_counter(read_file):
             if ('a' in word) and ('e' in word) and ('i' in word) and ('o' in word) and ('u' in word):
                 vowels_counter.append(word)
 
-    return vowels_counter
+    return len(vowels_counter)
 
 
 
@@ -161,11 +166,12 @@ Returns the number of times the word 'word' appears in the file
 '''
 def specific_word_count(read_file, word):
     count = 0
+    word = word.lower()
     
     for line in read_file:
         words = line.lower().split()
         for wordd in words:
-            if wordd == word.lower():
+            if wordd == word:
                 count += 1
 
     return count
@@ -180,11 +186,12 @@ Returns the number of words in a file that begin with a specific word.
 '''
 def starts_with_counter(read_file, word_beginning):
     count = 0
+    word_beginning = word_beginning.lower()
 
     for line in read_file:
         words = line.lower().split()
         for word in words:
-            if word[:len(word_beginning)] == word_beginning.lower():
+            if word[:len(word_beginning)] == word_beginning:
                 count += 1
 
     return count

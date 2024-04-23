@@ -4,8 +4,12 @@
 
 import random
 
+
 """
-Returns the average length of of all the words in a file
+T2
+Returns the average length of of all the words in a file. If there are 0 words read, return
+None
+
     inputs:
         read_file                     A file that is open for reading.
 """
@@ -19,45 +23,64 @@ def average_length(read_file):
         for word in words: 
             total_length += len(word) 
             words_read += 1
-            
-    return total_length/words_read 
+    if words_read == 0:
+        return None
+    if words_read != 0:
+        return total_length/words_read 
 
 """
+T3
 Returns the longest word in a file
     inputs:
         read_file                     A file that is open for reading.
 """
 def longest_word(read_file):
-    current_longest_word = '' 
-    
+    current_longest_words = [] 
+    len_longest_words = 0 
     for line in read_file:
         words = line.split()
         for word in words: 
 
             
-            if len(word) > len(current_longest_word):
-                current_longest_word = word
+            if len(word) == len_longest_words:
+                current_longest_words.append(word.lower())
                 
-    return current_longest_word
+                
+            elif len(word) > len_longest_words:
+                current_longest_words = []
+                current_longest_words.append(word.lower())
+                len_longest_words = len(word)
+
+    return current_longest_words
 
 
 """
+T4
 Returns the longest palindrome in a file
     inputs:
         read_file                     A file that is open for reading.
 """
 
 def longest_palindrome(read_file):
-    current_longest_palindrome = ''
+    current_longest_palindromes = []
+    len_longest_palindrome = 0
     for line in read_file:
         words = line.split()
         for word in words:
-            if word.lower() == word[::-1].lower(): 
-                if len(word) > len(current_longest_palindrome):
-                    current_longest_palindrome = word
-    return current_longest_palindrome
+            if word.lower() == word[::-1].lower():
+                
+                if len(word) == len_longest_palindrome:
+                    current_longest_palindromes.append(word.lower)
+                    
+                elif len(word) > len_longest_palindrome:
+                    current_longest_palindromes = []
+                    current_longest_palindromes.append(word.lower())
+                    len_longest_palindrome = len(word)
+                
+    return current_longest_palindromes
 
 """
+T5
 Returns the number of vowels (a, e, i, o, u) in a file, regardless of capitalization
     inputs:
         read_file                     A file that is open for reading.
@@ -76,6 +99,7 @@ def all_vowels_counter(read_file):
     return vowels_count  
 
 """
+T6
 Returns the number of lines in a file that contain at least min_length characters, currently
 set at 10.
     inputs:
@@ -94,6 +118,7 @@ def count_long_lines(read_file, min_length):
     return long_line_count
 
 """
+T7
 Returns a random word from a file by taking a random word from each line, and making a list of
 all of those words, then choosing one word from that list
     inputs:
@@ -111,6 +136,7 @@ def random_word(read_file):
     return final_random_word
  
 """
+T8
 Returns a a list of num_words random words from a file. If a word appears more than once, it
 can be chosen multiple times and has a higher chance of being chosen. num_words currently set
 to 5
@@ -137,6 +163,7 @@ def random_words(read_file, num_words):
     return final_random_words 
 
 """
+T9
 Returns the number of times that the word 'word' appears in a file, case specific
     inputs:
             read_file                     A file that is open for reading.
@@ -160,6 +187,7 @@ def specific_word_count(read_file, word):
     return specific_word_count 
 
 """
+T10
 Returns the number of words in a file that begin with the string word_beginning, not case
 specific
     inputs:

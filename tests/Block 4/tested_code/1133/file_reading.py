@@ -22,6 +22,7 @@ def average_length(read_file):
         return 0  
     return total_length / total_words  
 
+
 '''
 T3
 Returns the list of longest word(s) in the file.
@@ -36,11 +37,13 @@ def longest_word(read_file):
         for word in words:
             word_length = len(word)
             if word_length > max_length:
-                longest_words = [word]  
+                longest_words = [word.lower()]  
                 max_length = word_length  
             elif word_length == max_length:
-                longest_words.append(word)  
+                longest_words.append(word.lower())  
     return longest_words
+
+
 
 '''
 T4
@@ -48,7 +51,7 @@ Returns the list of longest palindrome word(s) in the file.
     inputs
         read_file    A file that is open for reading.
 '''
-def longest_palindrome(read_file): 
+def longest_palindrome(read_file):
     def is_palindrome(word):
         return word == word[::-1]  
 
@@ -57,13 +60,15 @@ def longest_palindrome(read_file):
     for line in read_file:
         words = line.split()
         for word in words:
-            if is_palindrome(word):
+            word_lower = word.lower()  
+            if is_palindrome(word_lower):
                 word_length = len(word)
                 if word_length > max_length:
-                    longest_palindromes = [word]  
-                    max_length = word_length      
+                    longest_palindromes = [word_lower]  
+                    max_length = word_length  
                 elif word_length == max_length:
-                    longest_palindromes.append(word)  
+                    if word_lower not in longest_palindromes:
+                        longest_palindromes.append(word_lower)  
     return longest_palindromes
 
 '''
@@ -118,8 +123,7 @@ def random_words(read_file, num_words):
     words = []  
     for line in read_file:
         words.extend(line.split())
-        return random.sample(words, num_words)  
-
+    return random.sample(words, num_words)  
 '''
 T9
 Returns the number of times the specified word appears in the file.
@@ -150,37 +154,29 @@ def starts_with_counter(read_file, word_beginning):
 
 
 def main():
-
+    
     file_name = 'Text files/names.txt'
     with open(file_name, 'r') as my_file:
         print("Average word length:", average_length(my_file))
-
-    file_name = 'Text files/names.txt'
-    with open(file_name, 'r') as my_file:
+        my_file.seek(0)  
         print("Longest word(s):", longest_word(my_file))
 
+    
     file_name = 'Text files/test_for_palindrome.txt'
     with open(file_name, 'r') as my_file:
         print("Longest palindrome word(s):", longest_palindrome(my_file))
-    with open(file_name, 'r') as my_file:
+        my_file.seek(0)  
         print("Number of words containing all vowels:", all_vowels_counter(my_file))
-
-    with open(file_name, 'r') as my_file:
+        my_file.seek(0)  
         print("Number of lines with at least 10 characters:", count_long_lines(my_file, 10))
-
-    with open(file_name, 'r') as my_file:
+        my_file.seek(0)  
         print("Random word:", random_word(my_file))
-
-    with open(file_name, 'r') as my_file:
+        my_file.seek(0)  
         print("Random words:", random_words(my_file, 5))
-
-    with open(file_name, 'r') as my_file:
+        my_file.seek(0)  
         print("Occurrences of 'the':", specific_word_count(my_file, 'the'))
-
-    with open(file_name, 'r') as my_file:
+        my_file.seek(0)  
         print("Number of words starting with 'a':", starts_with_counter(my_file, 'a'))
-
 
 if __name__ == "__main__":
     main()
-

@@ -15,7 +15,6 @@ Returns the average length of each word in the file.
 '''
 
 def average_length(read_file):
-
     word_count = 0  
     each_word_count = []  
     for line in read_file:
@@ -37,7 +36,6 @@ Returns the longest word / words in the file.
 
 
 def longest_word(read_file):
-
     word_list = []
     longest_word = '' 
     for line in read_file:
@@ -59,7 +57,6 @@ Returns the longest palindrome in the file.
 '''
 
 def longest_palindrome(read_file):
-
     word_list = []
     longest_word = ''
     for line in read_file:
@@ -83,7 +80,6 @@ Returns the words that contain all vowels.
 
 
 def all_vowels_counter(read_file):
-
     vowel_word_list = []
     for line in read_file:
         words = line.split()
@@ -100,7 +96,6 @@ Returns the number of lines in the file that contains min_length of chaarcters
 '''
 
 def count_long_lines(read_file, min_length):
-
     amount_of_lines = 0
     for line in read_file:
         if len(line) > min_length:
@@ -114,7 +109,6 @@ Returns a random word in the file
 '''
 
 def random_word(read_file):
-
     word_list = []
     list_of_lines = read_file.readlines()
     new_line = random.choice(list_of_lines)
@@ -129,8 +123,8 @@ Returns a list of num_words random words from read file
     inputs:
         read_file    A file that is open for reading.
 '''
-def random_words(read_file, num_words): 
 
+def random_words(read_file, num_words): 
     random_word_list = []
     words = read_file.read().split() 
     while len(random_word_list) < num_words:
@@ -145,8 +139,8 @@ Returns how many times a word appears in read_file
     inputs:
         read_file    A file that is open for reading.
 '''
-def specific_word_count(read_file, word):
 
+def specific_word_count(read_file, word):
     count = 0 
     for line in read_file:
         words = line.split()
@@ -163,8 +157,8 @@ Returns how many times a word begin with a certain letter
     inputs:
         read_file    A file that is open for reading.
 '''
-def starts_with_counter(read_file, word_beginning):
 
+def starts_with_counter(read_file, word_beginning):
 
     count = 0
     for line in read_file:
@@ -176,7 +170,6 @@ def starts_with_counter(read_file, word_beginning):
                                 
 
 def main():
-
     
     file_name = 'Text files/names.txt'
     with open(file_name, 'r') as my_file:

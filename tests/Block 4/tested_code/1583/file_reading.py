@@ -1,11 +1,12 @@
 
 
 
-
 import random
 
 
+
 delimiters = [' ']
+
 
 
 
@@ -20,11 +21,13 @@ def average_length(read_file):
     
     for line in read_file:
         
+        '''
         for delimiter in delimiters:
-            
-            
+            # calls the split function with 1 delimiter, and then the next,
+            # and so on
             line = " ".join(line.split(delimiter))
-            
+        '''
+        
         words = line.split()
 
         
@@ -32,7 +35,8 @@ def average_length(read_file):
             sum_so_far += len(word)
             words_so_far += 1
 
-    return sum_so_far / words_so_far
+    if words_so_far != 0:
+        return sum_so_far / words_so_far
 
 
 
@@ -58,6 +62,7 @@ def longest_word(read_file):
         if len(words) > 0:
 
             for word in words:
+                word = word.lower()
                 if len(word) > len(longest_words[0]): 
                     
                     longest_words = [word]
@@ -65,8 +70,11 @@ def longest_word(read_file):
                      and (word not in longest_words)): 
                     longest_words.append(word)
 
-    if longest_word != ['']: 
+    if longest_words != ['']: 
         return longest_words
+    return []
+
+
 
 
 
@@ -103,6 +111,8 @@ def longest_palindrome(read_file):
 
     if longest_palindromes != ['']:
         return longest_palindromes
+    return []
+
 
 
 
@@ -117,6 +127,7 @@ def all_vowels_counter(read_file):
 
     
     for line in read_file:
+
         for delimiter in delimiters:
             line = " ".join(line.split(delimiter))
             
@@ -138,17 +149,19 @@ def all_vowels_counter(read_file):
 
 
 
+
 def count_long_lines(read_file, min_length):
     num_long_lines = 0
     lines = [] 
 
     for line in read_file:
-        if len(line) - 2 >= min_length: 
+        if len(line) - 1 >= min_length: 
                                         
             num_long_lines += 1
-            lines.append(line)
 
     return num_long_lines
+
+
 
 
 
@@ -163,6 +176,7 @@ def random_word(read_file):
     
     for line in read_file:
         
+        
         for delimiter in delimiters:
             line = " ".join(line.split(delimiter))
         line = line.split()
@@ -172,9 +186,13 @@ def random_word(read_file):
             contents.append(word)
 
     
-    random_word_index = random.randint(0, len(contents))
-    return contents[random_word_index]
-    
+    if len(contents) > 0:
+        random_word_index = random.randint(0, len(contents))
+        return contents[random_word_index]
+        
+
+
+
 
 
 
@@ -192,6 +210,8 @@ def random_words(read_file, num_words):
 
     
     for line in read_file:
+
+        
         for delimiter in delimiters:
             line = " ".join(line.split(delimiter))
         line = line.split()
@@ -200,11 +220,14 @@ def random_words(read_file, num_words):
             contents.append(word)
 
     
-    for i in range(num_words):
-        random_word_index = random.randint(0, len(contents))
-        random_words_list.append(contents[random_word_index])
+    while len(random_words_list) < num_words:
+
+        random_word = random.choice(contents)
+        if random_word not in random_words_list:
+            random_words_list.append(random_word)
         
     return random_words_list
+
 
 
 
@@ -231,6 +254,7 @@ def specific_word_count(read_file, counting_word):
                 word_counter += 1
 
     return word_counter
+
 
 
 
@@ -270,11 +294,12 @@ def main():
     common_words_file = 'Text files/commonwords.txt'
     names_file = 'Text files/names.txt'
     addition_file = 'Text files/addition.txt'
-
+    hi_file = 'Text files/hi.txt'
+    
 
     
 
-    with open(green_eggs_file, 'r') as my_file:
+    with open(hi_file, 'r') as my_file:
         average_length_of_words = average_length(my_file)
 
     print('The average length of words in greeneggs.txt is '
@@ -284,7 +309,7 @@ def main():
 
     
 
-    with open(words_file, 'r') as my_file:
+    with open(hi_file, 'r') as my_file:
         longest_words = longest_word(my_file)
 
     print('The longest words in words.txt are '
@@ -314,8 +339,8 @@ def main():
 
     
 
-    with open(green_eggs_file, 'r') as my_file:
-        num_long_lines = count_long_lines(my_file, 6)
+    with open(hi_file, 'r') as my_file:
+        num_long_lines = count_long_lines(my_file, 5)
 
     print('The number of lines with at least 6 characters in greeneggs.txt is '
           + str(num_long_lines) + '.')
@@ -332,7 +357,7 @@ def main():
 
 
     
-
+    
     with open(green_eggs_file, 'r') as my_file:
         random_word_list = random_words(my_file, 10)
 

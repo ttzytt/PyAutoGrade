@@ -27,7 +27,10 @@ def average_length(read_file):
         constant = constant + each_word_count[i] 
     sum_of_all_the_lengths = constant    
     number_of_words = len(each_word_count)
-    return sum_of_all_the_lengths / number_of_words
+    if number_of_words == 0: 
+        return None
+    else:
+        return sum_of_all_the_lengths / number_of_words
 '''
 Returns the longest word / words in the file.
     inputs:
@@ -41,6 +44,7 @@ def longest_word(read_file):
     for line in read_file:
         words = line.split()
         for word in words:
+            word = word.lower() 
             if len(word) > len(longest_word):
                 longest_word = word
                 word_list.clear() 
@@ -58,20 +62,21 @@ Returns the longest palindrome in the file.
 
 def longest_palindrome(read_file):
     word_list = []
-    longest_word = ''
-    for line in read_file:
-        words = line.split()
-        for word in words:
-            if word[::] == word[::-1]: 
-                if len(word) > len(longest_word): 
-                    longest_word = word 
-                    word_list.clear()
-                    word_list.append(longest_word)
-                elif len(word) == len(longest_word):
-                    if word not in word_list:
-                        word_list.append(word)
+    highest_length = 0
+    words = read_file.read().split()
+    for word in words:
+        word = word.lower()
+        if word[::-1] == word[::]:
+            if len(word) > highest_length:
+                highest_length = len(word)
+                word_list.clear()
+                word_list.append(word)
+            elif len(word) == highest_length:
+                if word not in word_list:
+                    word_list.append(word)
 
     return word_list
+
 '''
 Returns the words that contain all vowels.
     inputs:
@@ -79,15 +84,32 @@ Returns the words that contain all vowels.
 '''
 
 
-def all_vowels_counter(read_file):
-    vowel_word_list = []
-    for line in read_file:
-        words = line.split()
-        for word in words:
-            if 'a' in word and 'e' in word and 'i' in word and 'o' in word and 'u' in word and 'A' in word and 'E' in word and 'I' in word and 'O' in word and 'U' in word:
-                vowel_word_list.append(word)
-    return vowel_word_list       
+ 
 
+def all_vowels_counter(read_file):
+    words_list = []
+    vowels_in_word = []
+    words = read_file.read().split() 
+    for word in words:
+        for i in range(len(word)):
+            if word[i].lower() == 'a' and 'a' not in vowels_in_word:
+                vowels_in_word.append(word[i].lower())
+            elif word[i].lower() == 'e' and 'e' not in vowels_in_word:
+                vowels_in_word.append(word[i].lower())
+            elif word[i].lower() == 'i' and 'i' not in vowels_in_word:
+                vowels_in_word.append(word[i].lower())
+            elif word[i].lower() == 'o' and 'o' not in vowels_in_word:
+                vowels_in_word.append(word[i].lower())
+            elif word[i].lower() == 'u' and 'u' not in vowels_in_word:
+                vowels_in_word.append(word[i].lower())
+        vowels_in_word.sort()
+        
+
+        if vowels_in_word == ['a','e','i','o','u']:
+            words_list.append(word)
+            
+        vowels_in_word.clear()
+    return len(words_list)
 
 '''
 Returns the number of lines in the file that contains min_length of chaarcters
@@ -191,7 +213,7 @@ def main():
 
                         
     
-    file_name = 'Text files/names.txt'
+    file_name = 'Text files/words.txt'
     with open(file_name, 'r') as my_file:
         all_vowels = all_vowels_counter(my_file)
     print('Words with every vowel in ' + file_name + ' is ' + str(all_vowels))

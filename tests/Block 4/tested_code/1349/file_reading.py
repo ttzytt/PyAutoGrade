@@ -25,6 +25,9 @@ def average_length(read_file):
         total_words += len(words) 
         total_sum += sum_ 
         sum_ = 0 
+
+    if total_words == 0:
+        return None
         
     return total_sum * 1.00 / total_words 
 
@@ -49,8 +52,10 @@ def longest_word(read_file):
         words = lines[i].split()
         for j in range(len(words)):
             if len(words[j]) == highest_value:
-                return_list.append(words[j]) 
-                
+                return_list.append(words[j].lower()) 
+
+    return_list = set(return_list)
+    return_list = list(return_list)
     return return_list
 
 '''
@@ -68,14 +73,14 @@ def longest_palindrome(read_file):
     for i in range(len(lines)):
         words = lines[i].split()
         for j in range(len(words)):
-            if len(words[j]) > highest_value and words[j] == words[j][::-1]:
+            if len(words[j]) > highest_value and words[j].lower() == words[j][::-1].lower():
                 highest_value = len(words[j]) 
                 
     for i in range(len(lines)):
         words = lines[i].split()
         for j in range(len(words)):
-            if len(words[j]) == highest_value and words[j] == words[j][::-1]:
-                return_list.append(words[j]) 
+            if len(words[j]) == highest_value and words[j].lower() == words[j][::-1].lower():
+                return_list.append(words[j].lower()) 
 
     return return_list
 
@@ -183,9 +188,9 @@ def starts_with_counter(read_file, word_beginning):
 
 def main():
     
-    file_name = 'Text files/greeneggs.txt'
+    file_name = 'Text files/my_cool_new_file.txt'
     with open(file_name, 'r') as my_file:
-        output = specific_word_count(my_file, "I")
+        output = longest_palindrome(my_file)
 
     print(output)
 

@@ -27,6 +27,18 @@ def write_diamond_pattern(out_file, width):
 
 
 
+def last_name_first(in_file, out_file):
+    new_names = ''
+    for line in in_file:
+        splited_line = line.split()
+        new_names += str(splited_line[1]) 
+        new_names += ', '
+        new_names += str(splited_line[0]) 
+        new_names += '\n'
+    return new_names
+    
+
+
 def add_and_write(in_file, out_file):
     new_string = ''
     for line in in_file:
@@ -42,21 +54,6 @@ def add_and_write(in_file, out_file):
         
         
     return new_string
-
-
-
-
-def last_name_first(in_file, out_file):
-    new_names = ''
-    for line in in_file:
-        splited_line = line.split()
-        new_names += str(splited_line[1]) 
-        new_names += ', '
-        new_names += str(splited_line[0]) 
-        new_names += '\n'
-    return new_names
-    
-
 
 
 

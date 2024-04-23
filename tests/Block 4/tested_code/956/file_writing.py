@@ -7,8 +7,11 @@
 '''
 Suppose out_file is a file open for writing and width is a positive odd integer. This function
 should print a “diamond” of x’s with the given width. For example, with width = 3, it should write
-x xxx x
-to the file and with width = 5, it should write x
+ x
+xxx
+ x
+to the file and with width = 5, it should write
+  x
  xxx
 xxxxx
  xxx
@@ -16,7 +19,7 @@ xxxxx
 to the file.
     inputs:
         out_file    A file that is open for reading.
-        width
+        width       The length of the longest line of the diamond pattern
 '''
 def write_diamond_pattern(out_file, width):
     string_d = ''
@@ -38,8 +41,8 @@ separated by a space, as in James Bond. But you need the last names first,
 and a comma in between, as in
 Bond, James. Write a function that solves this problem (and try it on names.txt).
     inputs:
-        out_file    A file that is open for reading.
-        width
+        in_file    A file that is open for reading.
+        out_file   The file after modified.
 '''
 def last_name_first(in_file, out_file):
     new_names = ''
@@ -56,8 +59,8 @@ Suppose you have a file in which each line contains an addition problem, for exa
 You want a new file that has this problem as well as the answer, in this case 2 + 3 = 5.
 Write a function that solves this problem (and try it on addition.txt).
     inputs:
-        out_file    A file that is open for reading.
-        width
+        in_file    A file that is open for reading.
+        out_file   The file after modified.
 '''
 def add_and_write(in_file, out_file):
     new_string = ''
@@ -82,8 +85,8 @@ you want to replace it with just the first 15 characters followed by the string 
 blah blah blah'. (If a line is 20 characters or less, leave it alone.)
 Write a function that solves this problem.
     inputs:
-        out_file    A file that is open for reading.
-        width
+        in_file_name    A file that is open for reading.
+        out_file_name   The file after modified.
 '''
 def blah_blah_blah(in_file_name, out_file_name):
     new_string = ''
@@ -129,33 +132,26 @@ or files opened for reading/writing.
 # –––––––––––––––––––––– Main function ––––––––––––––––––––––
 
 def main():
-    print('T11 finished')
     file_name = 'Text files/write_diamond_pattern.txt'
     with open(file_name, 'w') as my_file:
         width = 11
         diamond = write_diamond_pattern(my_file, width)
         my_file.write(diamond)
-    print()
 
-    print('T12 finished')
     input_file = 'Text files/names.txt'
     output_file = 'Text files/last_name_first.txt'
     with (open(input_file, 'r') as my_file1,
           open(output_file, 'w') as my_file2):
         new_name = last_name_first(my_file1,my_file2)
         my_file2.write(new_name)
-    print()
 
-    print('T13 finished')
     input_file = 'Text files/addition.txt'
     output_file = 'Text files/addition_solutions.txt'
     with (open(input_file, 'r') as my_file1,
           open(output_file, 'w') as my_file2):
         solutions = add_and_write(my_file1,my_file2)
         my_file2.write(solutions)
-    print()
 
-    print('T14 finished')
     input_file = 'Text files/names.txt'
     output_file = 'Text files/blah blah blah.txt'
     with (open(input_file,'r') as my_file1,

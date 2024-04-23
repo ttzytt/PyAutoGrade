@@ -2,6 +2,9 @@
 
 
 
+
+
+
 '''
 T11
 Writes a diamond pattern in a file with given widths to draw the diamond
@@ -12,6 +15,7 @@ A width = 3 diamond would look like
  x
 xxx
  x
+Keep in mind you need to manually set the width
     inputs:
         width The width of the diamond
     outputs:
@@ -20,7 +24,7 @@ xxx
 
 def write_diamond_pattern(out_file, width):
     width = 5
-    # Determines the rows
+    # Determines the rows(doesnt give like 3.0, it will give 3)
     rows = (width + 1) // 2
     # Prints upper part of diamond
     for top_rows in range(1, rows + 1):
@@ -65,12 +69,13 @@ Takes in a expression and will find the result of it
 '''
 def add_and_write(in_file, out_file):
     for line in in_file:
+        if line[-1] == '\n':
+            line = line[:-1]
         expression = line.split('+')
-        addition_list = []
-        for adding in expression:
-            addition_list.append(int(adding))
-        result = sum(addition_list)
-        out_file.write(str(expression[0]) + '+' + str(expression[1]) + ' = ' + str(result) + '\n')
+        first_num = int(expression[0])
+        second_num = int(expression[1])
+        result = first_num + second_num
+        out_file.write(line + ' = ' + str(result) + '\n')
         
               
 
@@ -86,6 +91,7 @@ character with the string 'blah blah blah'
 
 def blah_blah_blah(in_file_name, out_file_name):
     for line in in_file_name:
+        # Checks for the line length
         if len(line) > 20:
             new_line = (str(line[:15]) + ', blah blah blah' + "\n")
         else:
@@ -93,7 +99,7 @@ def blah_blah_blah(in_file_name, out_file_name):
     out_file_name.write(new_line)
                     
     
-            
+
         
 def main():
     

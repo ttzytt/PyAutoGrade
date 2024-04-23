@@ -13,8 +13,9 @@ def average_length(file):
     count = 0
     for line in file:
         
-        result += len(line)
         words = line.split()
+        for i in range(len(words)):
+            result += len(words[i])
         
         count += len(words)
     return result/count
@@ -31,11 +32,11 @@ def longest_word(file):
                 
                 record = len(words[i])
                 
-                result.append(words[i])
+                result.append(words[i].lower())
     final = []
     for i in range(len(result)):
         
-        if len(result[i]) == record:
+        if len(result[i]) == record and result[i] not in final:
             final.append(result[i])
     return final
 
@@ -50,15 +51,15 @@ def longest_palindrome(file):
         for i in range(len(words)):
             temp = words[i].lower()
             
-            if temp[::1]== temp[::-1] and len(words[i]) > record:
+            if temp[::1]== temp[::-1] and len(words[i]) >= record:
                 
                 record = len(words[i])
                 
-                result.append(words[i])
+                result.append(words[i].lower())
     final = []
     for i in range(len(result)):
         
-        if len(result[i]) == record:
+        if len(result[i]) == record and result[i] not in final:
             final.append(result[i])
     return final
 
@@ -152,7 +153,7 @@ def starts_with_counter(file, word_beginning):
 
 
 def main():
-    with open('Text files/words.txt','r') as in_file:
+    with open("Text files/names.txt",'r') as in_file:
         print(average_length(in_file))
     with open('Text files/words.txt','r') as in_file:
         print(longest_word(in_file))

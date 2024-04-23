@@ -177,10 +177,17 @@ class PrewrittenScriptCase(TestCase):
         
 
         loading_module_exception = None
+        module = None; module_specs = None
         try: 
-            module_specs = importlib.util.spec_from_file_location('module', evaluated_module_path)
-            module = importlib.util.module_from_spec(module_specs)
-            module_specs.loader.exec_module(module)
+            @timeout(1)
+            def load_module():
+                nonlocal module
+                nonlocal loading_module_exception
+                nonlocal module_specs
+                module_specs = importlib.util.spec_from_file_location('module', evaluated_module_path)
+                module = importlib.util.module_from_spec(module_specs)
+                module_specs.loader.exec_module(module)
+            load_module()
         except Exception as e:
             loading_module_exception = e
         @timeout(self.test_limits.time_limit / 1000)
@@ -206,7 +213,7 @@ class PrewrittenScriptCase(TestCase):
                     ret.actual = evaluator_ret.actual
                     ret.err_message = evaluator_ret.msg
                 children_pipe.send(ret)
-                children_pipe.close()
+                # children_pipe.close()
                 exit()
             except Exception as e:
                 stack_trace_str = traceback.format_exc()
@@ -215,7 +222,7 @@ class PrewrittenScriptCase(TestCase):
                 if isinstance(e, SyntaxError):
                     children_pipe.send(TestCase.TestResult(TestCase.TestResultType.syntax_error, err_message=str(e), stack_trace=stack_trace_str))
                 children_pipe.send(TestCase.TestResult(TestCase.TestResultType.runtime_error, err_message=str(e), stack_trace=stack_trace_str))
-                children_pipe.close()
+                # children_pipe.close()
                 exit()
         
         children_pip, parent_pip = Pipe()
@@ -239,8 +246,8 @@ class PrewrittenScriptCase(TestCase):
             except psutil.NoSuchProcess:
                 break 
             
-        prog.join()
         ret = parent_pip.recv()
+        prog.join()
         assert isinstance(ret, TestCase.TestResult)
         ret.memory_used = max_mem_usage 
         ret.tested_func_name = self.tested_func_name

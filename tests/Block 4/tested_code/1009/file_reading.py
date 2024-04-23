@@ -9,19 +9,22 @@ Returns the average length for the file, as a string.
         read_file    A file that is open for reading.
 '''
 def average_length(read_file):
-    total_length = 0 
-    total_words = 0 
+    len_words = 0 
+    num_words = 0 
+    
+    
+    
     
     
     for line in read_file:
         words = line.split() 
-        total_words += len(words) 
+        num_words += len(words) 
 
     
         for word in words:
-            total_length += len(word)
+            len_words += len(word)
 
-    average = total_length / total_words
+    average = len_words / num_words
     return average
        
 
@@ -92,13 +95,15 @@ def all_vowels_counter(read_file):
         words = line.split()
         
         for word in words:
-            has_all_vowels = True
+            
+            if_has_all_vowels = True
+            
             for vowel in vowels:
                 if vowel not in word:
                     
-                    has_all_vowels = False
+                    if_has_all_vowels = False
                     break
-            if has_all_vowels:
+            if if_has_all_vowels:
                 
                 count += 1
     return count
@@ -146,7 +151,9 @@ Returns a list of num_words random words in the file, as a list of strings.
 def random_words(read_file, num_words):
     
     words = read_file.read().split()
-    num_words = int(input("How many words do you want: "))
+    
+    
+    
     
     return random.sample(words, num_words)
 
@@ -250,10 +257,13 @@ def main():
 
 
     
+    
+    
+    target_word = "word"
     file_name = 'Text files/words.txt'
     with open(file_name, 'r') as file:
         word_count = specific_word_count(file, word)
-        print(f"The word '{word}' appears {word_count} times in the file.")
+        print(f"The word '{target_word}' appears {word_count} times in the file.")
     print()
 
     

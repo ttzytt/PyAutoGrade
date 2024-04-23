@@ -3,6 +3,8 @@
 
 
 
+
+
 '''
 Returns the average length of all the words in the file read_file.
     inputs:
@@ -16,6 +18,8 @@ def average_length(read_file):
         for word in words:
             number_of_words += 1
             length += len(word)
+            if number_of_words == 0:
+                return None
         
     return (length/number_of_words)
 
@@ -148,7 +152,7 @@ def specific_word_count(read_file, word):
     for line in read_file:
         words = line.split()
         for thing in words:
-            if thing == word:
+            if thing == word: 
                 word_count += 1
     return word_count
 
@@ -166,9 +170,10 @@ def starts_with_counter(read_file, word_beginning):
     for line in read_file:
         words = line.split()
         for word in words:
-            if line[0] == word_beginning:
+            if line[0] == word_beginning: 
                 word_counter += 1
     return word_counter
+
 
 
 
@@ -179,10 +184,10 @@ def main():
     min
 
 
-    with open(file_name, 'r') as my_file:
+    with open(file_name, 'r') as my_file: 
         num_characters = average_length(my_file)
 
-    print('The average of ' + file_name + ' is ' + str(num_characters)
+    print('The average of ' + file_name + ' is ' + str(num_characters) 
           + ' words.')
     print()
 

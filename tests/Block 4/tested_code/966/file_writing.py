@@ -80,6 +80,63 @@ However, readlines keeps the '\n' character, so they work great together.
 '''
 
 
-def write_diamond_pattern(out_file, width):
 
-    
+def write_diamond_pattern(out_file, width):
+    num_spaces = width // 2
+    num_xs = 1
+    out_file.write(' ' * num_spaces + 'x' * num_xs + '\n') 
+    for line in range(width // 2): 
+        num_spaces -= 1
+        num_xs += 2
+        out_file.write(' ' * num_spaces + 'x' * num_xs + '\n')
+    for line in range(width // 2): 
+        num_spaces += 1
+        num_xs -= 2
+        out_file.write(' ' * num_spaces + 'x' * num_xs + '\n')
+
+file_name = 'Text files/diamonds.txt'
+with open(file_name , 'w') as my_file:
+    write_diamond_pattern(my_file, 5)
+
+
+def last_name_first(in_file, out_file):
+    for line in in_file: 
+        words = line.split()
+        out_file.write(word[1] + ', ' + word[0] + '\n') 
+
+
+
+def add_and_write(in_file, out_file):
+    for line in in_file:
+        function = line 
+        words = line.split()
+        result = int(word[0]) + int(word[2]) 
+        out_file.write(str(function) + ' = ' + str(result)) 
+
+
+
+def blah_blah_blah(in_file_name, out_file_name):
+    for line in in_file:
+        if len(line) > 20: 
+            out_file.write(line[15:] == ', blah blah blah') 
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        

@@ -8,6 +8,8 @@
 
 
 
+
+
 '''
 Writes a “diamond” of x’s with the given width in a file.
 For example, with width = 3, it should write
@@ -26,9 +28,9 @@ xxxxx
         
 
 '''
+
 def write_diamond_pattern(out_file, width):
     for i in range(1, width, 2):
-        
         for j in range(int((width-i) / 2)):
             out_file.write(' ')
         for j in range(i):

@@ -79,24 +79,27 @@ def blah_blah_blah(in_file_name, out_file_name):
 
 
 
-file_name = 'Text files/diamond_pattern.txt'
-with open(file_name, 'w') as my_file:
-    write_diamond_pattern(my_file, 3)
+def main():
+    file_name = 'Text files/diamond_pattern.txt'
+    with open(file_name, 'w') as my_file:
+        write_diamond_pattern(my_file, 3)
 
 
-in_file_name = 'Text files/names.txt'
-out_file_name = 'Text files/last_names_first.txt'
-with (open(in_file_name, 'r') as in_file,
-      open(out_file_name, 'w') as out_file):
-    last_name_first(in_file, out_file)
+    in_file_name = 'Text files/names.txt'
+    out_file_name = 'Text files/last_names_first.txt'
+    with (open(in_file_name, 'r') as in_file,
+          open(out_file_name, 'w') as out_file):
+        last_name_first(in_file, out_file)
 
 
-in_file_name = 'Text files/addition.txt'
-out_file_name = 'Text files/add_and_write.txt'
-with (open(in_file_name, 'r') as in_file,
-      open(out_file_name, 'w') as out_file):
-    add_and_write(in_file, out_file)
+    in_file_name = 'Text files/addition.txt'
+    out_file_name = 'Text files/add_and_write.txt'
+    with (open(in_file_name, 'r') as in_file,
+          open(out_file_name, 'w') as out_file):
+        add_and_write(in_file, out_file)
 
 
-blah_blah_blah('Text files/greeneggs.txt', 'Text files/blah_greeneggs.txt')
+    blah_blah_blah('Text files/greeneggs.txt', 'Text files/blah_greeneggs.txt')
     
+if __name__ == "__main__":
+    main()

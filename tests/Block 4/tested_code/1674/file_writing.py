@@ -1,5 +1,8 @@
 
 
+
+
+
 '''
 Write a 'diamond' of x's with the given width.
 inputs:
@@ -48,7 +51,7 @@ def add_and_write(in_file, out_file):
         for word in words: 
             numbers.append(word) 
         sum_of_line = int(numbers[0]) + int(numbers[2]) 
-        out_file.write(equation + ' = ' + str(sum_of_line)) 
+        out_file.write(equation + ' = ' + str(sum_of_line)+ '\n') 
 
 '''
 Writes 'blah blah blah' if a line in the file is longer than 20 characters replace it with just first 15 characters
@@ -69,7 +72,7 @@ def blah_blah_blah(in_file_name, out_file_name):
 def main():
     file_name = 'Text files/diamond_pattern.txt'
     with open(file_name, 'w') as my_file:
-        write_diamond_pattern(my_file, 11)
+        write_diamond_pattern(my_file, 13)
 
     in_file_name = 'Text files/names.txt'
     out_file_name = 'Text files/last_names_first.txt'

@@ -13,6 +13,8 @@
 
 
 
+
+
 '''
 Returns the average length of the words in the file.
     inputs:
@@ -163,7 +165,8 @@ Returns the number of times the word word appears in the file.
 '''
 def specific_word_count(read_file, word):
     count = 0
-    for line in read_file: 
+    
+    for line in my_file: 
         words = line.split()
         for sentence_word in words:
             if (sentence_word.lower() == word.lower()):
@@ -182,7 +185,8 @@ word_beginning. Ignores capitalization.
 def starts_with_counter(read_file, word_beginning):
     word_beginning = word_beginning.lower()
     count = 0
-    for line in read_file: 
+    
+    for line in my_file: 
         words = line.split()
         for word in words:
             word = word.lower()
@@ -203,7 +207,7 @@ def starts_with_counter(read_file, word_beginning):
 def main():
     file_name = 'Text files/greeneggs.txt'
     with open(file_name, 'r') as my_file:
-        print(specific_word_count(my_file, 'I'))
+        print(longest_palindrome(my_file))
 
 
 if __name__ == "__main__":

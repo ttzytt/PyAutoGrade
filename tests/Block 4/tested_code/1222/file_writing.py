@@ -63,17 +63,12 @@ Only if the line is longer than 20 characters
 '''
 
 def blah_blah_blah(in_file_name, out_file_name):
-    line_len_list = []
     for line in in_file_name:
-        list_of_lines = in_file_name.readlines()
-        for i in range(len(list_of_lines)):
-            line_len = len(list_of_lines[i])
-            line_len_list.append(line_len)
-            for j in range(len(line_len_list)):
-                if int(line_len_list[j]) > 20:
-                    list_of_lines[j] = (str(list_of_lines[j][:15]) + ', blah blah blah' + "\n")
-
-                out_file_name.write(list_of_lines[j])
+        if len(line) > 20:
+            new_line = (str(line[:15]) + ', blah blah blah' + "\n")
+        else:
+            new_line = line
+    out_file_name.write(new_line)
 
 # ------------------------------------Open & Run--------------------------------------------
 def main():
@@ -98,10 +93,12 @@ def main():
             open(out_file_name, 'w') as out_file):
         solution_to_problem = add_and_write(in_file, out_file)
 
-    # T14
-    in_file_name = 'Text Files/greeneggs.txt'
-    out_file_name = 'Text Files/file_writing_tests.txt'
-    blah_blah_blah(in_file_name, out_file_name)
+    
+    in_file_name = "Text files/some_tests.txt"
+    out_file_name = "Text files/test output.txt"
+    with (open(in_file_name, "r") as file_in,
+            open(out_file_name, "w") as file_out):
+        (blah_blah_blah(file_in, file_out))
 
 if __name__ == "__main__":
     main()

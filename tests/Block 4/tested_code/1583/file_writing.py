@@ -9,10 +9,13 @@
 
 
 
+
+
+
+
 def write_diamond_pattern(out_file, width):
     
     list_of_lines = []
-
     num_spaces = 0
     num_xs = 0
 
@@ -47,6 +50,7 @@ def write_diamond_pattern(out_file, width):
 
 
 
+
 def last_name_first(in_file, out_file):
     for line in in_file:
         line = line.split()
@@ -54,6 +58,7 @@ def last_name_first(in_file, out_file):
         converted_name = line[1] + ', ' + line[0] + '\n'
 
         out_file.write(converted_name)
+
 
 
 

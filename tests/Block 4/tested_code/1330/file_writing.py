@@ -5,12 +5,16 @@
 
 
 
+
+
+
 '''
 Returns a “diamond” of x’s with the given width in the out_file. 
     inputs:
         out_file    A file that will print diamond in it.
         width    the width of diamond.
 '''
+
 def write_diamond_pattern(out_file, width):
     diamond = ""
     for i in range(width):
@@ -63,13 +67,13 @@ my_file.write(lists + '\n')
 '''
 
 
-
 '''
 Returns a “diamond” of x’s with the given width in the out_file. 
     inputs:
         out_file    A file that will rewrite names in it.
         in_file    A file gives you a list of names. 
 '''
+
 def last_name_first(in_file, out_file):
     name_list = ""
     with open(in_file, 'r') as f_in:
@@ -95,10 +99,11 @@ Returns the results of an addition
         out_file    A file gives you the answer of problems
 
 '''
+
 def add_and_write(in_file, out_file):
-    with open(input_file, 'r') as f:
+    with open(in_file, 'r') as f:
         problems = f.readlines()
-    with open(output_file, 'w') as f:
+    with open(out_file, 'w') as f:
         for problem in problems:
             num1, operator, num2 = problem.split()
             num1 = int(num1)
@@ -115,6 +120,7 @@ Returns the file with blah blah blah
         in_file_name    A file that will give you many texts
         out_file_name    A file gives you texts with blah
 '''
+
 def blah_blah_blah(in_file_name, out_file_name):
     with open(in_file_name, 'r') as in_file:
         lines = in_file.readlines()
@@ -136,7 +142,7 @@ def main():
     
     print('T11 begins:')
     out_file = 'Text files/blank.txt'
-    width = 7
+    width = 5
 
     resulting_diamond = write_diamond_pattern(out_file, width)
     with open(out_file, 'w') as my_file:  
@@ -159,7 +165,7 @@ def main():
 
     
     print('T14 begins:')
-    in_file_name = 'Text files/long_paragraph.txt'
+    in_file_name = 'Text files/greeneggs.txt'
     out_file_name = 'Text files/shrinked_paragraph.txt'
     blah_blah_blah(in_file_name, out_file_name)
 

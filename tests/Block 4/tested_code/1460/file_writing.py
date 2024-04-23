@@ -10,6 +10,7 @@
 def write_diamond_pattern(out_file, width):
     if width % 2 == 0:
         raise(ValueError, "width cannot be an even integer.")
+    
     list_of_lines = []
     for i in range(1, width + 1, 2):
         space_buffer = int((width - i)/2) * ' '
@@ -67,7 +68,7 @@ def blah_blah_blah(in_file_name, out_file_name):
         if len(line) > 20:
             list_of_lines.append(line[:15] + ", blah blah blah\n")
         else:
-            list_of_lines.append(line)
+            list_of_lines.append(line + '\n')
 
     with open(out_file_name, 'w') as out_file:
         out_file.writelines(list_of_lines)

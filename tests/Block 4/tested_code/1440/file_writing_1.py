@@ -9,8 +9,7 @@ file_name = 'Text files/in_file.txt'
 
 
 
-
-
+x = 1 
 def write_diamond_pattern(out_file, width):
     a = 1 
     

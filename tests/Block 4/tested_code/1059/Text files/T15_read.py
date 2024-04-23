@@ -10,8 +10,6 @@ random.seed()
 
 
 
-
-
 def write_diamond_pattern(out_file, width):
     count = 1 
     count_1 = width - 2 
@@ -29,9 +27,6 @@ def write_diamond_pattern(out_file, width):
             count_1 -= 2 
 
 
-
-
-
 def last_name_first(in_file, out_file):
     lines = in_file.read()
     words = lines.split()
@@ -43,8 +38,6 @@ def last_name_first(in_file, out_file):
         out_file.write(temp_string)
         out_file.write("\n") 
         word_index += 2
-
-
 
 
 def add_and_write(in_file, out_file):
@@ -60,9 +53,6 @@ def add_and_write(in_file, out_file):
         out_file.write(str(addition))
         out_file.write("\n")
         index += 3
-
-
-
 
 
 

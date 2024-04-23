@@ -20,6 +20,9 @@ def average_length(read_file):
             total_length += len(word)
             number_terms += 1
     
+    if number_terms == 0:
+        return None
+    
     return total_length/number_terms
 
 
@@ -36,10 +39,12 @@ def longest_word(read_file):
         words = line.split()
         for word in words:
             
+            lowered_word = word.lower()
             
-            if len(word) > len_longest_word:
-                list_longest_words = [word]
-                len_longest_word = len(word)
+            
+            if len(lowered_word) > len_longest_word:
+                list_longest_words = [lowered_word]
+                len_longest_word = len(lowered_word)
             
             elif len(word) == len_longest_word and not(word in list_longest_words):
                 list_longest_words.append(word)
@@ -60,15 +65,17 @@ def longest_palindrome(read_file):
         words = line.split()
         for word in words:
             
-            if word == word[::-1]:
+            lowered_word = word.lower()
+            
+            if lowered_word == lowered_word[::-1]:
                 
                 
-                if len(word) > len_longest_palindromes:
-                    list_longest_palindromes = [word]
-                    len_longest_palindromes = len(word)
+                if len(lowered_word) > len_longest_palindromes:
+                    list_longest_palindromes = [lowered_word]
+                    len_longest_palindromes = len(lowered_word)
                 
-                elif len(word) == len_longest_palindromes and not(word in list_longest_palindromes):
-                    list_longest_palindromes.append(word)
+                elif len(lowered_word) == len_longest_palindromes and not(lowered_word in list_longest_palindromes):
+                    list_longest_palindromes.append(lowered_word)
     return list_longest_palindromes
 
 
@@ -84,9 +91,10 @@ def all_vowels_counter(read_file):
         words = line.split()
         for word in words:
             
-            word.lower()
+            lowered_word = word.lower()
             
-            if 'a' in word and 'e' in word and 'i' in word and 'o' in word and 'u' in word:
+            if ('a' in lowered_word and 'e' in lowered_word and
+                'i' in lowered_word and 'o' in lowered_word and 'u' in lowered_word):
                 num_all_vowels += 1
     return num_all_vowels
 
@@ -100,6 +108,7 @@ def count_long_lines(read_file, min_length):
     num_long_lines = 0
     
     for line in read_file:
+        print(line)
         
         
         if len(line) - 1 >= min_length:
@@ -162,9 +171,8 @@ def specific_word_count(read_file, word):
             
             lowered_word = current_word.lower()
             input_word = word.lower()
-            if lowered_word == word:
+            if lowered_word == input_word:
                 num_times += 1
-                
     return num_times
 
 
@@ -212,9 +220,9 @@ def main():
         print('The file ' + file_name + ' contains ' + str(num_all_vowels) + ' as the number of words with all vowels.')
         print()
 
-    file_name = 'Text files/commonwords.txt'
+    file_name = 'Text files/test.txt'
     with open(file_name, 'r') as my_file:
-        num_long_lines = count_long_lines(my_file, 10)
+        num_long_lines = count_long_lines(my_file, 5)
         print('The file ' + file_name + ' contains ' + str(num_long_lines) + ' as the number of long lines.')
         print()
 

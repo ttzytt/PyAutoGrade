@@ -37,9 +37,20 @@ def last_name_first(in_file_name, out_file_name):
             out_file.write(word_list[1] + ', ' + word_list[0] + '\n')
 
             
+def asdf:
+    asdf()
+    asdfasdf
+    asdfasdfasdf
+a
+
+asdfasdf
 
 
+def asdfasdf:
+    asdfasdf()
+    asdfasdfasdf
 
+a
 
 def blah_blah_blah(in_file_name, out_file_name):
 
@@ -54,10 +65,10 @@ def blah_blah_blah(in_file_name, out_file_name):
                 out_file.write(line + '\n')
 asdfasdf
 
-def
+def asdf
 
-def
-def
+def asdf
+def asdf
 
 out_file_name = 'Text files/diamond_pattern.txt'
 

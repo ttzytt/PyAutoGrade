@@ -16,15 +16,11 @@ Returns the average length of all the words in the file read_file
 def average_length(read_file):
     word_length = 0
     word_count = 0
-    
-    letters = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz'
     for line in read_file:
-        for character in line:
-            if character in letters: 
-                word_length += 1 
-            else:
-                word_count += 1
-                word_length -= 1
+        words = line.split()
+        word_count += len(words) 
+        for word in words:
+            word_length += len(word) 
     return word_length/word_count 
 
 
@@ -153,10 +149,12 @@ If a word is common it should have a higher count and vise versa'
 '''
 def specific_word_count(read_file, word):
     count = 0
+    target = word
     for line in read_file:
         words = line.split()
-        for _ in words: # Goes through all of the words
-            if word == _: # If the word is in the list/line
+        for word in words: # Goes through all of the words
+            word.lower()
+            if target == word: # If the word is in the list/line
                 count += 1 # Add to the counter
     return count
 
@@ -169,11 +167,13 @@ Returns the number of words in read_file that begin with the string word_beginni
 '''
 def starts_with_counter(read_file, word_beginning):
     word_counter = 0
+    target = word_beginning.lower()
+    slice_length = len(word_beginning) # Length that determines how much to slice
     for line in read_file:
         words = line.split()
         for word in words:
-            slice_length = len(word_beginning) # Length that determines how much to slice
-            if word_beginning == word[:slice_length]: # Compares the same length of two words
+            word = word.lower()
+            if target == word[:slice_length]: # Compares the same length of two words
                 word_counter += 1 # If the same, add one
     return word_counter
  
@@ -182,7 +182,7 @@ def main():
     min_length = 95
     num_words = 10
     word = 'bob'
-    word_beginning = 'the'
+    word_beginning = 'yo'
     file_name = 'Text Files/some_tests.txt'
 
     #T2

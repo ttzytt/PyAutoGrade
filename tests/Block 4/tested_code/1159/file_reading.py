@@ -1,5 +1,6 @@
 '''
 Written by Alex
+Reviewed by Ethan
 TASK 2-10
 '''
 
@@ -20,7 +21,10 @@ def average_length(read_file):
         for n in range(len(splited_line)):
             character_count += len(splited_line[n])
             
-    return character_count/word_count
+    if word_count > 0:
+        return character_count/word_count
+    elif word_count = 0:
+        return None
     
 
 
@@ -38,17 +42,17 @@ def longest_word(read_file):
                 if len(word) > max_len:
                     max_len = len(word)
                     long_words = []
-                    long_words.append(word)
+                    long_words.append(word.lower())
                 elif len(word) == max_len:
-                    long_words.append(word)
+                    long_words.append(word.lower())
                     
             else: 
                 if len(word)-1 > max_len:
                     max_len = len(word)
                     long_words = []
-                    long_words.append(word)
+                    long_words.append(word.lower())
                 elif len(word)-1 == max_len:
-                    long_words.append(word)
+                    long_words.append(word.lower())
 
     
     return long_words
@@ -63,22 +67,22 @@ def longest_palindrome(read_file):
         for n in range(len(splited_line)):
             word = splited_line[n]
 
-            if word == word[::-1]: 
+            if word.lower() == word[::-1].lower(): 
             
                 if word[-1] != ',' and word[-1] != '.':
                     if len(word) > max_len:
                         max_len = len(word)
                         long_words = []
-                        long_words.append(word)
+                        long_words.append(word.lower())
                     elif len(word) == max_len:
-                        long_words.append(word)
+                        long_words.append(word.lower())
                 elif word[-1] == ',' or word[-1] == '.':
                     if len(word)-1 > max_len:
                         max_len = len(word)
                         long_words = []
-                        long_words.append(word)
+                        long_words.append(word.lower())
                     elif len(word)-1 == max_len:
-                        long_words.append(word)
+                        long_words.append(word.lower())
     return long_words      
 
 
@@ -92,13 +96,16 @@ def all_vowels_counter(read_file):
             word = splited_line[n]
 
             
+            
+            
             if ( ('A' in word or 'a' in word) and ('E' in word or 'e' in word) and ('I' in word or 'i' in word)
                  and ('O' in word or 'o' in word) and ('U' in word or 'u' in word) ):
                 all_vowels_words.append(word)
-    return all_vowels_words
+    return len(all_vowels_words)
 
 
 
+'''
 def count_long_lines(read_file, min_length):
     long_lines = 0
     for line in read_file:
@@ -110,10 +117,17 @@ def count_long_lines(read_file, min_length):
             for i in range(len(word)):
                 if word[i] != ',' and word[i] != '.':
                     characters_in_line += 1
-                    
+                    # count the number of characters in a line
         if characters_in_line >= min_length:
             long_lines += 1
     return long_lines
+'''
+def count_long_lines(read_file, min_length):
+    count = 0
+    for line in read_file:
+        if len(line) >= min_length:
+            count += 1
+    return count
 
 
 
@@ -171,8 +185,6 @@ def specific_word_count(read_file, word):
         splited_line = line.split()
         for n in range(len(splited_line)):
             single_word = splited_line[n]
-            if single_word[-1] == ',' or single_word[-1] == '.':
-                single_word = single_word[:-1]
             all_words.append(single_word)
     
 
@@ -193,8 +205,6 @@ def starts_with_counter(read_file, word_beginning):
         splited_line = line.split()
         for n in range(len(splited_line)):
             single_word = splited_line[n]
-            if single_word[-1] == ',' or single_word[-1] == '.':
-                single_word = single_word[:-1]
             all_words.append(single_word)
     
 
@@ -210,7 +220,7 @@ def starts_with_counter(read_file, word_beginning):
 
 '''------------------------TESTS-------------------------'''
 
-def main_function():
+def main():
     
     
     print('T2')
@@ -287,4 +297,7 @@ def main_function():
         appeared_time2 = starts_with_counter(my_file, word_beginning)
     print(appeared_time2)
     print()
+
+if __name__ == '__main__':
+    main()
 

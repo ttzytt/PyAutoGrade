@@ -12,22 +12,28 @@
 
 
 
-
+import random
+random.seed()
 
 
 '''
-Returns the average length of the words in the file.
+Returns the average length of the words in the file as a double. If no words
+returns None
     inputs:
         read_file    A file that is open for reading.
 '''
-def average_length(read_file):
+def average_length(read_file): 
     count = 0
-    line_number = 0
+    word_number = 0
     for line in read_file:
-        count += len(line)
-        line_number += 1
+        words = line.split()
+        for word in words:
+            count += len(word)
+            word_number += 1
+    if (word_number == 0):
+        return None
 
-    return count / line_number
+    return count / word_number
 
 
 '''
@@ -54,7 +60,8 @@ def longest_word(read_file):
 '''
 Returns a list of the longest word or words in file that is a 
 palindrome (the same forward and backward). Only prints one copy of each,
-counts puncation as part of the word, ignores capitalization.
+counts puncation as part of the word, ignores capitalization. If no palindromes,
+returns [].
     inputs:
         read_file    A file that is open for reading.
 '''
@@ -70,6 +77,9 @@ def longest_palindrome(read_file):
                         max_palindrome = [word]
                     elif (len(word) == len(max_palindrome[0])):
                         max_palindrome.append(word)
+
+    if (max_palindrome == ['']):
+        max_palindrome = []
                     
     return max_palindrome
 
@@ -114,28 +124,34 @@ def count_long_lines(read_file, min_length):
 
 '''
 Returns a random word from the file. Beware of using this with a
-very long file.
+very long file. Returns None if there are no words.
     inputs:
         read_file    A file that is open for reading.
 '''
-def random_word(my_file):
+def random_word(my_file): 
     all_words = []
     for line in my_file:
         words = line.split()
         for word in words:
             all_words.append(word)
 
+    if (all_words == []):
+        return None
+
     return all_words[random.randint(0, len(all_words) - 1)]
 
 
 '''
-Returns a list of num_words random words from the file. Input is
-opened file
+Returns a list of num_words random words from the file. If there are repeats of
+a word, will count that word more times. For example: if given 'a b a', there is
+a 2/3 chance it is an 'a', not 1/2. Returns None if there are no words. If a
+word is selected twice, it will be counted twice.
+Input is opened file
     inputs:
         read_file    A file that is open for reading.
         num_words    An integer for the number of random wors generated.
 '''
-def random_words(my_file, num_words):
+def random_words(my_file, num_words): 
     
     all_words = []
     for line in my_file:
@@ -143,6 +159,9 @@ def random_words(my_file, num_words):
         for word in words:
             all_words.append(word)
 
+    
+    if (all_words == []):
+        return None
 
     
     list_indexes = []
@@ -158,15 +177,14 @@ def random_words(my_file, num_words):
 
 
 '''
-Returns the number of times the word word appears in the file.
+Returns the number of times a string word appears in the file.
     inputs:
         read_file    A file that is open for reading.
         word    A string
 '''
 def specific_word_count(read_file, word):
     count = 0
-    
-    for line in my_file: 
+    for line in read_file: 
         words = line.split()
         for sentence_word in words:
             if (sentence_word.lower() == word.lower()):
@@ -180,13 +198,12 @@ Returns the number of words in read_file that begin with the string
 word_beginning. Ignores capitalization.
     inputs:
         read_file    A file that is open for reading.
-        word_beginning    A string 
+        word_beginning    A string
 '''
 def starts_with_counter(read_file, word_beginning):
     word_beginning = word_beginning.lower()
     count = 0
-    
-    for line in my_file: 
+    for line in read_file: 
         words = line.split()
         for word in words:
             word = word.lower()
@@ -205,9 +222,9 @@ def starts_with_counter(read_file, word_beginning):
 
 
 def main():
-    file_name = 'Text files/greeneggs.txt'
+    file_name = 'Text files/workshopped_test_file.txt'
     with open(file_name, 'r') as my_file:
-        print(longest_palindrome(my_file))
+        print(average_length(my_file))
 
 
 if __name__ == "__main__":
