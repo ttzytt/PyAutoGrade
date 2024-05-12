@@ -4,6 +4,7 @@ import dataclasses
 import pyright.types
 from rich.progress import Progress
 import yaml
+import multiprocessing
 from multiprocessing import Process, Pipe
 import os
 from timeout_decorator import timeout, timeout_decorator
@@ -198,6 +199,12 @@ class PrewrittenScriptCase(TestCase):
         loading_module_exception = None
         module = None; module_specs = None
         stdio_simulator : StdIOSimulator | None = None
+        para_cnt = len(signature(self.test_case).parameters)
+        use_stdio_simulator = para_cnt == 2
+        evaluated_func = None
+        proc_task_q = multiprocessing.Queue()
+
+
         try: 
             @timeout(1)
             def load_module():
@@ -214,19 +221,16 @@ class PrewrittenScriptCase(TestCase):
         except Exception as e:
             loading_module_exception = e
 
-        para_cnt = len(signature(self.test_case).parameters)
-        use_stdio_simulator = para_cnt == 2
-        evaluated_func = None
-        @timeout(self.test_limits.time_limit / 1000)
+        # TODO: find out why timeout decorator didn't work here 
         def get_test_ret(stdio_simulator : StdIOSimulator): 
             nonlocal evaluated_func
+            print("in get test ret, before exec")
             stdio_simulator.exec_module()
             print("after exec")
             if loading_module_exception is not None:
                   raise loading_module_exception
             evaluated_func = None
             print("before loading evaluated func")
-
             if self.tested_func_name != None and self.tested_func_name != "":
                 print("loading evaluated func")
                 evaluated_func = getattr(module, self.tested_func_name)
@@ -236,64 +240,70 @@ class PrewrittenScriptCase(TestCase):
         @timeout(self.test_limits.time_limit / 1000, exception_message="the tester with stdio simulator is taking too long")
         def run_tester_with_stdio_simulator():
             return self.test_case(evaluated_func, stdio_simulator)
-
-        def proc_task(children_pipe : 'Pipe'): 
-            # this is to prevent the tested code from writing anythings to the disk
+        def proc_task(): 
+            # this is to prevent the tested code from writing anythings to the disk\
+            nonlocal proc_task_q
             try : 
                 os.chroot('/tmp/autograde') # limit read and write after loading
                 free_nonroot_uid = 65534                    
                 os.setuid(free_nonroot_uid)
                 st_time = time.time()
+                print("before get_test_ret")
                 evaluator_ret = get_test_ret(stdio_simulator)
                 print("got regular test_ret")
                 ed_time = time.time()
                 ret = TestCase.TestResult(self.TestResultType.pass_, (ed_time - st_time) * 1000)
+                print("use_stdio_simulator: ", use_stdio_simulator)
                 if use_stdio_simulator:
                     # in this case the ret will not include message about the correctness of the output
                     # the correctness will be evaluated by the tester with the stdio simulator
                     # which is run in the main process
-                    children_pipe.send(ret)
+                    print("sending ret: ", ret)
+                    proc_task_q.put(ret)
                     exit()
                 ret.copy_from_evaluator_result(evaluator_ret)
                 print("proc_task sending ret: ", ret)
-                # children_pipe.close()
+                proc_task_q.put(ret)
                 exit()
             except Exception as e:
                 print("caught exception in proc_task")
                 stack_trace_str = traceback.format_exc()
-                if isinstance(e, timeout_decorator.TimeoutError):
-                    children_pipe.send(TestCase.TestResult(TestCase.TestResultType.time_limit_exceeded, err_message=str(e), stack_trace=stack_trace_str))
                 if isinstance(e, SyntaxError):
-                    children_pipe.send(TestCase.TestResult(TestCase.TestResultType.syntax_error, err_message=str(e), stack_trace=stack_trace_str))
+                    proc_task_q.put(TestCase.TestResult(TestCase.TestResultType.syntax_error, err_message=str(e), stack_trace=stack_trace_str))
                 print("proc_task sending runtime error: ", e)
                 # print the stack trace
                 print(stack_trace_str)
-                children_pipe.send(TestCase.TestResult(TestCase.TestResultType.runtime_error, err_message=str(e), stack_trace=stack_trace_str))
-                # children_pipe.close()
+                proc_task_q.put(TestCase.TestResult(TestCase.TestResultType.runtime_error, err_message=str(e), stack_trace=stack_trace_str))
                 exit()
-        
-        children_pip, parent_pip = Pipe()
+
         st_time = time.time()
-        prog = Process(target=proc_task, args=(children_pip, ))
+        prog = Process(target=proc_task)
         prog.start()
         max_mem_usage = 0
+        ret : TestCase.TestResult | None = None
         def recording_max_mem_usage():
             nonlocal max_mem_usage
             while True: 
-                # checking the memory usage
+                # checking mem and time usage
                 try:
                     prog_info = psutil.Process(prog.pid)
                     mem_usage = prog_info.memory_info().rss / 1024 / 1024
                     max_mem_usage = max(max_mem_usage, mem_usage)
+                    time_usage = (time.time() - st_time) * 1000
                     if mem_usage > self.test_limits.memory_limit:
-                        ed_time = time.time()
-                        time_usage = (ed_time - st_time) * 1000
                         prog.terminate()
-                        return TestCase.TestResult(TestCase.TestResultType.memory_limit_exceeded, time_usage, mem_usage)
+                        proc_task_q.put(TestCase.TestResult(TestCase.TestResultType.memory_limit_exceeded, time_usage, mem_usage))
+                        return 
+                    if time_usage > self.test_limits.time_limit:
+                        print("time limit exceeded  ")
+                        prog.terminate()
+                        print("program killed")
+                        proc_task_q.put(TestCase.TestResult(TestCase.TestResultType.time_limit_exceeded, time_usage, max_mem_usage))
+                        return
                     if not prog.is_alive():
-                        break
+                        return
                 except psutil.NoSuchProcess:
-                    break 
+                    return
         mem_thread = threading.Thread(target=recording_max_mem_usage)
         mem_thread.start()
 
@@ -301,12 +311,24 @@ class PrewrittenScriptCase(TestCase):
         sdtio_tester_timeout = False
         if use_stdio_simulator:
             try: 
+                print("start to run simulator")
                 stdio_tester_ret = run_tester_with_stdio_simulator()
+                print("finished running simulator")
             except timeout_decorator.TimeoutError as e:
+                print("simulator timeout")
                 sdtio_tester_timeout = True
-
-        ret : TestCase.TestResult = parent_pip.recv()
+        # @timeout(self.test_limits.time_limit / 1000)
+        # def get_ret():
+        #     return parent_pip.recv()
+        # try:  
+        #     ret = get_ret()
+        # except timeout_decorator.TimeoutError as e:
+        #     ret = TestCase.TestResult(TestCase.TestResultType.system_error, err_message="system error: the program is exiting unexpectedly")
+        print("memthread is alive: ", mem_thread.is_alive())
+        
+        ret = proc_task_q.get()
         prog.join()
+        
         mem_thread.join()
         print("stdio_tester_ret: ", stdio_tester_ret)  
 
@@ -321,7 +343,6 @@ class PrewrittenScriptCase(TestCase):
         assert isinstance(ret, TestCase.TestResult)
         ret.memory_used = max_mem_usage 
         ret.tested_func_name = self.tested_func_name
-        parent_pip.close()
         shutil.rmtree('/tmp/autograde/')
         return ret
 class PrewrittenFileCase(PrewrittenScriptCase):

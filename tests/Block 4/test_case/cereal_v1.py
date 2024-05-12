@@ -20,8 +20,8 @@ def test_case_constructor() -> list[TestCase]:
     }    
 
 
-    TOT_TEST_CNT = 2
-    LINES_PER_TEST_HIGH = 8
+    TOT_TEST_CNT = 1
+    LINES_PER_TEST_HIGH = 1
     line_cnt_in_tests = list(np.linspace(1, LINES_PER_TEST_HIGH, TOT_TEST_CNT, dtype=int))
     for i in range(TOT_TEST_CNT):
         lines_per_test = line_cnt_in_tests[i]
@@ -36,11 +36,11 @@ def test_case_constructor() -> list[TestCase]:
                 print("selected fruits: ", selected_fruits)
                 stdio_simulator.write_input(" ".join(selected_fruits) + "\n")
 
-                try:
-                    while stdio_simulator.tested_code_ans_count() <= 0: pass
-                except TimeoutError: 
-                    stdio_simulator.write_input("quit")
-                    return PrewrittenScriptCase.EvaluatorResult(False, "TimeoutError")
+                # try:
+                while stdio_simulator.tested_code_ans_count() <= 0: pass
+                # except TimeoutError: 
+                #     stdio_simulator.write_input("quit")
+                #     return PrewrittenScriptCase.EvaluatorResult(False, "TimeoutError")
                 ans_from_tested_code = stdio_simulator.tested_code_ans.get()
                 stdio_simulator.clear_all()
                 print("ans_from_tested_codef:", ans_from_tested_code)

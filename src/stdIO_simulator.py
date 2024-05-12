@@ -5,10 +5,11 @@ import queue
 
 class StdIOSimulator:
     def __init__(self, simulated_module : ModuleType | str):
+        MAX_Q_SZ = 100
         self.simulated_module = simulated_module
-        self.prints_to_receive_queue = multiprocessing.Queue()  # Queue to store prints to be received from the simulated module
-        self.inputs_to_send_queue = multiprocessing.Queue()  # Queue to store inputs to be sent to the simulated module
-        self.tested_code_ans = multiprocessing.Queue() # printed by tested code after last time they called input()
+        self.prints_to_receive_queue = multiprocessing.Queue(maxsize=MAX_Q_SZ)  # Queue to store prints to be received from the simulated module
+        self.inputs_to_send_queue = multiprocessing.Queue(maxsize=MAX_Q_SZ)  # Queue to store inputs to be sent to the simulated module
+        self.tested_code_ans = multiprocessing.Queue(maxsize=MAX_Q_SZ) # printed by tested code after last time they called input()
 
     @staticmethod
     def clear_multiprocessing_queue(q : multiprocessing.Queue):
