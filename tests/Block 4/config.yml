@@ -6,4 +6,5 @@ students_list :
 - \d+
 problems_list: 
 - ./file_reading
-# - ./file_writing
+- ./file_writing
+- ./cereal_v1
