@@ -192,7 +192,7 @@ class PrewrittenScriptCase(TestCase):
         evaluated_module_name = os.path.basename(evaluated_module_path)
         evaluated_module_path = os.path.abspath(evaluated_module_path)
         evaluated_module_path = os.path.dirname(evaluated_module_path)
-        logger.debug("after dir name: ", evaluated_module_path)
+        logger.debug(f"after dir name: {evaluated_module_path}")
         os.makedirs(f"/tmp/autograde/{evaluated_module_path}", exist_ok=True)
         shutil.copy(f"{evaluated_module_path}/{evaluated_module_name}", f"/tmp/autograde/{evaluated_module_path}")
         evaluated_module_path = f"/tmp/autograde/{evaluated_module_path}/{evaluated_module_name}"
@@ -254,16 +254,16 @@ class PrewrittenScriptCase(TestCase):
                 logger.debug("got regular test_ret")
                 ed_time = time.time()
                 ret = TestCase.TestResult(self.TestResultType.pass_, (ed_time - st_time) * 1000)
-                logger.debug("use_stdio_simulator: ", use_stdio_simulator)
+                logger.debug(f"use_stdio_simulator: {use_stdio_simulator}")
                 if use_stdio_simulator:
                     # in this case the ret will not include message about the correctness of the output
                     # the correctness will be evaluated by the tester with the stdio simulator
                     # which is run in the main process
-                    logger.debug("sending ret: ", ret)
+                    logger.debug(f"sending ret: {ret}")
                     proc_task_q.put(ret)
                     exit()
                 ret.copy_from_evaluator_result(evaluator_ret)
-                logger.debug("proc_task sending ret: ", ret)
+                logger.debug(f"proc_task sending ret: {ret} ")
                 proc_task_q.put(ret)
                 exit()
             except Exception as e:

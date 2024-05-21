@@ -9,7 +9,8 @@ import pandas as pd
 from numbers import Number
 from datetime import datetime
 from helpers import * 
-
+import logging_conf
+logger = logging_conf.LOGGER
 class BatchTestManger(CfgFileRelated):
     @dataclasses.dataclass
     class TestSummary: 
@@ -74,6 +75,7 @@ class BatchTestManger(CfgFileRelated):
         """
         for i, (stu, prob) in enumerate(pbar):
             assert not os.path.isabs(prob), "prob path should be the relative path from the `test_case_path` or `tested_code_path` provided in the cfg file"
+            logger.info(f"Testing {stu}'s problem: {prob}")
             pbar.set_description(f"Testing {stu}'s {prob}")
             abs_prob_testcase_path = os.path.join(self.test_case_abs_path, prob + '.py')
             abs_prob_solution_path = os.path.join(self.tested_code_abs_path, stu, prob + '.py')

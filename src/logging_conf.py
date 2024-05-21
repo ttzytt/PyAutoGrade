@@ -1,6 +1,6 @@
 import logging
 from helpers import *
-
+import sys
 class _Logger(CfgFileRelated):
     def get_logger(self):
         logger = logging.getLogger()
@@ -25,3 +25,7 @@ class _Logger(CfgFileRelated):
 
         return logger
 LOGGER = _Logger().get_logger()
+
+def _exception_handler(type, value, tb):
+    LOGGER.error(f"Uncaught exception: {value}", exc_info=(type, value, tb))
+sys.excepthook = _exception_handler
