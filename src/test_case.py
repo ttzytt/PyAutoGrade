@@ -20,6 +20,9 @@ import typing
 from inspect import signature
 import threading
 import shutil
+import logging_conf 
+
+logger = logging_conf.LOGGER
 
 class TestCase(ABC): 
     # abstract class for all kinds of testers 
@@ -77,8 +80,6 @@ class TestCase(ABC):
     
 
 class PrewrittenScriptCase(TestCase):
-    
-
     class EvaluatorBuilder:
         def __init__(self, float_precision : float = 1e-5):
             self.float_precision = float_precision
@@ -191,7 +192,7 @@ class PrewrittenScriptCase(TestCase):
         evaluated_module_name = os.path.basename(evaluated_module_path)
         evaluated_module_path = os.path.abspath(evaluated_module_path)
         evaluated_module_path = os.path.dirname(evaluated_module_path)
-        print("after dir name: ", evaluated_module_path)
+        logger.debug("after dir name: ", evaluated_module_path)
         os.makedirs(f"/tmp/autograde/{evaluated_module_path}", exist_ok=True)
         shutil.copy(f"{evaluated_module_path}/{evaluated_module_name}", f"/tmp/autograde/{evaluated_module_path}")
         evaluated_module_path = f"/tmp/autograde/{evaluated_module_path}/{evaluated_module_name}"
@@ -224,15 +225,15 @@ class PrewrittenScriptCase(TestCase):
         # TODO: find out why timeout decorator didn't work here 
         def get_test_ret(stdio_simulator : StdIOSimulator): 
             nonlocal evaluated_func
-            print("in get test ret, before exec")
+            logger.debug("in get test ret, before exec")
             stdio_simulator.exec_module()
-            print("after exec")
+            logger.debug("after exec")
             if loading_module_exception is not None:
                   raise loading_module_exception
             evaluated_func = None
-            print("before loading evaluated func")
+            logger.debug("before loading evaluated func")
             if self.tested_func_name != None and self.tested_func_name != "":
-                print("loading evaluated func")
+                logger.debug("loading evaluated func")
                 evaluated_func = getattr(module, self.tested_func_name)
             if not use_stdio_simulator:
                 return self.test_case(evaluated_func)
@@ -248,31 +249,29 @@ class PrewrittenScriptCase(TestCase):
                 free_nonroot_uid = 65534                    
                 os.setuid(free_nonroot_uid)
                 st_time = time.time()
-                print("before get_test_ret")
+                logger.debug("before get_test_ret")
                 evaluator_ret = get_test_ret(stdio_simulator)
-                print("got regular test_ret")
+                logger.debug("got regular test_ret")
                 ed_time = time.time()
                 ret = TestCase.TestResult(self.TestResultType.pass_, (ed_time - st_time) * 1000)
-                print("use_stdio_simulator: ", use_stdio_simulator)
+                logger.debug("use_stdio_simulator: ", use_stdio_simulator)
                 if use_stdio_simulator:
                     # in this case the ret will not include message about the correctness of the output
                     # the correctness will be evaluated by the tester with the stdio simulator
                     # which is run in the main process
-                    print("sending ret: ", ret)
+                    logger.debug("sending ret: ", ret)
                     proc_task_q.put(ret)
                     exit()
                 ret.copy_from_evaluator_result(evaluator_ret)
-                print("proc_task sending ret: ", ret)
+                logger.debug("proc_task sending ret: ", ret)
                 proc_task_q.put(ret)
                 exit()
             except Exception as e:
-                print("caught exception in proc_task")
+                logger.info("caught exception in proc_task")
                 stack_trace_str = traceback.format_exc()
                 if isinstance(e, SyntaxError):
                     proc_task_q.put(TestCase.TestResult(TestCase.TestResultType.syntax_error, err_message=str(e), stack_trace=stack_trace_str))
-                print("proc_task sending runtime error: ", e)
-                # print the stack trace
-                print(stack_trace_str)
+                logger.info("proc_task sending runtime error: ", e)
                 proc_task_q.put(TestCase.TestResult(TestCase.TestResultType.runtime_error, err_message=str(e), stack_trace=stack_trace_str))
                 exit()
 
@@ -291,13 +290,15 @@ class PrewrittenScriptCase(TestCase):
                     max_mem_usage = max(max_mem_usage, mem_usage)
                     time_usage = (time.time() - st_time) * 1000
                     if mem_usage > self.test_limits.memory_limit:
+                        logger.info("memory limit exceeded")
                         prog.terminate()
+                        logger.info("program killed")
                         proc_task_q.put(TestCase.TestResult(TestCase.TestResultType.memory_limit_exceeded, time_usage, mem_usage))
                         return 
                     if time_usage > self.test_limits.time_limit:
-                        print("time limit exceeded  ")
+                        logger.info("time limit exceeded  ")
                         prog.terminate()
-                        print("program killed")
+                        logger.info("program killed")
                         proc_task_q.put(TestCase.TestResult(TestCase.TestResultType.time_limit_exceeded, time_usage, max_mem_usage))
                         return
                     if not prog.is_alive():
@@ -311,31 +312,20 @@ class PrewrittenScriptCase(TestCase):
         sdtio_tester_timeout = False
         if use_stdio_simulator:
             try: 
-                print("start to run simulator")
+                logger.debug("start to run simulator")
                 stdio_tester_ret = run_tester_with_stdio_simulator()
-                print("finished running simulator")
+                logger.debug("finished running simulator")
             except timeout_decorator.TimeoutError as e:
-                print("simulator timeout")
+                logger.debug("simulator timeout")
                 sdtio_tester_timeout = True
-        # @timeout(self.test_limits.time_limit / 1000)
-        # def get_ret():
-        #     return parent_pip.recv()
-        # try:  
-        #     ret = get_ret()
-        # except timeout_decorator.TimeoutError as e:
-        #     ret = TestCase.TestResult(TestCase.TestResultType.system_error, err_message="system error: the program is exiting unexpectedly")
-        print("memthread is alive: ", mem_thread.is_alive())
-        
         ret = proc_task_q.get()
         prog.join()
-        
         mem_thread.join()
-        print("stdio_tester_ret: ", stdio_tester_ret)  
 
         if stdio_tester_ret is not None:
             ret.copy_from_evaluator_result(stdio_tester_ret)
         else:
-            print("timeout detected")
+            logger.warning("stdio: timeout detected")
             assert sdtio_tester_timeout
             if ret.result_type is None:
                 ret.result_type = TestCase.TestResultType.time_limit_exceeded

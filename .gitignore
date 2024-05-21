@@ -4,3 +4,4 @@ tests/test_output/**
 *.csv
 /test_specs
 *.pdf
+*.log

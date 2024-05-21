@@ -3,7 +3,7 @@ output_path : ./output
 test_case_path : ./test_case 
 temp_files_path : ./temp_files
 students_list :
-- "1"
+- \d+
 problems_list: 
 - ./file_reading
 - ./file_writing
