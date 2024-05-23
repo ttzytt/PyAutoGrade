@@ -130,7 +130,13 @@ class BatchTestManger(CfgFileRelated):
                     tmp_dict[col_name].append(str(entry_val)[:10000])
         
         file_name = "test result@" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".csv"
-        df = pd.DataFrame(tmp_dict)
+        
+        def sorting_key(value):
+            try:
+                return int(value)
+            except ValueError:
+                return value
+        df = pd.DataFrame(tmp_dict).sort_values(by="students", key=lambda col: col.map(sorting_key))
         # save to csv file
         df.to_csv(os.path.join(export_path, file_name), index=False)
     
