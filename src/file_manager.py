@@ -91,15 +91,15 @@ class FileManager(CfgFileRelated):
                                     file_path = os.path.join(root, file)
                                     relative_path = os.path.relpath(file_path, student_pf_path)
                                     self._process_file(file_path, stu, relative_path, timestr)
-                else:
-                    # print("HELL NO")
-                    # Handle case where no solution is found for the student
-                    no_solution_folder = os.path.join(destination_folder, 'no_solution')
-                    if not os.path.exists(no_solution_folder):
-                        os.makedirs(no_solution_folder)
-                    dest_solution_file_path = os.path.join(no_solution_folder, stu + ' [no solution found]' + ('.' + pfname.split('.')[-1] if isfile else ''))
-                    with open(dest_solution_file_path, 'w') as dest_solution_file:
-                        dest_solution_file.close()
+                # else:
+                #     # print("HELL NO")
+                #     # Handle case where no solution is found for the student
+                #     no_solution_folder = os.path.join(destination_folder, 'no_solution')
+                #     if not os.path.exists(no_solution_folder):
+                #         os.makedirs(no_solution_folder)
+                #     dest_solution_file_path = os.path.join(no_solution_folder, stu + ' [no solution found]' + ('.' + pfname.split('.')[-1] if isfile else ''))
+                #     with open(dest_solution_file_path, 'w') as dest_solution_file:
+                #         dest_solution_file.close()
 
                 # for stu in self.student_list:
                 #     student_folder = os.path.join(destination_folder, stu)
