@@ -5,9 +5,6 @@ temp_files_path : ./temp_files
 students_list :
 -  \d+
 problems_list: 
-- ./file_reading
-- ./file_writing
-- './Unit 3/cereal_v1'
-- './Unit 3/cereal_v2'
+- ./state.py
 
 # 1246 --> timeout

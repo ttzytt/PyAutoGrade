@@ -5,6 +5,6 @@ sys.path.append("./../../src/")
 from batch_test_manager import *
 
 bm = BatchTestManger(cfg_path="./config.yml")
-test_ret = bm.test_problems('./Unit 3/cereal_v2')
+test_ret = bm.test_problems('./Unit 3/letter_count')
 pprint(test_ret)
 print(bm.export_csv())
