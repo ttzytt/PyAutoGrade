@@ -228,6 +228,7 @@ if __name__ == "__main__":
     parser.add_argument('--move_directories', '-md', type=str, nargs='+', help='move folders to `temp_files_path`')
     parser.add_argument('--clear_cache', '-cc', action='store_true', help='clear all files in `temp_files_path`')
     parser.add_argument('--obfuscate_tested_codes', '-oc', action='store_true', help='obfuscate all tested codes')
+    parser.add_argument('--group_by_review', '-r', action='store_true', help='go through the files and group them by reviewer')
     args = parser.parse_args()
 
     print("Parsed arguments:", args)
@@ -237,13 +238,19 @@ if __name__ == "__main__":
         print("Clearing cache")
         fm.clear_cache()
     if args.move_files:
-        print("Moving files:", args.move_files)
-        fm.get_all_by_review([True] * len(args.move_files), *args.move_files)
-        #fm.get_all_by_problem([True] * len(args.move_files), *args.move_files)
+        if args.group_by_review:
+            print("Moving files:", args.move_files, "and grouping by reviewer")
+            fm.get_all_by_review([True] * len(args.move_files), *args.move_files)
+        else:
+            print("Moving files:", args.move_files)
+            fm.get_all_by_problem([True] * len(args.move_files), *args.move_files)
     if args.move_directories:
-        print("Moving directories:", args.move_directories)
-        fm.get_all_by_review([False] * len(args.move_directories), *args.move_directories)
-        #fm.get_all_by_problem([False] * len(args.move_directories), *args.move_directories)
+        if args.group_by_review:
+            print("Moving directories and grouping by reviewer:", args.move_directories)
+            fm.get_all_by_review([False] * len(args.move_directories), *args.move_directories)
+        else:
+            print("Moving directories:", args.move_directories)
+            fm.get_all_by_problem([False] * len(args.move_directories), *args.move_directories)
     if args.obfuscate_tested_codes:
         print("Obfuscating tested codes")
         fm.obfuscate_tested_codes()
